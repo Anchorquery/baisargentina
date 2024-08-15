@@ -10,6 +10,13 @@ enum RestriccionEvent {
   mayores_edad,
 }
 
+enum BookingState {
+  pending,
+  approved,
+  canceled,
+  rejected,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -25,6 +32,8 @@ T? deserializeEnum<T>(String? value) {
       return TypeEvent.values.deserialize(value) as T?;
     case (RestriccionEvent):
       return RestriccionEvent.values.deserialize(value) as T?;
+    case (BookingState):
+      return BookingState.values.deserialize(value) as T?;
     default:
       return null;
   }

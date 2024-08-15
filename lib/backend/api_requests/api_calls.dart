@@ -193,6 +193,14 @@ class LoginCall {
         response,
         r'''$.user.university''',
       ));
+  String? avatar(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.avatar''',
+      ));
+  int? role(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.user.role.id''',
+      ));
 }
 
 /// End Public Group Code
@@ -208,6 +216,9 @@ class ReserveGroup {
     'Authorization': 'Bearer [token]',
   };
   static CreateReserveCall createReserveCall = CreateReserveCall();
+  static FindmeCall findmeCall = FindmeCall();
+  static FindmeOneCall findmeOneCall = FindmeOneCall();
+  static VerificarReservaCall verificarReservaCall = VerificarReservaCall();
 }
 
 class CreateReserveCall {
@@ -243,7 +254,262 @@ class CreateReserveCall {
   }
 }
 
+class FindmeCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'findme',
+      apiUrl: '$baseUrl/bookings-me/find',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  dynamic pagination(dynamic response) => getJsonField(
+        response,
+        r'''$.meta.pagination''',
+      );
+}
+
+class FindmeOneCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'findme One',
+      apiUrl: '$baseUrl/bookings-me/find/$uuid',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+class VerificarReservaCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'verificarReserva',
+      apiUrl: '$baseUrl/bookings/verificar-reserva/$uuid',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+  dynamic owner(dynamic response) => getJsonField(
+        response,
+        r'''$.data.owner''',
+      );
+  dynamic organizador(dynamic response) => getJsonField(
+        response,
+        r'''$.data.organizador''',
+      );
+  dynamic event(dynamic response) => getJsonField(
+        response,
+        r'''$.data.event''',
+      );
+  dynamic supervisor(dynamic response) => getJsonField(
+        response,
+        r'''$.data.supervisor''',
+      );
+  dynamic verficacion(dynamic response) => getJsonField(
+        response,
+        r'''$.verificacion''',
+      );
+}
+
 /// End Reserve Group Code
+
+/// Start User Group Code
+
+class UserGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://server.baisargentina.com/api';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static MeCall meCall = MeCall();
+}
+
+class MeCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'me',
+      apiUrl: '$baseUrl/users/me',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic user(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+      );
+}
+
+/// End User Group Code
+
+/// Start Upload Media Group Code
+
+class UploadMediaGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://server.baisargentina.com/api';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static MutipleCall mutipleCall = MutipleCall();
+  static SingleCall singleCall = SingleCall();
+}
+
+class MutipleCall {
+  Future<ApiCallResponse> call({
+    String? ref = '',
+    String? field = '',
+    List<FFUploadedFile>? filesList,
+    int? refId,
+    String? token = '',
+  }) async {
+    final baseUrl = UploadMediaGroup.getBaseUrl(
+      token: token,
+    );
+    final files = filesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Mutiple',
+      apiUrl: '$baseUrl/upload',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      params: {
+        'ref': ref,
+        'field': field,
+        'refId': refId,
+        'files': files,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SingleCall {
+  Future<ApiCallResponse> call({
+    String? ref = '',
+    String? field = '',
+    FFUploadedFile? files,
+    int? refId,
+    String? token = '',
+  }) async {
+    final baseUrl = UploadMediaGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Single',
+      apiUrl: '$baseUrl/upload',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      params: {
+        'ref': ref,
+        'field': field,
+        'refId': refId,
+        'files': files,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Upload Media Group Code
 
 class ApiRegisterCall {
   static Future<ApiCallResponse> call({
@@ -346,64 +612,6 @@ class ApiCreateEventsCall {
         'categoryID': categoryId,
       },
       bodyType: BodyType.MULTIPART,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class UploadImagesCall {
-  static Future<ApiCallResponse> call({
-    String? field = '',
-    String? refId = '',
-    String? ref = '',
-    List<String>? filesList,
-  }) async {
-    final files = _serializeList(filesList);
-
-    return ApiManager.instance.makeApiCall(
-      callName: 'UploadImages',
-      apiUrl: 'https://server.baisargentina.com/api/upload',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzIwNTgyODU0LCJleHAiOjE3MjMxNzQ4NTR9.tqZ8fYUAWm9jI-zvUnrvgpOnIt2r7FhEjjw6DeWi58M',
-      },
-      params: {
-        'ref': ref,
-        'refId': refId,
-        'field': field,
-        'files': files,
-      },
-      bodyType: BodyType.MULTIPART,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ApiMeCall {
-  static Future<ApiCallResponse> call({
-    String? token =
-        'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMjk1ODQ3MiwiZXhwIjoxNzI1NTUwNDcyfQ.YTnfgg9uDGqVnIevH9stb-vwqeIH6Z9LPRdeA8-V4jw',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Api  me',
-      apiUrl: 'https://server.baisargentina.com/api/users/me',
-      callType: ApiCallType.GET,
-      headers: {
-        'authorization':
-            'Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMjk1ODQ3MiwiZXhwIjoxNzI1NTUwNDcyfQ.YTnfgg9uDGqVnIevH9stb-vwqeIH6Z9LPRdeA8-V4jw',
-      },
-      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

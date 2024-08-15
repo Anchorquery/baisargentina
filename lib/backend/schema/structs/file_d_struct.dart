@@ -8,17 +8,17 @@ import '/flutter_flow/flutter_flow_util.dart';
 class FileDStruct extends BaseStruct {
   FileDStruct({
     int? id,
-    String? url,
     String? name,
     String? mime,
     String? ext,
     String? small,
+    String? url,
   })  : _id = id,
-        _url = url,
         _name = name,
         _mime = mime,
         _ext = ext,
-        _small = small;
+        _small = small,
+        _url = url;
 
   // "id" field.
   int? _id;
@@ -28,13 +28,6 @@ class FileDStruct extends BaseStruct {
   void incrementId(int amount) => id = id + amount;
 
   bool hasId() => _id != null;
-
-  // "url" field.
-  String? _url;
-  String get url => _url ?? '';
-  set url(String? val) => _url = val;
-
-  bool hasUrl() => _url != null;
 
   // "name" field.
   String? _name;
@@ -64,13 +57,20 @@ class FileDStruct extends BaseStruct {
 
   bool hasSmall() => _small != null;
 
+  // "url" field.
+  String? _url;
+  String get url => _url ?? '';
+  set url(String? val) => _url = val;
+
+  bool hasUrl() => _url != null;
+
   static FileDStruct fromMap(Map<String, dynamic> data) => FileDStruct(
         id: castToType<int>(data['id']),
-        url: data['url'] as String?,
         name: data['name'] as String?,
         mime: data['mime'] as String?,
         ext: data['ext'] as String?,
         small: data['small'] as String?,
+        url: data['url'] as String?,
       );
 
   static FileDStruct? maybeFromMap(dynamic data) =>
@@ -78,11 +78,11 @@ class FileDStruct extends BaseStruct {
 
   Map<String, dynamic> toMap() => {
         'id': _id,
-        'url': _url,
         'name': _name,
         'mime': _mime,
         'ext': _ext,
         'small': _small,
+        'url': _url,
       }.withoutNulls;
 
   @override
@@ -90,10 +90,6 @@ class FileDStruct extends BaseStruct {
         'id': serializeParam(
           _id,
           ParamType.int,
-        ),
-        'url': serializeParam(
-          _url,
-          ParamType.String,
         ),
         'name': serializeParam(
           _name,
@@ -111,6 +107,10 @@ class FileDStruct extends BaseStruct {
           _small,
           ParamType.String,
         ),
+        'url': serializeParam(
+          _url,
+          ParamType.String,
+        ),
       }.withoutNulls;
 
   static FileDStruct fromSerializableMap(Map<String, dynamic> data) =>
@@ -118,11 +118,6 @@ class FileDStruct extends BaseStruct {
         id: deserializeParam(
           data['id'],
           ParamType.int,
-          false,
-        ),
-        url: deserializeParam(
-          data['url'],
-          ParamType.String,
           false,
         ),
         name: deserializeParam(
@@ -145,6 +140,11 @@ class FileDStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        url: deserializeParam(
+          data['url'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -154,31 +154,31 @@ class FileDStruct extends BaseStruct {
   bool operator ==(Object other) {
     return other is FileDStruct &&
         id == other.id &&
-        url == other.url &&
         name == other.name &&
         mime == other.mime &&
         ext == other.ext &&
-        small == other.small;
+        small == other.small &&
+        url == other.url;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([id, url, name, mime, ext, small]);
+      const ListEquality().hash([id, name, mime, ext, small, url]);
 }
 
 FileDStruct createFileDStruct({
   int? id,
-  String? url,
   String? name,
   String? mime,
   String? ext,
   String? small,
+  String? url,
 }) =>
     FileDStruct(
       id: id,
-      url: url,
       name: name,
       mime: mime,
       ext: ext,
       small: small,
+      url: url,
     );

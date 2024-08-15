@@ -14,13 +14,17 @@ class EventsStruct extends BaseStruct {
     FileDStruct? portada,
     double? precio,
     TypeEvent? type,
+    String? fecha,
+    String? horaInicioEvento,
   })  : _id = id,
         _name = name,
         _description = description,
         _category = category,
         _portada = portada,
         _precio = precio,
-        _type = type;
+        _type = type,
+        _fecha = fecha,
+        _horaInicioEvento = horaInicioEvento;
 
   // "id" field.
   int? _id;
@@ -79,6 +83,20 @@ class EventsStruct extends BaseStruct {
 
   bool hasType() => _type != null;
 
+  // "fecha" field.
+  String? _fecha;
+  String get fecha => _fecha ?? '';
+  set fecha(String? val) => _fecha = val;
+
+  bool hasFecha() => _fecha != null;
+
+  // "horaInicioEvento" field.
+  String? _horaInicioEvento;
+  String get horaInicioEvento => _horaInicioEvento ?? '';
+  set horaInicioEvento(String? val) => _horaInicioEvento = val;
+
+  bool hasHoraInicioEvento() => _horaInicioEvento != null;
+
   static EventsStruct fromMap(Map<String, dynamic> data) => EventsStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -87,6 +105,8 @@ class EventsStruct extends BaseStruct {
         portada: FileDStruct.maybeFromMap(data['portada']),
         precio: castToType<double>(data['precio']),
         type: deserializeEnum<TypeEvent>(data['type']),
+        fecha: data['fecha'] as String?,
+        horaInicioEvento: data['horaInicioEvento'] as String?,
       );
 
   static EventsStruct? maybeFromMap(dynamic data) =>
@@ -100,6 +120,8 @@ class EventsStruct extends BaseStruct {
         'portada': _portada?.toMap(),
         'precio': _precio,
         'type': _type?.serialize(),
+        'fecha': _fecha,
+        'horaInicioEvento': _horaInicioEvento,
       }.withoutNulls;
 
   @override
@@ -131,6 +153,14 @@ class EventsStruct extends BaseStruct {
         'type': serializeParam(
           _type,
           ParamType.Enum,
+        ),
+        'fecha': serializeParam(
+          _fecha,
+          ParamType.String,
+        ),
+        'horaInicioEvento': serializeParam(
+          _horaInicioEvento,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -172,6 +202,16 @@ class EventsStruct extends BaseStruct {
           ParamType.Enum,
           false,
         ),
+        fecha: deserializeParam(
+          data['fecha'],
+          ParamType.String,
+          false,
+        ),
+        horaInicioEvento: deserializeParam(
+          data['horaInicioEvento'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -186,12 +226,23 @@ class EventsStruct extends BaseStruct {
         category == other.category &&
         portada == other.portada &&
         precio == other.precio &&
-        type == other.type;
+        type == other.type &&
+        fecha == other.fecha &&
+        horaInicioEvento == other.horaInicioEvento;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([id, name, description, category, portada, precio, type]);
+  int get hashCode => const ListEquality().hash([
+        id,
+        name,
+        description,
+        category,
+        portada,
+        precio,
+        type,
+        fecha,
+        horaInicioEvento
+      ]);
 }
 
 EventsStruct createEventsStruct({
@@ -202,6 +253,8 @@ EventsStruct createEventsStruct({
   FileDStruct? portada,
   double? precio,
   TypeEvent? type,
+  String? fecha,
+  String? horaInicioEvento,
 }) =>
     EventsStruct(
       id: id,
@@ -211,4 +264,6 @@ EventsStruct createEventsStruct({
       portada: portada ?? FileDStruct(),
       precio: precio,
       type: type,
+      fecha: fecha,
+      horaInicioEvento: horaInicioEvento,
     );

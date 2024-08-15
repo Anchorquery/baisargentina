@@ -8,7 +8,6 @@ import '/backend/schema/structs/index.dart';
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
 import '/index.dart';
-import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -73,14 +72,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const InicioWidget(),
+      errorBuilder: (context, state) => RootPageContext.wrap(
+        appStateNotifier.loggedIn ? const EventsWidget() : const InicioWidget(),
+        errorRoute: state.uri.toString(),
+      ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const InicioWidget(),
+          builder: (context, _) => RootPageContext.wrap(
+            appStateNotifier.loggedIn ? const EventsWidget() : const InicioWidget(),
+          ),
         ),
         FFRoute(
           name: 'inicio',
@@ -100,57 +102,61 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'descuentos',
           path: '/descuentos',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'descuentos')
-              : const DescuentosWidget(),
+          requireAuth: true,
+          builder: (context, params) => const DescuentosWidget(),
         ),
         FFRoute(
           name: 'housign',
           path: '/housign',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'housign')
-              : const HousignWidget(),
+          requireAuth: true,
+          builder: (context, params) => const HousignWidget(),
         ),
         FFRoute(
           name: 'userProfile',
           path: '/userProfile',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'userProfile')
-              : const UserProfileWidget(),
+          requireAuth: true,
+          builder: (context, params) => const UserProfileWidget(),
         ),
         FFRoute(
           name: 'beerpong',
           path: '/beerpong',
+          requireAuth: true,
           builder: (context, params) => const BeerpongWidget(),
         ),
         FFRoute(
           name: 'reservaexitosa',
           path: '/reservaexitosa',
+          requireAuth: true,
           builder: (context, params) => const ReservaexitosaWidget(),
         ),
         FFRoute(
           name: 'tranvia',
           path: '/tranvia',
+          requireAuth: true,
           builder: (context, params) => const TranviaWidget(),
         ),
         FFRoute(
           name: 'clubderunning',
           path: '/clubderunning',
+          requireAuth: true,
           builder: (context, params) => const ClubderunningWidget(),
         ),
         FFRoute(
           name: 'tallerdeequilibrio',
           path: '/tallerdeequilibrio',
+          requireAuth: true,
           builder: (context, params) => const TallerdeequilibrioWidget(),
         ),
         FFRoute(
           name: 'tallerdecv',
           path: '/tallerdecv',
+          requireAuth: true,
           builder: (context, params) => const TallerdecvWidget(),
         ),
         FFRoute(
           name: 'buenosaireshousign',
           path: '/buenosaireshousign',
+          requireAuth: true,
           builder: (context, params) => const BuenosaireshousignWidget(),
         ),
         FFRoute(
@@ -176,11 +182,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'create',
           path: '/create',
+          requireAuth: true,
           builder: (context, params) => const CreateWidget(),
         ),
         FFRoute(
           name: 'event',
           path: '/event',
+          requireAuth: true,
           builder: (context, params) => EventWidget(
             id: params.getParam(
               'id',
@@ -192,9 +200,71 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'events',
           path: '/events',
           requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'events')
-              : const EventsWidget(),
+          builder: (context, params) => const EventsWidget(),
+        ),
+        FFRoute(
+          name: 'reservas',
+          path: '/reservas',
+          requireAuth: true,
+          builder: (context, params) => const ReservasWidget(),
+        ),
+        FFRoute(
+          name: 'DetallesReserva',
+          path: '/detallesReserva',
+          requireAuth: true,
+          builder: (context, params) => const DetallesReservaWidget(),
+        ),
+        FFRoute(
+          name: 'scan',
+          path: '/scan',
+          requireAuth: true,
+          builder: (context, params) => const ScanWidget(),
+        ),
+        FFRoute(
+          name: 'scaneoexitoso',
+          path: '/scaneoexitoso',
+          requireAuth: true,
+          builder: (context, params) => const ScaneoexitosoWidget(),
+        ),
+        FFRoute(
+          name: 'scaneoError',
+          path: '/scaneoError',
+          requireAuth: true,
+          builder: (context, params) => const ScaneoErrorWidget(),
+        ),
+        FFRoute(
+          name: 'eventsCopy',
+          path: '/eventsCopy',
+          requireAuth: true,
+          builder: (context, params) => const EventsCopyWidget(),
+        ),
+        FFRoute(
+          name: 'edit',
+          path: '/edit',
+          requireAuth: true,
+          builder: (context, params) => const EditWidget(),
+        ),
+        FFRoute(
+          name: 'editEvent',
+          path: '/editEvent',
+          requireAuth: true,
+          builder: (context, params) => EditEventWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'reservaId',
+          path: '/reservaId',
+          requireAuth: true,
+          builder: (context, params) => ReservaIdWidget(
+            uuid: params.getParam(
+              'uuid',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
