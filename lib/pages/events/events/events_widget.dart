@@ -356,9 +356,9 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                   ),
                                                 );
                                               },
-                                              carouselController:
-                                                  _model.carouselController ??=
-                                                      CarouselController(),
+                                              carouselController: _model
+                                                      .carouselController ??=
+                                                  CarouselSliderController(),
                                               options: CarouselOptions(
                                                 initialPage: max(
                                                     0,
