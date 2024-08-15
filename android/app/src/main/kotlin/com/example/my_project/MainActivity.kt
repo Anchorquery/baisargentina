@@ -1,4 +1,4 @@
-package com.mycompany.baisargentina
+package com.msd.baisargentina
 
 import io.flutter.embedding.android.FlutterActivity
 
