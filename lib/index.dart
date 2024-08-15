@@ -23,7 +23,7 @@ export '/pages/policy/politicasde_reembolso/politicasde_reembolso_widget.dart'
 export '/pages/policy/nosotros/nosotros_widget.dart' show NosotrosWidget;
 export '/pages/policy/terminosycondiciones/terminosycondiciones_widget.dart'
     show TerminosycondicionesWidget;
-export '/pages/perfil/create/create_widget.dart' show CreateWidget;
+export '/pages/events/create/create_widget.dart' show CreateWidget;
 export '/pages/events/event/event_widget.dart' show EventWidget;
 export '/pages/events/events/events_widget.dart' show EventsWidget;
 export '/pages/booking/reservas/reservas_widget.dart' show ReservasWidget;

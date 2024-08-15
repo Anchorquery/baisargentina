@@ -1560,7 +1560,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                     },
                                                     carouselController: _model
                                                             .carouselController ??=
-                                                        CarouselSliderController(),
+                                                        CarouselController(),
                                                     options: CarouselOptions(
                                                       initialPage: max(
                                                           0,
@@ -1743,24 +1743,23 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     type: _model.dropDownValue,
                                     categoryId: _model.categoriaEventoValue,
                                     portada: _model.uploadedLocalFile1,
+                                    imagesList: _model.uploadedLocalFiles2,
                                   );
 
                                   if ((_model.apiResult3i2?.succeeded ??
                                       true)) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Event Created!!',
-                                          style: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
+                                    context.pushNamed(
+                                      'event',
+                                      queryParameters: {
+                                        'id': serializeParam(
+                                          getJsonField(
+                                            (_model.apiResult3i2?.jsonBody ??
+                                                ''),
+                                            r'''$.data.id''',
                                           ),
+                                          ParamType.int,
                                         ),
-                                        duration: Duration(milliseconds: 4000),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondary,
-                                      ),
+                                      }.withoutNulls,
                                     );
                                   }
 
