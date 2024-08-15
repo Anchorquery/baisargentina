@@ -9,9 +9,13 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'create_model.dart';
 export 'create_model.dart';
 
@@ -90,20 +94,20 @@ class _CreateWidgetState extends State<CreateWidget> {
         body: SafeArea(
           top: true,
           child: Stack(
-            alignment: const AlignmentDirectional(0.0, 1.0),
+            alignment: AlignmentDirectional(0.0, 1.0),
             children: [
               SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(-1.0, -1.0),
+                      alignment: AlignmentDirectional(-1.0, -1.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 0.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -121,9 +125,9 @@ class _CreateWidgetState extends State<CreateWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, -1.0),
+                            alignment: AlignmentDirectional(0.0, -1.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   70.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Crear evento',
@@ -146,9 +150,9 @@ class _CreateWidgetState extends State<CreateWidget> {
                     Opacity(
                       opacity: 0.5,
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
+                        alignment: AlignmentDirectional(0.0, -1.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 5.0, 5.0, 5.0),
                           child: Text(
                             'Rellena todos los campos',
@@ -166,7 +170,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Form(
                         key: _model.formKey,
                         autovalidateMode: AutovalidateMode.always,
@@ -174,7 +178,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 20.0),
                               child: TextFormField(
                                 controller: _model.nameTextController,
@@ -205,7 +209,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -226,7 +230,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
+                                      EdgeInsetsDirectional.fromSTEB(
                                           20.0, 0.0, 0.0, 0.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -243,7 +247,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 20.0),
                               child: TextFormField(
                                 controller: _model.placeUrlTextController,
@@ -273,7 +277,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -294,7 +298,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
+                                      EdgeInsetsDirectional.fromSTEB(
                                           20.0, 0.0, 0.0, 0.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -309,7 +313,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 20.0),
                               child: TextFormField(
                                 controller: _model.organizadorTextController,
@@ -339,7 +343,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -360,7 +364,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
+                                      EdgeInsetsDirectional.fromSTEB(
                                           20.0, 0.0, 0.0, 0.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -376,7 +380,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -386,10 +390,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, -1.0),
+                                            AlignmentDirectional(-1.0, -1.0),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 5.0),
                                           child: Text(
                                             'Inicio de venta',
@@ -405,7 +409,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          final datePicked1Date =
+                                          final _datePicked1Date =
                                               await showDatePicker(
                                             context: context,
                                             initialDate: getCurrentTimestamp,
@@ -451,12 +455,12 @@ class _CreateWidgetState extends State<CreateWidget> {
                                             },
                                           );
 
-                                          if (datePicked1Date != null) {
+                                          if (_datePicked1Date != null) {
                                             safeSetState(() {
                                               _model.datePicked1 = DateTime(
-                                                datePicked1Date.year,
-                                                datePicked1Date.month,
-                                                datePicked1Date.day,
+                                                _datePicked1Date.year,
+                                                _datePicked1Date.month,
+                                                _datePicked1Date.day,
                                               );
                                             });
                                           }
@@ -470,7 +474,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                         .languageCode,
                                               )
                                             : 'Fecha',
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.calendar_today,
                                           size: 15.0,
                                         ),
@@ -478,10 +482,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                           width: 160.0,
                                           height: 40.0,
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -494,7 +498,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                     letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -505,17 +509,17 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         30.0, 0.0, 0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-1.0, -1.0),
+                                              AlignmentDirectional(-1.0, -1.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 5.0),
                                             child: Text(
                                               'Dia del evento',
@@ -532,7 +536,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                         ),
                                         FFButtonWidget(
                                           onPressed: () async {
-                                            final datePicked2Date =
+                                            final _datePicked2Date =
                                                 await showDatePicker(
                                               context: context,
                                               initialDate: getCurrentTimestamp,
@@ -586,12 +590,12 @@ class _CreateWidgetState extends State<CreateWidget> {
                                               },
                                             );
 
-                                            if (datePicked2Date != null) {
+                                            if (_datePicked2Date != null) {
                                               safeSetState(() {
                                                 _model.datePicked2 = DateTime(
-                                                  datePicked2Date.year,
-                                                  datePicked2Date.month,
-                                                  datePicked2Date.day,
+                                                  _datePicked2Date.year,
+                                                  _datePicked2Date.month,
+                                                  _datePicked2Date.day,
                                                 );
                                               });
                                             }
@@ -605,7 +609,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                       .languageCode,
                                                 )
                                               : 'Fecha',
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.calendar_today,
                                             size: 15.0,
                                           ),
@@ -613,10 +617,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                             width: 160.0,
                                             height: 40.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -629,7 +633,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                       letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -644,7 +648,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 10.0, 20.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -654,10 +658,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, -1.0),
+                                            AlignmentDirectional(-1.0, -1.0),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 5.0),
                                           child: Text(
                                             'Hora Inicio del evento',
@@ -673,7 +677,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          final datePicked3Time =
+                                          final _datePicked3Time =
                                               await showTimePicker(
                                             context: context,
                                             initialTime: TimeOfDay.fromDateTime(
@@ -717,14 +721,14 @@ class _CreateWidgetState extends State<CreateWidget> {
                                               );
                                             },
                                           );
-                                          if (datePicked3Time != null) {
+                                          if (_datePicked3Time != null) {
                                             safeSetState(() {
                                               _model.datePicked3 = DateTime(
                                                 getCurrentTimestamp.year,
                                                 getCurrentTimestamp.month,
                                                 getCurrentTimestamp.day,
-                                                datePicked3Time.hour,
-                                                datePicked3Time.minute,
+                                                _datePicked3Time.hour,
+                                                _datePicked3Time.minute,
                                               );
                                             });
                                           }
@@ -738,7 +742,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                         .languageCode,
                                               )
                                             : 'Hora inicio',
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.access_time_filled,
                                           size: 15.0,
                                         ),
@@ -746,10 +750,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                           width: 160.0,
                                           height: 40.0,
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -762,7 +766,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                     letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -773,17 +777,17 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         30.0, 0.0, 0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-1.0, -1.0),
+                                              AlignmentDirectional(-1.0, -1.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 5.0),
                                             child: Text(
                                               'Hora de fin de evento',
@@ -800,7 +804,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                         ),
                                         FFButtonWidget(
                                           onPressed: () async {
-                                            final datePicked4Time =
+                                            final _datePicked4Time =
                                                 await showTimePicker(
                                               context: context,
                                               initialTime:
@@ -853,14 +857,14 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                 );
                                               },
                                             );
-                                            if (datePicked4Time != null) {
+                                            if (_datePicked4Time != null) {
                                               safeSetState(() {
                                                 _model.datePicked4 = DateTime(
                                                   getCurrentTimestamp.year,
                                                   getCurrentTimestamp.month,
                                                   getCurrentTimestamp.day,
-                                                  datePicked4Time.hour,
-                                                  datePicked4Time.minute,
+                                                  _datePicked4Time.hour,
+                                                  _datePicked4Time.minute,
                                                 );
                                               });
                                             }
@@ -874,7 +878,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                       .languageCode,
                                                 )
                                               : 'Hora fin',
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.access_time_filled,
                                             size: 15.0,
                                           ),
@@ -882,10 +886,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                             width: 160.0,
                                             height: 40.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -898,7 +902,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                       letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -913,13 +917,13 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 20.0),
                               child: FlutterFlowDropDown<String>(
                                 controller:
                                     _model.detenerventasValueController ??=
                                         FormFieldController<String>(null),
-                                options: const [
+                                options: [
                                   '1 dia antes del evento',
                                   '2 dia antes del evento'
                                 ],
@@ -945,7 +949,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     FlutterFlowTheme.of(context).primary,
                                 borderWidth: 1.0,
                                 borderRadius: 30.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
+                                margin: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 4.0, 16.0, 4.0),
                                 hidesUnderline: true,
                                 isOverButton: false,
@@ -954,7 +958,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 10.0),
                               child: TextFormField(
                                 controller:
@@ -985,7 +989,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -1006,7 +1010,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     borderRadius: BorderRadius.circular(24.0),
                                   ),
                                   contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
+                                      EdgeInsetsDirectional.fromSTEB(
                                           20.0, 0.0, 0.0, 0.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -1024,13 +1028,13 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 20.0),
                               child: FlutterFlowDropDown<String>(
                                 controller:
                                     _model.puedenAsistirValueController ??=
                                         FormFieldController<String>(null),
-                                options: const [
+                                options: [
                                   'Solo estudiantes +18',
                                   'Cualquier persona'
                                 ],
@@ -1056,7 +1060,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     FlutterFlowTheme.of(context).primary,
                                 borderWidth: 1.0,
                                 borderRadius: 30.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
+                                margin: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 4.0, 16.0, 4.0),
                                 hidesUnderline: true,
                                 isOverButton: false,
@@ -1065,7 +1069,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 20.0),
                               child: FlutterFlowDropDown<String>(
                                 controller:
@@ -1099,7 +1103,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     FlutterFlowTheme.of(context).primary,
                                 borderWidth: 1.0,
                                 borderRadius: 30.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
+                                margin: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 4.0, 16.0, 4.0),
                                 hidesUnderline: true,
                                 isOverButton: false,
@@ -1108,7 +1112,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 10.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -1116,7 +1120,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Expanded(
-                                    child: SizedBox(
+                                    child: Container(
                                       width: 160.0,
                                       child: TextFormField(
                                         controller: _model
@@ -1154,7 +1158,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                 BorderRadius.circular(24.0),
                                           ),
                                           focusedBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0x00000000),
                                               width: 1.0,
                                             ),
@@ -1202,7 +1206,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                             FormFieldController<String>(null),
                                     options:
                                         List<String>.from(['Gratis', 'Pago']),
-                                    optionLabels: const [
+                                    optionLabels: [
                                       'Evento Gratis',
                                       'Evento de  pago'
                                     ],
@@ -1230,18 +1234,18 @@ class _CreateWidgetState extends State<CreateWidget> {
                                         FlutterFlowTheme.of(context).primary,
                                     borderWidth: 1.0,
                                     borderRadius: 30.0,
-                                    margin: const EdgeInsetsDirectional.fromSTEB(
+                                    margin: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 4.0, 16.0, 4.0),
                                     hidesUnderline: true,
                                     isOverButton: false,
                                     isSearchable: false,
                                     isMultiSelect: false,
                                   ),
-                                ].divide(const SizedBox(width: 5.0)),
+                                ].divide(SizedBox(width: 5.0)),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 0.0),
                               child: TextFormField(
                                 controller:
@@ -1312,9 +1316,9 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 15.0, 0.0, 0.0),
                                 child: Text(
                                   'Imagen principal',
@@ -1339,11 +1343,12 @@ class _CreateWidgetState extends State<CreateWidget> {
                                 Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    if ((_model.uploadedLocalFile1.bytes
+                                    if (_model.uploadedLocalFile1 != null &&
+                                        (_model.uploadedLocalFile1.bytes
                                                 ?.isNotEmpty ??
                                             false))
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 20.0, 0.0, 0.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
@@ -1383,9 +1388,9 @@ class _CreateWidgetState extends State<CreateWidget> {
                                         ),
                                       ),
                                     Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 20.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
@@ -1448,10 +1453,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                           options: FFButtonOptions(
                                             height: 20.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -1465,7 +1470,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                       letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -1480,9 +1485,9 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ],
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 15.0, 0.0, 0.0),
                                 child: Text(
                                   'Imagenes del evento',
@@ -1512,13 +1517,14 @@ class _CreateWidgetState extends State<CreateWidget> {
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: Visibility(
                                           visible: _model
-                                                  .uploadedLocalFiles2.isNotEmpty,
+                                                  .uploadedLocalFiles2.length >
+                                              0,
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 20.0, 0.0, 0.0),
                                             child: Builder(
                                               builder: (context) {
@@ -1526,7 +1532,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                     .uploadedLocalFiles2
                                                     .toList();
 
-                                                return SizedBox(
+                                                return Container(
                                                   width: double.infinity,
                                                   height: 180.0,
                                                   child: CarouselSlider.builder(
@@ -1585,7 +1591,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 20.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
@@ -1647,10 +1653,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                           options: FFButtonOptions(
                                             height: 20.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -1664,7 +1670,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                       letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -1679,7 +1685,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 10.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -1750,7 +1756,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                 .primaryText,
                                           ),
                                         ),
-                                        duration: const Duration(milliseconds: 4000),
+                                        duration: Duration(milliseconds: 4000),
                                         backgroundColor:
                                             FlutterFlowTheme.of(context)
                                                 .secondary,
@@ -1763,9 +1769,9 @@ class _CreateWidgetState extends State<CreateWidget> {
                                 text: 'Crear evento',
                                 options: FFButtonOptions(
                                   height: 40.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).tertiary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -1776,7 +1782,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

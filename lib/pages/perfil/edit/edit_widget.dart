@@ -7,6 +7,8 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'edit_model.dart';
 export 'edit_model.dart';
 
@@ -74,12 +76,12 @@ class _EditWidgetState extends State<EditWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Stack(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
@@ -87,7 +89,7 @@ class _EditWidgetState extends State<EditWidget> {
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.none,
-                          alignment: const Alignment(0.0, 0.0),
+                          alignment: Alignment(0.0, 0.0),
                         ),
                       ),
                     ),
@@ -95,23 +97,23 @@ class _EditWidgetState extends State<EditWidget> {
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: EdgeInsets.all(24.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.displayNameTextController,
                             focusNode: _model.displayNameFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.name],
+                            autofillHints: [AutofillHints.name],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Nombre',
@@ -167,14 +169,14 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.apellidoTextController,
                             focusNode: _model.apellidoFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.name],
+                            autofillHints: [AutofillHints.name],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Apellido',
@@ -230,7 +232,7 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -255,7 +257,7 @@ class _EditWidgetState extends State<EditWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 2.0,
                                     ),
@@ -303,14 +305,14 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.emailAddressTextController,
                             focusNode: _model.emailAddressFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.email],
+                            autofillHints: [AutofillHints.email],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Correo electrónico ',
@@ -367,14 +369,14 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.fechanacimientoTextController,
                             focusNode: _model.fechanacimientoFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.birthday],
+                            autofillHints: [AutofillHints.birthday],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Fecha de nacimiento (dd-Mm-yyyy)',
@@ -430,14 +432,14 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.passwordTextController,
                             focusNode: _model.passwordFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.password],
+                            autofillHints: [AutofillHints.password],
                             obscureText: !_model.passwordVisibility,
                             decoration: InputDecoration(
                               labelText: 'Cotraseña',
@@ -507,14 +509,14 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.passwordConfirmTextController,
                             focusNode: _model.passwordConfirmFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.password],
+                            autofillHints: [AutofillHints.password],
                             obscureText: !_model.passwordConfirmVisibility,
                             decoration: InputDecoration(
                               labelText: 'Confirmar contraseña',
@@ -586,14 +588,14 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   '¿Estas en Argentina?',
@@ -615,11 +617,11 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FlutterFlowDropDown<String>(
                           controller: _model.estasEnArgentinaValueController ??=
                               FormFieldController<String>(null),
-                          options: const ['Si', 'No'],
+                          options: ['Si', 'No'],
                           onChanged: (val) => setState(
                               () => _model.estasEnArgentinaValue = val),
                           width: 346.0,
@@ -627,7 +629,7 @@ class _EditWidgetState extends State<EditWidget> {
                           textStyle:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Lato',
-                                    color: const Color(0xFF14181B),
+                                    color: Color(0xFF14181B),
                                     letterSpacing: 0.0,
                                   ),
                           hintText: 'Selecciona',
@@ -642,7 +644,7 @@ class _EditWidgetState extends State<EditWidget> {
                           borderColor: FlutterFlowTheme.of(context).alternate,
                           borderWidth: 2.0,
                           borderRadius: 30.0,
-                          margin: const EdgeInsetsDirectional.fromSTEB(
+                          margin: EdgeInsetsDirectional.fromSTEB(
                               16.0, 4.0, 16.0, 4.0),
                           hidesUnderline: true,
                           isOverButton: false,
@@ -658,7 +660,7 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: TextFormField(
                           controller: _model.phoneNumberTextController,
                           focusNode: _model.phoneNumberFocusNode,
@@ -679,7 +681,7 @@ class _EditWidgetState extends State<EditWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
@@ -729,7 +731,7 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: TextFormField(
                           controller: _model.universidadFieldTextController,
                           focusNode: _model.universidadFieldFocusNode,
@@ -750,7 +752,7 @@ class _EditWidgetState extends State<EditWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
@@ -793,7 +795,7 @@ class _EditWidgetState extends State<EditWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             _model.authRegisterResponse =
@@ -823,7 +825,7 @@ class _EditWidgetState extends State<EditWidget> {
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: const Duration(milliseconds: 4000),
+                                  duration: Duration(milliseconds: 4000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
@@ -836,9 +838,9 @@ class _EditWidgetState extends State<EditWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 44.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -849,7 +851,7 @@ class _EditWidgetState extends State<EditWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 3.0,
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),

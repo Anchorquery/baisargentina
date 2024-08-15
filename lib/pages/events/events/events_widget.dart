@@ -7,12 +7,16 @@ import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
+import 'package:provider/provider.dart';
 import 'events_model.dart';
 export 'events_model.dart';
 
@@ -46,12 +50,12 @@ class _EventsWidgetState extends State<EventsWidget> {
               context: context,
               builder: (alertDialogContext) {
                 return AlertDialog(
-                  title: const Text('Ha ocurrido un error'),
-                  content: const Text('Error en la solicitud'),
+                  title: Text('Ha ocurrido un error'),
+                  content: Text('Error en la solicitud'),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(alertDialogContext),
-                      child: const Text('Ok'),
+                      child: Text('Ok'),
                     ),
                   ],
                 );
@@ -116,7 +120,7 @@ class _EventsWidgetState extends State<EventsWidget> {
         floatingActionButton: Visibility(
           visible: _model.loading == false,
           child: Align(
-            alignment: const AlignmentDirectional(1.0, 0.8),
+            alignment: AlignmentDirectional(1.0, 0.8),
             child: FloatingActionButton(
               onPressed: () async {
                 context.pushNamed('create');
@@ -152,7 +156,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 90.0),
                           child: SingleChildScrollView(
                             primary: false,
@@ -161,7 +165,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 15.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -169,10 +173,10 @@ class _EventsWidgetState extends State<EventsWidget> {
                                       Expanded(
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, -1.0),
+                                              AlignmentDirectional(0.0, -1.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 15.0, 10.0, 10.0),
                                             child: Text(
                                               'EVENTOS',
@@ -195,21 +199,21 @@ class _EventsWidgetState extends State<EventsWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 15.0),
                                   child: Container(
                                     width:
                                         MediaQuery.sizeOf(context).width * 1.0,
                                     height: MediaQuery.sizeOf(context).height *
                                         0.05,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Builder(
                                       builder: (context) {
                                         final categorie = _model.categories
                                             .unique((e) => e.id)
                                             .toList();
 
-                                        return SizedBox(
+                                        return Container(
                                           width: double.infinity,
                                           height: 180.0,
                                           child: CarouselSlider.builder(
@@ -369,11 +373,11 @@ class _EventsWidgetState extends State<EventsWidget> {
                                   builder: (context) {
                                     final data = _model.items.toList();
                                     if (data.isEmpty) {
-                                      return SizedBox(
+                                      return Container(
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
-                                        child: const EmptyListWidget(
+                                        child: EmptyListWidget(
                                           message:
                                               'No hay eventos para esta categoria',
                                           error: 'Sin datos',
@@ -390,11 +394,11 @@ class _EventsWidgetState extends State<EventsWidget> {
                                         final dataItem = data[dataIndex];
                                         return Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 25.0, 0.0, 0.0),
                                           child: Stack(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             children: [
                                               InkWell(
                                                 splashColor: Colors.transparent,
@@ -415,7 +419,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                 },
                                                 child: ClipRRect(
                                                   borderRadius:
-                                                      const BorderRadius.only(
+                                                      BorderRadius.only(
                                                     bottomLeft:
                                                         Radius.circular(20.0),
                                                     bottomRight:
@@ -434,7 +438,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                 context)
                                                             .height *
                                                         0.176,
-                                                    decoration: const BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                       color: Color(0xFFF7F8FA),
                                                       borderRadius:
                                                           BorderRadius.only(
@@ -479,7 +483,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         10.0,
@@ -517,7 +521,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                 fit: BoxFit
                                                                     .cover,
                                                                 alignment:
-                                                                    const Alignment(
+                                                                    Alignment(
                                                                         1.0,
                                                                         1.0),
                                                               ),
@@ -526,7 +530,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                           Expanded(
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           10.0,
@@ -558,7 +562,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                         ),
                                                                   ),
                                                                   Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             10.0,
@@ -648,11 +652,11 @@ class _EventsWidgetState extends State<EventsWidget> {
                         ),
                       ),
                       Align(
-                        alignment: const AlignmentDirectional(0.0, 1.0),
+                        alignment: AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
                           model: _model.navBarWithMiddleButtonModel,
                           updateCallback: () => setState(() {}),
-                          child: const NavBarWithMiddleButtonWidget(),
+                          child: NavBarWithMiddleButtonWidget(),
                         ),
                       ),
                     ],
@@ -661,7 +665,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                   return wrapWithModel(
                     model: _model.loaderModel,
                     updateCallback: () => setState(() {}),
-                    child: const LoaderWidget(),
+                    child: LoaderWidget(),
                   );
                 }
               },

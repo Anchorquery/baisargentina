@@ -6,11 +6,15 @@ import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
+import 'package:provider/provider.dart';
 import 'reservas_model.dart';
 export 'reservas_model.dart';
 
@@ -44,12 +48,12 @@ class _ReservasWidgetState extends State<ReservasWidget> {
               context: context,
               builder: (alertDialogContext) {
                 return AlertDialog(
-                  title: const Text('Ha ocurrido un error'),
-                  content: const Text('Error en la solicitud'),
+                  title: Text('Ha ocurrido un error'),
+                  content: Text('Error en la solicitud'),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(alertDialogContext),
-                      child: const Text('Ok'),
+                      child: Text('Ok'),
                     ),
                   ],
                 );
@@ -113,7 +117,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primary,
         body: SafeArea(
           top: true,
-          child: SizedBox(
+          child: Container(
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: MediaQuery.sizeOf(context).height * 1.103,
             child: Stack(
@@ -122,9 +126,9 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                   builder: (context) {
                     if (_model.loading == false) {
                       return Align(
-                        alignment: const AlignmentDirectional(0.0, 1.0),
+                        alignment: AlignmentDirectional(0.0, 1.0),
                         child: Stack(
-                          alignment: const AlignmentDirectional(0.0, 1.0),
+                          alignment: AlignmentDirectional(0.0, 1.0),
                           children: [
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
@@ -140,7 +144,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                 ),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 90.0),
                                 child: SingleChildScrollView(
                                   primary: false,
@@ -149,17 +153,17 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 50.0, 0.0, 15.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Expanded(
                                               child: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, -1.0),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(10.0, 15.0,
                                                           10.0, 10.0),
                                                   child: Text(
@@ -186,11 +190,11 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                         builder: (context) {
                                           final data = _model.items.toList();
                                           if (data.isEmpty) {
-                                            return SizedBox(
+                                            return Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
                                                   1.0,
-                                              child: const EmptyListWidget(
+                                              child: EmptyListWidget(
                                                 message:
                                                     'No hay eventos para esta categoria',
                                                 error: 'Sin datos',
@@ -206,12 +210,12 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                             itemBuilder: (context, dataIndex) {
                                               final dataItem = data[dataIndex];
                                               return Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 25.0, 0.0, 0.0),
                                                 child: Stack(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           0.0, 0.0),
                                                   children: [
                                                     InkWell(
@@ -247,7 +251,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                                     .height *
                                                                 0.176,
                                                         decoration:
-                                                            const BoxDecoration(
+                                                            BoxDecoration(
                                                           color:
                                                               Color(0xFFF7F8FA),
                                                           borderRadius:
@@ -294,7 +298,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                                     .max,
                                                             children: [
                                                               Padding(
-                                                                padding: const EdgeInsetsDirectional
+                                                                padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         10.0,
@@ -336,7 +340,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                                     fit: BoxFit
                                                                         .cover,
                                                                     alignment:
-                                                                        const Alignment(
+                                                                        Alignment(
                                                                             1.0,
                                                                             1.0),
                                                                   ),
@@ -344,7 +348,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                               ),
                                                               Expanded(
                                                                 child: Padding(
-                                                                  padding: const EdgeInsetsDirectional
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           10.0,
@@ -372,7 +376,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                                             ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             20.0,
                                                                             0.0,
@@ -386,7 +390,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                                             children: [
                                                                               TextSpan(
                                                                                 text: dataItem.event.fecha,
-                                                                                style: const TextStyle(
+                                                                                style: TextStyle(
                                                                                   color: Color(0xFFFF8F14),
                                                                                   fontWeight: FontWeight.w900,
                                                                                   fontSize: 24.0,
@@ -425,7 +429,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                             wrapWithModel(
                               model: _model.navBarWithMiddleButtonModel,
                               updateCallback: () => setState(() {}),
-                              child: const NavBarWithMiddleButtonWidget(),
+                              child: NavBarWithMiddleButtonWidget(),
                             ),
                           ],
                         ),
@@ -434,7 +438,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                       return wrapWithModel(
                         model: _model.loaderModel,
                         updateCallback: () => setState(() {}),
-                        child: const LoaderWidget(),
+                        child: LoaderWidget(),
                       );
                     }
                   },

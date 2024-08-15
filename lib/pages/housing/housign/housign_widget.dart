@@ -1,7 +1,11 @@
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'housign_model.dart';
 export 'housign_model.dart';
 
@@ -38,7 +42,7 @@ class _HousignWidgetState extends State<HousignWidget> {
         key: scaffoldKey,
         backgroundColor: Colors.white,
         body: Stack(
-          alignment: const AlignmentDirectional(0.0, 1.0),
+          alignment: AlignmentDirectional(0.0, 1.0),
           children: [
             Container(
               width: MediaQuery.sizeOf(context).width * 1.0,
@@ -57,7 +61,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 85.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 85.0, 0.0, 0.0),
                     child: Text(
                       'HOUSING',
                       style:
@@ -71,7 +75,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                     child: Stack(
                       children: [
                         InkWell(
@@ -85,7 +89,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 0.85,
                             height: MediaQuery.sizeOf(context).height * 0.15,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Color(0xFFF7F8FA),
                               borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(20.0),
@@ -98,7 +102,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 10.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
@@ -112,7 +116,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 10.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -132,7 +136,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 8.0, 0.0, 0.0),
                                           child: Text(
                                             '3 huéspedes 1 habitación 2 camas 1 baño',
@@ -204,13 +208,13 @@ class _HousignWidgetState extends State<HousignWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                     child: Stack(
                       children: [
                         Container(
                           width: MediaQuery.sizeOf(context).width * 0.85,
                           height: MediaQuery.sizeOf(context).height * 0.15,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Color(0xFFF7F8FA),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20.0),
@@ -223,7 +227,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 10.0, 10.0, 10.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -237,7 +241,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 10.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -256,7 +260,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                                             ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 8.0, 0.0, 0.0),
                                         child: Text(
                                           'Edificio y zona tranquilos. Dispone de excelente ventilación natural y aire acondicionado.',
@@ -329,7 +333,7 @@ class _HousignWidgetState extends State<HousignWidget> {
             wrapWithModel(
               model: _model.navBarWithMiddleButtonModel,
               updateCallback: () => setState(() {}),
-              child: const NavBarWithMiddleButtonWidget(),
+              child: NavBarWithMiddleButtonWidget(),
             ),
           ],
         ),

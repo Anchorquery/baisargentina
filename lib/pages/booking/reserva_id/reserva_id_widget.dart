@@ -5,9 +5,12 @@ import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'reserva_id_model.dart';
 export 'reserva_id_model.dart';
 
@@ -37,7 +40,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResponseFindMeBooking = await ReserveGroup.findmeOneCall.call(
         token: currentAuthenticationToken,
-        uuid: widget.uuid,
+        uuid: widget!.uuid,
       );
 
       if ((_model.apiResponseFindMeBooking?.succeeded ?? true)) {
@@ -84,7 +87,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                     context.pop();
                   },
                 ),
-                actions: const [],
+                actions: [],
                 centerTitle: false,
                 elevation: 0.0,
               )
@@ -95,13 +98,13 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
             builder: (context) {
               if (_model.loading == false) {
                 return Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 20.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 20.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -117,7 +120,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                     fontWeight: FontWeight.w800,
                                   ),
                             ),
-                          ].divide(const SizedBox(width: 10.0)),
+                          ].divide(SizedBox(width: 10.0)),
                         ),
                       ),
                       Row(
@@ -137,7 +140,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                           ),
                           Text(
                             valueOrDefault<String>(
-                              _model.data?.event.name,
+                              _model.data?.event?.name,
                               'name',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -147,7 +150,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   letterSpacing: 0.0,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                       if (_model.data?.placeUrl != null &&
                           _model.data?.placeUrl != '')
@@ -161,7 +164,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Lato',
-                                    color: const Color(0x8F212529),
+                                    color: Color(0x8F212529),
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                   ),
@@ -180,13 +183,13 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Lato',
-                                      color: const Color(0x8F212529),
+                                      color: Color(0x8F212529),
                                       letterSpacing: 0.0,
                                       decoration: TextDecoration.underline,
                                     ),
                               ),
                             ),
-                          ].divide(const SizedBox(width: 10.0)),
+                          ].divide(SizedBox(width: 10.0)),
                         ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -225,7 +228,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   fontWeight: FontWeight.normal,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -237,7 +240,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Lato',
-                                  color: const Color(0x8F212529),
+                                  color: Color(0x8F212529),
                                   fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
@@ -249,18 +252,18 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Lato',
-                                  color: const Color(0x8F212529),
+                                  color: Color(0x8F212529),
                                   fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.normal,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
-                      if (_model.data?.organizador.phone != null &&
-                          _model.data?.organizador.phone != '')
+                      if (_model.data?.organizador?.phone != null &&
+                          _model.data?.organizador?.phone != '')
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 15.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -288,10 +291,10 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                       fontWeight: FontWeight.normal,
                                     ),
                               ),
-                            ].divide(const SizedBox(width: 10.0)),
+                            ].divide(SizedBox(width: 10.0)),
                           ),
                         ),
-                      const Divider(
+                      Divider(
                         thickness: 1.0,
                         color: Color(0x8F212529),
                       ),
@@ -345,11 +348,11 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                               ),
                             ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -360,7 +363,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Lato',
-                                    color: const Color(0x8F212529),
+                                    color: Color(0x8F212529),
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
@@ -372,16 +375,16 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Lato',
-                                    color: const Color(0x8E212529),
+                                    color: Color(0x8E212529),
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
                                   ),
                             ),
-                          ].divide(const SizedBox(width: 10.0)),
+                          ].divide(SizedBox(width: 10.0)),
                         ),
                       ),
-                      const Divider(
+                      Divider(
                         thickness: 1.0,
                         color: Color(0x8F212529),
                       ),
@@ -411,7 +414,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   fontWeight: FontWeight.w800,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -439,7 +442,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   fontWeight: FontWeight.w800,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -467,16 +470,16 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                   fontWeight: FontWeight.w800,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
-                      const Divider(
+                      Divider(
                         thickness: 1.0,
                         color: Color(0x8F212529),
                       ),
                       Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 25.0, 0.0, 25.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
@@ -490,7 +493,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                         ),
                       ),
                       ClipRRect(
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(20.0),
                           bottomRight: Radius.circular(20.0),
                           topLeft: Radius.circular(20.0),
@@ -499,7 +502,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 0.85,
                           height: MediaQuery.sizeOf(context).height * 0.12,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Color(0xFFF2F2F2),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20.0),
@@ -509,9 +512,9 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                             ),
                           ),
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 5.0, 10.0, 5.0),
                               child: Text(
                                 'Estamos emocionados de contar contigo en este evento. Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. ¡Nos vemos pronto!',
@@ -533,7 +536,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                 return wrapWithModel(
                   model: _model.loaderModel,
                   updateCallback: () => setState(() {}),
-                  child: const LoaderWidget(),
+                  child: LoaderWidget(),
                 );
               }
             },

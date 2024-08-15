@@ -9,6 +9,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'registro_model.dart';
 export 'registro_model.dart';
 
@@ -76,9 +78,9 @@ class _RegistroWidgetState extends State<RegistroWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Stack(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -90,7 +92,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
@@ -98,7 +100,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.none,
-                          alignment: const Alignment(0.0, 0.0),
+                          alignment: Alignment(0.0, 0.0),
                         ),
                       ),
                     ),
@@ -106,9 +108,9 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: EdgeInsets.all(24.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +124,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                 ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             0.0, 12.0, 0.0, 24.0),
                         child: Text(
                           'Empecemos rellenando el siguiente formulario.',
@@ -134,7 +136,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             0.0, 12.0, 0.0, 24.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
@@ -150,19 +152,19 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                       letterSpacing: 0.0,
                                     ),
                               ),
-                              const TextSpan(
+                              TextSpan(
                                 text: 'Términos.',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
-                              const TextSpan(
+                              TextSpan(
                                 text:
                                     '\nConoce como procesamos tus datos en nuestras',
                                 style: TextStyle(),
                               ),
-                              const TextSpan(
+                              TextSpan(
                                 text: ' Políticas de reembolso',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
@@ -181,14 +183,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.displayNameTextController,
                             focusNode: _model.displayNameFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.name],
+                            autofillHints: [AutofillHints.name],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Nombre',
@@ -244,14 +246,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.apellidoTextController,
                             focusNode: _model.apellidoFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.name],
+                            autofillHints: [AutofillHints.name],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Apellido',
@@ -307,7 +309,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -332,7 +334,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 2.0,
                                     ),
@@ -380,14 +382,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.emailAddressTextController,
                             focusNode: _model.emailAddressFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.email],
+                            autofillHints: [AutofillHints.email],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Correo electrónico ',
@@ -444,14 +446,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.fechanacimientoTextController,
                             focusNode: _model.fechanacimientoFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.birthday],
+                            autofillHints: [AutofillHints.birthday],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Fecha de nacimiento (dd-Mm-yyyy)',
@@ -507,14 +509,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.passwordTextController,
                             focusNode: _model.passwordFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.password],
+                            autofillHints: [AutofillHints.password],
                             obscureText: !_model.passwordVisibility,
                             decoration: InputDecoration(
                               labelText: 'Cotraseña',
@@ -584,14 +586,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: Container(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _model.passwordConfirmTextController,
                             focusNode: _model.passwordConfirmFocusNode,
                             autofocus: true,
-                            autofillHints: const [AutofillHints.password],
+                            autofillHints: [AutofillHints.password],
                             obscureText: !_model.passwordConfirmVisibility,
                             decoration: InputDecoration(
                               labelText: 'Confirmar contraseña',
@@ -663,14 +665,14 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   '¿Estas en Argentina?',
@@ -692,11 +694,11 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FlutterFlowDropDown<String>(
                           controller: _model.estasEnArgentinaValueController ??=
                               FormFieldController<String>(null),
-                          options: const ['Si', 'No'],
+                          options: ['Si', 'No'],
                           onChanged: (val) => setState(
                               () => _model.estasEnArgentinaValue = val),
                           width: 346.0,
@@ -704,7 +706,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                           textStyle:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Lato',
-                                    color: const Color(0xFF14181B),
+                                    color: Color(0xFF14181B),
                                     letterSpacing: 0.0,
                                   ),
                           hintText: 'Selecciona',
@@ -719,7 +721,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                           borderColor: FlutterFlowTheme.of(context).alternate,
                           borderWidth: 2.0,
                           borderRadius: 30.0,
-                          margin: const EdgeInsetsDirectional.fromSTEB(
+                          margin: EdgeInsetsDirectional.fromSTEB(
                               16.0, 4.0, 16.0, 4.0),
                           hidesUnderline: true,
                           isOverButton: false,
@@ -735,7 +737,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: TextFormField(
                           controller: _model.phoneNumberTextController,
                           focusNode: _model.phoneNumberFocusNode,
@@ -756,7 +758,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
@@ -806,7 +808,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: TextFormField(
                           controller: _model.universidadFieldTextController,
                           focusNode: _model.universidadFieldFocusNode,
@@ -827,7 +829,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
@@ -870,7 +872,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             _model.authRegisterResponse =
@@ -900,7 +902,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: const Duration(milliseconds: 4000),
+                                  duration: Duration(milliseconds: 4000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
@@ -913,9 +915,9 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 44.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -926,7 +928,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 3.0,
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),
@@ -936,16 +938,16 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
-                        child: SizedBox(
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                        child: Container(
                           width: double.infinity,
                           child: Stack(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 12.0),
                                   child: Container(
                                     width: double.infinity,
@@ -958,7 +960,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Container(
                                   width: 70.0,
                                   height: 32.0,
@@ -966,7 +968,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                   ),
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Text(
                                     'OR',
                                     style: FlutterFlowTheme.of(context)
@@ -984,22 +986,22 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () {
                             print('regitstro-google pressed ...');
                           },
                           text: 'Continue with Google',
-                          icon: const FaIcon(
+                          icon: FaIcon(
                             FontAwesomeIcons.google,
                             size: 20.0,
                           ),
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 44.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -1025,9 +1027,9 @@ class _RegistroWidgetState extends State<RegistroWidget> {
 
                       // You will have to add an action on this rich text to go to your login page.
                       Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 0.0, 12.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1044,7 +1046,7 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                               textScaler: MediaQuery.of(context).textScaler,
                               text: TextSpan(
                                 children: [
-                                  const TextSpan(
+                                  TextSpan(
                                     text: '¿Ya tiene una cuenta? ',
                                     style: TextStyle(),
                                   ),

@@ -2,7 +2,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'tallerdecv_model.dart';
 export 'tallerdecv_model.dart';
 
@@ -39,7 +42,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Align(
-          alignment: const AlignmentDirectional(0.0, 0.0),
+          alignment: AlignmentDirectional(0.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -48,7 +51,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                 Stack(
                   children: [
                     ClipRRect(
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(70.0),
                         bottomRight: Radius.circular(70.0),
                         topLeft: Radius.circular(0.0),
@@ -68,7 +71,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                         height: MediaQuery.sizeOf(context).height * 0.25,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryText,
-                          borderRadius: const BorderRadius.only(
+                          borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(70.0),
                             bottomRight: Radius.circular(70.0),
                             topLeft: Radius.circular(0.0),
@@ -78,9 +81,9 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(-1.0, -1.0),
+                      alignment: AlignmentDirectional(-1.0, -1.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 75.0, 10.0, 10.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
@@ -99,9 +102,9 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(0.0, -1.0),
+                      alignment: AlignmentDirectional(0.0, -1.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             30.0, 80.0, 30.0, 20.0),
                         child: Text(
                           'Taller de Armado de Curriculum para estudiantes',
@@ -121,7 +124,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -130,20 +133,20 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                         width: 100.0,
                         height: 135.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                           borderRadius: BorderRadius.circular(18.0),
                           border: Border.all(
-                            color: const Color(0xFFF5F6F9),
+                            color: Color(0xFFF5F6F9),
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Container(
                                   width: 80.0,
@@ -163,7 +166,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Fecha',
                                 style: FlutterFlowTheme.of(context)
@@ -177,7 +180,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 '17/07/2024',
                                 style: FlutterFlowTheme.of(context)
@@ -197,20 +200,20 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                         width: 100.0,
                         height: 135.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                           borderRadius: BorderRadius.circular(18.0),
                           border: Border.all(
-                            color: const Color(0xFFF5F6F9),
+                            color: Color(0xFFF5F6F9),
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Container(
                                   width: 80.0,
@@ -230,7 +233,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Hora',
                                 style: FlutterFlowTheme.of(context)
@@ -244,7 +247,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 '06:00 pm',
                                 style: FlutterFlowTheme.of(context)
@@ -264,20 +267,20 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                         width: 100.0,
                         height: 135.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                           borderRadius: BorderRadius.circular(18.0),
                           border: Border.all(
-                            color: const Color(0xFFF5F6F9),
+                            color: Color(0xFFF5F6F9),
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Container(
                                   width: 80.0,
@@ -287,9 +290,9 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                                         .secondaryBackground,
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Icon(
                                       Icons.health_and_safety_outlined,
                                       color:
@@ -301,7 +304,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Tipo de evento',
                                 style: FlutterFlowTheme.of(context)
@@ -315,7 +318,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Gratuito',
                                 style: FlutterFlowTheme.of(context)
@@ -335,26 +338,26 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(25.0, 5.0, 5.0, 10.0),
+                        EdgeInsetsDirectional.fromSTEB(25.0, 5.0, 5.0, 10.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         await launchURL(
                             'https://www.google.com/maps/search/?api=1&query=-34.583983%2C-58.3930287');
                       },
                       text: 'Ubicación',
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.location_pin,
                         size: 24.0,
                       ),
                       options: FFButtonOptions(
                         height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -363,7 +366,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                                   letterSpacing: 0.0,
                                 ),
                         elevation: 3.0,
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -373,10 +376,10 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 35.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 35.0, 0.0),
                     child: RichText(
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
@@ -392,7 +395,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: ' Solo estudiantes mayores de edad',
                             style: TextStyle(),
                           )
@@ -407,7 +410,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
+                      EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
                     ' Taller de Armado de CV  participa en nuestro taller donde crearas un Curriculum Vitae profesional y atractivo.',
                     textAlign: TextAlign.start,
@@ -421,7 +424,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
+                      EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
                     'Te invitamos a participar en nuestro taller gratuito donde aprenderás a crear un Curriculum Vitae (CV) profesional y atractivo que destaque tus habilidades y experiencias, aumentando tus posibilidades de éxito en el mercado laboral.\n\nEn este taller práctico, descubrirás las claves para estructurar y redactar un CV que capture la atención de los reclutadores. Aprenderás sobre los elementos esenciales que debe incluir tu CV, cómo resaltar tus logros académicos y experiencias laborales, y consejos para adaptar tu CV a diferentes tipos de oportunidades profesionales.\n\nLas actividades que haremos serán:\n\nAnálisis de ejemplos de CV exitosos.\nEjercicios prácticos de redacción y edición de CV.\nRetroalimentación personalizada por parte del facilitador.\nSesión de preguntas y respuestas.\nFecha y Hora: Miércoles 17 de julio a las 16:00\n\nLugar: Casa BAIS\n\nCoordinador: Octavia Sol Ortuno Ramos, estudiante avanzada de Psicología, especialista en recursos humanos y orientación profesional.\n\nTemario:\n\nIntroducción al CV: función y primeros pasos.\nEstructura y formato: lo que todo buen CV debe tener.\nRedacción efectiva: cómo presentar tus habilidades y experiencias.\nAdaptación del CV: tailor-made para cada oportunidad.\nTips y trucos: lo que los reclutadores buscan.\n\n**Exclusivo para estudiantes de entre 18 y 30 años\n\n*** ¡Si tienes alguna pregunta sobre Argentina, estamos aquí para ayudarte! Puedes escribirnos a info@baisargentina.com y responderemos a todas tus preguntas.\n\nNo dejes pasar esta oportunidad de potenciar tu perfil profesional. ¡Te esperamos!\nEl recorrido será de aproximadamente 5KM, diseñado para que los participantes puedan correr o trotar a su propio ritmo, pasando por las rutas de los parques de recoleta, llegando a los bosques de Palermo. Cada rincón ofrece una foto perfecta y un respiro verde en medio de la ciudad!\n\nPunto de Encuentro: Esquina del Museo Nacional de Bellas Artes\n\nSi no puedes encontrarme, envíame un mensaje por WhatsApp.',
                     textAlign: TextAlign.start,
@@ -434,10 +437,10 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 0.0, 0.0),
                     child: RichText(
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
@@ -453,7 +456,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: ' Octavia Sol',
                             style: TextStyle(),
                           )
@@ -467,7 +470,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       context.pushNamed('reservaexitosa');
@@ -476,9 +479,9 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                     options: FFButtonOptions(
                       height: 40.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).tertiary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -487,7 +490,7 @@ class _TallerdecvWidgetState extends State<TallerdecvWidget> {
                                 letterSpacing: 0.0,
                               ),
                       elevation: 3.0,
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),

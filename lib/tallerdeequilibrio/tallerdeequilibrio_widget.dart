@@ -2,7 +2,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'tallerdeequilibrio_model.dart';
 export 'tallerdeequilibrio_model.dart';
 
@@ -40,7 +43,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Align(
-          alignment: const AlignmentDirectional(0.0, 0.0),
+          alignment: AlignmentDirectional(0.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -49,7 +52,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                 Stack(
                   children: [
                     ClipRRect(
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(70.0),
                         bottomRight: Radius.circular(70.0),
                         topLeft: Radius.circular(0.0),
@@ -69,7 +72,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                         height: MediaQuery.sizeOf(context).height * 0.25,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryText,
-                          borderRadius: const BorderRadius.only(
+                          borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(70.0),
                             bottomRight: Radius.circular(70.0),
                             topLeft: Radius.circular(0.0),
@@ -79,9 +82,9 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(-1.0, -1.0),
+                      alignment: AlignmentDirectional(-1.0, -1.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 75.0, 10.0, 10.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
@@ -100,9 +103,9 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(0.0, -1.0),
+                      alignment: AlignmentDirectional(0.0, -1.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 80.0, 20.0, 20.0),
                         child: Text(
                           'Taller de equilibrio emocional en epocas de examenes para estudiantes',
@@ -122,7 +125,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -131,20 +134,20 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                         width: 100.0,
                         height: 135.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                           borderRadius: BorderRadius.circular(18.0),
                           border: Border.all(
-                            color: const Color(0xFFF5F6F9),
+                            color: Color(0xFFF5F6F9),
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Container(
                                   width: 80.0,
@@ -164,7 +167,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Fecha',
                                 style: FlutterFlowTheme.of(context)
@@ -178,7 +181,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 '08/07/2024',
                                 style: FlutterFlowTheme.of(context)
@@ -198,20 +201,20 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                         width: 100.0,
                         height: 135.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                           borderRadius: BorderRadius.circular(18.0),
                           border: Border.all(
-                            color: const Color(0xFFF5F6F9),
+                            color: Color(0xFFF5F6F9),
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Container(
                                   width: 80.0,
@@ -231,7 +234,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Hora',
                                 style: FlutterFlowTheme.of(context)
@@ -245,7 +248,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 '04:30 pm',
                                 style: FlutterFlowTheme.of(context)
@@ -265,20 +268,20 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                         width: 100.0,
                         height: 135.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                           borderRadius: BorderRadius.circular(18.0),
                           border: Border.all(
-                            color: const Color(0xFFF5F6F9),
+                            color: Color(0xFFF5F6F9),
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Container(
                                   width: 80.0,
@@ -288,9 +291,9 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                                         .secondaryBackground,
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Icon(
                                       Icons.health_and_safety_outlined,
                                       color:
@@ -302,7 +305,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Tipo de evento',
                                 style: FlutterFlowTheme.of(context)
@@ -316,7 +319,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 'Gratuito',
                                 style: FlutterFlowTheme.of(context)
@@ -336,26 +339,26 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(25.0, 5.0, 5.0, 10.0),
+                        EdgeInsetsDirectional.fromSTEB(25.0, 5.0, 5.0, 10.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         await launchURL(
                             'https://www.google.com/maps/search/Ayacucho+1571+Buenos+Aires+CABA+1112+Argentina/@-34.5912482,-58.3957341,17z/data=!3m1!4b1?hl=en&entry=ttu');
                       },
                       text: 'Ubicación',
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.location_pin,
                         size: 24.0,
                       ),
                       options: FFButtonOptions(
                         height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -364,7 +367,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                                   letterSpacing: 0.0,
                                 ),
                         elevation: 3.0,
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -374,10 +377,10 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 35.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 35.0, 0.0),
                     child: RichText(
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
@@ -393,7 +396,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: ' Solo estudiantes mayores de edad',
                             style: TextStyle(),
                           )
@@ -408,7 +411,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
+                      EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
                     'Te invitamos a ser parte de un taller diseñado especialmente para estudiantes universitarios, donde aprenderás herramientas clave para la regulación emocional y mejorarás tu bienestar y rendimiento académico.',
                     textAlign: TextAlign.start,
@@ -422,7 +425,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
+                      EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
                     'Lugar: Casa BAIS\n\nActividades:\n\nDinámicas de grupo para la comprensión de emociones.\nEjercicios prácticos de respiración y mindfulness.\nRole-playing para practicar habilidades sociales.\nSesión de preguntas y respuestas con el facilitador.\nInscripción: El taller es completamente gratuito, pero el espacio es limitado. Para reservar tu lugar, por favor regístrate en línea a través de nuestro sitio web.\n\n*La inscripción en nuestra página web es obligatoria\n\n**Exclusivo para estudiantes de entre 18 y 30 años\n\n\nNo te pierdas esta oportunidad de aprender y crecer emocionalmente. ¡Te esperamos!',
                     textAlign: TextAlign.start,
@@ -435,10 +438,10 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(35.0, 0.0, 0.0, 0.0),
                     child: RichText(
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
@@ -454,7 +457,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: ' Octavia Sol',
                             style: TextStyle(),
                           )
@@ -468,7 +471,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       context.pushNamed('reservaexitosa');
@@ -477,9 +480,9 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                     options: FFButtonOptions(
                       height: 40.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).tertiary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -488,7 +491,7 @@ class _TallerdeequilibrioWidgetState extends State<TallerdeequilibrioWidget> {
                                 letterSpacing: 0.0,
                               ),
                       elevation: 3.0,
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),

@@ -5,6 +5,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'nav_bar_with_middle_button_model.dart';
 export 'nav_bar_with_middle_button_model.dart';
 
@@ -44,13 +46,13 @@ class _NavBarWithMiddleButtonWidgetState
     return Container(
       width: double.infinity,
       height: 90.0,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0x00EEEEEE),
       ),
       child: Stack(
         children: [
           Align(
-            alignment: const AlignmentDirectional(0.0, 1.0),
+            alignment: AlignmentDirectional(0.0, 1.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -58,7 +60,7 @@ class _NavBarWithMiddleButtonWidgetState
                 Material(
                   color: Colors.transparent,
                   elevation: 0.0,
-                  shape: const RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(40.0),
                       bottomRight: Radius.circular(40.0),
@@ -71,7 +73,7 @@ class _NavBarWithMiddleButtonWidgetState
                     height: 60.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primaryBackground,
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
                           blurRadius: 10.0,
                           color: Color(0x1A57636C),
@@ -82,7 +84,7 @@ class _NavBarWithMiddleButtonWidgetState
                           spreadRadius: 0.1,
                         )
                       ],
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(40.0),
                         bottomRight: Radius.circular(40.0),
                         topLeft: Radius.circular(40.0),
@@ -95,7 +97,7 @@ class _NavBarWithMiddleButtonWidgetState
             ),
           ),
           Align(
-            alignment: const AlignmentDirectional(0.0, 0.7),
+            alignment: AlignmentDirectional(0.0, 0.7),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,7 +108,7 @@ class _NavBarWithMiddleButtonWidgetState
                   borderRadius: 30.0,
                   borderWidth: 1.0,
                   buttonSize: 50.0,
-                  icon: const Icon(
+                  icon: Icon(
                     FFIcons.keventos,
                     color: Color(0xFF9299A1),
                     size: 35.0,
@@ -120,7 +122,7 @@ class _NavBarWithMiddleButtonWidgetState
                   borderRadius: 30.0,
                   borderWidth: 1.0,
                   buttonSize: 50.0,
-                  icon: const Icon(
+                  icon: Icon(
                     FFIcons.kdescuentos,
                     color: Color(0xFF9299A1),
                     size: 35.0,
@@ -137,14 +139,14 @@ class _NavBarWithMiddleButtonWidgetState
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                         child: FlutterFlowIconButton(
                           borderColor: Colors.transparent,
                           borderRadius: 4.0,
                           borderWidth: 1.0,
                           buttonSize: 60.0,
                           fillColor: FlutterFlowTheme.of(context).primary,
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.qr_code_scanner_outlined,
                             color: Colors.white,
                             size: 30.0,
@@ -182,7 +184,7 @@ class _NavBarWithMiddleButtonWidgetState
                   borderRadius: 30.0,
                   borderWidth: 1.0,
                   buttonSize: 50.0,
-                  icon: const Icon(
+                  icon: Icon(
                     FFIcons.khousign,
                     color: Color(0xFF9299A1),
                     size: 35.0,
@@ -196,7 +198,7 @@ class _NavBarWithMiddleButtonWidgetState
                   borderRadius: 30.0,
                   borderWidth: 1.0,
                   buttonSize: 50.0,
-                  icon: const Icon(
+                  icon: Icon(
                     FFIcons.kperfil,
                     color: Color(0xFF9299A1),
                     size: 35.0,

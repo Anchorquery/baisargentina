@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'inicio_model.dart';
 export 'inicio_model.dart';
@@ -42,7 +43,7 @@ class _InicioWidgetState extends State<InicioWidget> {
           setState(() {});
           authManager.updateAuthUserData(
             authenticationToken: currentAuthenticationToken,
-            authUid: currentUserData?.id.toString(),
+            authUid: currentUserData?.id?.toString(),
             userData: UserStruct(
               id: UserStruct.maybeFromMap(
                       (_model.apiResponseMe?.jsonBody ?? ''))
@@ -108,18 +109,18 @@ class _InicioWidgetState extends State<InicioWidget> {
         key: scaffoldKey,
         backgroundColor: Colors.white,
         body: Align(
-          alignment: const AlignmentDirectional(0.0, -1.0),
+          alignment: AlignmentDirectional(0.0, -1.0),
           child: Container(
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: MediaQuery.sizeOf(context).height * 1.0,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(0.0, -1.0),
+                  alignment: AlignmentDirectional(0.0, -1.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
@@ -131,10 +132,10 @@ class _InicioWidgetState extends State<InicioWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(0.0, -1.0),
+                  alignment: AlignmentDirectional(0.0, -1.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -142,13 +143,13 @@ class _InicioWidgetState extends State<InicioWidget> {
                         width: 199.0,
                         height: 142.0,
                         fit: BoxFit.none,
-                        alignment: const Alignment(0.0, 0.0),
+                        alignment: Alignment(0.0, 0.0),
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       context.pushNamed('login');
@@ -158,9 +159,9 @@ class _InicioWidgetState extends State<InicioWidget> {
                       width: 347.0,
                       height: 44.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).secondary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -179,7 +180,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       context.pushNamed('registro');
@@ -189,9 +190,9 @@ class _InicioWidgetState extends State<InicioWidget> {
                       width: 347.0,
                       height: 44.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -211,7 +212,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 30.0, 20.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(20.0, 30.0, 20.0, 0.0),
                   child: Text(
                     '¡Argentina te espera! Inicia sesión o regístrate en BAIS y vive la mejor experiencia de intercambio.',
                     textAlign: TextAlign.center,

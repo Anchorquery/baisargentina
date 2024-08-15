@@ -1,14 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -73,7 +81,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => RootPageContext.wrap(
-        appStateNotifier.loggedIn ? const EventsWidget() : const InicioWidget(),
+        appStateNotifier.loggedIn ? EventsWidget() : InicioWidget(),
         errorRoute: state.uri.toString(),
       ),
       routes: [
@@ -81,109 +89,109 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => RootPageContext.wrap(
-            appStateNotifier.loggedIn ? const EventsWidget() : const InicioWidget(),
+            appStateNotifier.loggedIn ? EventsWidget() : InicioWidget(),
           ),
         ),
         FFRoute(
           name: 'inicio',
           path: '/inicio',
-          builder: (context, params) => const InicioWidget(),
+          builder: (context, params) => InicioWidget(),
         ),
         FFRoute(
           name: 'registro',
           path: '/registro',
-          builder: (context, params) => const RegistroWidget(),
+          builder: (context, params) => RegistroWidget(),
         ),
         FFRoute(
           name: 'login',
           path: '/login',
-          builder: (context, params) => const LoginWidget(),
+          builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
           name: 'descuentos',
           path: '/descuentos',
           requireAuth: true,
-          builder: (context, params) => const DescuentosWidget(),
+          builder: (context, params) => DescuentosWidget(),
         ),
         FFRoute(
           name: 'housign',
           path: '/housign',
           requireAuth: true,
-          builder: (context, params) => const HousignWidget(),
+          builder: (context, params) => HousignWidget(),
         ),
         FFRoute(
           name: 'userProfile',
           path: '/userProfile',
           requireAuth: true,
-          builder: (context, params) => const UserProfileWidget(),
+          builder: (context, params) => UserProfileWidget(),
         ),
         FFRoute(
           name: 'beerpong',
           path: '/beerpong',
           requireAuth: true,
-          builder: (context, params) => const BeerpongWidget(),
+          builder: (context, params) => BeerpongWidget(),
         ),
         FFRoute(
           name: 'reservaexitosa',
           path: '/reservaexitosa',
           requireAuth: true,
-          builder: (context, params) => const ReservaexitosaWidget(),
+          builder: (context, params) => ReservaexitosaWidget(),
         ),
         FFRoute(
           name: 'tranvia',
           path: '/tranvia',
           requireAuth: true,
-          builder: (context, params) => const TranviaWidget(),
+          builder: (context, params) => TranviaWidget(),
         ),
         FFRoute(
           name: 'clubderunning',
           path: '/clubderunning',
           requireAuth: true,
-          builder: (context, params) => const ClubderunningWidget(),
+          builder: (context, params) => ClubderunningWidget(),
         ),
         FFRoute(
           name: 'tallerdeequilibrio',
           path: '/tallerdeequilibrio',
           requireAuth: true,
-          builder: (context, params) => const TallerdeequilibrioWidget(),
+          builder: (context, params) => TallerdeequilibrioWidget(),
         ),
         FFRoute(
           name: 'tallerdecv',
           path: '/tallerdecv',
           requireAuth: true,
-          builder: (context, params) => const TallerdecvWidget(),
+          builder: (context, params) => TallerdecvWidget(),
         ),
         FFRoute(
           name: 'buenosaireshousign',
           path: '/buenosaireshousign',
           requireAuth: true,
-          builder: (context, params) => const BuenosaireshousignWidget(),
+          builder: (context, params) => BuenosaireshousignWidget(),
         ),
         FFRoute(
           name: 'faq',
           path: '/faq',
-          builder: (context, params) => const FaqWidget(),
+          builder: (context, params) => FaqWidget(),
         ),
         FFRoute(
           name: 'politicasdeReembolso',
           path: '/politicasdeReembolso',
-          builder: (context, params) => const PoliticasdeReembolsoWidget(),
+          builder: (context, params) => PoliticasdeReembolsoWidget(),
         ),
         FFRoute(
           name: 'nosotros',
           path: '/nosotros',
-          builder: (context, params) => const NosotrosWidget(),
+          builder: (context, params) => NosotrosWidget(),
         ),
         FFRoute(
           name: 'terminosycondiciones',
           path: '/terminosycondiciones',
-          builder: (context, params) => const TerminosycondicionesWidget(),
+          builder: (context, params) => TerminosycondicionesWidget(),
         ),
         FFRoute(
           name: 'create',
           path: '/create',
           requireAuth: true,
-          builder: (context, params) => const CreateWidget(),
+          builder: (context, params) => CreateWidget(),
         ),
         FFRoute(
           name: 'event',
@@ -200,49 +208,49 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'events',
           path: '/events',
           requireAuth: true,
-          builder: (context, params) => const EventsWidget(),
+          builder: (context, params) => EventsWidget(),
         ),
         FFRoute(
           name: 'reservas',
           path: '/reservas',
           requireAuth: true,
-          builder: (context, params) => const ReservasWidget(),
+          builder: (context, params) => ReservasWidget(),
         ),
         FFRoute(
           name: 'DetallesReserva',
           path: '/detallesReserva',
           requireAuth: true,
-          builder: (context, params) => const DetallesReservaWidget(),
+          builder: (context, params) => DetallesReservaWidget(),
         ),
         FFRoute(
           name: 'scan',
           path: '/scan',
           requireAuth: true,
-          builder: (context, params) => const ScanWidget(),
+          builder: (context, params) => ScanWidget(),
         ),
         FFRoute(
           name: 'scaneoexitoso',
           path: '/scaneoexitoso',
           requireAuth: true,
-          builder: (context, params) => const ScaneoexitosoWidget(),
+          builder: (context, params) => ScaneoexitosoWidget(),
         ),
         FFRoute(
           name: 'scaneoError',
           path: '/scaneoError',
           requireAuth: true,
-          builder: (context, params) => const ScaneoErrorWidget(),
+          builder: (context, params) => ScaneoErrorWidget(),
         ),
         FFRoute(
           name: 'eventsCopy',
           path: '/eventsCopy',
           requireAuth: true,
-          builder: (context, params) => const EventsCopyWidget(),
+          builder: (context, params) => EventsCopyWidget(),
         ),
         FFRoute(
           name: 'edit',
           path: '/edit',
           requireAuth: true,
-          builder: (context, params) => const EditWidget(),
+          builder: (context, params) => EditWidget(),
         ),
         FFRoute(
           name: 'editEvent',
@@ -498,7 +506,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

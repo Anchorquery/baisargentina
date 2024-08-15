@@ -1,5 +1,8 @@
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'loader_model.dart';
 export 'loader_model.dart';
 
@@ -37,7 +40,7 @@ class _LoaderWidgetState extends State<LoaderWidget> {
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: MediaQuery.sizeOf(context).height * 1.0,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFF00215B),
       ),
       child: Row(

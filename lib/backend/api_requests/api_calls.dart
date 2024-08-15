@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:typed_data';
+import '../schema/structs/index.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -36,10 +38,10 @@ class GetEventsCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'GetEvents',
-      apiUrl: '$baseUrl/events',
+      apiUrl: '${baseUrl}/events',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {
         'categoryId': categoryId,
@@ -58,7 +60,7 @@ class GetEventsCall {
         r'''$.data''',
         true,
       ) as List?;
-  dynamic pagination(dynamic response) => getJsonField(
+  dynamic? pagination(dynamic response) => getJsonField(
         response,
         r'''$.meta.pagination''',
       );
@@ -76,10 +78,10 @@ class GetEventCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'GetEvent',
-      apiUrl: '$baseUrl/events/$id',
+      apiUrl: '${baseUrl}/events/${id}',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {},
       returnBody: true,
@@ -91,11 +93,11 @@ class GetEventCall {
     );
   }
 
-  dynamic data(dynamic response) => getJsonField(
+  dynamic? data(dynamic response) => getJsonField(
         response,
         r'''$.data''',
       );
-  dynamic portada(dynamic response) => getJsonField(
+  dynamic? portada(dynamic response) => getJsonField(
         response,
         r'''$.data.portada''',
       );
@@ -125,12 +127,12 @@ class LoginCall {
 
     final ffApiRequestBody = '''
 {
-  "identifier": "$identifier",
-  "password": "$password"
+  "identifier": "${identifier}",
+  "password": "${password}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Login',
-      apiUrl: '$baseUrl/auth/local',
+      apiUrl: '${baseUrl}/auth/local',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -153,7 +155,7 @@ class LoginCall {
         response,
         r'''$.user.id''',
       ));
-  dynamic user(dynamic response) => getJsonField(
+  dynamic? user(dynamic response) => getJsonField(
         response,
         r'''$.user''',
       );
@@ -232,14 +234,14 @@ class CreateReserveCall {
 
     final ffApiRequestBody = '''
 {
-  "event": $event
+  "event": ${event}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CreateReserve',
-      apiUrl: '$baseUrl/bookings',
+      apiUrl: '${baseUrl}/bookings',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -264,10 +266,10 @@ class FindmeCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'findme',
-      apiUrl: '$baseUrl/bookings-me/find',
+      apiUrl: '${baseUrl}/bookings-me/find',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {},
       returnBody: true,
@@ -284,7 +286,7 @@ class FindmeCall {
         r'''$.data''',
         true,
       ) as List?;
-  dynamic pagination(dynamic response) => getJsonField(
+  dynamic? pagination(dynamic response) => getJsonField(
         response,
         r'''$.meta.pagination''',
       );
@@ -301,10 +303,10 @@ class FindmeOneCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'findme One',
-      apiUrl: '$baseUrl/bookings-me/find/$uuid',
+      apiUrl: '${baseUrl}/bookings-me/find/${uuid}',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {},
       returnBody: true,
@@ -316,7 +318,7 @@ class FindmeOneCall {
     );
   }
 
-  dynamic data(dynamic response) => getJsonField(
+  dynamic? data(dynamic response) => getJsonField(
         response,
         r'''$.data''',
       );
@@ -333,10 +335,10 @@ class VerificarReservaCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'verificarReserva',
-      apiUrl: '$baseUrl/bookings/verificar-reserva/$uuid',
+      apiUrl: '${baseUrl}/bookings/verificar-reserva/${uuid}',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {},
       returnBody: true,
@@ -348,27 +350,27 @@ class VerificarReservaCall {
     );
   }
 
-  dynamic data(dynamic response) => getJsonField(
+  dynamic? data(dynamic response) => getJsonField(
         response,
         r'''$.data''',
       );
-  dynamic owner(dynamic response) => getJsonField(
+  dynamic? owner(dynamic response) => getJsonField(
         response,
         r'''$.data.owner''',
       );
-  dynamic organizador(dynamic response) => getJsonField(
+  dynamic? organizador(dynamic response) => getJsonField(
         response,
         r'''$.data.organizador''',
       );
-  dynamic event(dynamic response) => getJsonField(
+  dynamic? event(dynamic response) => getJsonField(
         response,
         r'''$.data.event''',
       );
-  dynamic supervisor(dynamic response) => getJsonField(
+  dynamic? supervisor(dynamic response) => getJsonField(
         response,
         r'''$.data.supervisor''',
       );
-  dynamic verficacion(dynamic response) => getJsonField(
+  dynamic? verficacion(dynamic response) => getJsonField(
         response,
         r'''$.verificacion''',
       );
@@ -399,10 +401,10 @@ class MeCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'me',
-      apiUrl: '$baseUrl/users/me',
+      apiUrl: '${baseUrl}/users/me',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {},
       returnBody: true,
@@ -451,10 +453,10 @@ class MutipleCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'Mutiple',
-      apiUrl: '$baseUrl/upload',
+      apiUrl: '${baseUrl}/upload',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {
         'ref': ref,
@@ -487,10 +489,10 @@ class SingleCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'Single',
-      apiUrl: '$baseUrl/upload',
+      apiUrl: '${baseUrl}/upload',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {
         'ref': ref,
@@ -590,7 +592,7 @@ class ApiCreateEventsCall {
       apiUrl: 'https://server.baisargentina.com/api/events',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
       },
       params: {
         'name': name,

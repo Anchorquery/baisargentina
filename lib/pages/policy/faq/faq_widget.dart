@@ -1,6 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'faq_model.dart';
 export 'faq_model.dart';
 
@@ -43,7 +47,7 @@ class _FaqWidgetState extends State<FaqWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -63,7 +67,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Preguntas Frecuentes',
                           style: FlutterFlowTheme.of(context)
@@ -80,7 +84,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18.0),
                     child: Container(
@@ -90,7 +94,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 10.0, 15.0, 10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
@@ -129,7 +133,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18.0),
                     child: Container(
@@ -139,7 +143,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 10.0, 15.0, 10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
@@ -178,7 +182,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18.0),
                     child: Container(
@@ -188,7 +192,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 10.0, 15.0, 10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
@@ -227,7 +231,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18.0),
                     child: Container(
@@ -237,7 +241,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 10.0, 15.0, 10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
@@ -277,7 +281,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18.0),
                     child: Container(
@@ -287,7 +291,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 10.0, 15.0, 10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
@@ -327,7 +331,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18.0),
                     child: Container(
@@ -337,7 +341,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 10.0, 15.0, 10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,
@@ -376,7 +380,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18.0),
                     child: Container(
@@ -386,7 +390,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 10.0, 15.0, 10.0),
                         child: RichText(
                           textScaler: MediaQuery.of(context).textScaler,

@@ -1,7 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'button_date_model.dart';
 export 'button_date_model.dart';
 
@@ -46,7 +49,7 @@ class _ButtonDateWidgetState extends State<ButtonDateWidget> {
   Widget build(BuildContext context) {
     return FFButtonWidget(
       onPressed: () async {
-        final datePickedDate = await showDatePicker(
+        final _datePickedDate = await showDatePicker(
           context: context,
           initialDate: getCurrentTimestamp,
           firstDate: getCurrentTimestamp,
@@ -78,12 +81,12 @@ class _ButtonDateWidgetState extends State<ButtonDateWidget> {
           },
         );
 
-        if (datePickedDate != null) {
+        if (_datePickedDate != null) {
           safeSetState(() {
             _model.datePicked = DateTime(
-              datePickedDate.year,
-              datePickedDate.month,
-              datePickedDate.day,
+              _datePickedDate.year,
+              _datePickedDate.month,
+              _datePickedDate.day,
             );
           });
         }
@@ -95,15 +98,15 @@ class _ButtonDateWidgetState extends State<ButtonDateWidget> {
               locale: FFLocalizations.of(context).languageCode,
             )
           : 'Fecha',
-      icon: const Icon(
+      icon: Icon(
         Icons.calendar_today,
         size: 15.0,
       ),
       options: FFButtonOptions(
         width: 160.0,
         height: 40.0,
-        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-        iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
         color: FlutterFlowTheme.of(context).primary,
         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
               fontFamily: 'Lato',
@@ -111,7 +114,7 @@ class _ButtonDateWidgetState extends State<ButtonDateWidget> {
               letterSpacing: 0.0,
             ),
         elevation: 3.0,
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Colors.transparent,
           width: 1.0,
         ),

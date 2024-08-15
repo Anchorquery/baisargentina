@@ -9,8 +9,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'event_model.dart';
 export 'event_model.dart';
 
@@ -39,12 +43,12 @@ class _EventWidgetState extends State<EventWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResponseEventId = await EventsGroup.getEventCall.call(
-        id: widget.id,
+        id: widget!.id,
         token: currentAuthenticationToken,
       );
 
       if ((_model.apiResponseEventId?.succeeded ?? true)) {
-        _model.id = widget.id;
+        _model.id = widget!.id;
         _model.portada = FileDStruct.maybeFromMap(getJsonField(
           (_model.apiResponseEventId?.jsonBody ?? ''),
           r'''$.data.portada''',
@@ -71,12 +75,12 @@ class _EventWidgetState extends State<EventWidget> {
           context: context,
           builder: (alertDialogContext) {
             return AlertDialog(
-              title: const Text('Error'),
-              content: const Text('Ha ocurrido un error al consultar'),
+              title: Text('Error'),
+              content: Text('Ha ocurrido un error al consultar'),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(alertDialogContext),
-                  child: const Text('Ok'),
+                  child: Text('Ok'),
                 ),
               ],
             );
@@ -101,13 +105,13 @@ class _EventWidgetState extends State<EventWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SizedBox(
+        body: Container(
           width: MediaQuery.sizeOf(context).width * 1.0,
           height: MediaQuery.sizeOf(context).height * 10.0,
           child: Stack(
             children: [
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Builder(
                   builder: (context) {
                     if (!valueOrDefault<bool>(
@@ -115,7 +119,7 @@ class _EventWidgetState extends State<EventWidget> {
                       true,
                     )) {
                       return Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -125,7 +129,7 @@ class _EventWidgetState extends State<EventWidget> {
                               Stack(
                                 children: [
                                   ClipRRect(
-                                    borderRadius: const BorderRadius.only(
+                                    borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(70.0),
                                       bottomRight: Radius.circular(70.0),
                                       topLeft: Radius.circular(0.0),
@@ -155,7 +159,7 @@ class _EventWidgetState extends State<EventWidget> {
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
-                                        borderRadius: const BorderRadius.only(
+                                        borderRadius: BorderRadius.only(
                                           bottomLeft: Radius.circular(70.0),
                                           bottomRight: Radius.circular(70.0),
                                           topLeft: Radius.circular(0.0),
@@ -165,9 +169,9 @@ class _EventWidgetState extends State<EventWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(-1.0, -1.0),
+                                    alignment: AlignmentDirectional(-1.0, -1.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           15.0, 75.0, 10.0, 10.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -187,9 +191,9 @@ class _EventWidgetState extends State<EventWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(0.0, -1.0),
+                                    alignment: AlignmentDirectional(0.0, -1.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           20.0, 80.0, 20.0, 20.0),
                                       child: Text(
                                         _model.data!.name,
@@ -210,7 +214,7 @@ class _EventWidgetState extends State<EventWidget> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 20.0, 20.0, 20.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -221,22 +225,22 @@ class _EventWidgetState extends State<EventWidget> {
                                       width: 100.0,
                                       height: 135.0,
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFF5F6F9),
+                                        color: Color(0xFFF5F6F9),
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         border: Border.all(
-                                          color: const Color(0xFFF5F6F9),
+                                          color: Color(0xFFF5F6F9),
                                         ),
                                       ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 5.0, 5.0, 5.0),
                                               child: Container(
                                                 width: 80.0,
@@ -261,7 +265,7 @@ class _EventWidgetState extends State<EventWidget> {
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               'Fecha',
                                               style:
@@ -278,7 +282,7 @@ class _EventWidgetState extends State<EventWidget> {
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               valueOrDefault<String>(
                                                 _model.data?.fecha,
@@ -303,22 +307,22 @@ class _EventWidgetState extends State<EventWidget> {
                                       width: 100.0,
                                       height: 135.0,
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFF5F6F9),
+                                        color: Color(0xFFF5F6F9),
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         border: Border.all(
-                                          color: const Color(0xFFF5F6F9),
+                                          color: Color(0xFFF5F6F9),
                                         ),
                                       ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 5.0, 5.0, 5.0),
                                               child: Container(
                                                 width: 80.0,
@@ -343,7 +347,7 @@ class _EventWidgetState extends State<EventWidget> {
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               'Hora',
                                               style:
@@ -360,7 +364,7 @@ class _EventWidgetState extends State<EventWidget> {
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               valueOrDefault<String>(
                                                 _model.data?.horaInicioEvento,
@@ -385,22 +389,22 @@ class _EventWidgetState extends State<EventWidget> {
                                       width: 100.0,
                                       height: 135.0,
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFF5F6F9),
+                                        color: Color(0xFFF5F6F9),
                                         borderRadius:
                                             BorderRadius.circular(18.0),
                                         border: Border.all(
-                                          color: const Color(0xFFF5F6F9),
+                                          color: Color(0xFFF5F6F9),
                                         ),
                                       ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 5.0, 5.0, 5.0),
                                               child: Container(
                                                 width: 80.0,
@@ -413,11 +417,11 @@ class _EventWidgetState extends State<EventWidget> {
                                                       BorderRadius.circular(
                                                           18.0),
                                                 ),
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: Icon(
                                                     Icons
@@ -433,7 +437,7 @@ class _EventWidgetState extends State<EventWidget> {
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               'Tipo de evento',
                                               style:
@@ -450,7 +454,7 @@ class _EventWidgetState extends State<EventWidget> {
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               _model.data?.type ==
                                                       TypeEvent.free
@@ -475,25 +479,25 @@ class _EventWidgetState extends State<EventWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       25.0, 5.0, 5.0, 10.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       await launchURL(_model.data!.placeUrl);
                                     },
                                     text: 'Ubicación',
-                                    icon: const Icon(
+                                    icon: Icon(
                                       Icons.location_pin,
                                       size: 24.0,
                                     ),
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -505,7 +509,7 @@ class _EventWidgetState extends State<EventWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -515,9 +519,9 @@ class _EventWidgetState extends State<EventWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       35.0, 0.0, 35.0, 0.0),
                                   child: RichText(
                                     textScaler:
@@ -542,7 +546,7 @@ class _EventWidgetState extends State<EventWidget> {
                                                   RestriccionEvent.mayores_edad
                                               ? 'Sólo estudiantes mayores de edad.'
                                               : 'Estudiantes de cualquier edad.',
-                                          style: const TextStyle(),
+                                          style: TextStyle(),
                                         )
                                       ],
                                       style: FlutterFlowTheme.of(context)
@@ -556,9 +560,9 @@ class _EventWidgetState extends State<EventWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       35.0, 0.0, 0.0, 0.0),
                                   child: RichText(
                                     textScaler:
@@ -580,7 +584,7 @@ class _EventWidgetState extends State<EventWidget> {
                                         ),
                                         TextSpan(
                                           text: _model.data!.description,
-                                          style: const TextStyle(),
+                                          style: TextStyle(),
                                         )
                                       ],
                                       style: FlutterFlowTheme.of(context)
@@ -594,9 +598,9 @@ class _EventWidgetState extends State<EventWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                alignment: AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       35.0, 0.0, 0.0, 0.0),
                                   child: RichText(
                                     textScaler:
@@ -621,7 +625,7 @@ class _EventWidgetState extends State<EventWidget> {
                                             _model.data?.organizador,
                                             '\"\"',
                                           ),
-                                          style: const TextStyle(),
+                                          style: TextStyle(),
                                         )
                                       ],
                                       style: FlutterFlowTheme.of(context)
@@ -634,116 +638,117 @@ class _EventWidgetState extends State<EventWidget> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 10.0),
-                                child: Builder(
-                                  builder: (context) {
-                                    final imagenes = _model.images.toList();
+                              if ((_model.images.isNotEmpty) != null)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 0.0, 10.0),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final imagenes = _model.images.toList();
 
-                                    return SizedBox(
-                                      width:
-                                          MediaQuery.sizeOf(context).width *
-                                              1.0,
-                                      height:
-                                          MediaQuery.sizeOf(context).height *
-                                              0.3,
-                                      child: CarouselSlider.builder(
-                                        itemCount: imagenes.length,
-                                        itemBuilder:
-                                            (context, imagenesIndex, _) {
-                                          final imagenesItem =
-                                              imagenes[imagenesIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor:
-                                                Colors.transparent,
-                                            onTap: () async {
-                                              await Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                  type:
-                                                      PageTransitionType.fade,
-                                                  child:
-                                                      FlutterFlowExpandedImageView(
-                                                    image: CachedNetworkImage(
-                                                      fadeInDuration:
-                                                          const Duration(
-                                                              milliseconds:
-                                                                  500),
-                                                      fadeOutDuration:
-                                                          const Duration(
-                                                              milliseconds:
-                                                                  500),
-                                                      imageUrl: getJsonField(
+                                      return Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                1.0,
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                0.3,
+                                        child: CarouselSlider.builder(
+                                          itemCount: imagenes.length,
+                                          itemBuilder:
+                                              (context, imagenesIndex, _) {
+                                            final imagenesItem =
+                                                imagenes[imagenesIndex];
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type:
+                                                        PageTransitionType.fade,
+                                                    child:
+                                                        FlutterFlowExpandedImageView(
+                                                      image: CachedNetworkImage(
+                                                        fadeInDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        fadeOutDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        imageUrl: getJsonField(
+                                                          imagenesItem.toMap(),
+                                                          r'''$.url''',
+                                                        ).toString(),
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      allowRotation: false,
+                                                      tag: getJsonField(
                                                         imagenesItem.toMap(),
                                                         r'''$.url''',
                                                       ).toString(),
-                                                      fit: BoxFit.contain,
+                                                      useHeroAnimation: true,
                                                     ),
-                                                    allowRotation: false,
-                                                    tag: getJsonField(
+                                                  ),
+                                                );
+                                              },
+                                              child: Hero(
+                                                tag: getJsonField(
+                                                  imagenesItem.toMap(),
+                                                  r'''$.url''',
+                                                ).toString(),
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: CachedNetworkImage(
+                                                    fadeInDuration: Duration(
+                                                        milliseconds: 500),
+                                                    fadeOutDuration: Duration(
+                                                        milliseconds: 500),
+                                                    imageUrl: getJsonField(
                                                       imagenesItem.toMap(),
                                                       r'''$.url''',
                                                     ).toString(),
-                                                    useHeroAnimation: true,
+                                                    width: 300.0,
+                                                    height: 200.0,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
-                                              );
-                                            },
-                                            child: Hero(
-                                              tag: getJsonField(
-                                                imagenesItem.toMap(),
-                                                r'''$.url''',
-                                              ).toString(),
-                                              transitionOnUserGestures: true,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        8.0),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  fadeOutDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  imageUrl: getJsonField(
-                                                    imagenesItem.toMap(),
-                                                    r'''$.url''',
-                                                  ).toString(),
-                                                  width: 300.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                        carouselController: _model
-                                                .carouselhousignController ??=
-                                            CarouselController(),
-                                        options: CarouselOptions(
-                                          initialPage: max(
-                                              0, min(1, imagenes.length - 1)),
-                                          viewportFraction: 0.5,
-                                          disableCenter: true,
-                                          enlargeCenterPage: true,
-                                          enlargeFactor: 0.25,
-                                          enableInfiniteScroll: true,
-                                          scrollDirection: Axis.horizontal,
-                                          autoPlay: false,
-                                          onPageChanged: (index, _) => _model
-                                                  .carouselhousignCurrentIndex =
-                                              index,
+                                            );
+                                          },
+                                          carouselController: _model
+                                                  .carouselhousignController ??=
+                                              CarouselController(),
+                                          options: CarouselOptions(
+                                            initialPage: max(
+                                                0, min(1, imagenes.length - 1)),
+                                            viewportFraction: 0.5,
+                                            disableCenter: true,
+                                            enlargeCenterPage: true,
+                                            enlargeFactor: 0.25,
+                                            enableInfiniteScroll: true,
+                                            scrollDirection: Axis.horizontal,
+                                            autoPlay: false,
+                                            onPageChanged: (index, _) => _model
+                                                    .carouselhousignCurrentIndex =
+                                                index,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 10.0),
                                 child: FFButtonWidget(
                                   onPressed: _model.data!.reservado
@@ -754,7 +759,7 @@ class _EventWidgetState extends State<EventWidget> {
                                                   .createReserveCall
                                                   .call(
                                             token: currentAuthenticationToken,
-                                            event: widget.id,
+                                            event: widget!.id,
                                           );
 
                                           if ((_model.apiResponseCreateReserve
@@ -770,9 +775,9 @@ class _EventWidgetState extends State<EventWidget> {
                                       : 'Reservar ticket',
                                   options: FFButtonOptions(
                                     height: 40.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color:
                                         FlutterFlowTheme.of(context).tertiary,
@@ -784,12 +789,12 @@ class _EventWidgetState extends State<EventWidget> {
                                           letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(24.0),
-                                    disabledColor: const Color(0xFFCBAFAF),
+                                    disabledColor: Color(0xFFCBAFAF),
                                   ),
                                 ),
                               ),
@@ -801,7 +806,7 @@ class _EventWidgetState extends State<EventWidget> {
                       return wrapWithModel(
                         model: _model.loaderModel,
                         updateCallback: () => setState(() {}),
-                        child: const LoaderWidget(),
+                        child: LoaderWidget(),
                       );
                     }
                   },

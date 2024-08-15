@@ -4,7 +4,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'buenosaireshousign_model.dart';
 export 'buenosaireshousign_model.dart';
 
@@ -48,7 +52,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
               Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(70.0),
                       bottomRight: Radius.circular(70.0),
                       topLeft: Radius.circular(0.0),
@@ -68,7 +72,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                       height: MediaQuery.sizeOf(context).height * 0.25,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primaryText,
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(70.0),
                           bottomRight: Radius.circular(70.0),
                           topLeft: Radius.circular(0.0),
@@ -78,9 +82,9 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, -1.0),
+                    alignment: AlignmentDirectional(-1.0, -1.0),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           15.0, 75.0, 10.0, 10.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
@@ -99,9 +103,9 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, -1.0),
+                    alignment: AlignmentDirectional(0.0, -1.0),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 80.0, 20.0, 20.0),
                       child: Text(
                         'Alquiler: Buenos Aires',
@@ -118,7 +122,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -127,20 +131,20 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                       width: 100.0,
                       height: 135.0,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F9),
+                        color: Color(0xFFF5F6F9),
                         borderRadius: BorderRadius.circular(18.0),
                         border: Border.all(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                         ),
                       ),
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 5.0),
                               child: Container(
                                 width: 80.0,
@@ -159,7 +163,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Baños',
                               style: FlutterFlowTheme.of(context)
@@ -173,7 +177,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               '1',
                               style: FlutterFlowTheme.of(context)
@@ -193,20 +197,20 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                       width: 100.0,
                       height: 135.0,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F9),
+                        color: Color(0xFFF5F6F9),
                         borderRadius: BorderRadius.circular(18.0),
                         border: Border.all(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                         ),
                       ),
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 5.0),
                               child: Container(
                                 width: 80.0,
@@ -225,7 +229,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Habitaciones',
                               style: FlutterFlowTheme.of(context)
@@ -239,7 +243,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               '2',
                               style: FlutterFlowTheme.of(context)
@@ -259,20 +263,20 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                       width: 100.0,
                       height: 135.0,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F9),
+                        color: Color(0xFFF5F6F9),
                         borderRadius: BorderRadius.circular(18.0),
                         border: Border.all(
-                          color: const Color(0xFFF5F6F9),
+                          color: Color(0xFFF5F6F9),
                         ),
                       ),
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 5.0),
                               child: Container(
                                 width: 80.0,
@@ -291,7 +295,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Àrea (mtrs²)',
                               style: FlutterFlowTheme.of(context)
@@ -305,7 +309,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               '45',
                               style: FlutterFlowTheme.of(context)
@@ -325,7 +329,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                 child: AutoSizeText(
                   '3 huéspedes1 habitación2 camas1 baño',
                   textAlign: TextAlign.start,
@@ -338,7 +342,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                 child: AutoSizeText(
                   'Acerca de este espacio\n¡Bienvenido a nuestro departamento!\n\nUbicado a solo dos cuadras del metro, estarás cerca de atracciones turísticas y podrás explorar la ciudad de forma fácil y segura.\n\nNuestro apartamento tiene todo lo necesario para sentirte cómodo y disfrutar de tu estancia al máximo.\n\nTe ayudaremos con cualquier cosa que necesites, recomendaciones de lugares para visitar, información sobre eventos y mucho más.\n\nNo esperes más y reserva tu estadía en nuestro departamento en este momento.\nEl espacio\nLa cocina es amplia y está equipada con lavadora-secadora. Tenemos todo listo para que cocines sin la necesidad de comprar lo básico.\n\nEn la sala de estar, encontrarás un televisor inteligente con Netflix, un sofá cama y una mesa de comedor con 4 sillas. Tiene calefacción y refrigeración, y hay una guía con todo lo que necesitas saber durante tu estancia.\n\nEl dormitorio cuenta con amplios armarios, opciones de calefacción y refrigeración, y dos juegos de sábanas que se cambian para estancias más largas o a petición del huésped.\n\nEl baño incluye una bañera y un armario para guardar todos los artículos de higiene personal.\n\nOfrecemos 2 juegos de llaves.\nAcceso de los huéspedes\nLos huéspedes pueden usar todo el alojamiento. Hay UN solo armario cerrado donde almacenamos las existencias y los productos de limpieza.\nOtros aspectos a destacar\nMi objetivo es convertirme en Superanfitrión. Soy nuevo en esto, y con mi familia (mi esposa y mis dos hijas), queremos que nuestros huéspedes vuelvan siempre en el futuro a través de recomendaciones. Nos esforzamos por ir más allá de las expectativas y ofrecer una experiencia excepcional.',
                   textAlign: TextAlign.start,
@@ -351,10 +355,10 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(-1.0, 0.0),
+                alignment: AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 10.0),
+                      EdgeInsetsDirectional.fromSTEB(30.0, 10.0, 30.0, 10.0),
                   child: RichText(
                     textScaler: MediaQuery.of(context).textScaler,
                     text: TextSpan(
@@ -402,7 +406,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                   ),
                 ),
               ),
-              SizedBox(
+              Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
                 height: MediaQuery.sizeOf(context).height * 0.3,
                 child: CarouselSlider(
@@ -533,7 +537,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                 child: FFButtonWidget(
                   onPressed: () {
                     print('contactar-housign pressed ...');
@@ -542,9 +546,9 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Lato',
@@ -552,7 +556,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                           letterSpacing: 0.0,
                         ),
                     elevation: 3.0,
-                    borderSide: const BorderSide(
+                    borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1.0,
                     ),

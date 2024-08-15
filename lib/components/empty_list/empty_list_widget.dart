@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'empty_list_model.dart';
 export 'empty_list_model.dart';
 
@@ -10,7 +12,7 @@ class EmptyListWidget extends StatefulWidget {
     this.message,
     String? error,
     this.icon,
-  }) : error = error ?? 'upps';
+  }) : this.error = error ?? 'upps';
 
   final String? message;
   final String error;
@@ -49,15 +51,15 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Icon(
+        Icon(
           Icons.report,
           color: Colors.white,
           size: 72.0,
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
           child: Text(
-            widget.error,
+            widget!.error,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -68,10 +70,10 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
           ),
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
           child: Text(
             valueOrDefault<String>(
-              widget.message,
+              widget!.message,
               'Prueba nuevamente',
             ),
             style: FlutterFlowTheme.of(context).labelMedium.override(

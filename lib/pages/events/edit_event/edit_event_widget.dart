@@ -1,5 +1,6 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
@@ -9,9 +10,13 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'edit_event_model.dart';
 export 'edit_event_model.dart';
 
@@ -42,7 +47,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
       await Future.wait([
         Future(() async {
           _model.apiResponseEvent = await EventsGroup.getEventCall.call(
-            id: widget.id,
+            id: widget!.id,
             token: currentAuthenticationToken,
           );
 
@@ -97,7 +102,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Stack(
-          alignment: const AlignmentDirectional(0.0, 1.0),
+          alignment: AlignmentDirectional(0.0, 1.0),
           children: [
             Builder(
               builder: (context) {
@@ -107,13 +112,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, -1.0),
+                          alignment: AlignmentDirectional(-1.0, -1.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 0.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -131,9 +136,9 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(0.0, -1.0),
+                                alignment: AlignmentDirectional(0.0, -1.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       70.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     'Editar evento',
@@ -156,9 +161,9 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                         Opacity(
                           opacity: 0.5,
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, -1.0),
+                            alignment: AlignmentDirectional(0.0, -1.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 5.0),
                               child: Text(
                                 'Rellena todos los campos',
@@ -176,7 +181,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 0.0),
                           child: Form(
                             key: _model.formKey,
@@ -185,7 +190,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 20.0),
                                   child: TextFormField(
                                     controller: _model.nameTextController,
@@ -217,7 +222,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -243,7 +248,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               20.0, 0.0, 0.0, 0.0),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -261,7 +266,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 20.0),
                                   child: TextFormField(
                                     controller: _model.placeUrlTextController,
@@ -292,7 +297,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -318,7 +323,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               20.0, 0.0, 0.0, 0.0),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -333,7 +338,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 20.0),
                                   child: TextFormField(
                                     controller:
@@ -365,7 +370,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -391,7 +396,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               20.0, 0.0, 0.0, 0.0),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -407,7 +412,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -416,10 +421,10 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Align(
-                                            alignment: const AlignmentDirectional(
+                                            alignment: AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 5.0),
                                               child: Text(
                                                 'Inicio de venta',
@@ -436,7 +441,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                           ),
                                           FFButtonWidget(
                                             onPressed: () async {
-                                              final datePicked1Date =
+                                              final _datePicked1Date =
                                                   await showDatePicker(
                                                 context: context,
                                                 initialDate:
@@ -494,12 +499,12 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                 },
                                               );
 
-                                              if (datePicked1Date != null) {
+                                              if (_datePicked1Date != null) {
                                                 safeSetState(() {
                                                   _model.datePicked1 = DateTime(
-                                                    datePicked1Date.year,
-                                                    datePicked1Date.month,
-                                                    datePicked1Date.day,
+                                                    _datePicked1Date.year,
+                                                    _datePicked1Date.month,
+                                                    _datePicked1Date.day,
                                                   );
                                                 });
                                               }
@@ -513,17 +518,17 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                         .languageCode,
                                                   )
                                                 : _model.event!.fecha,
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.calendar_today,
                                               size: 15.0,
                                             ),
                                             options: FFButtonOptions(
                                               width: 160.0,
                                               height: 40.0,
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -537,7 +542,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -548,16 +553,16 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         ],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             30.0, 0.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 5.0),
                                                 child: Text(
@@ -575,7 +580,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             ),
                                             FFButtonWidget(
                                               onPressed: () async {
-                                                final datePicked2Date =
+                                                final _datePicked2Date =
                                                     await showDatePicker(
                                                   context: context,
                                                   initialDate:
@@ -634,13 +639,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                   },
                                                 );
 
-                                                if (datePicked2Date != null) {
+                                                if (_datePicked2Date != null) {
                                                   safeSetState(() {
                                                     _model.datePicked2 =
                                                         DateTime(
-                                                      datePicked2Date.year,
-                                                      datePicked2Date.month,
-                                                      datePicked2Date.day,
+                                                      _datePicked2Date.year,
+                                                      _datePicked2Date.month,
+                                                      _datePicked2Date.day,
                                                     );
                                                   });
                                                 }
@@ -655,18 +660,18 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                               .languageCode,
                                                     )
                                                   : 'Fecha',
-                                              icon: const Icon(
+                                              icon: Icon(
                                                 Icons.calendar_today,
                                                 size: 15.0,
                                               ),
                                               options: FFButtonOptions(
                                                 width: 160.0,
                                                 height: 40.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         24.0, 0.0, 24.0, 0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -681,7 +686,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                           letterSpacing: 0.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -696,7 +701,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 10.0, 20.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -705,10 +710,10 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Align(
-                                            alignment: const AlignmentDirectional(
+                                            alignment: AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 5.0),
                                               child: Text(
                                                 'Hora Inicio del evento',
@@ -725,7 +730,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                           ),
                                           FFButtonWidget(
                                             onPressed: () async {
-                                              final datePicked3Time =
+                                              final _datePicked3Time =
                                                   await showTimePicker(
                                                 context: context,
                                                 initialTime:
@@ -781,14 +786,14 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                   );
                                                 },
                                               );
-                                              if (datePicked3Time != null) {
+                                              if (_datePicked3Time != null) {
                                                 safeSetState(() {
                                                   _model.datePicked3 = DateTime(
                                                     getCurrentTimestamp.year,
                                                     getCurrentTimestamp.month,
                                                     getCurrentTimestamp.day,
-                                                    datePicked3Time.hour,
-                                                    datePicked3Time.minute,
+                                                    _datePicked3Time.hour,
+                                                    _datePicked3Time.minute,
                                                   );
                                                 });
                                               }
@@ -802,17 +807,17 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                         .languageCode,
                                                   )
                                                 : 'Hora inicio',
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.access_time_filled,
                                               size: 15.0,
                                             ),
                                             options: FFButtonOptions(
                                               width: 160.0,
                                               height: 40.0,
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -826,7 +831,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -837,16 +842,16 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         ],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             30.0, 0.0, 0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 5.0),
                                                 child: Text(
@@ -864,7 +869,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             ),
                                             FFButtonWidget(
                                               onPressed: () async {
-                                                final datePicked4Time =
+                                                final _datePicked4Time =
                                                     await showTimePicker(
                                                   context: context,
                                                   initialTime:
@@ -920,15 +925,15 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                     );
                                                   },
                                                 );
-                                                if (datePicked4Time != null) {
+                                                if (_datePicked4Time != null) {
                                                   safeSetState(() {
                                                     _model.datePicked4 =
                                                         DateTime(
                                                       getCurrentTimestamp.year,
                                                       getCurrentTimestamp.month,
                                                       getCurrentTimestamp.day,
-                                                      datePicked4Time.hour,
-                                                      datePicked4Time.minute,
+                                                      _datePicked4Time.hour,
+                                                      _datePicked4Time.minute,
                                                     );
                                                   });
                                                 }
@@ -943,18 +948,18 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                               .languageCode,
                                                     )
                                                   : 'Hora fin',
-                                              icon: const Icon(
+                                              icon: Icon(
                                                 Icons.access_time_filled,
                                                 size: 15.0,
                                               ),
                                               options: FFButtonOptions(
                                                 width: 160.0,
                                                 height: 40.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         24.0, 0.0, 24.0, 0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -969,7 +974,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                           letterSpacing: 0.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -984,13 +989,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 20.0),
                                   child: FlutterFlowDropDown<String>(
                                     controller:
                                         _model.detenerventasValueController ??=
                                             FormFieldController<String>(null),
-                                    options: const [
+                                    options: [
                                       '1 dia antes del evento',
                                       '2 dia antes del evento'
                                     ],
@@ -1016,7 +1021,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         FlutterFlowTheme.of(context).primary,
                                     borderWidth: 1.0,
                                     borderRadius: 30.0,
-                                    margin: const EdgeInsetsDirectional.fromSTEB(
+                                    margin: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 4.0, 16.0, 4.0),
                                     hidesUnderline: true,
                                     isOverButton: false,
@@ -1025,7 +1030,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 10.0),
                                   child: TextFormField(
                                     controller:
@@ -1058,7 +1063,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -1084,7 +1089,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             BorderRadius.circular(24.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               20.0, 0.0, 0.0, 0.0),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -1102,13 +1107,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 20.0),
                                   child: FlutterFlowDropDown<String>(
                                     controller:
                                         _model.puedenAsistirValueController ??=
                                             FormFieldController<String>(null),
-                                    options: const [
+                                    options: [
                                       'Solo estudiantes +18',
                                       'Cualquier persona'
                                     ],
@@ -1134,7 +1139,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         FlutterFlowTheme.of(context).primary,
                                     borderWidth: 1.0,
                                     borderRadius: 30.0,
-                                    margin: const EdgeInsetsDirectional.fromSTEB(
+                                    margin: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 4.0, 16.0, 4.0),
                                     hidesUnderline: true,
                                     isOverButton: false,
@@ -1143,7 +1148,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 20.0),
                                   child: FlutterFlowDropDown<String>(
                                     controller: _model
@@ -1177,7 +1182,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         FlutterFlowTheme.of(context).primary,
                                     borderWidth: 1.0,
                                     borderRadius: 30.0,
-                                    margin: const EdgeInsetsDirectional.fromSTEB(
+                                    margin: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 4.0, 16.0, 4.0),
                                     hidesUnderline: true,
                                     isOverButton: false,
@@ -1186,7 +1191,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 10.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1194,7 +1199,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Expanded(
-                                        child: SizedBox(
+                                        child: Container(
                                           width: 160.0,
                                           child: TextFormField(
                                             controller: _model
@@ -1232,7 +1237,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                     BorderRadius.circular(24.0),
                                               ),
                                               focusedBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
@@ -1280,7 +1285,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             FormFieldController<String>(null),
                                         options: List<String>.from(
                                             ['Gratis', 'Pago']),
-                                        optionLabels: const [
+                                        optionLabels: [
                                           'Evento Gratis',
                                           'Evento de  pago'
                                         ],
@@ -1309,18 +1314,18 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                 .primary,
                                         borderWidth: 1.0,
                                         borderRadius: 30.0,
-                                        margin: const EdgeInsetsDirectional.fromSTEB(
+                                        margin: EdgeInsetsDirectional.fromSTEB(
                                             16.0, 4.0, 16.0, 4.0),
                                         hidesUnderline: true,
                                         isOverButton: false,
                                         isSearchable: false,
                                         isMultiSelect: false,
                                       ),
-                                    ].divide(const SizedBox(width: 5.0)),
+                                    ].divide(SizedBox(width: 5.0)),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 0.0),
                                   child: TextFormField(
                                     controller: _model
@@ -1397,9 +1402,9 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 15.0, 0.0, 0.0),
                                     child: Text(
                                       'Imagen principal',
@@ -1424,12 +1429,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        if ((_model.uploadedLocalFile1.bytes
+                                        if (_model.uploadedLocalFile1 != null &&
+                                            (_model.uploadedLocalFile1.bytes
                                                     ?.isNotEmpty ??
                                                 false))
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 20.0, 0.0, 0.0),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
@@ -1474,10 +1480,10 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                           ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 20.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
@@ -1542,11 +1548,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                               text: 'Upload Image',
                                               options: FFButtonOptions(
                                                 height: 20.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         24.0, 0.0, 24.0, 0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -1562,7 +1568,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                           letterSpacing: 0.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -1577,9 +1583,9 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ],
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 15.0, 0.0, 0.0),
                                     child: Text(
                                       'Imagenes del evento',
@@ -1609,12 +1615,14 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
                                                 1.0,
-                                            decoration: const BoxDecoration(),
+                                            decoration: BoxDecoration(),
                                             child: Visibility(
                                               visible: _model
-                                                      .uploadedLocalFiles2.isNotEmpty,
+                                                      .uploadedLocalFiles2
+                                                      .length >
+                                                  0,
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 20.0, 0.0, 0.0),
                                                 child: Builder(
@@ -1623,7 +1631,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                         .uploadedLocalFiles2
                                                         .toList();
 
-                                                    return SizedBox(
+                                                    return Container(
                                                       width: double.infinity,
                                                       height: 180.0,
                                                       child: CarouselSlider
@@ -1689,7 +1697,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 20.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
@@ -1753,11 +1761,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                               text: 'Upload Image',
                                               options: FFButtonOptions(
                                                 height: 20.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         24.0, 0.0, 24.0, 0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -1773,7 +1781,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                           letterSpacing: 0.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -1788,7 +1796,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 10.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
@@ -1862,7 +1870,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                               ),
                                             ),
                                             duration:
-                                                const Duration(milliseconds: 4000),
+                                                Duration(milliseconds: 4000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -1875,10 +1883,10 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     text: 'Guardar evento',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).tertiary,
@@ -1890,7 +1898,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -1909,7 +1917,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                   return wrapWithModel(
                     model: _model.loaderModel,
                     updateCallback: () => setState(() {}),
-                    child: const LoaderWidget(),
+                    child: LoaderWidget(),
                   );
                 }
               },

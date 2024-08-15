@@ -2,6 +2,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'validar_reserva_model.dart';
 export 'validar_reserva_model.dart';
 
@@ -41,14 +43,14 @@ class _ValidarReservaWidgetState extends State<ValidarReservaWidget> {
         context.pushNamed('scan');
       },
       text: 'Validar reserva',
-      icon: const Icon(
+      icon: Icon(
         Icons.qr_code_scanner,
         size: 15.0,
       ),
       options: FFButtonOptions(
         height: 40.0,
-        padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-        iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
         color: FlutterFlowTheme.of(context).tertiary,
         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
               fontFamily: 'Lato',
@@ -56,7 +58,7 @@ class _ValidarReservaWidgetState extends State<ValidarReservaWidget> {
               letterSpacing: 0.0,
             ),
         elevation: 3.0,
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Colors.transparent,
           width: 1.0,
         ),

@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'scaneo_error_model.dart';
 export 'scaneo_error_model.dart';
 
@@ -42,7 +44,7 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 16.0),
+              padding: EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -67,16 +69,16 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget> {
               width: 140.0,
               height: 140.0,
               decoration: BoxDecoration(
-                color: const Color(0x53FF5963),
+                color: Color(0x53FF5963),
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: FlutterFlowTheme.of(context).error,
                   width: 2.0,
                 ),
               ),
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: const EdgeInsets.all(30.0),
+                padding: EdgeInsets.all(30.0),
                 child: Icon(
                   Icons.report_gmailerrorred_outlined,
                   color: FlutterFlowTheme.of(context).error,
@@ -85,7 +87,7 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
               child: Text(
                 '¡Error! QR  invalido',
                 style: FlutterFlowTheme.of(context).displaySmall.override(
@@ -96,7 +98,7 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 0.0),
               child: Text(
                 'Vuelve a intentarlo, toma en cuenta que es posible esta reserva no exista.',
                 textAlign: TextAlign.center,
@@ -108,7 +110,7 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -122,9 +124,9 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget> {
                         width: 230.0,
                         height: 50.0,
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).alternate,
                         textStyle:
                             FlutterFlowTheme.of(context).bodyLarge.override(
@@ -132,7 +134,7 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget> {
                                   letterSpacing: 0.0,
                                 ),
                         elevation: 0.0,
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),

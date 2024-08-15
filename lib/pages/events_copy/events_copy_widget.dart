@@ -7,12 +7,16 @@ import '/components/loader/loader_widget.dart';
 import '/components/validar_reserva/validar_reserva_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
+import 'package:provider/provider.dart';
 import 'events_copy_model.dart';
 export 'events_copy_model.dart';
 
@@ -46,12 +50,12 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
               context: context,
               builder: (alertDialogContext) {
                 return AlertDialog(
-                  title: const Text('Ha ocurrido un error'),
-                  content: const Text('Error en la solicitud'),
+                  title: Text('Ha ocurrido un error'),
+                  content: Text('Error en la solicitud'),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(alertDialogContext),
-                      child: const Text('Ok'),
+                      child: Text('Ok'),
                     ),
                   ],
                 );
@@ -116,7 +120,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
         floatingActionButton: Visibility(
           visible: _model.loading == false,
           child: Align(
-            alignment: const AlignmentDirectional(1.0, 0.95),
+            alignment: AlignmentDirectional(1.0, 0.95),
             child: FloatingActionButton(
               onPressed: () async {
                 context.pushNamed('create');
@@ -154,7 +158,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 90.0),
                             child: SingleChildScrollView(
                               primary: false,
@@ -163,7 +167,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 15.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -171,9 +175,9 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                         Expanded(
                                           child: Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, -1.0),
+                                                AlignmentDirectional(0.0, -1.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 15.0, 10.0, 10.0),
                                               child: Text(
@@ -197,7 +201,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 15.0),
                                     child: Container(
                                       width: MediaQuery.sizeOf(context).width *
@@ -205,14 +209,14 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                       height:
                                           MediaQuery.sizeOf(context).height *
                                               0.05,
-                                      decoration: const BoxDecoration(),
+                                      decoration: BoxDecoration(),
                                       child: Builder(
                                         builder: (context) {
                                           final categorie = _model.categories
                                               .unique((e) => e.id)
                                               .toList();
 
-                                          return SizedBox(
+                                          return Container(
                                             width: double.infinity,
                                             height: 180.0,
                                             child: CarouselSlider.builder(
@@ -382,11 +386,11 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                     builder: (context) {
                                       final data = _model.items.toList();
                                       if (data.isEmpty) {
-                                        return SizedBox(
+                                        return Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   1.0,
-                                          child: const EmptyListWidget(
+                                          child: EmptyListWidget(
                                             message:
                                                 'No hay eventos para esta categoria',
                                             error: 'Sin datos',
@@ -403,10 +407,10 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                           final dataItem = data[dataIndex];
                                           return Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 25.0, 0.0, 0.0),
                                             child: Stack(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               children: [
                                                 InkWell(
@@ -431,7 +435,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                                   },
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        const BorderRadius.only(
+                                                        BorderRadius.only(
                                                       bottomLeft:
                                                           Radius.circular(20.0),
                                                       bottomRight:
@@ -450,7 +454,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                                                   context)
                                                               .height *
                                                           0.176,
-                                                      decoration: const BoxDecoration(
+                                                      decoration: BoxDecoration(
                                                         color:
                                                             Color(0xFFF7F8FA),
                                                         borderRadius:
@@ -496,7 +500,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           10.0,
                                                                           10.0,
@@ -535,7 +539,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                                                   fit: BoxFit
                                                                       .cover,
                                                                   alignment:
-                                                                      const Alignment(
+                                                                      Alignment(
                                                                           1.0,
                                                                           1.0),
                                                                 ),
@@ -543,7 +547,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                                             ),
                                                             Expanded(
                                                               child: Padding(
-                                                                padding: const EdgeInsetsDirectional
+                                                                padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         10.0,
@@ -575,7 +579,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                                                           ),
                                                                     ),
                                                                     Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           10.0,
                                                                           0.0,
@@ -657,7 +661,7 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                         return wrapWithModel(
                           model: _model.loaderModel,
                           updateCallback: () => setState(() {}),
-                          child: const LoaderWidget(),
+                          child: LoaderWidget(),
                         );
                       }
                     },
@@ -665,14 +669,14 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                 ],
               ),
               Align(
-                alignment: const AlignmentDirectional(1.0, 1.0),
+                alignment: AlignmentDirectional(1.0, 1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 100.0),
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 100.0),
                   child: wrapWithModel(
                     model: _model.validarReservaModel,
                     updateCallback: () => setState(() {}),
-                    child: const ValidarReservaWidget(),
+                    child: ValidarReservaWidget(),
                   ),
                 ),
               ),

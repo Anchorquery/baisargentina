@@ -1,7 +1,10 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'detalles_reserva_model.dart';
 export 'detalles_reserva_model.dart';
 
@@ -54,19 +57,19 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
               context.pop();
             },
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 20.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 20.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +88,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                               fontWeight: FontWeight.w800,
                             ),
                       ),
-                    ].divide(const SizedBox(width: 10.0)),
+                    ].divide(SizedBox(width: 10.0)),
                   ),
                 ),
                 Row(
@@ -108,7 +111,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                             letterSpacing: 0.0,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -118,7 +121,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                       'Ubicación  del evento:',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lato',
-                            color: const Color(0x8F212529),
+                            color: Color(0x8F212529),
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w800,
                           ),
@@ -127,11 +130,11 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                       'ejemplo',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lato',
-                            color: const Color(0x8F212529),
+                            color: Color(0x8F212529),
                             letterSpacing: 0.0,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -155,7 +158,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                             fontWeight: FontWeight.normal,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -165,7 +168,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                       'Email del organizador:',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lato',
-                            color: const Color(0x8F212529),
+                            color: Color(0x8F212529),
                             fontSize: 14.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w800,
@@ -175,16 +178,16 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                       'ejemplo@gmail.com',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lato',
-                            color: const Color(0x8F212529),
+                            color: Color(0x8F212529),
                             fontSize: 14.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.normal,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -207,10 +210,10 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                               fontWeight: FontWeight.normal,
                             ),
                       ),
-                    ].divide(const SizedBox(width: 10.0)),
+                    ].divide(SizedBox(width: 10.0)),
                   ),
                 ),
-                const Divider(
+                Divider(
                   thickness: 1.0,
                   color: Color(0x8F212529),
                 ),
@@ -236,10 +239,10 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                             fontWeight: FontWeight.w800,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -248,7 +251,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                         'Email de la reserva:',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
-                              color: const Color(0x8F212529),
+                              color: Color(0x8F212529),
                               fontSize: 16.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.normal,
@@ -258,16 +261,16 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                         'ejemeplo@gmail.com',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
-                              color: const Color(0x8E212529),
+                              color: Color(0x8E212529),
                               fontSize: 16.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.normal,
                             ),
                       ),
-                    ].divide(const SizedBox(width: 10.0)),
+                    ].divide(SizedBox(width: 10.0)),
                   ),
                 ),
-                const Divider(
+                Divider(
                   thickness: 1.0,
                   color: Color(0x8F212529),
                 ),
@@ -293,7 +296,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                             fontWeight: FontWeight.w800,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -317,7 +320,7 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                             fontWeight: FontWeight.w800,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -341,9 +344,9 @@ class _DetallesReservaWidgetState extends State<DetallesReservaWidget> {
                             fontWeight: FontWeight.w800,
                           ),
                     ),
-                  ].divide(const SizedBox(width: 10.0)),
+                  ].divide(SizedBox(width: 10.0)),
                 ),
-                const Divider(
+                Divider(
                   thickness: 1.0,
                   color: Color(0x8F212529),
                 ),
