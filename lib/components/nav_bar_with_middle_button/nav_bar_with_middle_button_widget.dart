@@ -168,9 +168,35 @@ class _NavBarWithMiddleButtonWidgetState
 
                             if ((_model.apiResponseVericarTicket?.succeeded ??
                                 true)) {
-                              context.pushNamed('DetallesReserva');
+                              context.pushNamed(
+                                'scaneoExitoso',
+                                queryParameters: {
+                                  'uuid': serializeParam(
+                                    getJsonField(
+                                      (_model.apiResponseVericarTicket
+                                              ?.jsonBody ??
+                                          ''),
+                                      r'''$.data.uuid''',
+                                    ).toString(),
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
                             } else {
-                              context.pushNamed('scaneoError');
+                              context.pushNamed(
+                                'scaneoError',
+                                queryParameters: {
+                                  'uuid': serializeParam(
+                                    getJsonField(
+                                      (_model.apiResponseVericarTicket
+                                              ?.jsonBody ??
+                                          ''),
+                                      r'''$.data.uuid''',
+                                    ).toString(),
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
+                              );
                             }
 
                             setState(() {});

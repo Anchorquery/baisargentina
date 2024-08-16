@@ -27,14 +27,13 @@ export '/pages/events/create/create_widget.dart' show CreateWidget;
 export '/pages/events/event/event_widget.dart' show EventWidget;
 export '/pages/events/events/events_widget.dart' show EventsWidget;
 export '/pages/booking/reservas/reservas_widget.dart' show ReservasWidget;
-export '/pages/admin/validarqr/detalles_reserva/detalles_reserva_widget.dart'
-    show DetallesReservaWidget;
-export '/pages/admin/validarqr/scan/scan_widget.dart' show ScanWidget;
-export '/pages/admin/validarqr/scaneoexitoso/scaneoexitoso_widget.dart'
-    show ScaneoexitosoWidget;
+export '/pages/admin/validarqr/scaneo_exitoso/scaneo_exitoso_widget.dart'
+    show ScaneoExitosoWidget;
 export '/pages/admin/validarqr/scaneo_error/scaneo_error_widget.dart'
     show ScaneoErrorWidget;
 export '/pages/events_copy/events_copy_widget.dart' show EventsCopyWidget;
 export '/pages/perfil/edit/edit_widget.dart' show EditWidget;
 export '/pages/events/edit_event/edit_event_widget.dart' show EditEventWidget;
 export '/pages/booking/reserva_id/reserva_id_widget.dart' show ReservaIdWidget;
+export '/pages/admin/validarqr/detalle_reserva/detalle_reserva_widget.dart'
+    show DetalleReservaWidget;

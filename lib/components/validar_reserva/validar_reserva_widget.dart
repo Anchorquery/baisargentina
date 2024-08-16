@@ -39,8 +39,8 @@ class _ValidarReservaWidgetState extends State<ValidarReservaWidget> {
   @override
   Widget build(BuildContext context) {
     return FFButtonWidget(
-      onPressed: () async {
-        context.pushNamed('scan');
+      onPressed: () {
+        print('button pressed ...');
       },
       text: 'Validar reserva',
       icon: Icon(

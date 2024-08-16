@@ -9,7 +9,12 @@ import 'scaneo_error_model.dart';
 export 'scaneo_error_model.dart';
 
 class ScaneoErrorWidget extends StatefulWidget {
-  const ScaneoErrorWidget({super.key});
+  const ScaneoErrorWidget({
+    super.key,
+    required this.uuid,
+  });
+
+  final String? uuid;
 
   @override
   State<ScaneoErrorWidget> createState() => _ScaneoErrorWidgetState();

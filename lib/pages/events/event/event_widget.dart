@@ -757,7 +757,7 @@ class _EventWidgetState extends State<EventWidget> {
                                             },
                                             carouselController: _model
                                                     .carouselhousignController ??=
-                                                CarouselSliderController(),
+                                                CarouselController(),
                                             options: CarouselOptions(
                                               initialPage: max(0,
                                                   min(1, imagenes.length - 1)),

@@ -1,29 +1,48 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'scaneoexitoso_model.dart';
-export 'scaneoexitoso_model.dart';
+import 'scaneo_exitoso_model.dart';
+export 'scaneo_exitoso_model.dart';
 
-class ScaneoexitosoWidget extends StatefulWidget {
-  const ScaneoexitosoWidget({super.key});
+class ScaneoExitosoWidget extends StatefulWidget {
+  const ScaneoExitosoWidget({
+    super.key,
+    required this.uuid,
+  });
+
+  final String? uuid;
 
   @override
-  State<ScaneoexitosoWidget> createState() => _ScaneoexitosoWidgetState();
+  State<ScaneoExitosoWidget> createState() => _ScaneoExitosoWidgetState();
 }
 
-class _ScaneoexitosoWidgetState extends State<ScaneoexitosoWidget> {
-  late ScaneoexitosoModel _model;
+class _ScaneoExitosoWidgetState extends State<ScaneoExitosoWidget> {
+  late ScaneoExitosoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ScaneoexitosoModel());
+    _model = createModel(context, () => ScaneoExitosoModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResponseFindMeBooking = await ReserveGroup.findmeOneCall.call(
+        token: currentAuthenticationToken,
+        uuid: widget!.uuid,
+      );
+
+      if ((_model.apiResponseFindMeBooking?.succeeded ?? true) == true) {}
+    });
   }
 
   @override

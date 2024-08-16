@@ -217,28 +217,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ReservasWidget(),
         ),
         FFRoute(
-          name: 'DetallesReserva',
-          path: '/detallesReserva',
+          name: 'scaneoExitoso',
+          path: '/scaneoExitoso',
           requireAuth: true,
-          builder: (context, params) => DetallesReservaWidget(),
-        ),
-        FFRoute(
-          name: 'scan',
-          path: '/scan',
-          requireAuth: true,
-          builder: (context, params) => ScanWidget(),
-        ),
-        FFRoute(
-          name: 'scaneoexitoso',
-          path: '/scaneoexitoso',
-          requireAuth: true,
-          builder: (context, params) => ScaneoexitosoWidget(),
+          builder: (context, params) => ScaneoExitosoWidget(
+            uuid: params.getParam(
+              'uuid',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'scaneoError',
           path: '/scaneoError',
           requireAuth: true,
-          builder: (context, params) => ScaneoErrorWidget(),
+          builder: (context, params) => ScaneoErrorWidget(
+            uuid: params.getParam(
+              'uuid',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'eventsCopy',
@@ -268,6 +266,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/reservaId',
           requireAuth: true,
           builder: (context, params) => ReservaIdWidget(
+            uuid: params.getParam(
+              'uuid',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'detalleReserva',
+          path: '/detalleReserva',
+          requireAuth: true,
+          builder: (context, params) => DetalleReservaWidget(
             uuid: params.getParam(
               'uuid',
               ParamType.String,
