@@ -51,7 +51,10 @@ class _EventsWidgetState extends State<EventsWidget> {
               builder: (alertDialogContext) {
                 return AlertDialog(
                   title: Text('Ha ocurrido un error'),
-                  content: Text('Error en la solicitud'),
+                  content: Text(getJsonField(
+                    (_model.apiResponseEvents?.jsonBody ?? ''),
+                    r'''$.error''',
+                  ).toString().toString()),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(alertDialogContext),
@@ -358,7 +361,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                 },
                                                 carouselController: _model
                                                         .carouselController ??=
-                                                    CarouselSliderController(),
+                                                    CarouselController(),
                                                 options: CarouselOptions(
                                                   initialPage: max(
                                                       0,
@@ -389,12 +392,11 @@ class _EventsWidgetState extends State<EventsWidget> {
                               ),
                               Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, -1.0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 90.0),
                                     child: SingleChildScrollView(
-                                      primary: false,
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -420,6 +422,7 @@ class _EventsWidgetState extends State<EventsWidget> {
 
                                               return ListView.builder(
                                                 padding: EdgeInsets.zero,
+                                                primary: false,
                                                 shrinkWrap: true,
                                                 scrollDirection: Axis.vertical,
                                                 itemCount: data.length,

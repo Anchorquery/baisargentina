@@ -9,25 +9,25 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'clubderunning_model.dart';
-export 'clubderunning_model.dart';
+import 'tranvia_model.dart';
+export 'tranvia_model.dart';
 
-class ClubderunningWidget extends StatefulWidget {
-  const ClubderunningWidget({super.key});
+class TranviaWidget extends StatefulWidget {
+  const TranviaWidget({super.key});
 
   @override
-  State<ClubderunningWidget> createState() => _ClubderunningWidgetState();
+  State<TranviaWidget> createState() => _TranviaWidgetState();
 }
 
-class _ClubderunningWidgetState extends State<ClubderunningWidget> {
-  late ClubderunningModel _model;
+class _TranviaWidgetState extends State<TranviaWidget> {
+  late TranviaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ClubderunningModel());
+    _model = createModel(context, () => TranviaModel());
   }
 
   @override
@@ -61,7 +61,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                         topRight: Radius.circular(0.0),
                       ),
                       child: Image.asset(
-                        'assets/images/Running-en-Los-Bosques-FACEBOOK-1536x864.jpg',
+                        'assets/images/tranvia.png',
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         height: MediaQuery.sizeOf(context).height * 0.25,
                         fit: BoxFit.cover,
@@ -110,7 +110,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 80.0, 20.0, 20.0),
                         child: Text(
-                          'Club de Running',
+                          'Tranvía Histórico',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context)
                               .titleLarge
@@ -185,7 +185,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
-                                '04/07/2024',
+                                '07/07/2024',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -252,7 +252,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
-                                '12:30 pm',
+                                '5:0  pm',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -348,7 +348,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         await launchURL(
-                            'https://www.google.com/maps/search/?api=1&query=-34.583983%2C-58.3930287');
+                            'https://maps.app.goo.gl/9jNzLHnrwL5gUxJD6');
                       },
                       text: 'Ubicación',
                       icon: Icon(
@@ -415,7 +415,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                   padding:
                       EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
-                    '¡Running para todos! ‍Disfruta de los paisajes urbanos mientras se mantienen activos.',
+                    '¡Viaja en el tiempo! Tranvía Histórico BA\nRecorre Caballito en 20 min. ¡Historia, nostalgia y diversión! ¡Reserva ya!',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Lato',
@@ -429,7 +429,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                   padding:
                       EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
-                    '¡Prepárate para una experiencia única de running por los encantadores barrios de Recoleta y Palermo en la ciudad de Buenos Aires! Este evento es perfecto para todos aquellos que aman el deporte al aire libre y quieren disfrutar de los paisajes urbanos mientras se mantienen activos.\n\nNo importa si eres un corredor experimentado o apenas estás empezando, todos son bienvenidos a participar y disfrutar de la compañía de otros entusiastas del running.\n\nEl recorrido será de aproximadamente 5KM, diseñado para que los participantes puedan correr o trotar a su propio ritmo, pasando por las rutas de los parques de recoleta, llegando a los bosques de Palermo. Cada rincón ofrece una foto perfecta y un respiro verde en medio de la ciudad!\n\nPunto de Encuentro: Esquina del Museo Nacional de Bellas Artes\n\nSi no puedes encontrarme, envíame un mensaje por WhatsApp.',
+                    '🕒 Hora: 15 hs\n\n📍 Lugar de encuentro: Tranvía Histórico, Emilio Mitre 500, CABA, Buenos Aires\n\nNota: Este evento es una excelente oportunidad para conocer más sobre la historia local, hacer nuevos amigos y disfrutar de un entorno encantador.\n\n¡No te pierdas esta oportunidad de descubrir Buenos Aires de una manera única y memorable!\n\nEl servicio es gratuito.\n\n¡Nos vemos allí!\n\n*La inscripción en nuestra página web es obligatoria\n\n**No olvides traer dinero para tu consumo.',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Lato',
@@ -460,7 +460,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                                 ),
                           ),
                           TextSpan(
-                            text: ' Octavia Sol',
+                            text: '',
                             style: TextStyle(),
                           )
                         ],
@@ -491,7 +491,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.asset(
-                                    'assets/images/SJM9fmzOf_720x0__1.jpg',
+                                    'assets/images/tranvia-1.jpg',
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
@@ -507,7 +507,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/SJM9fmzOf_720x0__1.jpg',
+                                'assets/images/tranvia-1.jpg',
                                 width: 300.0,
                                 height: 200.0,
                                 fit: BoxFit.cover,
@@ -527,7 +527,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.asset(
-                                    'assets/images/CPRC.jpg',
+                                    'assets/images/ARCHI_878384.jpg',
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
@@ -543,7 +543,43 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/CPRC.jpg',
+                                'assets/images/ARCHI_878384.jpg',
+                                width: 300.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: FlutterFlowExpandedImageView(
+                                  image: Image.asset(
+                                    'assets/images/BJ2h4qfIZ_720x0.jpg',
+                                    fit: BoxFit.contain,
+                                  ),
+                                  allowRotation: false,
+                                  tag: 'imageTag4',
+                                  useHeroAnimation: true,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Hero(
+                            tag: 'imageTag4',
+                            transitionOnUserGestures: true,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/BJ2h4qfIZ_720x0.jpg',
                                 width: 300.0,
                                 height: 200.0,
                                 fit: BoxFit.cover,
@@ -553,7 +589,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                         ),
                       ],
                       carouselController: _model.carouselhousignController ??=
-                          CarouselSliderController(),
+                          CarouselController(),
                       options: CarouselOptions(
                         initialPage: 1,
                         viewportFraction: 0.5,

@@ -1,20 +1,21 @@
 // Export pages
 export '/pages/public/inicio/inicio_widget.dart' show InicioWidget;
-export '/pages/public/registro/registro_widget.dart' show RegistroWidget;
+export '/pages/registro/registro_widget.dart' show RegistroWidget;
 export '/pages/public/login/login_widget.dart' show LoginWidget;
 export '/pages/discoint/descuentos/descuentos_widget.dart'
     show DescuentosWidget;
 export '/pages/housing/housign/housign_widget.dart' show HousignWidget;
 export '/pages/perfil/user_profile/user_profile_widget.dart'
     show UserProfileWidget;
-export '/beerpong/beerpong_widget.dart' show BeerpongWidget;
+export '/pages/beerpong/beerpong_widget.dart' show BeerpongWidget;
 export '/pages/booking/reservaexitosa/reservaexitosa_widget.dart'
     show ReservaexitosaWidget;
-export '/tranvia/tranvia_widget.dart' show TranviaWidget;
-export '/clubderunning/clubderunning_widget.dart' show ClubderunningWidget;
-export '/tallerdeequilibrio/tallerdeequilibrio_widget.dart'
+export '/pages/tranvia/tranvia_widget.dart' show TranviaWidget;
+export '/pages/clubderunning/clubderunning_widget.dart'
+    show ClubderunningWidget;
+export '/pages/tallerdeequilibrio/tallerdeequilibrio_widget.dart'
     show TallerdeequilibrioWidget;
-export '/tallerdecv/tallerdecv_widget.dart' show TallerdecvWidget;
+export '/pages/tallerdecv/tallerdecv_widget.dart' show TallerdecvWidget;
 export '/pages/housing/buenosaireshousign/buenosaireshousign_widget.dart'
     show BuenosaireshousignWidget;
 export '/pages/policy/faq/faq_widget.dart' show FaqWidget;

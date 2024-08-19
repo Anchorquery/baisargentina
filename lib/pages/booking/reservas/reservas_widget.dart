@@ -188,7 +188,6 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 20.0),
                                       child: SingleChildScrollView(
-                                        primary: false,
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -212,6 +211,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
 
                                                 return ListView.builder(
                                                   padding: EdgeInsets.zero,
+                                                  primary: false,
                                                   shrinkWrap: true,
                                                   scrollDirection:
                                                       Axis.vertical,

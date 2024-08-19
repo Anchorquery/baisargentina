@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'scaneo_exitoso_widget.dart' show ScaneoExitosoWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,9 @@ class ScaneoExitosoModel extends FlutterFlowModel<ScaneoExitosoWidget> {
 
   // Stores action output result for [Backend Call - API (findme One)] action in scaneoExitoso widget.
   ApiCallResponse? apiResponseFindMeBooking;
+  var responseScanQr = '';
+  // Stores action output result for [Backend Call - API (verificarReserva)] action in Button widget.
+  ApiCallResponse? apiResponseVericarTicket;
 
   @override
   void initState(BuildContext context) {}

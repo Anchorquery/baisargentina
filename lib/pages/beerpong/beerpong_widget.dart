@@ -9,25 +9,25 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'tranvia_model.dart';
-export 'tranvia_model.dart';
+import 'beerpong_model.dart';
+export 'beerpong_model.dart';
 
-class TranviaWidget extends StatefulWidget {
-  const TranviaWidget({super.key});
+class BeerpongWidget extends StatefulWidget {
+  const BeerpongWidget({super.key});
 
   @override
-  State<TranviaWidget> createState() => _TranviaWidgetState();
+  State<BeerpongWidget> createState() => _BeerpongWidgetState();
 }
 
-class _TranviaWidgetState extends State<TranviaWidget> {
-  late TranviaModel _model;
+class _BeerpongWidgetState extends State<BeerpongWidget> {
+  late BeerpongModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TranviaModel());
+    _model = createModel(context, () => BeerpongModel());
   }
 
   @override
@@ -51,79 +51,82 @@ class _TranviaWidgetState extends State<TranviaWidget> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(70.0),
-                        bottomRight: Radius.circular(70.0),
-                        topLeft: Radius.circular(0.0),
-                        topRight: Radius.circular(0.0),
+                Container(
+                  width: MediaQuery.sizeOf(context).width * 1.0,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(70.0),
+                          bottomRight: Radius.circular(70.0),
+                          topLeft: Radius.circular(0.0),
+                          topRight: Radius.circular(0.0),
+                        ),
+                        child: Image.asset(
+                          'assets/images/Beerpong-FACEBOOK-1-1536x864.jpg',
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 0.2,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      child: Image.asset(
-                        'assets/images/tranvia.png',
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: MediaQuery.sizeOf(context).height * 0.25,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Opacity(
-                      opacity: 0.8,
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: MediaQuery.sizeOf(context).height * 0.25,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(70.0),
-                            bottomRight: Radius.circular(70.0),
-                            topLeft: Radius.circular(0.0),
-                            topRight: Radius.circular(0.0),
+                      Opacity(
+                        opacity: 0.8,
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 0.2,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(70.0),
+                              bottomRight: Radius.circular(70.0),
+                              topLeft: Radius.circular(0.0),
+                              topRight: Radius.circular(0.0),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, -1.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 75.0, 10.0, 10.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.safePop();
-                          },
-                          child: Icon(
-                            Icons.chevron_left_sharp,
-                            color: FlutterFlowTheme.of(context).secondary,
-                            size: 24.0,
+                      Align(
+                        alignment: AlignmentDirectional(-1.0, -1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              15.0, 75.0, 10.0, 10.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.safePop();
+                            },
+                            child: Icon(
+                              Icons.chevron_left_sharp,
+                              color: FlutterFlowTheme.of(context).secondary,
+                              size: 24.0,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 80.0, 20.0, 20.0),
-                        child: Text(
-                          'Tranvía Histórico',
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context)
-                              .titleLarge
-                              .override(
-                                fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).secondary,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      Align(
+                        alignment: AlignmentDirectional(0.0, -1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 80.0, 20.0, 20.0),
+                          child: Text(
+                            'Beerpong Tournament',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Lato',
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding:
@@ -185,7 +188,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
-                                '07/07/2024',
+                                'Todos los jueves',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -252,7 +255,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
-                                '5:0  pm',
+                                '10  pm',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -348,7 +351,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                     child: FFButtonWidget(
                       onPressed: () async {
                         await launchURL(
-                            'https://maps.app.goo.gl/9jNzLHnrwL5gUxJD6');
+                            'https://www.google.com/maps/place/Costa+Rica+4667,+C1414BSI+Cdad.+Aut%C3%B3noma+de+Buenos+Aires,+Argentina/@-34.5881914,-58.4292157,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcb587b2777cb3:0xb00a30857153f856!8m2!3d-34.5881914!4d-58.4266408!16s%2Fg%2F11b8v85w0y?hl=en&entry=ttu');
                       },
                       text: 'Ubicación',
                       icon: Icon(
@@ -415,7 +418,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                   padding:
                       EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
-                    '¡Viaja en el tiempo! Tranvía Histórico BA\nRecorre Caballito en 20 min. ¡Historia, nostalgia y diversión! ¡Reserva ya!',
+                    '¡JueVES de Beer Pong en Buda Bar! Torneo BAIS en Buda Bar! El ganador del torneo gana un 2×1 para un viaje a Iguazu + un voucher de \$50.000',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Lato',
@@ -429,7 +432,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                   padding:
                       EdgeInsetsDirectional.fromSTEB(35.0, 10.0, 35.0, 10.0),
                   child: AutoSizeText(
-                    '🕒 Hora: 15 hs\n\n📍 Lugar de encuentro: Tranvía Histórico, Emilio Mitre 500, CABA, Buenos Aires\n\nNota: Este evento es una excelente oportunidad para conocer más sobre la historia local, hacer nuevos amigos y disfrutar de un entorno encantador.\n\n¡No te pierdas esta oportunidad de descubrir Buenos Aires de una manera única y memorable!\n\nEl servicio es gratuito.\n\n¡Nos vemos allí!\n\n*La inscripción en nuestra página web es obligatoria\n\n**No olvides traer dinero para tu consumo.',
+                    '¿Sabían que los jueves son de Beer Pong?\n\nEste y todos los Jueves, BAIS te invita a disfrutar de tu torneo favorito Beer Pong Tournament en Buda Bar!\n\nEl equipo ganador del torneo gana un 2×1 para un viaje a Iguazu + un voucher de \$50.000 en consumo para otro jueves! El segundo puesto ganar una cena para dos personas en otro Beerpong! Y el tercer puesto dos consumisiones!\n\nValor de entradas:\n\nLlegando antes de las 22hs: Entrada Free\nLlegando entre las 22 y las 00hs: \$6.000 (Incluye consumición)\nLlegando entre las oo y 04hs: \$6.000 (Sin consumisión)\nIMPORTANTE : La inscripción al torneo es por orden de llegada y tiene un valor de \$6.000 por persona (e incluye una jarra de cerveza por equipo en cada ronda que jueguen). Recomendamos llegar temprano para asegurar tu lugar\n\nLos invitamos a disfrutar de nuestro clásico de los Jueves! Tanto si quieres jugar,  cenar o pasar un buen rato con amigos.\n\nLos esperamos!',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Lato',
@@ -491,7 +494,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.asset(
-                                    'assets/images/tranvia-1.jpg',
+                                    'assets/images/unnamed_(1).jpg',
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
@@ -507,7 +510,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/tranvia-1.jpg',
+                                'assets/images/unnamed_(1).jpg',
                                 width: 300.0,
                                 height: 200.0,
                                 fit: BoxFit.cover,
@@ -527,7 +530,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.asset(
-                                    'assets/images/ARCHI_878384.jpg',
+                                    'assets/images/Buddha-Bar-v2.jpg',
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
@@ -543,7 +546,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/ARCHI_878384.jpg',
+                                'assets/images/Buddha-Bar-v2.jpg',
                                 width: 300.0,
                                 height: 200.0,
                                 fit: BoxFit.cover,
@@ -563,7 +566,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                                 type: PageTransitionType.fade,
                                 child: FlutterFlowExpandedImageView(
                                   image: Image.asset(
-                                    'assets/images/BJ2h4qfIZ_720x0.jpg',
+                                    'assets/images/unnamed.jpg',
                                     fit: BoxFit.contain,
                                   ),
                                   allowRotation: false,
@@ -579,7 +582,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/BJ2h4qfIZ_720x0.jpg',
+                                'assets/images/unnamed.jpg',
                                 width: 300.0,
                                 height: 200.0,
                                 fit: BoxFit.cover,
@@ -589,7 +592,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                         ),
                       ],
                       carouselController: _model.carouselhousignController ??=
-                          CarouselSliderController(),
+                          CarouselController(),
                       options: CarouselOptions(
                         initialPage: 1,
                         viewportFraction: 0.5,

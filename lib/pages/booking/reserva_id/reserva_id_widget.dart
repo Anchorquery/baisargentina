@@ -2,6 +2,7 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,6 +11,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'reserva_id_model.dart';
 export 'reserva_id_model.dart';
@@ -404,7 +406,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                 ),
                           ),
                           AutoSizeText(
-                            _model.data!.uuid,
+                            _model.data!.ref.toString(),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -481,13 +483,41 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 25.0, 0.0, 25.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              _model.data!.qrImage.url,
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              height: MediaQuery.sizeOf(context).height * 0.2,
-                              fit: BoxFit.cover,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: FlutterFlowExpandedImageView(
+                                    image: Image.network(
+                                      _model.data!.qrImage.url,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    allowRotation: false,
+                                    tag: _model.data!.qrImage.url,
+                                    useHeroAnimation: true,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Hero(
+                              tag: _model.data!.qrImage.url,
+                              transitionOnUserGestures: true,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  _model.data!.qrImage.url,
+                                  width: MediaQuery.sizeOf(context).width * 0.4,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.2,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
                         ),

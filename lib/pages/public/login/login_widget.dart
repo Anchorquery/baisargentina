@@ -36,11 +36,6 @@ class _LoginWidgetState extends State<LoginWidget> {
     _model.emailFocusNode!.addListener(() => setState(() {}));
     _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.emailTextController?.text = 'daniel@adaki.net';
-          _model.passwordTextController?.text = 'Daniel1995=';
-        }));
   }
 
   @override
@@ -439,10 +434,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 },
                               );
                               setState(() {
-                                _model.passwordTextController?.text =
-                                    'Daniel1995=';
-                                _model.emailTextController?.text =
-                                    'daniel@adaki.net';
+                                _model.passwordTextController?.clear();
+                                _model.emailTextController?.clear();
                               });
                             }
 

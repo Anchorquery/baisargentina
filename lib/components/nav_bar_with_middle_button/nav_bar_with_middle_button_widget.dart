@@ -152,6 +152,7 @@ class _NavBarWithMiddleButtonWidgetState
                             size: 30.0,
                           ),
                           onPressed: () async {
+                            var _shouldSetState = false;
                             _model.responseScanQr =
                                 await FlutterBarcodeScanner.scanBarcode(
                               '#C62828', // scanning line color
@@ -160,46 +161,55 @@ class _NavBarWithMiddleButtonWidgetState
                               ScanMode.QR,
                             );
 
-                            _model.apiResponseVericarTicket =
-                                await ReserveGroup.verificarReservaCall.call(
-                              token: currentAuthenticationToken,
-                              uuid: _model.responseScanQr,
-                            );
+                            _shouldSetState = true;
+                            if (_model.responseScanQr != null &&
+                                _model.responseScanQr != '') {
+                              _model.apiResponseVericarTicket =
+                                  await ReserveGroup.verificarReservaCall.call(
+                                token: currentAuthenticationToken,
+                                data: _model.responseScanQr,
+                              );
 
-                            if ((_model.apiResponseVericarTicket?.succeeded ??
-                                true)) {
-                              context.pushNamed(
-                                'scaneoExitoso',
-                                queryParameters: {
-                                  'uuid': serializeParam(
-                                    getJsonField(
-                                      (_model.apiResponseVericarTicket
-                                              ?.jsonBody ??
-                                          ''),
-                                      r'''$.data.uuid''',
-                                    ).toString(),
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
+                              _shouldSetState = true;
+                              if ((_model.apiResponseVericarTicket?.succeeded ??
+                                      true) ==
+                                  true) {
+                                context.pushNamed(
+                                  'scaneoExitoso',
+                                  queryParameters: {
+                                    'uuid': serializeParam(
+                                      getJsonField(
+                                        (_model.apiResponseVericarTicket
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.data.uuid''',
+                                      ).toString(),
+                                      ParamType.String,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              } else {
+                                context.pushNamed(
+                                  'scaneoError',
+                                  queryParameters: {
+                                    'uuid': serializeParam(
+                                      getJsonField(
+                                        (_model.apiResponseVericarTicket
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.data.uuid''',
+                                      ).toString(),
+                                      ParamType.String,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              }
                             } else {
-                              context.pushNamed(
-                                'scaneoError',
-                                queryParameters: {
-                                  'uuid': serializeParam(
-                                    getJsonField(
-                                      (_model.apiResponseVericarTicket
-                                              ?.jsonBody ??
-                                          ''),
-                                      r'''$.data.uuid''',
-                                    ).toString(),
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                              );
+                              if (_shouldSetState) setState(() {});
+                              return;
                             }
 
-                            setState(() {});
+                            if (_shouldSetState) setState(() {});
                           },
                         ),
                       ),

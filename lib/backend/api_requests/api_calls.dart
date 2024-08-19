@@ -87,7 +87,7 @@ class GetEventCall {
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
-      cache: true,
+      cache: false,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
@@ -326,21 +326,27 @@ class FindmeOneCall {
 
 class VerificarReservaCall {
   Future<ApiCallResponse> call({
-    String? uuid = '',
+    String? data = '',
     String? token = '',
   }) async {
     final baseUrl = ReserveGroup.getBaseUrl(
       token: token,
     );
 
+    final ffApiRequestBody = '''
+{
+  "data": "${data}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'verificarReserva',
-      apiUrl: '${baseUrl}/bookings/verificar-reserva/${uuid}',
-      callType: ApiCallType.GET,
+      apiUrl: '${baseUrl}/bookings/verificar-reserva',
+      callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${token}',
       },
       params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

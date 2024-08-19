@@ -17,6 +17,7 @@ class BookingStruct extends BaseStruct {
     FileDStruct? qrImage,
     OwnerStruct? organizador,
     String? placeUrl,
+    int? ref,
   })  : _id = id,
         _uuid = uuid,
         _state = state,
@@ -25,7 +26,8 @@ class BookingStruct extends BaseStruct {
         _event = event,
         _qrImage = qrImage,
         _organizador = organizador,
-        _placeUrl = placeUrl;
+        _placeUrl = placeUrl,
+        _ref = ref;
 
   // "id" field.
   int? _id;
@@ -108,6 +110,15 @@ class BookingStruct extends BaseStruct {
 
   bool hasPlaceUrl() => _placeUrl != null;
 
+  // "ref" field.
+  int? _ref;
+  int get ref => _ref ?? 0;
+  set ref(int? val) => _ref = val;
+
+  void incrementRef(int amount) => ref = ref + amount;
+
+  bool hasRef() => _ref != null;
+
   static BookingStruct fromMap(Map<String, dynamic> data) => BookingStruct(
         id: castToType<int>(data['id']),
         uuid: data['uuid'] as String?,
@@ -118,6 +129,7 @@ class BookingStruct extends BaseStruct {
         qrImage: FileDStruct.maybeFromMap(data['qrImage']),
         organizador: OwnerStruct.maybeFromMap(data['organizador']),
         placeUrl: data['placeUrl'] as String?,
+        ref: castToType<int>(data['ref']),
       );
 
   static BookingStruct? maybeFromMap(dynamic data) =>
@@ -133,6 +145,7 @@ class BookingStruct extends BaseStruct {
         'qrImage': _qrImage?.toMap(),
         'organizador': _organizador?.toMap(),
         'placeUrl': _placeUrl,
+        'ref': _ref,
       }.withoutNulls;
 
   @override
@@ -172,6 +185,10 @@ class BookingStruct extends BaseStruct {
         'placeUrl': serializeParam(
           _placeUrl,
           ParamType.String,
+        ),
+        'ref': serializeParam(
+          _ref,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -226,6 +243,11 @@ class BookingStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        ref: deserializeParam(
+          data['ref'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -242,7 +264,8 @@ class BookingStruct extends BaseStruct {
         event == other.event &&
         qrImage == other.qrImage &&
         organizador == other.organizador &&
-        placeUrl == other.placeUrl;
+        placeUrl == other.placeUrl &&
+        ref == other.ref;
   }
 
   @override
@@ -255,7 +278,8 @@ class BookingStruct extends BaseStruct {
         event,
         qrImage,
         organizador,
-        placeUrl
+        placeUrl,
+        ref
       ]);
 }
 
@@ -269,6 +293,7 @@ BookingStruct createBookingStruct({
   FileDStruct? qrImage,
   OwnerStruct? organizador,
   String? placeUrl,
+  int? ref,
 }) =>
     BookingStruct(
       id: id,
@@ -280,4 +305,5 @@ BookingStruct createBookingStruct({
       qrImage: qrImage ?? FileDStruct(),
       organizador: organizador ?? OwnerStruct(),
       placeUrl: placeUrl,
+      ref: ref,
     );

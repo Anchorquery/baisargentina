@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'scaneo_exitoso_model.dart';
@@ -41,7 +42,31 @@ class _ScaneoExitosoWidgetState extends State<ScaneoExitosoWidget> {
         uuid: widget!.uuid,
       );
 
-      if ((_model.apiResponseFindMeBooking?.succeeded ?? true) == true) {}
+      if ((_model.apiResponseFindMeBooking?.succeeded ?? true) == true) {
+        _model.data =
+            BookingStruct.maybeFromMap(ReserveGroup.findmeOneCall.data(
+          (_model.apiResponseFindMeBooking?.jsonBody ?? ''),
+        ));
+        _model.loading = false;
+        setState(() {});
+      } else {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Ha ocurrido un error'),
+              content: Text('No se puede verficar la reserva'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Cerrar'),
+                ),
+              ],
+            );
+          },
+        );
+        context.safePop();
+      }
     });
   }
 
@@ -121,7 +146,7 @@ class _ScaneoExitosoWidgetState extends State<ScaneoExitosoWidget> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 24.0),
                 child: Text(
-                  'Nombre de usuario',
+                  '${_model.data?.owner?.firstname}${_model.data?.owner?.lastname}',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).displayLarge.override(
                         fontFamily: 'Lato',
@@ -194,7 +219,7 @@ class _ScaneoExitosoWidgetState extends State<ScaneoExitosoWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 4.0),
                                   child: Text(
-                                    '1234567891',
+                                    _model.data!.ref.toString(),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .labelMedium
@@ -222,8 +247,65 @@ class _ScaneoExitosoWidgetState extends State<ScaneoExitosoWidget> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        var _shouldSetState = false;
+                        _model.responseScanQr =
+                            await FlutterBarcodeScanner.scanBarcode(
+                          '#C62828', // scanning line color
+                          'Cancel', // cancel button text
+                          true, // whether to show the flash icon
+                          ScanMode.QR,
+                        );
+
+                        _shouldSetState = true;
+                        if (_model.responseScanQr != null &&
+                            _model.responseScanQr != '') {
+                          _model.apiResponseVericarTicket =
+                              await ReserveGroup.verificarReservaCall.call(
+                            token: currentAuthenticationToken,
+                            data: _model.responseScanQr,
+                          );
+
+                          _shouldSetState = true;
+                          if ((_model.apiResponseVericarTicket?.succeeded ??
+                                  true) ==
+                              true) {
+                            context.pushNamed(
+                              'scaneoExitoso',
+                              queryParameters: {
+                                'uuid': serializeParam(
+                                  getJsonField(
+                                    (_model.apiResponseVericarTicket
+                                            ?.jsonBody ??
+                                        ''),
+                                    r'''$.data.uuid''',
+                                  ).toString(),
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
+                          } else {
+                            context.pushNamed(
+                              'scaneoError',
+                              queryParameters: {
+                                'uuid': serializeParam(
+                                  getJsonField(
+                                    (_model.apiResponseVericarTicket
+                                            ?.jsonBody ??
+                                        ''),
+                                    r'''$.data.uuid''',
+                                  ).toString(),
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
+                          }
+                        } else {
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+
+                        if (_shouldSetState) setState(() {});
                       },
                       text: 'Seguir scaneando',
                       options: FFButtonOptions(

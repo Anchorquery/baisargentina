@@ -111,7 +111,7 @@ class _EventWidgetState extends State<EventWidget> {
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: MediaQuery.sizeOf(context).height * 10.0,
             child: Stack(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, -1.0),
               children: [
                 Align(
                   alignment: AlignmentDirectional(0.0, 0.0),
@@ -122,7 +122,7 @@ class _EventWidgetState extends State<EventWidget> {
                         true,
                       )) {
                         return Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, -1.0),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -757,7 +757,7 @@ class _EventWidgetState extends State<EventWidget> {
                                             },
                                             carouselController: _model
                                                     .carouselhousignController ??=
-                                                CarouselSliderController(),
+                                                CarouselController(),
                                             options: CarouselOptions(
                                               initialPage: max(0,
                                                   min(1, imagenes.length - 1)),
