@@ -592,7 +592,7 @@ class _BeerpongWidgetState extends State<BeerpongWidget> {
                         ),
                       ],
                       carouselController: _model.carouselhousignController ??=
-                          CarouselController(),
+                          CarouselSliderController(),
                       options: CarouselOptions(
                         initialPage: 1,
                         viewportFraction: 0.5,
