@@ -18,7 +18,6 @@ export '/pages/tallerdeequilibrio/tallerdeequilibrio_widget.dart'
 export '/pages/tallerdecv/tallerdecv_widget.dart' show TallerdecvWidget;
 export '/pages/housing/buenosaireshousign/buenosaireshousign_widget.dart'
     show BuenosaireshousignWidget;
-export '/pages/policy/faq/faq_widget.dart' show FaqWidget;
 export '/pages/policy/politicasde_reembolso/politicasde_reembolso_widget.dart'
     show PoliticasdeReembolsoWidget;
 export '/pages/policy/nosotros/nosotros_widget.dart' show NosotrosWidget;
@@ -38,3 +37,4 @@ export '/pages/events/edit_event/edit_event_widget.dart' show EditEventWidget;
 export '/pages/booking/reserva_id/reserva_id_widget.dart' show ReservaIdWidget;
 export '/pages/admin/validarqr/detalle_reserva/detalle_reserva_widget.dart'
     show DetalleReservaWidget;
+export '/pages/policy/faq/faq_widget.dart' show FaqWidget;

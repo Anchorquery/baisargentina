@@ -30,9 +30,21 @@ class CreateModel extends FlutterFlowModel<CreateWidget> {
   void updateCategoriesAtIndex(int index, Function(CategoryStruct) updateFn) =>
       categories[index] = updateFn(categories[index]);
 
+  List<OrganizadorStruct> organizers = [];
+  void addToOrganizers(OrganizadorStruct item) => organizers.add(item);
+  void removeFromOrganizers(OrganizadorStruct item) => organizers.remove(item);
+  void removeAtIndexFromOrganizers(int index) => organizers.removeAt(index);
+  void insertAtIndexInOrganizers(int index, OrganizadorStruct item) =>
+      organizers.insert(index, item);
+  void updateOrganizersAtIndex(
+          int index, Function(OrganizadorStruct) updateFn) =>
+      organizers[index] = updateFn(organizers[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
+  // Stores action output result for [Backend Call - API (GetOrganizer)] action in create widget.
+  ApiCallResponse? apiResponseOrganizers;
   // Stores action output result for [Backend Call - API (Api Get Categories)] action in create widget.
   ApiCallResponse? apiResponseCategories;
   // State field(s) for name widget.
@@ -60,18 +72,8 @@ class CreateModel extends FlutterFlowModel<CreateWidget> {
   }
 
   // State field(s) for organizador widget.
-  FocusNode? organizadorFocusNode;
-  TextEditingController? organizadorTextController;
-  String? Function(BuildContext, String?)? organizadorTextControllerValidator;
-  String? _organizadorTextControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'nombre del oganizador';
-    }
-
-    return null;
-  }
-
+  int? organizadorValue;
+  FormFieldController<int>? organizadorValueController;
   DateTime? datePicked1;
   DateTime? datePicked2;
   DateTime? datePicked3;
@@ -135,7 +137,7 @@ class CreateModel extends FlutterFlowModel<CreateWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
+  CarouselController? carouselController;
   int carouselCurrentIndex = 1;
 
   bool isDataUploading2 = false;
@@ -148,7 +150,6 @@ class CreateModel extends FlutterFlowModel<CreateWidget> {
   void initState(BuildContext context) {
     nameTextControllerValidator = _nameTextControllerValidator;
     placeUrlTextControllerValidator = _placeUrlTextControllerValidator;
-    organizadorTextControllerValidator = _organizadorTextControllerValidator;
     descripcionEventoTextControllerValidator =
         _descripcionEventoTextControllerValidator;
     limiteDePersonasTextControllerValidator =
@@ -164,9 +165,6 @@ class CreateModel extends FlutterFlowModel<CreateWidget> {
 
     placeUrlFocusNode?.dispose();
     placeUrlTextController?.dispose();
-
-    organizadorFocusNode?.dispose();
-    organizadorTextController?.dispose();
 
     descripcionEventoFocusNode?.dispose();
     descripcionEventoTextController?.dispose();

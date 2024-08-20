@@ -168,11 +168,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => BuenosaireshousignWidget(),
         ),
         FFRoute(
-          name: 'faq',
-          path: '/faq',
-          builder: (context, params) => FaqWidget(),
-        ),
-        FFRoute(
           name: 'politicasdeReembolso',
           path: '/politicasdeReembolso',
           builder: (context, params) => PoliticasdeReembolsoWidget(),
@@ -282,6 +277,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'FAQ',
+          path: '/faq',
+          builder: (context, params) => FaqWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

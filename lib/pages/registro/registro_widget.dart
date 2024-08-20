@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -877,16 +876,18 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                           onPressed: () async {
                             _model.authRegisterResponse =
                                 await ApiRegisterCall.call(
-                              username: _model.displayNameTextController.text,
+                              username: _model.emailAddressTextController.text,
                               password: _model.passwordTextController.text,
                               email: _model.emailAddressTextController.text,
-                              name: random_data.randomName(true, true),
+                              name: _model.displayNameTextController.text,
                               university:
-                                  (_model.universidadFieldFocusNode?.hasFocus ??
-                                          false)
-                                      .toString(),
-                              birth: '2024-10-10',
-                              country: 'country',
+                                  _model.universidadFieldTextController.text,
+                              birth: _model.fechanacimientoTextController.text,
+                              country: _model.nacionalidadTextController.text,
+                              inargentina:
+                                  _model.estasEnArgentinaValue != null &&
+                                      _model.estasEnArgentinaValue != '',
+                              lastName: _model.apellidoTextController.text,
                             );
 
                             if ((_model.authRegisterResponse?.succeeded ??

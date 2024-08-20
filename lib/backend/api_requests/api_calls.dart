@@ -24,6 +24,7 @@ class EventsGroup {
   };
   static GetEventsCall getEventsCall = GetEventsCall();
   static GetEventCall getEventCall = GetEventCall();
+  static GetOrganizerCall getOrganizerCall = GetOrganizerCall();
 }
 
 class GetEventsCall {
@@ -104,6 +105,39 @@ class GetEventCall {
   List? images(dynamic response) => getJsonField(
         response,
         r'''$.data.images''',
+        true,
+      ) as List?;
+}
+
+class GetOrganizerCall {
+  Future<ApiCallResponse> call({
+    String? token =
+        'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMzA4OTkxOSwiZXhwIjoxNzI1NjgxOTE5fQ.F-1c8-nRWcHRqiHQjxtTwlXT-VImWmicIysfDQsSZfM',
+  }) async {
+    final baseUrl = EventsGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetOrganizer',
+      apiUrl: '${baseUrl}/events/find-organizer',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
         true,
       ) as List?;
 }
@@ -530,6 +564,7 @@ class ApiRegisterCall {
     String? university = '',
     String? birth = '',
     FFUploadedFile? images,
+    String? lastName = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Api Register',
@@ -545,6 +580,7 @@ class ApiRegisterCall {
         'inargentina': university,
         'university': university,
         'birth': birth,
+        'lastName': lastName,
       },
       bodyType: BodyType.MULTIPART,
       returnBody: true,
@@ -575,7 +611,7 @@ class ApiCreateEventsCall {
     String? name = '',
     String? description = '',
     String? nombreComercio = '',
-    String? organizador = '',
+    int? organizador,
     String? placeUrl = '',
     String? fecha = '',
     String? fechaInicioVenta = '',

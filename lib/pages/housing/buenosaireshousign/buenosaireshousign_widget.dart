@@ -521,7 +521,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                     ),
                   ],
                   carouselController: _model.carouselhousignController ??=
-                      CarouselSliderController(),
+                      CarouselController(),
                   options: CarouselOptions(
                     initialPage: 1,
                     viewportFraction: 0.5,
@@ -539,8 +539,9 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('contactar-housign pressed ...');
+                  onPressed: () async {
+                    await launchURL(
+                        'https://www.airbnb.mx/rooms/907985442098063169?viralityEntryPoint=1&s=76&source_impression_id=p3_1724114013_P3j8KVJpjGcUPdl5');
                   },
                   text: 'Contactar',
                   options: FFButtonOptions(

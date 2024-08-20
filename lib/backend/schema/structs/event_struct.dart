@@ -12,7 +12,6 @@ class EventStruct extends BaseStruct {
     String? name,
     TypeEvent? type,
     String? nombreComercio,
-    String? organizador,
     String? placeUrl,
     String? placeDescription,
     double? precio,
@@ -28,11 +27,11 @@ class EventStruct extends BaseStruct {
     String? horaFinEvento,
     String? description,
     bool? reservado,
+    OwnerStruct? organizador,
   })  : _id = id,
         _name = name,
         _type = type,
         _nombreComercio = nombreComercio,
-        _organizador = organizador,
         _placeUrl = placeUrl,
         _placeDescription = placeDescription,
         _precio = precio,
@@ -47,7 +46,8 @@ class EventStruct extends BaseStruct {
         _restriccion = restriccion,
         _horaFinEvento = horaFinEvento,
         _description = description,
-        _reservado = reservado;
+        _reservado = reservado,
+        _organizador = organizador;
 
   // "id" field.
   int? _id;
@@ -78,13 +78,6 @@ class EventStruct extends BaseStruct {
   set nombreComercio(String? val) => _nombreComercio = val;
 
   bool hasNombreComercio() => _nombreComercio != null;
-
-  // "organizador" field.
-  String? _organizador;
-  String get organizador => _organizador ?? '';
-  set organizador(String? val) => _organizador = val;
-
-  bool hasOrganizador() => _organizador != null;
 
   // "placeUrl" field.
   String? _placeUrl;
@@ -208,12 +201,22 @@ class EventStruct extends BaseStruct {
 
   bool hasReservado() => _reservado != null;
 
+  // "organizador" field.
+  OwnerStruct? _organizador;
+  OwnerStruct get organizador => _organizador ?? OwnerStruct();
+  set organizador(OwnerStruct? val) => _organizador = val;
+
+  void updateOrganizador(Function(OwnerStruct) updateFn) {
+    updateFn(_organizador ??= OwnerStruct());
+  }
+
+  bool hasOrganizador() => _organizador != null;
+
   static EventStruct fromMap(Map<String, dynamic> data) => EventStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
         type: deserializeEnum<TypeEvent>(data['type']),
         nombreComercio: data['nombreComercio'] as String?,
-        organizador: data['organizador'] as String?,
         placeUrl: data['placeUrl'] as String?,
         placeDescription: data['placeDescription'] as String?,
         precio: castToType<double>(data['precio']),
@@ -232,6 +235,7 @@ class EventStruct extends BaseStruct {
         horaFinEvento: data['horaFinEvento'] as String?,
         description: data['description'] as String?,
         reservado: data['reservado'] as bool?,
+        organizador: OwnerStruct.maybeFromMap(data['organizador']),
       );
 
   static EventStruct? maybeFromMap(dynamic data) =>
@@ -242,7 +246,6 @@ class EventStruct extends BaseStruct {
         'name': _name,
         'type': _type?.serialize(),
         'nombreComercio': _nombreComercio,
-        'organizador': _organizador,
         'placeUrl': _placeUrl,
         'placeDescription': _placeDescription,
         'precio': _precio,
@@ -258,6 +261,7 @@ class EventStruct extends BaseStruct {
         'horaFinEvento': _horaFinEvento,
         'description': _description,
         'reservado': _reservado,
+        'organizador': _organizador?.toMap(),
       }.withoutNulls;
 
   @override
@@ -276,10 +280,6 @@ class EventStruct extends BaseStruct {
         ),
         'nombreComercio': serializeParam(
           _nombreComercio,
-          ParamType.String,
-        ),
-        'organizador': serializeParam(
-          _organizador,
           ParamType.String,
         ),
         'placeUrl': serializeParam(
@@ -343,6 +343,10 @@ class EventStruct extends BaseStruct {
           _reservado,
           ParamType.bool,
         ),
+        'organizador': serializeParam(
+          _organizador,
+          ParamType.DataStruct,
+        ),
       }.withoutNulls;
 
   static EventStruct fromSerializableMap(Map<String, dynamic> data) =>
@@ -364,11 +368,6 @@ class EventStruct extends BaseStruct {
         ),
         nombreComercio: deserializeParam(
           data['nombreComercio'],
-          ParamType.String,
-          false,
-        ),
-        organizador: deserializeParam(
-          data['organizador'],
           ParamType.String,
           false,
         ),
@@ -450,6 +449,12 @@ class EventStruct extends BaseStruct {
           ParamType.bool,
           false,
         ),
+        organizador: deserializeStructParam(
+          data['organizador'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: OwnerStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -463,7 +468,6 @@ class EventStruct extends BaseStruct {
         name == other.name &&
         type == other.type &&
         nombreComercio == other.nombreComercio &&
-        organizador == other.organizador &&
         placeUrl == other.placeUrl &&
         placeDescription == other.placeDescription &&
         precio == other.precio &&
@@ -478,7 +482,8 @@ class EventStruct extends BaseStruct {
         restriccion == other.restriccion &&
         horaFinEvento == other.horaFinEvento &&
         description == other.description &&
-        reservado == other.reservado;
+        reservado == other.reservado &&
+        organizador == other.organizador;
   }
 
   @override
@@ -487,7 +492,6 @@ class EventStruct extends BaseStruct {
         name,
         type,
         nombreComercio,
-        organizador,
         placeUrl,
         placeDescription,
         precio,
@@ -502,7 +506,8 @@ class EventStruct extends BaseStruct {
         restriccion,
         horaFinEvento,
         description,
-        reservado
+        reservado,
+        organizador
       ]);
 }
 
@@ -511,7 +516,6 @@ EventStruct createEventStruct({
   String? name,
   TypeEvent? type,
   String? nombreComercio,
-  String? organizador,
   String? placeUrl,
   String? placeDescription,
   double? precio,
@@ -526,13 +530,13 @@ EventStruct createEventStruct({
   String? horaFinEvento,
   String? description,
   bool? reservado,
+  OwnerStruct? organizador,
 }) =>
     EventStruct(
       id: id,
       name: name,
       type: type,
       nombreComercio: nombreComercio,
-      organizador: organizador,
       placeUrl: placeUrl,
       placeDescription: placeDescription,
       precio: precio,
@@ -547,4 +551,5 @@ EventStruct createEventStruct({
       horaFinEvento: horaFinEvento,
       description: description,
       reservado: reservado,
+      organizador: organizador ?? OwnerStruct(),
     );

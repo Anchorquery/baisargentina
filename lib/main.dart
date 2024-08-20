@@ -96,12 +96,12 @@ class _MyAppState extends State<MyApp> {
         scrollbarTheme: ScrollbarThemeData(
           thumbColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.dragged)) {
-              return Color(4289045925);
+              return Color(4285822068);
             }
             if (states.contains(MaterialState.hovered)) {
-              return Color(4289045925);
+              return Color(4285822068);
             }
-            return Color(4289045925);
+            return Color(4285822068);
           }),
         ),
         useMaterial3: false,
@@ -111,12 +111,12 @@ class _MyAppState extends State<MyApp> {
         scrollbarTheme: ScrollbarThemeData(
           thumbColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.dragged)) {
-              return Color(4289045925);
+              return Color(4285822068);
             }
             if (states.contains(MaterialState.hovered)) {
-              return Color(4289045925);
+              return Color(4285822068);
             }
-            return Color(4289045925);
+            return Color(4285822068);
           }),
         ),
         useMaterial3: false,

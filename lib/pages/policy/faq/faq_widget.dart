@@ -75,6 +75,7 @@ class _FaqWidgetState extends State<FaqWidget> {
                               .override(
                                 fontFamily: 'Lato',
                                 color: FlutterFlowTheme.of(context).tertiary,
+                                fontSize: 18.0,
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -84,349 +85,133 @@ class _FaqWidgetState extends State<FaqWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.227,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 15.0, 10.0),
-                        child: RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: '¿Qué es BAIS?\n',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\nBAIS es una aplicación que conecta a estudiantes de intercambio con negocios locales y estudiantes locales. Ofrecemos una plataforma donde los usuarios pueden ver y crear eventos, contactar servicios de emergencia y rentar apartamentos o casas para estudiantes.',
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(30.0, 35.0, 30.0, 20.0),
+                  child: RichText(
+                    textScaler: MediaQuery.of(context).textScaler,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '¿Qué es BAIS?\n',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                        TextSpan(
+                          text:
+                              '\nBAIS es una aplicación que conecta a estudiantes de intercambio con negocios locales y estudiantes locales. Ofrecemos una plataforma donde los usuarios pueden ver y crear eventos, contactar servicios de emergencia y rentar apartamentos o casas para estudiantes.',
+                          style: GoogleFonts.getFont(
+                            'Lato',
+                            color: FlutterFlowTheme.of(context).primary,
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 15.0, 10.0),
-                        child: RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: '¿Cuánto cuesta usar BAIS?',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\n\nEl registro y uso básico de BAIS es gratuito. Sin embargo, algunos eventos y servicios pueden tener un costo asociado. También ofrecemos suscripciones con características adicionales por una tarifa mensual o anual.',
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
+                        TextSpan(
+                          text: '\n\n¿Cuánto cuesta usar BAIS?',
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context).primary,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.237,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 15.0, 10.0),
-                        child: RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: '¿Cómo puedo crear un evento en BAIS?',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\n\nPara crear un evento, inicie sesión en su cuenta de BAIS y navegue a la sección de eventos. Haga clic en \"Crear Evento\" y complete la información requerida, como el título del evento, la fecha, la hora, la ubicación y una descripción. Una vez completado, publique su evento para que otros usuarios puedan verlo y unirse.',
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
+                        TextSpan(
+                          text:
+                              '\n\nEl registro y uso básico de BAIS es gratuito. Sin embargo, algunos eventos y servicios pueden tener un costo asociado. También ofrecemos suscripciones con características adicionales por una tarifa mensual o anual.',
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context).primary,
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.238,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 15.0, 10.0),
-                        child: RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text:
-                                    '¿Qué debo hacer si necesito contactar un servicio de emergencia?',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\n\nEn caso de emergencia, use la función de \"Servicios de Emergencia\" en la aplicación. Puede seleccionar entre diferentes tipos de servicios, como médicos o taxis, y la aplicación lo conectará con el proveedor de servicios correspondiente más cercano.\n',
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
+                        TextSpan(
+                          text: '\n\n¿Cómo puedo crear un evento en BAIS?',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                        ),
+                        TextSpan(
+                          text:
+                              '\n\nPara crear un evento, inicie sesión en su cuenta de BAIS y navegue a la sección de eventos. Haga clic en \"Crear Evento\" y complete la información requerida, como el título del evento, la fecha, la hora, la ubicación y una descripción. Una vez completado, publique su evento para que otros usuarios puedan verlo y unirse.',
+                          style: GoogleFonts.getFont(
+                            'Lato',
+                            color: FlutterFlowTheme.of(context).primary,
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.228,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 15.0, 10.0),
-                        child: RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text:
-                                    '¿Qué pasa si un evento al que me inscribí es cancelado?\n',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\nSi un evento es cancelado por el organizador, recibirá una notificación por correo electrónico y se le reembolsará el pago completo del evento automáticamente. Consulte nuestra Política de Reembolso para obtener más información.\n',
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
+                        TextSpan(
+                          text:
+                              '\n\n¿Qué debo hacer si necesito contactar un servicio de emergencia?',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                        ),
+                        TextSpan(
+                          text:
+                              '\n\nEn caso de emergencia, use la función de \"Servicios de Emergencia\" en la aplicación. Puede seleccionar entre diferentes tipos de servicios, como médicos o taxis, y la aplicación lo conectará con el proveedor de servicios correspondiente más cercano.\n',
+                          style: GoogleFonts.getFont(
+                            'Lato',
+                            color: FlutterFlowTheme.of(context).primary,
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.235,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 15.0, 10.0),
-                        child: RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: ' ¿Cómo puedo cancelar mi suscripción?\n',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\nPara cancelar su suscripción, vaya a la configuración de su cuenta en la aplicación y seleccione la opción de cancelar suscripción. Si cancela dentro de los primeros 14 días, recibirá un reembolso completo. No se otorgarán reembolsos por cancelaciones realizadas después de este período.\n',
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
+                        TextSpan(
+                          text:
+                              '\n\n¿Qué pasa si un evento al que me inscribí es cancelado?',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w800,
+                                  ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 0.85,
-                      height: MediaQuery.sizeOf(context).height * 0.285,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 10.0, 15.0, 10.0),
-                        child: RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text:
-                                    '¿Puedo reportar conductas inapropiadas o problemas con otros usuarios?\n',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\nSí, si experimenta conductas inapropiadas o tiene problemas con otros usuarios, puede reportarlo a nuestro equipo de soporte a través de la sección de soporte en la aplicación. Investigaremos todas las denuncias y tomaremos las medidas adecuadas para garantizar la seguridad y bienestar de nuestra comunidad.\n\n',
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                              )
-                            ],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
+                        TextSpan(
+                          text:
+                              '\n\nSi un evento es cancelado por el organizador, recibirá una notificación por correo electrónico y se le reembolsará el pago completo del evento automáticamente. Consulte nuestra Política de Reembolso para obtener más información.\n',
+                          style: TextStyle(),
                         ),
-                      ),
+                        TextSpan(
+                          text: '\n\n ¿Cómo puedo cancelar mi suscripción?',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                        ),
+                        TextSpan(
+                          text:
+                              '\n\n\nPara cancelar su suscripción, vaya a la configuración de su cuenta en la aplicación y seleccione la opción de cancelar suscripción. Si cancela dentro de los primeros 14 días, recibirá un reembolso completo. No se otorgarán reembolsos por cancelaciones realizadas después de este período.\n',
+                          style: TextStyle(),
+                        ),
+                        TextSpan(
+                          text:
+                              '\n\n¿Puedo reportar conductas inapropiadas o problemas con otros usuarios?\n',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                        ),
+                        TextSpan(
+                          text:
+                              '\n\n\nSí, si experimenta conductas inapropiadas o tiene problemas con otros usuarios, puede reportarlo a nuestro equipo de soporte a través de la sección de soporte en la aplicación. Investigaremos todas las denuncias y tomaremos las medidas adecuadas para garantizar la seguridad y bienestar de nuestra comunidad.\n',
+                          style: TextStyle(),
+                        )
+                      ],
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Lato',
+                            color: FlutterFlowTheme.of(context).primary,
+                            letterSpacing: 0.0,
+                          ),
                     ),
+                    textAlign: TextAlign.justify,
                   ),
                 ),
               ],

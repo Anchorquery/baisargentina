@@ -38,24 +38,48 @@ class _CreateWidgetState extends State<CreateWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResponseCategories = await ApiGetCategoriesCall.call();
+      await Future.wait([
+        Future(() async {
+          _model.apiResponseOrganizers =
+              await EventsGroup.getOrganizerCall.call(
+            token: currentAuthenticationToken,
+          );
 
-      if ((_model.apiResponseCategories?.succeeded ?? true)) {
-        _model.categories = (getJsonField(
-          (_model.apiResponseCategories?.jsonBody ?? ''),
-          r'''$.data''',
-          true,
-        )!
-                .toList()
-                .map<CategoryStruct?>(CategoryStruct.maybeFromMap)
-                .toList() as Iterable<CategoryStruct?>)
-            .withoutNulls
-            .toList()
-            .cast<CategoryStruct>();
-        setState(() {});
-      } else {
-        return;
-      }
+          if (!(_model.apiResponseCategories?.succeeded ?? true)) {
+            return;
+          }
+        }),
+        Future(() async {
+          _model.apiResponseCategories = await ApiGetCategoriesCall.call();
+
+          if (!(_model.apiResponseCategories?.succeeded ?? true)) {
+            return;
+          }
+        }),
+      ]);
+      _model.categories = (getJsonField(
+        (_model.apiResponseCategories?.jsonBody ?? ''),
+        r'''$.data''',
+        true,
+      )!
+              .toList()
+              .map<CategoryStruct?>(CategoryStruct.maybeFromMap)
+              .toList() as Iterable<CategoryStruct?>)
+          .withoutNulls
+          .toList()
+          .cast<CategoryStruct>();
+      _model.organizers = (getJsonField(
+        (_model.apiResponseOrganizers?.jsonBody ?? ''),
+        r'''$.data''',
+        true,
+      )!
+              .toList()
+              .map<OrganizadorStruct?>(OrganizadorStruct.maybeFromMap)
+              .toList() as Iterable<OrganizadorStruct?>)
+          .withoutNulls
+          .toList()
+          .cast<OrganizadorStruct>();
+      setState(() {});
     });
 
     _model.nameTextController ??= TextEditingController();
@@ -63,9 +87,6 @@ class _CreateWidgetState extends State<CreateWidget> {
 
     _model.placeUrlTextController ??= TextEditingController();
     _model.placeUrlFocusNode ??= FocusNode();
-
-    _model.organizadorTextController ??= TextEditingController();
-    _model.organizadorFocusNode ??= FocusNode();
 
     _model.descripcionEventoTextController ??= TextEditingController();
     _model.descripcionEventoFocusNode ??= FocusNode();
@@ -314,69 +335,49 @@ class _CreateWidgetState extends State<CreateWidget> {
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 20.0, 20.0),
-                              child: TextFormField(
-                                controller: _model.organizadorTextController,
-                                focusNode: _model.organizadorFocusNode,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Nombre del organizador',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 0.0, 0.0, 0.0),
+                                  0.0, 0.0, 0.0, 20.0),
+                              child: FlutterFlowDropDown<int>(
+                                controller:
+                                    _model.organizadorValueController ??=
+                                        FormFieldController<int>(
+                                  _model.organizadorValue ??= 0,
                                 ),
-                                style: FlutterFlowTheme.of(context)
+                                options: List<int>.from(_model.organizers
+                                    .map((e) => e.id)
+                                    .toList()),
+                                optionLabels: _model.organizers
+                                    .map((e) => e.name)
+                                    .toList(),
+                                onChanged: (val) => setState(
+                                    () => _model.organizadorValue = val),
+                                width: 348.0,
+                                height: 56.0,
+                                textStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Lato',
                                       letterSpacing: 0.0,
                                     ),
-                                keyboardType: TextInputType.name,
-                                validator: _model
-                                    .organizadorTextControllerValidator
-                                    .asValidator(context),
+                                hintText: 'Nombre del organizador',
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                elevation: 2.0,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                borderWidth: 2.0,
+                                borderRadius: 40.0,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                hidesUnderline: true,
+                                isOverButton: true,
+                                isSearchable: false,
+                                isMultiSelect: false,
                               ),
                             ),
                             Padding(
@@ -1560,7 +1561,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                     },
                                                     carouselController: _model
                                                             .carouselController ??=
-                                                        CarouselSliderController(),
+                                                        CarouselController(),
                                                     options: CarouselOptions(
                                                       initialPage: max(
                                                           0,
@@ -1716,11 +1717,10 @@ class _CreateWidgetState extends State<CreateWidget> {
                                       await ApiCreateEventsCall.call(
                                     name: _model.nameTextController.text,
                                     description:
-                                        _model.organizadorTextController.text,
+                                        _model.organizadorValue?.toString(),
                                     placeUrl:
                                         _model.placeUrlTextController.text,
-                                    organizador:
-                                        _model.organizadorTextController.text,
+                                    organizador: _model.organizadorValue,
                                     fecha: _model.datePicked2?.toString(),
                                     fechaInicioVenta:
                                         _model.datePicked1?.toString(),

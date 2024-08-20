@@ -74,7 +74,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
     _model.placeUrlFocusNode ??= FocusNode();
 
     _model.organizadorTextController ??=
-        TextEditingController(text: _model.event?.organizador);
+        TextEditingController(text: _model.event?.organizador?.id?.toString());
     _model.organizadorFocusNode ??= FocusNode();
 
     _model.descripcionEventoTextController ??= TextEditingController();
@@ -1663,7 +1663,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                         },
                                                         carouselController: _model
                                                                 .carouselController ??=
-                                                            CarouselSliderController(),
+                                                            CarouselController(),
                                                         options:
                                                             CarouselOptions(
                                                           initialPage: max(
@@ -1830,8 +1830,8 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             .organizadorTextController.text,
                                         placeUrl:
                                             _model.placeUrlTextController.text,
-                                        organizador: _model
-                                            .organizadorTextController.text,
+                                        organizador: int.tryParse(_model
+                                            .organizadorTextController.text),
                                         fecha: _model.datePicked2?.toString(),
                                         fechaInicioVenta:
                                             _model.datePicked1?.toString(),

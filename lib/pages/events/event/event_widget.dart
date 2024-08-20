@@ -647,10 +647,8 @@ class _EventWidgetState extends State<EventWidget> {
                                                 ),
                                           ),
                                           TextSpan(
-                                            text: valueOrDefault<String>(
-                                              _model.data?.organizador,
-                                              '\"\"',
-                                            ),
+                                            text:
+                                                '${_model.data?.organizador?.firstname}${_model.data?.organizador?.lastname}',
                                             style: TextStyle(),
                                           )
                                         ],
@@ -757,7 +755,7 @@ class _EventWidgetState extends State<EventWidget> {
                                             },
                                             carouselController: _model
                                                     .carouselhousignController ??=
-                                                CarouselSliderController(),
+                                                CarouselController(),
                                             options: CarouselOptions(
                                               initialPage: max(0,
                                                   min(1, imagenes.length - 1)),

@@ -85,7 +85,7 @@ class _DescuentosWidgetState extends State<DescuentosWidget> {
                         children: [
                           Container(
                             width: MediaQuery.sizeOf(context).width * 0.85,
-                            height: MediaQuery.sizeOf(context).height * 0.15,
+                            height: MediaQuery.sizeOf(context).height * 0.208,
                             decoration: BoxDecoration(
                               color: Color(0xFFF7F8FA),
                               borderRadius: BorderRadius.only(

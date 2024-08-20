@@ -6,6 +6,7 @@ export 'bookings_struct.dart';
 export 'category_struct.dart';
 export 'event_struct.dart';
 export 'events_struct.dart';
+export 'organizador_struct.dart';
 export 'owner_struct.dart';
 export 'user_struct.dart';
 export 'verificacion_data_struct.dart';
