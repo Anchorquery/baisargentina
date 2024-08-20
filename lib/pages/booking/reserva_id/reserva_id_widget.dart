@@ -131,7 +131,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'Evento:',
+                              'Datos del Evento:',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -139,18 +139,6 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                                     fontFamily: 'Lato',
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            Text(
-                              valueOrDefault<String>(
-                                _model.data?.event?.name,
-                                'name',
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
                                   ),
                             ),
                           ].divide(SizedBox(width: 10.0)),
@@ -162,14 +150,15 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Ubicación  del evento:',
+                                valueOrDefault<String>(
+                                  _model.data?.event?.name,
+                                  'name',
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Lato',
-                                      color: Color(0x8F212529),
                                       letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w800,
                                     ),
                               ),
                               InkWell(
@@ -199,17 +188,6 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'Organizador:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            Text(
                               _model.data!.organizador.firstname,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -238,18 +216,6 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'Email del organizador:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    color: Color(0x8F212529),
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            Text(
                               _model.data!.organizador.email,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -272,17 +238,6 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Número de teléfono\ndel organizador:',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                ),
                                 Text(
                                   _model.data!.organizador.phone,
                                   style: FlutterFlowTheme.of(context)
