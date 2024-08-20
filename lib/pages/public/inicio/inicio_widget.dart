@@ -33,6 +33,7 @@ class _InicioWidgetState extends State<InicioWidget> {
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
+      Function() _navigate = () {};
       if (currentAuthenticationToken != null &&
           currentAuthenticationToken != '') {
         _model.apiResponseMe = await UserGroup.meCall.call(
@@ -85,10 +86,17 @@ class _InicioWidgetState extends State<InicioWidget> {
           FFAppState().token = '';
           FFAppState().user = UserStruct.fromSerializableMap(jsonDecode('{}'));
           setState(() {});
+          GoRouter.of(context).prepareAuthEvent();
+          await authManager.signOut();
+          GoRouter.of(context).clearRedirectLocation();
+
+          _navigate = () => context.goNamedAuth('inicio', context.mounted);
         }
       } else {
         return;
       }
+
+      _navigate();
     });
   }
 

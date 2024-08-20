@@ -37,6 +37,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Function() _navigate = () {};
       await Future.wait([
         Future(() async {
           _model.apiResponseEvents = await ReserveGroup.findmeCall.call(
@@ -59,6 +60,16 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                 );
               },
             );
+            if ((_model.apiResponseEvents?.statusCode ?? 200) == 401) {
+              GoRouter.of(context).prepareAuthEvent();
+              await authManager.signOut();
+              GoRouter.of(context).clearRedirectLocation();
+
+              _navigate = () => context.goNamedAuth('inicio', context.mounted);
+            } else {
+              return;
+            }
+
             return;
           }
         }),
@@ -98,6 +109,8 @@ class _ReservasWidgetState extends State<ReservasWidget> {
           .cast<CategoryStruct>();
       _model.loading = false;
       setState(() {});
+
+      _navigate();
     });
   }
 

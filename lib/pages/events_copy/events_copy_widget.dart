@@ -356,9 +356,9 @@ class _EventsCopyWidgetState extends State<EventsCopyWidget> {
                                                   ),
                                                 );
                                               },
-                                              carouselController: _model
-                                                      .carouselController ??=
-                                                  CarouselSliderController(),
+                                              carouselController:
+                                                  _model.carouselController ??=
+                                                      CarouselController(),
                                               options: CarouselOptions(
                                                 initialPage: max(
                                                     0,
