@@ -256,12 +256,25 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                           thickness: 1.0,
                           color: Color(0x8F212529),
                         ),
+                        Align(
+                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          child: Text(
+                            'Datos reserva:',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Lato',
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                          ),
+                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'Reserva a nombre de:',
+                              'A nombre :',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -293,7 +306,7 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Email de la reserva:',
+                                'Email :',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
