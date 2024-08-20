@@ -203,7 +203,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                         1.0,
                                                     child: EmptyListWidget(
                                                       message:
-                                                          'No hay eventos para esta categoria',
+                                                          'No hay reservas',
                                                       error: 'Sin datos',
                                                     ),
                                                   );

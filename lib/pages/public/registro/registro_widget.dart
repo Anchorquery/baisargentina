@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/backend/schema/structs/index.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,14 +44,8 @@ class _RegistroWidgetState extends State<RegistroWidget> {
     _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.fechanacimientoTextController ??= TextEditingController();
-    _model.fechanacimientoFocusNode ??= FocusNode();
-
     _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
-
-    _model.passwordConfirmTextController ??= TextEditingController();
-    _model.passwordConfirmFocusNode ??= FocusNode();
 
     _model.phoneNumberTextController ??= TextEditingController();
     _model.phoneNumberFocusNode ??= FocusNode();
@@ -306,6 +302,120 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                           ),
                         ),
                       ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, -1.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 15.0),
+                              child: Text(
+                                'Fecha de nacimiento',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lato',
+                                      color: Color(0xFF151515),
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 20.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                final _datePickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: getCurrentTimestamp,
+                                  firstDate: DateTime(1900),
+                                  lastDate: getCurrentTimestamp,
+                                  builder: (context, child) {
+                                    return wrapInMaterialDatePickerTheme(
+                                      context,
+                                      child!,
+                                      headerBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      headerForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      headerTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily: 'Lato',
+                                                fontSize: 32.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                      pickerBackgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      pickerForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      selectedDateTimeBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      selectedDateTimeForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      actionButtonForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      iconSize: 24.0,
+                                    );
+                                  },
+                                );
+
+                                if (_datePickedDate != null) {
+                                  safeSetState(() {
+                                    _model.datePicked = DateTime(
+                                      _datePickedDate.year,
+                                      _datePickedDate.month,
+                                      _datePickedDate.day,
+                                    );
+                                  });
+                                }
+                              },
+                              text: _model.datePicked != null
+                                  ? dateTimeFormat(
+                                      "d/M/y",
+                                      _model.datePicked,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    )
+                                  : 'Fecha de nacimiento',
+                              icon: Icon(
+                                Icons.calendar_today,
+                                size: 15.0,
+                              ),
+                              options: FFButtonOptions(
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: 40.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Lato',
+                                      color: Colors.white,
+                                      letterSpacing: 0.0,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
@@ -449,69 +559,6 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                         child: Container(
                           width: double.infinity,
                           child: TextFormField(
-                            controller: _model.fechanacimientoTextController,
-                            focusNode: _model.fechanacimientoFocusNode,
-                            autofocus: true,
-                            autofillHints: [AutofillHints.birthday],
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Fecha de nacimiento (dd-Mm-yyyy)',
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Lato',
-                                      letterSpacing: 0.0,
-                                    ),
-                            validator: _model
-                                .fechanacimientoTextControllerValidator
-                                .asValidator(context),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: Container(
-                          width: double.infinity,
-                          child: TextFormField(
                             controller: _model.passwordTextController,
                             focusNode: _model.passwordFocusNode,
                             autofocus: true,
@@ -586,85 +633,6 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: Container(
-                          width: double.infinity,
-                          child: TextFormField(
-                            controller: _model.passwordConfirmTextController,
-                            focusNode: _model.passwordConfirmFocusNode,
-                            autofocus: true,
-                            autofillHints: [AutofillHints.password],
-                            obscureText: !_model.passwordConfirmVisibility,
-                            decoration: InputDecoration(
-                              labelText: 'Confirmar contraseña',
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              suffixIcon: InkWell(
-                                onTap: () => setState(
-                                  () => _model.passwordConfirmVisibility =
-                                      !_model.passwordConfirmVisibility,
-                                ),
-                                focusNode: FocusNode(skipTraversal: true),
-                                child: Icon(
-                                  _model.passwordConfirmVisibility
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                              ),
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Lato',
-                                      letterSpacing: 0.0,
-                                    ),
-                            minLines: 1,
-                            validator: _model
-                                .passwordConfirmTextControllerValidator
-                                .asValidator(context),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -694,12 +662,15 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: FlutterFlowDropDown<String>(
-                          controller: _model.estasEnArgentinaValueController ??=
-                              FormFieldController<String>(null),
-                          options: ['Si', 'No'],
-                          onChanged: (val) => setState(
-                              () => _model.estasEnArgentinaValue = val),
+                        child: FlutterFlowDropDown<bool>(
+                          controller: _model.inArgentinaValueController ??=
+                              FormFieldController<bool>(
+                            _model.inArgentinaValue ??= true,
+                          ),
+                          options: List<bool>.from([true, false]),
+                          optionLabels: ['Si', 'No'],
+                          onChanged: (val) =>
+                              setState(() => _model.inArgentinaValue = val),
                           width: 346.0,
                           height: 56.0,
                           textStyle:
@@ -882,31 +853,42 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                               name: _model.displayNameTextController.text,
                               university:
                                   _model.universidadFieldTextController.text,
-                              birth: _model.fechanacimientoTextController.text,
+                              birth: _model.datePicked?.toString(),
                               country: _model.nacionalidadTextController.text,
-                              inargentina:
-                                  _model.estasEnArgentinaValue != null &&
-                                      _model.estasEnArgentinaValue != '',
                               lastName: _model.apellidoTextController.text,
+                              phone: _model.phoneNumberTextController.text,
+                              inArgentina: _model.inArgentinaValue,
                             );
 
                             if ((_model.authRegisterResponse?.succeeded ??
                                 true)) {
                               context.goNamed('login');
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Unable to ',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
-                                ),
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text(ErrorStruct.maybeFromMap(
+                                            ApiRegisterCall.error(
+                                      (_model.authRegisterResponse?.jsonBody ??
+                                          ''),
+                                    ))!
+                                        .name),
+                                    content: Text(ErrorStruct.maybeFromMap(
+                                            ApiRegisterCall.error(
+                                      (_model.authRegisterResponse?.jsonBody ??
+                                          ''),
+                                    ))!
+                                        .message),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
                             }
 

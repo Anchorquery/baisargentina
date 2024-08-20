@@ -78,7 +78,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
             ),
             style: FlutterFlowTheme.of(context).labelMedium.override(
                   fontFamily: 'Plus Jakarta Sans',
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 14.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,

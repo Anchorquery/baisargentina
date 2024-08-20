@@ -560,29 +560,33 @@ class ApiRegisterCall {
     String? email = '',
     String? name = '',
     String? country = '',
-    bool? inargentina,
     String? university = '',
     String? birth = '',
-    FFUploadedFile? images,
     String? lastName = '',
+    String? phone = '',
+    bool? inArgentina,
   }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "${email}",
+  "email": "${email}",
+  "name": "${name}",
+  "lastName": "${lastName}",
+  "password": "${password}",
+  "birth": "${birth}",
+  "university": "${university}",
+  "inArgentina": "${inArgentina}",
+  "country": "${country}",
+  "phone": "${phone}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'Api Register',
       apiUrl: 'https://server.baisargentina.com/api/auth/local/register',
       callType: ApiCallType.POST,
       headers: {},
-      params: {
-        'username': username,
-        'password': password,
-        'email': email,
-        'name': name,
-        'country': country,
-        'inargentina': university,
-        'university': university,
-        'birth': birth,
-        'lastName': lastName,
-      },
-      bodyType: BodyType.MULTIPART,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -604,6 +608,10 @@ class ApiRegisterCall {
         response,
         r'''$.jwt''',
       ));
+  static dynamic? error(dynamic response) => getJsonField(
+        response,
+        r'''$.error''',
+      );
 }
 
 class ApiCreateEventsCall {

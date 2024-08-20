@@ -1,6 +1,6 @@
 // Export pages
 export '/pages/public/inicio/inicio_widget.dart' show InicioWidget;
-export '/pages/registro/registro_widget.dart' show RegistroWidget;
+export '/pages/public/registro/registro_widget.dart' show RegistroWidget;
 export '/pages/public/login/login_widget.dart' show LoginWidget;
 export '/pages/discoint/descuentos/descuentos_widget.dart'
     show DescuentosWidget;

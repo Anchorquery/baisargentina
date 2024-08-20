@@ -4,7 +4,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/backend/schema/structs/index.dart';
 import 'registro_widget.dart' show RegistroWidget;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +25,7 @@ class RegistroModel extends FlutterFlowModel<RegistroWidget> {
   FocusNode? apellidoFocusNode;
   TextEditingController? apellidoTextController;
   String? Function(BuildContext, String?)? apellidoTextControllerValidator;
+  DateTime? datePicked;
   // State field(s) for nacionalidad widget.
   FocusNode? nacionalidadFocusNode;
   TextEditingController? nacionalidadTextController;
@@ -31,25 +34,14 @@ class RegistroModel extends FlutterFlowModel<RegistroWidget> {
   FocusNode? emailAddressFocusNode;
   TextEditingController? emailAddressTextController;
   String? Function(BuildContext, String?)? emailAddressTextControllerValidator;
-  // State field(s) for fechanacimiento widget.
-  FocusNode? fechanacimientoFocusNode;
-  TextEditingController? fechanacimientoTextController;
-  String? Function(BuildContext, String?)?
-      fechanacimientoTextControllerValidator;
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
   TextEditingController? passwordTextController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
-  // State field(s) for passwordConfirm widget.
-  FocusNode? passwordConfirmFocusNode;
-  TextEditingController? passwordConfirmTextController;
-  late bool passwordConfirmVisibility;
-  String? Function(BuildContext, String?)?
-      passwordConfirmTextControllerValidator;
-  // State field(s) for estasEnArgentina widget.
-  String? estasEnArgentinaValue;
-  FormFieldController<String>? estasEnArgentinaValueController;
+  // State field(s) for inArgentina widget.
+  bool? inArgentinaValue;
+  FormFieldController<bool>? inArgentinaValueController;
   // State field(s) for phone_number widget.
   FocusNode? phoneNumberFocusNode;
   TextEditingController? phoneNumberTextController;
@@ -65,7 +57,6 @@ class RegistroModel extends FlutterFlowModel<RegistroWidget> {
   @override
   void initState(BuildContext context) {
     passwordVisibility = false;
-    passwordConfirmVisibility = false;
   }
 
   @override
@@ -82,14 +73,8 @@ class RegistroModel extends FlutterFlowModel<RegistroWidget> {
     emailAddressFocusNode?.dispose();
     emailAddressTextController?.dispose();
 
-    fechanacimientoFocusNode?.dispose();
-    fechanacimientoTextController?.dispose();
-
     passwordFocusNode?.dispose();
     passwordTextController?.dispose();
-
-    passwordConfirmFocusNode?.dispose();
-    passwordConfirmTextController?.dispose();
 
     phoneNumberFocusNode?.dispose();
     phoneNumberTextController?.dispose();

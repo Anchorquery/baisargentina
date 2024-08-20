@@ -4,6 +4,7 @@ export 'booking_struct.dart';
 export 'booking_verification_struct.dart';
 export 'bookings_struct.dart';
 export 'category_struct.dart';
+export 'error_struct.dart';
 export 'event_struct.dart';
 export 'events_struct.dart';
 export 'organizador_struct.dart';
