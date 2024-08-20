@@ -361,7 +361,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                 },
                                                 carouselController: _model
                                                         .carouselController ??=
-                                                    CarouselController(),
+                                                    CarouselSliderController(),
                                                 options: CarouselOptions(
                                                   initialPage: max(
                                                       0,

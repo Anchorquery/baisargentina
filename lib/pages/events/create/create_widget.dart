@@ -1561,7 +1561,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                     },
                                                     carouselController: _model
                                                             .carouselController ??=
-                                                        CarouselController(),
+                                                        CarouselSliderController(),
                                                     options: CarouselOptions(
                                                       initialPage: max(
                                                           0,
