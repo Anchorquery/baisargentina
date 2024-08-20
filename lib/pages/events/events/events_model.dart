@@ -56,7 +56,7 @@ class EventsModel extends FlutterFlowModel<EventsWidget> {
   // Stores action output result for [Backend Call - API (Api Get Categories)] action in events widget.
   ApiCallResponse? apiResponseCategories;
   // State field(s) for Carousel widget.
-  CarouselController? carouselController;
+  CarouselSliderController? carouselController;
   int carouselCurrentIndex = 1;
 
   // Stores action output result for [Backend Call - API (GetEvents)] action in Text widget.
