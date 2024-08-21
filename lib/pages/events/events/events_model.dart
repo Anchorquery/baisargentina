@@ -14,9 +14,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class EventsModel extends FlutterFlowModel<EventsWidget> {
@@ -56,13 +54,17 @@ class EventsModel extends FlutterFlowModel<EventsWidget> {
   // Stores action output result for [Backend Call - API (Api Get Categories)] action in events widget.
   ApiCallResponse? apiResponseCategories;
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
+  CarouselController? carouselController;
   int carouselCurrentIndex = 1;
 
   // Stores action output result for [Backend Call - API (GetEvents)] action in Text widget.
   ApiCallResponse? apiResponseGetEventsbyCategory;
   // Stores action output result for [Backend Call - API (GetEvents)] action in Text widget.
   ApiCallResponse? apiResponseGetEventsbyCategoryCopy;
+  // Stores action output result for [Backend Call - API (GetEvents)] action in ListView widget.
+  ApiCallResponse? apiResponseEventsCopy;
+  // Stores action output result for [Backend Call - API (Api Get Categories)] action in ListView widget.
+  ApiCallResponse? apiResponseCategoriesCopy;
   // Model for NavBarWithMiddleButton component.
   late NavBarWithMiddleButtonModel navBarWithMiddleButtonModel;
   // Model for loader component.

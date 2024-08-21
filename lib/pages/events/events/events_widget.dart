@@ -13,9 +13,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'events_model.dart';
 export 'events_model.dart';
@@ -361,7 +359,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                 },
                                                 carouselController: _model
                                                         .carouselController ??=
-                                                    CarouselSliderController(),
+                                                    CarouselController(),
                                                 options: CarouselOptions(
                                                   initialPage: max(
                                                       0,
@@ -420,248 +418,306 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                 );
                                               }
 
-                                              return ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                itemCount: data.length,
-                                                itemBuilder:
-                                                    (context, dataIndex) {
-                                                  final dataItem =
-                                                      data[dataIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 25.0,
-                                                                0.0, 0.0),
-                                                    child: Stack(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      children: [
-                                                        InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            context.pushNamed(
-                                                              'event',
-                                                              queryParameters: {
-                                                                'id':
-                                                                    serializeParam(
-                                                                  dataItem.id,
-                                                                  ParamType.int,
+                                              return RefreshIndicator(
+                                                key: Key(
+                                                    'RefreshIndicator_6hut1c67'),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiary,
+                                                onRefresh: () async {
+                                                  await Future.wait([
+                                                    Future(() async {
+                                                      _model.apiResponseEventsCopy =
+                                                          await EventsGroup
+                                                              .getEventsCall
+                                                              .call(
+                                                        token:
+                                                            currentAuthenticationToken,
+                                                      );
+
+                                                      if (!(_model
+                                                              .apiResponseEventsCopy
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              title: Text(
+                                                                  'Ha ocurrido un error'),
+                                                              content: Text(
+                                                                  'Intente luego'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext),
+                                                                  child: Text(
+                                                                      'Ok'),
                                                                 ),
-                                                              }.withoutNulls,
+                                                              ],
                                                             );
                                                           },
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .only(
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      20.0),
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          20.0),
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      20.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      20.0),
-                                                            ),
-                                                            child: Container(
-                                                              width: MediaQuery
-                                                                          .sizeOf(
-                                                                              context)
-                                                                      .width *
-                                                                  0.9,
-                                                              height: MediaQuery
-                                                                          .sizeOf(
-                                                                              context)
-                                                                      .height *
-                                                                  0.176,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFF7F8FA),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          20.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          20.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          20.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          20.0),
-                                                                ),
+                                                        );
+                                                        return;
+                                                      }
+                                                    }),
+                                                    Future(() async {
+                                                      _model.apiResponseCategoriesCopy =
+                                                          await ApiGetCategoriesCall
+                                                              .call();
+
+                                                      if (!(_model
+                                                              .apiResponseCategoriesCopy
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        return;
+                                                      }
+                                                    }),
+                                                  ]);
+                                                },
+                                                child: ListView.builder(
+                                                  padding: EdgeInsets.zero,
+                                                  primary: false,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemCount: data.length,
+                                                  itemBuilder:
+                                                      (context, dataIndex) {
+                                                    final dataItem =
+                                                        data[dataIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  25.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Stack(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        children: [
+                                                          InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              context.pushNamed(
+                                                                'event',
+                                                                queryParameters:
+                                                                    {
+                                                                  'id':
+                                                                      serializeParam(
+                                                                    dataItem.id,
+                                                                    ParamType
+                                                                        .int,
+                                                                  ),
+                                                                }.withoutNulls,
+                                                              );
+                                                            },
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        20.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        20.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        20.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        20.0),
                                                               ),
-                                                              child: InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  context
-                                                                      .pushNamed(
-                                                                    'event',
-                                                                    queryParameters:
-                                                                        {
-                                                                      'id':
-                                                                          serializeParam(
-                                                                        dataItem
-                                                                            .id,
-                                                                        ParamType
-                                                                            .int,
-                                                                      ),
-                                                                    }.withoutNulls,
-                                                                  );
-                                                                },
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          10.0,
-                                                                          10.0,
-                                                                          10.0,
-                                                                          10.0),
-                                                                      child:
-                                                                          ClipRRect(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(8.0),
+                                                              child: Container(
+                                                                width: MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .width *
+                                                                    0.9,
+                                                                height: MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .height *
+                                                                    0.176,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFF7F8FA),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .only(
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            20.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            20.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            20.0),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            20.0),
+                                                                  ),
+                                                                ),
+                                                                child: InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  onTap:
+                                                                      () async {
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'event',
+                                                                      queryParameters:
+                                                                          {
+                                                                        'id':
+                                                                            serializeParam(
+                                                                          dataItem
+                                                                              .id,
+                                                                          ParamType
+                                                                              .int,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                    );
+                                                                  },
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            10.0,
+                                                                            10.0,
+                                                                            10.0,
+                                                                            10.0),
                                                                         child:
-                                                                            OctoImage(
-                                                                          placeholderBuilder: (_) =>
-                                                                              SizedBox.expand(
-                                                                            child:
-                                                                                Image(
-                                                                              image: BlurHashImage(dataItem.portada.name),
-                                                                              fit: BoxFit.cover,
-                                                                            ),
-                                                                          ),
-                                                                          image:
-                                                                              CachedNetworkImageProvider(
-                                                                            getJsonField(
+                                                                            ClipRRect(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                          child:
+                                                                              CachedNetworkImage(
+                                                                            fadeInDuration:
+                                                                                Duration(milliseconds: 500),
+                                                                            fadeOutDuration:
+                                                                                Duration(milliseconds: 500),
+                                                                            imageUrl:
+                                                                                getJsonField(
                                                                               dataItem.portada.toMap(),
                                                                               r'''$.url''',
                                                                             ).toString(),
+                                                                            width:
+                                                                                116.0,
+                                                                            height:
+                                                                                200.0,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                            alignment:
+                                                                                Alignment(1.0, 1.0),
                                                                           ),
-                                                                          width:
-                                                                              116.0,
-                                                                          height:
-                                                                              200.0,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                          alignment: Alignment(
-                                                                              1.0,
-                                                                              1.0),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            10.0,
-                                                                            10.0,
-                                                                            0.0),
+                                                                      Expanded(
                                                                         child:
-                                                                            Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              dataItem.name,
-                                                                              style: FlutterFlowTheme.of(context).titleLarge.override(
-                                                                                    fontFamily: 'Lato',
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.bold,
-                                                                                  ),
-                                                                            ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
-                                                                              child: Text(
-                                                                                dataItem.description,
-                                                                                maxLines: 4,
-                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              10.0,
+                                                                              10.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Text(
+                                                                                dataItem.name,
+                                                                                style: FlutterFlowTheme.of(context).titleLarge.override(
                                                                                       fontFamily: 'Lato',
-                                                                                      fontSize: 14.0,
+                                                                                      fontSize: 16.0,
                                                                                       letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.bold,
                                                                                     ),
                                                                               ),
-                                                                            ),
-                                                                            RichText(
-                                                                              textScaler: MediaQuery.of(context).textScaler,
-                                                                              text: TextSpan(
-                                                                                children: [
-                                                                                  TextSpan(
-                                                                                    text: dataItem.type == TypeEvent.free
-                                                                                        ? 'Gratis'
-                                                                                        : valueOrDefault<String>(
-                                                                                            formatNumber(
-                                                                                              dataItem.precio,
-                                                                                              formatType: FormatType.decimal,
-                                                                                              decimalType: DecimalType.automatic,
-                                                                                              currency: '\$',
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                                                                                child: Text(
+                                                                                  dataItem.description,
+                                                                                  maxLines: 4,
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Lato',
+                                                                                        fontSize: 14.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                      ),
+                                                                                ),
+                                                                              ),
+                                                                              RichText(
+                                                                                textScaler: MediaQuery.of(context).textScaler,
+                                                                                text: TextSpan(
+                                                                                  children: [
+                                                                                    TextSpan(
+                                                                                      text: dataItem.type == TypeEvent.free
+                                                                                          ? 'Gratis'
+                                                                                          : valueOrDefault<String>(
+                                                                                              formatNumber(
+                                                                                                dataItem.precio,
+                                                                                                formatType: FormatType.decimal,
+                                                                                                decimalType: DecimalType.automatic,
+                                                                                                currency: '\$',
+                                                                                              ),
+                                                                                              '0',
                                                                                             ),
-                                                                                            '0',
-                                                                                          ),
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).tertiary,
-                                                                                      fontWeight: FontWeight.w900,
-                                                                                      fontSize: 24.0,
-                                                                                    ),
-                                                                                  )
-                                                                                ],
-                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                      fontFamily: 'Lato',
-                                                                                      fontSize: 10.0,
-                                                                                      letterSpacing: 0.0,
-                                                                                    ),
+                                                                                      style: TextStyle(
+                                                                                        color: FlutterFlowTheme.of(context).tertiary,
+                                                                                        fontWeight: FontWeight.w900,
+                                                                                        fontSize: 24.0,
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Lato',
+                                                                                        fontSize: 10.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                      ),
+                                                                                ),
                                                                               ),
-                                                                            ),
-                                                                          ],
+                                                                            ],
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  ],
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
                                               );
                                             },
                                           ),

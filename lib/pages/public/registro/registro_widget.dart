@@ -153,6 +153,11 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                   fontWeight: FontWeight.w900,
                                   decoration: TextDecoration.underline,
                                 ),
+                                mouseCursor: SystemMouseCursors.click,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    context.pushNamed('terminosycondiciones');
+                                  },
                               ),
                               TextSpan(
                                 text:
@@ -165,6 +170,11 @@ class _RegistroWidgetState extends State<RegistroWidget> {
                                   fontWeight: FontWeight.w900,
                                   decoration: TextDecoration.underline,
                                 ),
+                                mouseCursor: SystemMouseCursors.click,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    context.pushNamed('politicasdeReembolso');
+                                  },
                               )
                             ],
                             style: FlutterFlowTheme.of(context)

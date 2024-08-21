@@ -521,7 +521,7 @@ class _BuenosaireshousignWidgetState extends State<BuenosaireshousignWidget> {
                     ),
                   ],
                   carouselController: _model.carouselhousignController ??=
-                      CarouselSliderController(),
+                      CarouselController(),
                   options: CarouselOptions(
                     initialPage: 1,
                     viewportFraction: 0.5,

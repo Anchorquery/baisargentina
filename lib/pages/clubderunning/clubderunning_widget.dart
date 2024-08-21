@@ -553,7 +553,7 @@ class _ClubderunningWidgetState extends State<ClubderunningWidget> {
                         ),
                       ],
                       carouselController: _model.carouselhousignController ??=
-                          CarouselSliderController(),
+                          CarouselController(),
                       options: CarouselOptions(
                         initialPage: 1,
                         viewportFraction: 0.5,

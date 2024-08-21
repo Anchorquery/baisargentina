@@ -209,6 +209,26 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
           ),
         ],
       ),
+      'containerOnPageLoadAnimation6': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 100.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'buttonOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -230,12 +250,6 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
         ],
       ),
     });
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
   }
 
   @override
@@ -433,10 +447,11 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Text(
-                                    valueOrDefault<String>(
-                                      currentUserData?.name,
-                                      'Nombre',
-                                    ),
+                                    '${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                      (_model.apiResponseMe?.jsonBody ?? ''),
+                                    ))?.name} ${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                      (_model.apiResponseMe?.jsonBody ?? ''),
+                                    ))?.lastName}',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .override(
@@ -491,7 +506,6 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                     width: double.infinity,
                                     height: 60.0,
                                     decoration: BoxDecoration(
-                                      color: Color(0x2C00215B),
                                       borderRadius: BorderRadius.circular(30.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
@@ -678,7 +692,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      50.0, 0.0, 0.0, 0.0),
+                                                      50.0, 0.0, 50.0, 0.0),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(24.0),
@@ -692,6 +706,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                             24.0),
                                                     shape: BoxShape.rectangle,
                                                   ),
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: Align(
                                                     alignment:
                                                         AlignmentDirectional(
@@ -908,7 +925,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ).animateOnPageLoad(animationsMap[
+                                      'containerOnPageLoadAnimation6']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(

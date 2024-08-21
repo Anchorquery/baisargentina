@@ -205,7 +205,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).secondary,
+                                color: Colors.white,
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.bold,
                               ),

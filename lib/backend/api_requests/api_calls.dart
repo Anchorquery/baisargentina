@@ -456,7 +456,7 @@ class MeCall {
     );
   }
 
-  dynamic user(dynamic response) => getJsonField(
+  dynamic? user(dynamic response) => getJsonField(
         response,
         r'''$''',
       );
@@ -672,6 +672,11 @@ class ApiCreateEventsCall {
       alwaysAllowBody: false,
     );
   }
+
+  static dynamic? error(dynamic response) => getJsonField(
+        response,
+        r'''$.error''',
+      );
 }
 
 class ApiGetCategoriesCall {

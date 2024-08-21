@@ -15,7 +15,7 @@ class BeerpongModel extends FlutterFlowModel<BeerpongWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Carouselhousign widget.
-  CarouselSliderController? carouselhousignController;
+  CarouselController? carouselhousignController;
   int carouselhousignCurrentIndex = 1;
 
   @override
