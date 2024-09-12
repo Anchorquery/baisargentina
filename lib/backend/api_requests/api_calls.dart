@@ -553,6 +553,200 @@ class SingleCall {
 
 /// End Upload Media Group Code
 
+/// Start Services Group Code
+
+class ServicesGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://server.baisargentina.com/api';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static FindCall findCall = FindCall();
+  static FindCategoryCall findCategoryCall = FindCategoryCall();
+  static FindOneCtegoryCall findOneCtegoryCall = FindOneCtegoryCall();
+  static FindOneServiceCall findOneServiceCall = FindOneServiceCall();
+  static CreatedCall createdCall = CreatedCall();
+}
+
+class FindCall {
+  Future<ApiCallResponse> call({
+    int? categoryId,
+    String? token = '',
+  }) async {
+    final baseUrl = ServicesGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Find',
+      apiUrl: '${baseUrl}/services/find-all',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'categoryId': categoryId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  dynamic? pagination(dynamic response) => getJsonField(
+        response,
+        r'''$.meta.pagination''',
+      );
+}
+
+class FindCategoryCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = ServicesGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Find category',
+      apiUrl: '${baseUrl}/services/find-category',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  dynamic? pagination(dynamic response) => getJsonField(
+        response,
+        r'''$.meta.pagination''',
+      );
+}
+
+class FindOneCtegoryCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = ServicesGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'findOneCtegory',
+      apiUrl: '${baseUrl}/services/find-category-one/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+class FindOneServiceCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = ServicesGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'findOneService',
+      apiUrl: '${baseUrl}/services/find-one/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CreatedCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    String? caption = '',
+    String? contactUrl = '',
+    int? category,
+    List<FFUploadedFile>? imagesList,
+    String? token = '',
+  }) async {
+    final baseUrl = ServicesGroup.getBaseUrl(
+      token: token,
+    );
+    final images = imagesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Created',
+      apiUrl: '${baseUrl}/services/created',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'name': name,
+        'description': description,
+        'caption': caption,
+        'contactUrl': contactUrl,
+        'category': category,
+        'images': images,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Services Group Code
+
 class ApiRegisterCall {
   static Future<ApiCallResponse> call({
     String? username = '',

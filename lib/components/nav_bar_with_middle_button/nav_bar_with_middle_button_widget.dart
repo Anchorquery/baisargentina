@@ -103,20 +103,36 @@ class _NavBarWithMiddleButtonWidgetState
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 50.0,
-                  icon: Icon(
-                    FFIcons.keventos,
-                    color: Color(0xFF9299A1),
-                    size: 35.0,
+                if (currentUserData?.role == 1)
+                  FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 1.0,
+                    buttonSize: 50.0,
+                    icon: Icon(
+                      Icons.home,
+                      color: Color(0xFF9299A1),
+                      size: 35.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed('HomeAdmin');
+                    },
                   ),
-                  onPressed: () async {
-                    context.pushNamed('events');
-                  },
-                ),
+                if (currentUserData?.role != 1)
+                  FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 1.0,
+                    buttonSize: 50.0,
+                    icon: Icon(
+                      FFIcons.keventos,
+                      color: Color(0xFF9299A1),
+                      size: 35.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed('events');
+                    },
+                  ),
                 FlutterFlowIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
@@ -128,7 +144,7 @@ class _NavBarWithMiddleButtonWidgetState
                     size: 35.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('descuentos');
+                    context.pushNamed('Descuentos');
                   },
                 ),
                 if ((currentUserData?.role == 1) ||
@@ -205,11 +221,11 @@ class _NavBarWithMiddleButtonWidgetState
                                 );
                               }
                             } else {
-                              if (_shouldSetState) setState(() {});
+                              if (_shouldSetState) safeSetState(() {});
                               return;
                             }
 
-                            if (_shouldSetState) setState(() {});
+                            if (_shouldSetState) safeSetState(() {});
                           },
                         ),
                       ),

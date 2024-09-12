@@ -108,12 +108,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'descuentos',
-          path: '/descuentos',
-          requireAuth: true,
-          builder: (context, params) => DescuentosWidget(),
-        ),
-        FFRoute(
           name: 'housign',
           path: '/housign',
           requireAuth: true,
@@ -126,12 +120,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => UserProfileWidget(),
         ),
         FFRoute(
-          name: 'beerpong',
-          path: '/beerpong',
-          requireAuth: true,
-          builder: (context, params) => BeerpongWidget(),
-        ),
-        FFRoute(
           name: 'reservaexitosa',
           path: '/reservaexitosa',
           requireAuth: true,
@@ -142,24 +130,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/tranvia',
           requireAuth: true,
           builder: (context, params) => TranviaWidget(),
-        ),
-        FFRoute(
-          name: 'clubderunning',
-          path: '/clubderunning',
-          requireAuth: true,
-          builder: (context, params) => ClubderunningWidget(),
-        ),
-        FFRoute(
-          name: 'tallerdeequilibrio',
-          path: '/tallerdeequilibrio',
-          requireAuth: true,
-          builder: (context, params) => TallerdeequilibrioWidget(),
-        ),
-        FFRoute(
-          name: 'tallerdecv',
-          path: '/tallerdecv',
-          requireAuth: true,
-          builder: (context, params) => TallerdecvWidget(),
         ),
         FFRoute(
           name: 'buenosaireshousign',
@@ -234,12 +204,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'eventsCopy',
-          path: '/eventsCopy',
-          requireAuth: true,
-          builder: (context, params) => EventsCopyWidget(),
-        ),
-        FFRoute(
           name: 'edit',
           path: '/edit',
           requireAuth: true,
@@ -282,6 +246,166 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'FAQ',
           path: '/faq',
           builder: (context, params) => FaqWidget(),
+        ),
+        FFRoute(
+          name: 'emailRecovery',
+          path: '/emailRecovery',
+          requireAuth: true,
+          builder: (context, params) => EmailRecoveryWidget(),
+        ),
+        FFRoute(
+          name: 'codigoEnviado',
+          path: '/codigoEnviado',
+          requireAuth: true,
+          builder: (context, params) => CodigoEnviadoWidget(),
+        ),
+        FFRoute(
+          name: 'codigoDeValidacion',
+          path: '/codigoDeValidacion',
+          requireAuth: true,
+          builder: (context, params) => CodigoDeValidacionWidget(),
+        ),
+        FFRoute(
+          name: 'NewPassword',
+          path: '/newPassword',
+          requireAuth: true,
+          builder: (context, params) => NewPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'planes',
+          path: '/planes',
+          requireAuth: true,
+          builder: (context, params) => PlanesWidget(),
+        ),
+        FFRoute(
+          name: 'detallesDePlanBasic',
+          path: '/detallesDePlanBasic',
+          requireAuth: true,
+          builder: (context, params) => DetallesDePlanBasicWidget(),
+        ),
+        FFRoute(
+          name: 'detallesDePlanVIP',
+          path: '/detallesDePlanVIP',
+          requireAuth: true,
+          builder: (context, params) => DetallesDePlanVIPWidget(),
+        ),
+        FFRoute(
+          name: 'servicios',
+          path: '/servicios',
+          requireAuth: true,
+          builder: (context, params) => ServiciosWidget(),
+        ),
+        FFRoute(
+          name: 'HomeComercio',
+          path: '/homeComercio',
+          requireAuth: true,
+          builder: (context, params) => HomeComercioWidget(),
+        ),
+        FFRoute(
+          name: 'StatsComercio',
+          path: '/statsComercio',
+          requireAuth: true,
+          builder: (context, params) => StatsComercioWidget(),
+        ),
+        FFRoute(
+          name: 'StatProfileViews',
+          path: '/statProfileViews',
+          requireAuth: true,
+          builder: (context, params) => StatProfileViewsWidget(),
+        ),
+        FFRoute(
+          name: 'StatLocalViews',
+          path: '/statLocalViews',
+          requireAuth: true,
+          builder: (context, params) => StatLocalViewsWidget(),
+        ),
+        FFRoute(
+          name: 'StatEventosComercio',
+          path: '/statEventosComercio',
+          requireAuth: true,
+          builder: (context, params) => StatEventosComercioWidget(),
+        ),
+        FFRoute(
+          name: 'HomeAdmin',
+          path: '/homeAdmin',
+          requireAuth: true,
+          builder: (context, params) => HomeAdminWidget(),
+        ),
+        FFRoute(
+          name: 'EstablecerContrasena',
+          path: '/establecerContrasena',
+          requireAuth: true,
+          builder: (context, params) => EstablecerContrasenaWidget(),
+        ),
+        FFRoute(
+          name: 'ReservasAdmin',
+          path: '/reservasAdmin',
+          requireAuth: true,
+          builder: (context, params) => ReservasAdminWidget(),
+        ),
+        FFRoute(
+          name: 'serviciosCreados',
+          path: '/serviciosCreados',
+          requireAuth: true,
+          builder: (context, params) => ServiciosCreadosWidget(),
+        ),
+        FFRoute(
+          name: 'servicio',
+          path: '/servicio',
+          requireAuth: true,
+          builder: (context, params) => ServicioWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CrearServicio',
+          path: '/crearServicio',
+          requireAuth: true,
+          builder: (context, params) => CrearServicioWidget(),
+        ),
+        FFRoute(
+          name: 'CrearCategoria',
+          path: '/crearCategoria',
+          requireAuth: true,
+          builder: (context, params) => CrearCategoriaWidget(),
+        ),
+        FFRoute(
+          name: 'CrearDecuento',
+          path: '/crearDecuento',
+          requireAuth: true,
+          builder: (context, params) => CrearDecuentoWidget(),
+        ),
+        FFRoute(
+          name: 'CrearCategoriaDescuento',
+          path: '/crearCategoriaDescuento',
+          requireAuth: true,
+          builder: (context, params) => CrearCategoriaDescuentoWidget(),
+        ),
+        FFRoute(
+          name: 'transacciones',
+          path: '/transacciones',
+          requireAuth: true,
+          builder: (context, params) => TransaccionesWidget(),
+        ),
+        FFRoute(
+          name: 'Descuentos',
+          path: '/descuentos',
+          requireAuth: true,
+          builder: (context, params) => DescuentosWidget(),
+        ),
+        FFRoute(
+          name: 'servicesByCategory',
+          path: '/servicesByCategory',
+          requireAuth: true,
+          builder: (context, params) => ServicesByCategoryWidget(
+            idCategory: params.getParam(
+              'idCategory',
+              ParamType.int,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
