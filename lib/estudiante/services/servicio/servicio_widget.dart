@@ -4,6 +4,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -78,10 +79,19 @@ class _ServicioWidgetState extends State<ServicioWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.chevron_left_outlined,
-                      color: Color(0xFFFF8F14),
-                      size: 24.0,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.safePop();
+                      },
+                      child: Icon(
+                        Icons.chevron_left_outlined,
+                        color: Color(0xFFFF8F14),
+                        size: 24.0,
+                      ),
                     ),
                     Align(
                       alignment: AlignmentDirectional(0.0, -1.0),
@@ -233,27 +243,141 @@ class _ServicioWidgetState extends State<ServicioWidget> {
                             color: FlutterFlowTheme.of(context).error,
                             shape: BoxShape.circle,
                           ),
-                          child: Icon(
-                            Icons.cancel_outlined,
-                            color: Colors.white,
-                            size: 30.0,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              var _shouldSetState = false;
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Eliminar servicio'),
+                                            content: Text(
+                                                'Confirme que desea eliminar el servicio'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: Text('Confirmar'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                              if (confirmDialogResponse) {
+                                _model.apiResulthug =
+                                    await ServicesGroup.deleteCall.call(
+                                  id: widget!.id,
+                                  token: currentAuthenticationToken,
+                                );
+
+                                _shouldSetState = true;
+                                if ((_model.apiResulthug?.succeeded ?? true)) {
+                                  unawaited(
+                                    () async {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text(
+                                                'Servicio eliminado exitosamente'),
+                                            content: Text(
+                                                'Será  redireccionado al listado de servicios'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }(),
+                                  );
+
+                                  context.goNamed('servicios');
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Ha ocurrido un error'),
+                                        content: Text(getJsonField(
+                                          (_model.apiResulthug?.jsonBody ?? ''),
+                                          r'''$.error''',
+                                        ).toString()),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+
+                                if (_shouldSetState) safeSetState(() {});
+                                return;
+                              } else {
+                                Navigator.pop(context);
+                                if (_shouldSetState) safeSetState(() {});
+                                return;
+                              }
+
+                              if (_shouldSetState) safeSetState(() {});
+                            },
+                            child: Icon(
+                              Icons.cancel_outlined,
+                              color: Colors.white,
+                              size: 30.0,
+                            ),
                           ),
                         ),
                         Align(
                           alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Container(
-                            width: 50.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.edit,
-                                color: Colors.white,
-                                size: 20.0,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                'editarServicio',
+                                queryParameters: {
+                                  'id': serializeParam(
+                                    widget!.id,
+                                    ParamType.int,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.edit,
+                                  color: Colors.white,
+                                  size: 20.0,
+                                ),
                               ),
                             ),
                           ),

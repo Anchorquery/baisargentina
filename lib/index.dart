@@ -42,14 +42,11 @@ export '/password_recovery/new_password/new_password_widget.dart'
 export '/estudiante/planes/planes/planes_widget.dart' show PlanesWidget;
 export '/estudiante/planes/detalles_de_plan_basic/detalles_de_plan_basic_widget.dart'
     show DetallesDePlanBasicWidget;
-export '/estudiante/planes/detalles_de_plan_v_i_p/detalles_de_plan_v_i_p_widget.dart'
-    show DetallesDePlanVIPWidget;
 export '/estudiante/services/servicios/servicios_widget.dart'
     show ServiciosWidget;
 export '/comercio/home_comercio/home_comercio_widget.dart'
     show HomeComercioWidget;
-export '/comercio/stats_comercio/stats_comercio_widget.dart'
-    show StatsComercioWidget;
+export '/comercio/home_c/home_c_widget.dart' show HomeCWidget;
 export '/comercio/stat_profile_views/stat_profile_views_widget.dart'
     show StatProfileViewsWidget;
 export '/comercio/stat_local_views/stat_local_views_widget.dart'
@@ -78,3 +75,19 @@ export '/estudiante/discoint/descuentos/descuentos_widget.dart'
     show DescuentosWidget;
 export '/estudiante/services/services_by_category/services_by_category_widget.dart'
     show ServicesByCategoryWidget;
+export '/admin/servicios/editar_servicio/editar_servicio_widget.dart'
+    show EditarServicioWidget;
+export '/admin/servicios/editar_categoria_servicio/editar_categoria_servicio_widget.dart'
+    show EditarCategoriaServicioWidget;
+export '/admin/descuentos/editar_decuento/editar_decuento_widget.dart'
+    show EditarDecuentoWidget;
+export '/admin/descuentos/editar_categoria_descuento/editar_categoria_descuento_widget.dart'
+    show EditarCategoriaDescuentoWidget;
+export '/comercio/comercio_profile/comercio_profile_widget.dart'
+    show ComercioProfileWidget;
+export '/estudiante/planes/detalles_plan/detalles_plan_widget.dart'
+    show DetallesPlanWidget;
+export '/estudiante/paymen_succces/paymen_succces_widget.dart'
+    show PaymenSucccesWidget;
+export '/estudiante/planes/detalle_mi_plan/detalle_mi_plan_widget.dart'
+    show DetalleMiPlanWidget;

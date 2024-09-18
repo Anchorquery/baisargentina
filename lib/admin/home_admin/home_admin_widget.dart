@@ -1,8 +1,10 @@
 import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_admin_model.dart';
@@ -24,6 +26,37 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomeAdminModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (currentUserData?.role == 1) {
+        _model.apiResulAdminHome =
+            await RutasAdminGroup.getUserStudentCall.call(
+          token: currentAuthenticationToken,
+        );
+
+        if ((_model.apiResulAdminHome?.succeeded ?? true)) {
+          _model.cantidadEstudiantes = getJsonField(
+            (_model.apiResulAdminHome?.jsonBody ?? ''),
+            r'''$.data.count''',
+          );
+          _model.ultimoRegistro = getJsonField(
+            (_model.apiResulAdminHome?.jsonBody ?? ''),
+            r'''$.data.lastRegister''',
+          ).toString().toString();
+          safeSetState(() {});
+        }
+        return;
+      } else if (currentUserData?.role == 4) {
+        context.pushNamed('HomeComercio');
+
+        return;
+      } else {
+        context.pushNamed('events');
+
+        return;
+      }
+    });
   }
 
   @override
@@ -72,7 +105,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                   ),
                             ),
                             Text(
-                              'Nombre Admin',
+                              '${currentUserData?.name} ${currentUserData?.lastName}',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -119,7 +152,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                       child: Text(
-                        '1080',
+                        _model.cantidadEstudiantes.toString(),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
                               color: Color(0xFFFF8F14),
@@ -145,7 +178,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Text(
-                      'Ultima registro 12/07/2024',
+                      'Ultima registro ${_model.ultimoRegistro}',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lato',
                             color: FlutterFlowTheme.of(context).primary,
@@ -216,8 +249,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('events');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -507,8 +540,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('servicios');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -1002,8 +1035,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 15.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        context.pushNamed('Descuentos');
                                       },
                                       text: 'Ver más',
                                       options: FFButtonOptions(

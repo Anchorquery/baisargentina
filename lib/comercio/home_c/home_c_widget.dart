@@ -4,25 +4,25 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'stats_comercio_model.dart';
-export 'stats_comercio_model.dart';
+import 'home_c_model.dart';
+export 'home_c_model.dart';
 
-class StatsComercioWidget extends StatefulWidget {
-  const StatsComercioWidget({super.key});
+class HomeCWidget extends StatefulWidget {
+  const HomeCWidget({super.key});
 
   @override
-  State<StatsComercioWidget> createState() => _StatsComercioWidgetState();
+  State<HomeCWidget> createState() => _HomeCWidgetState();
 }
 
-class _StatsComercioWidgetState extends State<StatsComercioWidget> {
-  late StatsComercioModel _model;
+class _HomeCWidgetState extends State<HomeCWidget> {
+  late HomeCModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => StatsComercioModel());
+    _model = createModel(context, () => HomeCModel());
   }
 
   @override
@@ -108,7 +108,7 @@ class _StatsComercioWidgetState extends State<StatsComercioWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '439',
+                                  '0',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -120,8 +120,8 @@ class _StatsComercioWidgetState extends State<StatsComercioWidget> {
                                       ),
                                 ),
                                 FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed('StatProfileViews');
                                   },
                                   text: 'Ver más',
                                   options: FFButtonOptions(
@@ -189,7 +189,7 @@ class _StatsComercioWidgetState extends State<StatsComercioWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '239',
+                                  '0',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -201,8 +201,8 @@ class _StatsComercioWidgetState extends State<StatsComercioWidget> {
                                       ),
                                 ),
                                 FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed('StatLocalViews');
                                   },
                                   text: 'Ver más',
                                   options: FFButtonOptions(
@@ -270,7 +270,7 @@ class _StatsComercioWidgetState extends State<StatsComercioWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '25',
+                                  '1',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -282,8 +282,8 @@ class _StatsComercioWidgetState extends State<StatsComercioWidget> {
                                       ),
                                 ),
                                 FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    context.pushNamed('StatEventosComercio');
                                   },
                                   text: 'Ver más',
                                   options: FFButtonOptions(

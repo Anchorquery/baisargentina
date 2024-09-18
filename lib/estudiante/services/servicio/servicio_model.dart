@@ -4,6 +4,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import 'servicio_widget.dart' show ServicioWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,9 @@ class ServicioModel extends FlutterFlowModel<ServicioWidget> {
   // State field(s) for Carousel widget.
   CarouselController? carouselController;
   int carouselCurrentIndex = 1;
+
+  // Stores action output result for [Backend Call - API (delete)] action in Icon widget.
+  ApiCallResponse? apiResulthug;
 
   @override
   void initState(BuildContext context) {}

@@ -511,6 +511,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            var _shouldSetState = false;
                             if (_model.formKey.currentState == null ||
                                 !_model.formKey.currentState!.validate()) {
                               return;
@@ -521,6 +522,7 @@ class _LoginWidgetState extends State<LoginWidget>
                               password: _model.passwordTextController.text,
                             );
 
+                            _shouldSetState = true;
                             if ((_model.loginResponse?.succeeded ?? true)) {
                               GoRouter.of(context).prepareAuthEvent();
                               await authManager.signIn(
@@ -578,8 +580,19 @@ class _LoginWidgetState extends State<LoginWidget>
                                   PublicGroup.loginCall.user(
                                 (_model.loginResponse?.jsonBody ?? ''),
                               ))!;
+                              if (currentUserData?.role == 1) {
+                                context.pushNamedAuth(
+                                    'HomeAdmin', context.mounted);
+                              } else if (currentUserData?.role == 4) {
+                                context.pushNamedAuth(
+                                    'HomeComercio', context.mounted);
+                              } else {
+                                context.pushNamedAuth(
+                                    'events', context.mounted);
+                              }
 
-                              context.pushNamedAuth('events', context.mounted);
+                              if (_shouldSetState) safeSetState(() {});
+                              return;
                             } else {
                               await showDialog(
                                 context: context,
@@ -602,9 +615,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                 _model.passwordTextController?.clear();
                                 _model.emailTextController?.clear();
                               });
+                              if (_shouldSetState) safeSetState(() {});
+                              return;
                             }
 
-                            safeSetState(() {});
+                            if (_shouldSetState) safeSetState(() {});
                           },
                           text: 'Iniciar',
                           options: FFButtonOptions(

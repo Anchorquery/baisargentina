@@ -99,7 +99,7 @@ class _StatEventosComercioWidgetState extends State<StatEventosComercioWidget>
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              '435',
+                              '1',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

@@ -25,10 +25,17 @@ class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
 
   int? idUser;
 
+  PlanStruct? myPlan;
+  void updateMyPlanStruct(Function(PlanStruct) updateFn) {
+    updateFn(myPlan ??= PlanStruct());
+  }
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (me)] action in userProfile widget.
   ApiCallResponse? apiResponseMe;
+  // Stores action output result for [Backend Call - API (mi plan)] action in userProfile widget.
+  ApiCallResponse? apiMyPlan;
   // Model for loader component.
   late LoaderModel loaderModel;
   bool isDataUploading = false;

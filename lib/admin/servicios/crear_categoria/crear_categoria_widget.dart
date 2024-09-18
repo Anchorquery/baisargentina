@@ -1,3 +1,5 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -35,8 +37,11 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
     super.initState();
     _model = createModel(context, () => CrearCategoriaModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode1 ??= FocusNode();
+
+    _model.textController2 ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
 
     animationsMap.addAll({
       'rowOnPageLoadAnimation': AnimationInfo(
@@ -145,8 +150,8 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                                 child: Container(
                                   width: MediaQuery.sizeOf(context).width * 1.0,
                                   child: TextFormField(
-                                    controller: _model.textController,
-                                    focusNode: _model.textFieldFocusNode,
+                                    controller: _model.textController1,
+                                    focusNode: _model.textFieldFocusNode1,
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -211,7 +216,97 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                                         MaxLengthEnforcement.enforced,
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    validator: _model.textControllerValidator
+                                    validator: _model.textController1Validator
+                                        .asValidator(context),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'Descripción',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lato',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      fontSize: 18.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 0.0),
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  child: TextFormField(
+                                    controller: _model.textController2,
+                                    focusNode: _model.textFieldFocusNode2,
+                                    autofocus: false,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      hintText: 'Descripción de la categoria',
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                    maxLength: 50,
+                                    maxLengthEnforcement:
+                                        MaxLengthEnforcement.enforced,
+                                    cursorColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    validator: _model.textController2Validator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -397,8 +492,78 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 30.0, 0.0, 0.0),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      _model.apiResultCreateCategory =
+                                          await ServicesGroup.crearCategoriaCall
+                                              .call(
+                                        name: _model.textController1.text,
+                                        description:
+                                            _model.textController2.text,
+                                        image: _model.uploadedLocalFile,
+                                        token: currentAuthenticationToken,
+                                      );
+
+                                      if ((_model.apiResultCreateCategory
+                                              ?.succeeded ??
+                                          true)) {
+                                        safeSetState(() {
+                                          _model.isDataUploading = false;
+                                          _model.uploadedLocalFile =
+                                              FFUploadedFile(
+                                                  bytes:
+                                                      Uint8List.fromList([]));
+                                        });
+
+                                        safeSetState(() {
+                                          _model.textController1?.clear();
+                                          _model.textController2?.clear();
+                                        });
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'Categoría creada con exito'),
+                                              content: Text(
+                                                  'La categoría fue creada exitosamente'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title:
+                                                  Text('Ha ocurrido un error'),
+                                              content: Text(getJsonField(
+                                                (_model.apiResultCreateCategory
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.error''',
+                                              ).toString()),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+
+                                      safeSetState(() {});
                                     },
                                     text: 'Publicar',
                                     options: FFButtonOptions(

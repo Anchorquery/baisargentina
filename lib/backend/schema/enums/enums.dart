@@ -17,6 +17,19 @@ enum BookingState {
   rejected,
 }
 
+enum TypeUsing {
+  menores_18,
+  mayores_18,
+  todos,
+}
+
+enum DurationPlans {
+  one_month,
+  three_months,
+  six_months,
+  twelve_months,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -34,6 +47,10 @@ T? deserializeEnum<T>(String? value) {
       return RestriccionEvent.values.deserialize(value) as T?;
     case (BookingState):
       return BookingState.values.deserialize(value) as T?;
+    case (TypeUsing):
+      return TypeUsing.values.deserialize(value) as T?;
+    case (DurationPlans):
+      return DurationPlans.values.deserialize(value) as T?;
     default:
       return null;
   }

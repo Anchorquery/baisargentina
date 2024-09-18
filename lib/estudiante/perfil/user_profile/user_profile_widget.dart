@@ -41,31 +41,53 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResponseMe = await UserGroup.meCall.call(
-        token: currentAuthenticationToken,
-      );
+      await Future.wait([
+        Future(() async {
+          _model.apiResponseMe = await UserGroup.meCall.call(
+            token: currentAuthenticationToken,
+          );
 
-      if ((_model.apiResponseMe?.succeeded ?? true)) {
-        authManager.updateAuthUserData(
-          authenticationToken: currentAuthenticationToken,
-          authUid: getJsonField(
-            (_model.apiResponseMe?.jsonBody ?? ''),
-            r'''$.id''',
-          ).toString().toString(),
-          userData: UserStruct(
-            avatar: getJsonField(
+          if ((_model.apiResponseMe?.succeeded ?? true)) {
+            authManager.updateAuthUserData(
+              authenticationToken: currentAuthenticationToken,
+              authUid: getJsonField(
+                (_model.apiResponseMe?.jsonBody ?? ''),
+                r'''$.id''',
+              ).toString().toString(),
+              userData: UserStruct(
+                avatar: getJsonField(
+                  (_model.apiResponseMe?.jsonBody ?? ''),
+                  r'''$.avatar''',
+                ).toString(),
+              ),
+            );
+            _model.idUser = getJsonField(
               (_model.apiResponseMe?.jsonBody ?? ''),
-              r'''$.avatar''',
-            ).toString(),
-          ),
-        );
-        _model.loading = !_model.loading;
-        _model.idUser = getJsonField(
-          (_model.apiResponseMe?.jsonBody ?? ''),
-          r'''$.id''',
-        );
-        safeSetState(() {});
-      }
+              r'''$.id''',
+            );
+            safeSetState(() {});
+          } else {
+            return;
+          }
+        }),
+        Future(() async {
+          _model.apiMyPlan = await PlanGroup.miPlanCall.call(
+            token: currentAuthenticationToken,
+          );
+
+          if ((_model.apiMyPlan?.succeeded ?? true)) {
+            _model.myPlan = PlanStruct.maybeFromMap(getJsonField(
+              (_model.apiMyPlan?.jsonBody ?? ''),
+              r'''$.data''',
+            ));
+            safeSetState(() {});
+          } else {
+            return;
+          }
+        }),
+      ]);
+      _model.loading = !_model.loading;
+      safeSetState(() {});
     });
 
     animationsMap.addAll({
@@ -534,7 +556,12 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                               ),
                                         ),
                                         TextSpan(
-                                          text: ' Estandar',
+                                          text: valueOrDefault<String>(
+                                            _model.myPlan != null
+                                                ? _model.myPlan?.name
+                                                : 'Estandar',
+                                            'Estandar',
+                                          ),
                                           style: TextStyle(),
                                         )
                                       ],
@@ -547,6 +574,117 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                     ),
                                   ),
                                 ),
+                                if (_model.myPlan == null)
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 15.0, 0.0, 15.0),
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.8,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.2,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                  'detallesDePlanBasic');
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              child: Image.asset(
+                                                'assets/images/tarjeta.png',
+                                                width: 300.0,
+                                                height: 200.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  20.0, 50.0, 0.0, 0.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                                  (_model.apiResponseMe
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ))?.name} ${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                                  (_model.apiResponseMe
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ))?.lastName}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          color: Colors.white,
+                                                          fontSize: 16.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        ),
+                                              ),
+                                              Text(
+                                                'Estandar',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          color:
+                                                              Color(0x81FFFFFF),
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 15.0, 0.0, 0.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.asset(
+                                                    'assets/images/qrcode-generado_msdsoftware_1.png',
+                                                    width: MediaQuery.sizeOf(
+                                                                context)
+                                                            .width *
+                                                        0.15,
+                                                    height: MediaQuery.sizeOf(
+                                                                context)
+                                                            .height *
+                                                        0.07,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 15.0, 0.0, 15.0),
@@ -565,14 +703,34 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                           borderRadius:
                                               BorderRadius.circular(20.0),
                                         ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          child: Image.asset(
-                                            'assets/images/tarjeta.png',
-                                            width: 300.0,
-                                            height: 200.0,
-                                            fit: BoxFit.cover,
+                                        child: Visibility(
+                                          visible: _model.myPlan != null,
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                'detalleMiPlan',
+                                                queryParameters: {
+                                                  'id': serializeParam(
+                                                    _model.myPlan?.id,
+                                                    ParamType.int,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              child: Image.network(
+                                                _model.myPlan!.image.url,
+                                                width: 300.0,
+                                                height: 200.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -607,7 +765,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                       ),
                                             ),
                                             Text(
-                                              'Estandar',
+                                              valueOrDefault<String>(
+                                                _model.myPlan?.name,
+                                                'VIP',
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium

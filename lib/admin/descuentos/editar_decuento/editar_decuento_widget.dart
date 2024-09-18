@@ -1,5 +1,3 @@
-import '/auth/custom_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,36 +8,40 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
-import 'crear_decuento_model.dart';
-export 'crear_decuento_model.dart';
+import 'editar_decuento_model.dart';
+export 'editar_decuento_model.dart';
 
-class CrearDecuentoWidget extends StatefulWidget {
-  const CrearDecuentoWidget({super.key});
+class EditarDecuentoWidget extends StatefulWidget {
+  const EditarDecuentoWidget({
+    super.key,
+    required this.uuid,
+  });
+
+  final String? uuid;
 
   @override
-  State<CrearDecuentoWidget> createState() => _CrearDecuentoWidgetState();
+  State<EditarDecuentoWidget> createState() => _EditarDecuentoWidgetState();
 }
 
-class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
-  late CrearDecuentoModel _model;
+class _EditarDecuentoWidgetState extends State<EditarDecuentoWidget> {
+  late EditarDecuentoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CrearDecuentoModel());
+    _model = createModel(context, () => EditarDecuentoModel());
 
     _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.descripcionTextController ??= TextEditingController();
-    _model.descripcionFocusNode ??= FocusNode();
+    _model.textController2 ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.porcentajeTextController ??= TextEditingController();
-    _model.porcentajeFocusNode ??= FocusNode();
+    _model.textController3 ??= TextEditingController();
+    _model.textFieldFocusNode3 ??= FocusNode();
   }
 
   @override
@@ -129,7 +131,7 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             child: TextFormField(
                               controller: _model.textController1,
-                              focusNode: _model.textFieldFocusNode,
+                              focusNode: _model.textFieldFocusNode1,
                               autofocus: false,
                               textInputAction: TextInputAction.next,
                               obscureText: false,
@@ -205,11 +207,11 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                                   ),
                         ),
                         FlutterFlowDropDown<String>(
-                          controller: _model.comercioValueController ??=
+                          controller: _model.dropDownValueController1 ??=
                               FormFieldController<String>(null),
                           options: ['Option 1', 'Option 2', 'Option 3'],
                           onChanged: (val) =>
-                              safeSetState(() => _model.comercioValue = val),
+                              safeSetState(() => _model.dropDownValue1 = val),
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: 40.0,
                           textStyle:
@@ -510,10 +512,10 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                             child: Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
                               child: TextFormField(
-                                controller: _model.descripcionTextController,
-                                focusNode: _model.descripcionFocusNode,
+                                controller: _model.textController2,
+                                focusNode: _model.textFieldFocusNode2,
                                 onChanged: (_) => EasyDebounce.debounce(
-                                  '_model.descripcionTextController',
+                                  '_model.textController2',
                                   Duration(milliseconds: 2000),
                                   () => safeSetState(() {}),
                                 ),
@@ -565,12 +567,11 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
-                                  suffixIcon: _model.descripcionTextController!
-                                          .text.isNotEmpty
+                                  suffixIcon: _model
+                                          .textController2!.text.isNotEmpty
                                       ? InkWell(
                                           onTap: () async {
-                                            _model.descripcionTextController
-                                                ?.clear();
+                                            _model.textController2?.clear();
                                             safeSetState(() {});
                                           },
                                           child: Icon(
@@ -593,8 +594,7 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                                 keyboardType: TextInputType.multiline,
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primaryText,
-                                validator: _model
-                                    .descripcionTextControllerValidator
+                                validator: _model.textController2Validator
                                     .asValidator(context),
                               ),
                             ),
@@ -617,19 +617,11 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                           ),
                         ),
                         FlutterFlowDropDown<String>(
-                          controller: _model.usoValueController ??=
-                              FormFieldController<String>(
-                            _model.usoValue ??= 'todos',
-                          ),
-                          options: List<String>.from(
-                              ['todos', 'menores_18', 'mayores_18']),
-                          optionLabels: [
-                            'Todos',
-                            'Menores de 18',
-                            'Mayores de 18'
-                          ],
+                          controller: _model.dropDownValueController2 ??=
+                              FormFieldController<String>(null),
+                          options: ['Option 1', 'Option 2', 'Option 3'],
                           onChanged: (val) =>
-                              safeSetState(() => _model.usoValue = val),
+                              safeSetState(() => _model.dropDownValue2 = val),
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: 40.0,
                           textStyle:
@@ -678,8 +670,8 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             child: TextFormField(
-                              controller: _model.porcentajeTextController,
-                              focusNode: _model.porcentajeFocusNode,
+                              controller: _model.textController3,
+                              focusNode: _model.textFieldFocusNode3,
                               autofocus: false,
                               textInputAction: TextInputAction.done,
                               obscureText: false,
@@ -691,7 +683,7 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                                       fontFamily: 'Lato',
                                       letterSpacing: 0.0,
                                     ),
-                                hintText: '15%',
+                                hintText: 'Ejemplo 15%',
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -744,10 +736,8 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                               keyboardType: TextInputType.number,
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
-                              validator: _model
-                                  .porcentajeTextControllerValidator
+                              validator: _model.textController3Validator
                                   .asValidator(context),
-                              inputFormatters: [_model.porcentajeMask],
                             ),
                           ),
                         ),
@@ -757,54 +747,8 @@ class _CrearDecuentoWidgetState extends State<CrearDecuentoWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 30.0, 0.0, 0.0),
                             child: FFButtonWidget(
-                              onPressed: () async {
-                                var _shouldSetState = false;
-                                _model.apiCrarDescuento =
-                                    await DiscoinGroup.cratedCall.call(
-                                  token: currentAuthenticationToken,
-                                  name: _model.textController1.text,
-                                  description:
-                                      _model.descripcionTextController.text,
-                                  porceint: double.tryParse(
-                                      _model.porcentajeTextController.text),
-                                  typeUsing: _model.usoValue,
-                                  start: _model.datePicked1?.toString(),
-                                  end: _model.datePicked2?.toString(),
-                                );
-
-                                _shouldSetState = true;
-                                if ((_model.apiCrarDescuento?.succeeded ??
-                                    true)) {
-                                  context.pushNamed('Descuentos');
-
-                                  if (_shouldSetState) safeSetState(() {});
-                                  return;
-                                } else {
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('Ha courrido un error'),
-                                        content: Text(getJsonField(
-                                          (_model.apiCrarDescuento?.jsonBody ??
-                                              ''),
-                                          r'''$.error''',
-                                        ).toString()),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                  if (_shouldSetState) safeSetState(() {});
-                                  return;
-                                }
-
-                                if (_shouldSetState) safeSetState(() {});
+                              onPressed: () {
+                                print('Button pressed ...');
                               },
                               text: 'Publicar',
                               options: FFButtonOptions(

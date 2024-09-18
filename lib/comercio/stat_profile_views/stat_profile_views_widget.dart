@@ -98,7 +98,7 @@ class _StatProfileViewsWidgetState extends State<StatProfileViewsWidget>
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              '435',
+                              '0',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

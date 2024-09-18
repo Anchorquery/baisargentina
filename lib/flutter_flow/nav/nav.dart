@@ -81,7 +81,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => RootPageContext.wrap(
-        appStateNotifier.loggedIn ? EventsWidget() : InicioWidget(),
+        appStateNotifier.loggedIn ? HomeAdminWidget() : InicioWidget(),
         errorRoute: state.uri.toString(),
       ),
       routes: [
@@ -89,7 +89,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => RootPageContext.wrap(
-            appStateNotifier.loggedIn ? EventsWidget() : InicioWidget(),
+            appStateNotifier.loggedIn ? HomeAdminWidget() : InicioWidget(),
           ),
         ),
         FFRoute(
@@ -284,12 +284,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => DetallesDePlanBasicWidget(),
         ),
         FFRoute(
-          name: 'detallesDePlanVIP',
-          path: '/detallesDePlanVIP',
-          requireAuth: true,
-          builder: (context, params) => DetallesDePlanVIPWidget(),
-        ),
-        FFRoute(
           name: 'servicios',
           path: '/servicios',
           requireAuth: true,
@@ -302,10 +296,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HomeComercioWidget(),
         ),
         FFRoute(
-          name: 'StatsComercio',
-          path: '/statsComercio',
+          name: 'HomeC',
+          path: '/homeC',
           requireAuth: true,
-          builder: (context, params) => StatsComercioWidget(),
+          builder: (context, params) => HomeCWidget(),
         ),
         FFRoute(
           name: 'StatProfileViews',
@@ -403,6 +397,97 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ServicesByCategoryWidget(
             idCategory: params.getParam(
               'idCategory',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'editarServicio',
+          path: '/editarServicio',
+          requireAuth: true,
+          builder: (context, params) => EditarServicioWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'EditarCategoriaServicio',
+          path: '/editarCategoriaServicio',
+          requireAuth: true,
+          builder: (context, params) => EditarCategoriaServicioWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'editarDecuento',
+          path: '/editarDecuento',
+          requireAuth: true,
+          builder: (context, params) => EditarDecuentoWidget(
+            uuid: params.getParam(
+              'uuid',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'editarCategoriaDescuento',
+          path: '/editarCategoriaDescuento',
+          requireAuth: true,
+          builder: (context, params) => EditarCategoriaDescuentoWidget(
+            uuid: params.getParam(
+              'uuid',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ComercioProfile',
+          path: '/comercioProfile',
+          requireAuth: true,
+          builder: (context, params) => ComercioProfileWidget(),
+        ),
+        FFRoute(
+          name: 'detallesPlan',
+          path: '/detallesPlan',
+          requireAuth: true,
+          builder: (context, params) => DetallesPlanWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'paymenSuccces',
+          path: '/paymenSuccces',
+          requireAuth: true,
+          builder: (context, params) => PaymenSucccesWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+            mount: params.getParam(
+              'mount',
+              ParamType.double,
+            ),
+            lastForNumber: params.getParam(
+              'lastForNumber',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'detalleMiPlan',
+          path: '/detalleMiPlan',
+          requireAuth: true,
+          builder: (context, params) => DetalleMiPlanWidget(
+            id: params.getParam(
+              'id',
               ParamType.int,
             ),
           ),
