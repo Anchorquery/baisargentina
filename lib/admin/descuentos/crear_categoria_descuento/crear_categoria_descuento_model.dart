@@ -1,3 +1,5 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -12,6 +14,7 @@ class CrearCategoriaDescuentoModel
     extends FlutterFlowModel<CrearCategoriaDescuentoWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -20,6 +23,10 @@ class CrearCategoriaDescuentoModel
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
+  // Stores action output result for [Validate Form] action in Button widget.
+  bool? validacionForm;
+  // Stores action output result for [Backend Call - API (crear caregoria)] action in Button widget.
+  ApiCallResponse? apicrearCategoriaDescuentos;
 
   @override
   void initState(BuildContext context) {}

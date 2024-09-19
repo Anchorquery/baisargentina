@@ -1,5 +1,5 @@
 import '/components/componentes_admin/aprobar_reserva/aprobar_reserva_widget.dart';
-import '/components/componentes_admin/negar_reserva/negar_reserva_widget.dart';
+import '/components/negar_reserva/negar_reserva_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

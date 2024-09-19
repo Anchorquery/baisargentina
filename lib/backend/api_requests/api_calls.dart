@@ -866,6 +866,7 @@ class DiscoinGroup {
   static FindOneDescuentoCall findOneDescuentoCall = FindOneDescuentoCall();
   static EliminarCall eliminarCall = EliminarCall();
   static ObtnerCategoriasCall obtnerCategoriasCall = ObtnerCategoriasCall();
+  static CrearCaregoriaCall crearCaregoriaCall = CrearCaregoriaCall();
 }
 
 class CratedCall {
@@ -914,6 +915,9 @@ class CratedCall {
 
 class FindDescuentosCall {
   Future<ApiCallResponse> call({
+    int? categoryId,
+    String? nameCommerce = '',
+    String? q = '',
     String? token = '',
   }) async {
     final baseUrl = DiscoinGroup.getBaseUrl(
@@ -927,7 +931,11 @@ class FindDescuentosCall {
       headers: {
         'Authorization': 'Bearer ${token}',
       },
-      params: {},
+      params: {
+        'categoryId': categoryId,
+        'nameCommerce': nameCommerce,
+        'q': q,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1027,6 +1035,41 @@ class ObtnerCategoriasCall {
   }
 }
 
+class CrearCaregoriaCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    String? token = '',
+  }) async {
+    final baseUrl = DiscoinGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "name": "${name}",
+  "description": "${description}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'crear caregoria',
+      apiUrl: '${baseUrl}/discount-categories',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End Discoin Group Code
 
 /// Start plan Group Code
@@ -1047,6 +1090,10 @@ class PlanGroup {
   static GenerarPagoCall generarPagoCall = GenerarPagoCall();
   static GenerarSuscripcionCall generarSuscripcionCall =
       GenerarSuscripcionCall();
+  static VerificarSuscripcionCall verificarSuscripcionCall =
+      VerificarSuscripcionCall();
+  static RestarSuscripcionBebidaCall restarSuscripcionBebidaCall =
+      RestarSuscripcionBebidaCall();
 }
 
 class BucarPlanesCall {
@@ -1243,6 +1290,64 @@ class GenerarSuscripcionCall {
         'expiration_month': expirationMonth,
       },
       bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class VerificarSuscripcionCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? token = '',
+  }) async {
+    final baseUrl = PlanGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'verificarSuscripcion',
+      apiUrl: '${baseUrl}/suscriptions/validate-suscriptions/${uuid}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'uuid': uuid,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class RestarSuscripcionBebidaCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? token = '',
+  }) async {
+    final baseUrl = PlanGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'restarSuscripcionBebida',
+      apiUrl: '${baseUrl}/suscriptions/restar-bebida/${uuid}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'uuid': uuid,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

@@ -17,6 +17,8 @@ class PlanStruct extends BaseStruct {
     int? id,
     int? drinksAvailable,
     double? discountPorcentant,
+    String? qrImage,
+    String? uuid,
   })  : _name = name,
         _description = description,
         _image = image,
@@ -25,7 +27,9 @@ class PlanStruct extends BaseStruct {
         _duration = duration,
         _id = id,
         _drinksAvailable = drinksAvailable,
-        _discountPorcentant = discountPorcentant;
+        _discountPorcentant = discountPorcentant,
+        _qrImage = qrImage,
+        _uuid = uuid;
 
   // "name" field.
   String? _name;
@@ -107,6 +111,20 @@ class PlanStruct extends BaseStruct {
 
   bool hasDiscountPorcentant() => _discountPorcentant != null;
 
+  // "qrImage" field.
+  String? _qrImage;
+  String get qrImage => _qrImage ?? '';
+  set qrImage(String? val) => _qrImage = val;
+
+  bool hasQrImage() => _qrImage != null;
+
+  // "uuid" field.
+  String? _uuid;
+  String get uuid => _uuid ?? '';
+  set uuid(String? val) => _uuid = val;
+
+  bool hasUuid() => _uuid != null;
+
   static PlanStruct fromMap(Map<String, dynamic> data) => PlanStruct(
         name: data['name'] as String?,
         description: data['description'] as String?,
@@ -117,6 +135,8 @@ class PlanStruct extends BaseStruct {
         id: castToType<int>(data['id']),
         drinksAvailable: castToType<int>(data['drinksAvailable']),
         discountPorcentant: castToType<double>(data['discountPorcentant']),
+        qrImage: data['qrImage'] as String?,
+        uuid: data['uuid'] as String?,
       );
 
   static PlanStruct? maybeFromMap(dynamic data) =>
@@ -132,6 +152,8 @@ class PlanStruct extends BaseStruct {
         'id': _id,
         'drinksAvailable': _drinksAvailable,
         'discountPorcentant': _discountPorcentant,
+        'qrImage': _qrImage,
+        'uuid': _uuid,
       }.withoutNulls;
 
   @override
@@ -171,6 +193,14 @@ class PlanStruct extends BaseStruct {
         'discountPorcentant': serializeParam(
           _discountPorcentant,
           ParamType.double,
+        ),
+        'qrImage': serializeParam(
+          _qrImage,
+          ParamType.String,
+        ),
+        'uuid': serializeParam(
+          _uuid,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -222,6 +252,16 @@ class PlanStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
+        qrImage: deserializeParam(
+          data['qrImage'],
+          ParamType.String,
+          false,
+        ),
+        uuid: deserializeParam(
+          data['uuid'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -238,7 +278,9 @@ class PlanStruct extends BaseStruct {
         duration == other.duration &&
         id == other.id &&
         drinksAvailable == other.drinksAvailable &&
-        discountPorcentant == other.discountPorcentant;
+        discountPorcentant == other.discountPorcentant &&
+        qrImage == other.qrImage &&
+        uuid == other.uuid;
   }
 
   @override
@@ -251,7 +293,9 @@ class PlanStruct extends BaseStruct {
         duration,
         id,
         drinksAvailable,
-        discountPorcentant
+        discountPorcentant,
+        qrImage,
+        uuid
       ]);
 }
 
@@ -265,6 +309,8 @@ PlanStruct createPlanStruct({
   int? id,
   int? drinksAvailable,
   double? discountPorcentant,
+  String? qrImage,
+  String? uuid,
 }) =>
     PlanStruct(
       name: name,
@@ -276,4 +322,6 @@ PlanStruct createPlanStruct({
       id: id,
       drinksAvailable: drinksAvailable,
       discountPorcentant: discountPorcentant,
+      qrImage: qrImage,
+      uuid: uuid,
     );

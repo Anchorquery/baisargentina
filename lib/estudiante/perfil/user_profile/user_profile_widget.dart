@@ -4,17 +4,20 @@ import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'user_profile_model.dart';
 export 'user_profile_model.dart';
@@ -543,7 +546,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: 'Miembro:',
+                                          text: 'Miembro: ',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -557,9 +560,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                         ),
                                         TextSpan(
                                           text: valueOrDefault<String>(
-                                            _model.myPlan != null
-                                                ? _model.myPlan?.name
-                                                : 'Estandar',
+                                            _model.myPlan?.name,
                                             'Estandar',
                                           ),
                                           style: TextStyle(),
@@ -574,19 +575,15 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                     ),
                                   ),
                                 ),
-                                if (_model.myPlan == null)
+                                if (_model.myPlan?.name == 'Estandar')
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 15.0, 0.0, 15.0),
                                     child: Stack(
                                       children: [
                                         Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.8,
-                                          height: MediaQuery.sizeOf(context)
-                                                  .height *
-                                              0.2,
+                                          width: 300.0,
+                                          height: 200.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
@@ -660,22 +657,80 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 15.0, 0.0, 0.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Image.asset(
-                                                    'assets/images/qrcode-generado_msdsoftware_1.png',
-                                                    width: MediaQuery.sizeOf(
-                                                                context)
-                                                            .width *
-                                                        0.15,
-                                                    height: MediaQuery.sizeOf(
-                                                                context)
-                                                            .height *
-                                                        0.07,
-                                                    fit: BoxFit.cover,
+                                                        0.0, 15.0, 0.0, 15.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await Navigator.push(
+                                                      context,
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .fade,
+                                                        child:
+                                                            FlutterFlowExpandedImageView(
+                                                          image:
+                                                              CachedNetworkImage(
+                                                            fadeInDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                            fadeOutDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                            imageUrl: _model
+                                                                .myPlan!
+                                                                .qrImage,
+                                                            fit: BoxFit.contain,
+                                                          ),
+                                                          allowRotation: false,
+                                                          tag: _model
+                                                              .myPlan!.qrImage,
+                                                          useHeroAnimation:
+                                                              true,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Hero(
+                                                    tag: _model.myPlan!.qrImage,
+                                                    transitionOnUserGestures:
+                                                        true,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: CachedNetworkImage(
+                                                        fadeInDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        fadeOutDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        imageUrl: _model
+                                                            .myPlan!.qrImage,
+                                                        width:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                0.15,
+                                                        height:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height *
+                                                                0.07,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -685,26 +740,21 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                       ],
                                     ),
                                   ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 15.0, 0.0, 15.0),
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.8,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                0.2,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        child: Visibility(
-                                          visible: _model.myPlan != null,
+                                if (_model.myPlan?.name != 'Estandar')
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 15.0, 0.0, 15.0),
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          width: 300.0,
+                                          height: 200.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -733,79 +783,138 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 50.0, 0.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${UserStruct.maybeFromMap(UserGroup.meCall.user(
-                                                (_model.apiResponseMe
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ))?.name} ${UserStruct.maybeFromMap(UserGroup.meCall.user(
-                                                (_model.apiResponseMe
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ))?.lastName}',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Lato',
-                                                        color: Colors.white,
-                                                        fontSize: 16.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w800,
-                                                      ),
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                _model.myPlan?.name,
-                                                'VIP',
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  20.0, 50.0, 0.0, 0.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                                  (_model.apiResponseMe
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ))?.name} ${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                                  (_model.apiResponseMe
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ))?.lastName}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          color: Colors.white,
+                                                          fontSize: 16.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        ),
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Lato',
-                                                        color:
-                                                            Color(0x81FFFFFF),
-                                                        letterSpacing: 0.0,
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  _model.myPlan?.name,
+                                                  'VIP',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          color:
+                                                              Color(0x81FFFFFF),
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 15.0, 0.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await Navigator.push(
+                                                      context,
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .fade,
+                                                        child:
+                                                            FlutterFlowExpandedImageView(
+                                                          image:
+                                                              CachedNetworkImage(
+                                                            fadeInDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                            fadeOutDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                            imageUrl: _model
+                                                                .myPlan!
+                                                                .qrImage,
+                                                            fit: BoxFit.contain,
+                                                          ),
+                                                          allowRotation: false,
+                                                          tag: _model
+                                                              .myPlan!.qrImage,
+                                                          useHeroAnimation:
+                                                              true,
+                                                        ),
                                                       ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 15.0, 0.0, 0.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/qrcode-generado_msdsoftware_1.png',
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          0.15,
-                                                  height:
-                                                      MediaQuery.sizeOf(context)
-                                                              .height *
-                                                          0.07,
-                                                  fit: BoxFit.cover,
+                                                    );
+                                                  },
+                                                  child: Hero(
+                                                    tag: _model.myPlan!.qrImage,
+                                                    transitionOnUserGestures:
+                                                        true,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: CachedNetworkImage(
+                                                        fadeInDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        fadeOutDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        imageUrl: _model
+                                                            .myPlan!.qrImage,
+                                                        width:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                0.15,
+                                                        height:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height *
+                                                                0.07,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),

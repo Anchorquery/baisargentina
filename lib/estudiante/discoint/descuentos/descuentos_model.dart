@@ -54,12 +54,16 @@ class DescuentosModel extends FlutterFlowModel<DescuentosWidget> {
 
   String? searh;
 
+  String? searhComerce;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (Find descuentos)] action in Descuentos widget.
   ApiCallResponse? apiGetDescuentos;
-  // Stores action output result for [Backend Call - API (crated)] action in Descuentos widget.
+  // Stores action output result for [Backend Call - API (Obtner categorias)] action in Descuentos widget.
   ApiCallResponse? apiResultdgg;
+  // Stores action output result for [Backend Call - API (Find descuentos)] action in Text widget.
+  ApiCallResponse? apiGetDiscoinsByNameCommerce;
   // State field(s) for buscador widget.
   FocusNode? buscadorFocusNode;
   TextEditingController? buscadorTextController;

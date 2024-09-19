@@ -51,7 +51,7 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
           }
         }),
         Future(() async {
-          _model.apiResultdgg = await DiscoinGroup.cratedCall.call();
+          _model.apiResultdgg = await DiscoinGroup.obtnerCategoriasCall.call();
 
           if (!(_model.apiResultdgg?.succeeded ?? true)) {
             return;
@@ -254,19 +254,76 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
                                               final categoriasDescuentosItem =
                                                   categoriasDescuentos[
                                                       categoriasDescuentosIndex];
-                                              return Text(
-                                                categoriasDescuentosItem.name,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Lato',
-                                                          color: Colors.white,
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  _model.apiGetDiscoinsByNameCommerce =
+                                                      await DiscoinGroup
+                                                          .findDescuentosCall
+                                                          .call(
+                                                    token:
+                                                        currentAuthenticationToken,
+                                                    categoryId:
+                                                        categoriasDescuentosItem
+                                                            .id,
+                                                  );
+
+                                                  if ((_model
+                                                          .apiGetDiscoinsByNameCommerce
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    _model.data = (getJsonField(
+                                                      (_model.apiGetDiscoinsByNameCommerce
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      r'''$.data''',
+                                                      true,
+                                                    )!
+                                                                .toList()
+                                                                .map<DiscountsStruct?>(
+                                                                    DiscountsStruct
+                                                                        .maybeFromMap)
+                                                                .toList()
+                                                            as Iterable<
+                                                                DiscountsStruct?>)
+                                                        .withoutNulls
+                                                        .toList()
+                                                        .cast<
+                                                            DiscountsStruct>();
+                                                    _model.searhComerce = '';
+                                                    safeSetState(() {});
+                                                    _model.idCategory =
+                                                        categoriasDescuentosItem
+                                                            .id;
+                                                    safeSetState(() {});
+                                                  }
+
+                                                  safeSetState(() {});
+                                                },
+                                                child: Text(
+                                                  categoriasDescuentosItem.name,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Lato',
+                                                        color: Colors.white,
+                                                        fontSize:
+                                                            categoriasDescuentosItem
+                                                                        .id ==
+                                                                    _model
+                                                                        .idCategory
+                                                                ? 16.2
+                                                                : 15.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                ),
                                               );
                                             }).divide(SizedBox(width: 10.0)),
                                           ),
@@ -294,6 +351,9 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
                                                     .findDescuentosCall
                                                     .call(
                                               token: currentAuthenticationToken,
+                                              categoryId: _model.idCategory,
+                                              nameCommerce: _model
+                                                  .buscadorTextController.text,
                                             );
 
                                             if ((_model.apiGetDiscoins
@@ -402,6 +462,11 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
                                                             .call(
                                                       token:
                                                           currentAuthenticationToken,
+                                                      categoryId:
+                                                          _model.idCategory,
+                                                      nameCommerce: _model
+                                                          .buscadorTextController
+                                                          .text,
                                                     );
 
                                                     if ((_model.apiGetDiscoins

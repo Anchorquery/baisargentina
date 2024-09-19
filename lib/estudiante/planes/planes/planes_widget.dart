@@ -310,7 +310,7 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                           borderRadius:
                                               BorderRadius.circular(120.0),
                                           child: Image.network(
-                                            'https://picsum.photos/seed/724/600',
+                                            currentUserData!.avatar,
                                             width: 120.0,
                                             height: 120.0,
                                             fit: BoxFit.cover,
@@ -361,7 +361,7 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                               TextSpan(
                                                 text: valueOrDefault<String>(
                                                   _model.myPlan == null
-                                                      ? 'Básico'
+                                                      ? 'Estandar'
                                                       : _model.myPlan?.name,
                                                   'Estandar',
                                                 ),
@@ -409,12 +409,8 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 15.0, 0.0, 0.0),
                                             child: Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.9,
-                                              height: MediaQuery.sizeOf(context)
-                                                      .height *
-                                                  0.2,
+                                              width: 300.0,
+                                              height: 200.0,
                                               decoration: BoxDecoration(
                                                 color: Colors.black,
                                                 borderRadius:
@@ -425,9 +421,9 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                                     BorderRadius.circular(8.0),
                                                 child: Image.network(
                                                   _model.myPlan!.image.url,
-                                                  width: 30.0,
-                                                  height: 30.0,
-                                                  fit: BoxFit.none,
+                                                  width: 300.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.cover,
                                                   alignment:
                                                       Alignment(0.0, 0.0),
                                                 ),

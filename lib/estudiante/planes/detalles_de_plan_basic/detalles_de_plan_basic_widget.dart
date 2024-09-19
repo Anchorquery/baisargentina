@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -93,10 +94,19 @@ class _DetallesDePlanBasicWidgetState extends State<DetallesDePlanBasicWidget>
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.chevron_left_rounded,
-                        color: Color(0xFFFF8F14),
-                        size: 24.0,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('userProfile');
+                        },
+                        child: Icon(
+                          Icons.chevron_left_rounded,
+                          color: Color(0xFFFF8F14),
+                          size: 24.0,
+                        ),
                       ),
                       Padding(
                         padding:
@@ -121,8 +131,8 @@ class _DetallesDePlanBasicWidgetState extends State<DetallesDePlanBasicWidget>
                     child: Stack(
                       children: [
                         Container(
-                          width: MediaQuery.sizeOf(context).width * 0.9,
-                          height: MediaQuery.sizeOf(context).height * 0.2,
+                          width: 300.0,
+                          height: 200.0,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -146,7 +156,7 @@ class _DetallesDePlanBasicWidgetState extends State<DetallesDePlanBasicWidget>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Nombre de usuario',
+                                '${currentUserData?.name} ${currentUserData?.lastName}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -192,58 +202,67 @@ class _DetallesDePlanBasicWidgetState extends State<DetallesDePlanBasicWidget>
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                    child: Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      color: Color(0xFFF2F4F7),
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            15.0, 15.0, 15.0, 15.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Accede a beneficios \nque solo tienen los VIP ',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 15.0, 0.0, 0.0),
-                                  child: Text(
-                                    '\$14.95/mes',
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('planes');
+                      },
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: Color(0xFFF2F4F7),
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              15.0, 15.0, 15.0, 15.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Accede a beneficios \nque solo tienen los VIP ',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Lato',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          fontSize: 16.0,
                                           letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w800,
                                         ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Icon(
-                              Icons.navigate_next_rounded,
-                              color: Color(0xFFFF8F14),
-                              size: 45.0,
-                            ),
-                          ],
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 15.0, 0.0, 0.0),
+                                    child: Text(
+                                      '\$14.95/mes',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Icon(
+                                Icons.navigate_next_rounded,
+                                color: Color(0xFFFF8F14),
+                                size: 45.0,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
