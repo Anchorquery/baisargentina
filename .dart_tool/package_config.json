@@ -410,6 +410,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "mask_text_input_formatter",
+      "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/mask_text_input_formatter-2.9.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16+1",
       "packageUri": "lib/",
@@ -435,7 +441,7 @@
     },
     {
       "name": "mime",
-      "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.5",
+      "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.6",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -514,6 +520,12 @@
     {
       "name": "photo_view",
       "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/photo_view-0.14.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "pin_code_fields",
+      "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/pin_code_fields-8.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -717,7 +729,7 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.4.2",
+      "rootUri": "file:///C:/Users/Pruebas/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.5.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -800,7 +812,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-08-20T23:02:25.993810Z",
+  "generated": "2024-09-19T22:02:30.565304Z",
   "generator": "pub",
   "generatorVersion": "3.4.3",
   "flutterRoot": "file:///C:/flutter",
