@@ -14,12 +14,14 @@ class FileDStruct extends BaseStruct {
     String? ext,
     String? small,
     String? url,
+    String? blurhash,
   })  : _id = id,
         _name = name,
         _mime = mime,
         _ext = ext,
         _small = small,
-        _url = url;
+        _url = url,
+        _blurhash = blurhash;
 
   // "id" field.
   int? _id;
@@ -65,6 +67,13 @@ class FileDStruct extends BaseStruct {
 
   bool hasUrl() => _url != null;
 
+  // "blurhash" field.
+  String? _blurhash;
+  String get blurhash => _blurhash ?? '';
+  set blurhash(String? val) => _blurhash = val;
+
+  bool hasBlurhash() => _blurhash != null;
+
   static FileDStruct fromMap(Map<String, dynamic> data) => FileDStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -72,6 +81,7 @@ class FileDStruct extends BaseStruct {
         ext: data['ext'] as String?,
         small: data['small'] as String?,
         url: data['url'] as String?,
+        blurhash: data['blurhash'] as String?,
       );
 
   static FileDStruct? maybeFromMap(dynamic data) =>
@@ -84,6 +94,7 @@ class FileDStruct extends BaseStruct {
         'ext': _ext,
         'small': _small,
         'url': _url,
+        'blurhash': _blurhash,
       }.withoutNulls;
 
   @override
@@ -110,6 +121,10 @@ class FileDStruct extends BaseStruct {
         ),
         'url': serializeParam(
           _url,
+          ParamType.String,
+        ),
+        'blurhash': serializeParam(
+          _blurhash,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -146,6 +161,11 @@ class FileDStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        blurhash: deserializeParam(
+          data['blurhash'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -159,12 +179,13 @@ class FileDStruct extends BaseStruct {
         mime == other.mime &&
         ext == other.ext &&
         small == other.small &&
-        url == other.url;
+        url == other.url &&
+        blurhash == other.blurhash;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([id, name, mime, ext, small, url]);
+      const ListEquality().hash([id, name, mime, ext, small, url, blurhash]);
 }
 
 FileDStruct createFileDStruct({
@@ -174,6 +195,7 @@ FileDStruct createFileDStruct({
   String? ext,
   String? small,
   String? url,
+  String? blurhash,
 }) =>
     FileDStruct(
       id: id,
@@ -182,4 +204,5 @@ FileDStruct createFileDStruct({
       ext: ext,
       small: small,
       url: url,
+      blurhash: blurhash,
     );

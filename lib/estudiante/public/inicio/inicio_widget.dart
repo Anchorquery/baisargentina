@@ -39,14 +39,13 @@ class _InicioWidgetState extends State<InicioWidget>
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
-      Function() _navigate = () {};
       if (currentAuthenticationToken != null &&
           currentAuthenticationToken != '') {
         _model.apiResponseMe = await UserGroup.meCall.call(
           token: currentAuthenticationToken,
         );
 
-        if ((_model.apiResponseMe?.succeeded ?? true) == true) {
+        if ((_model.apiResponseMe?.succeeded ?? true)) {
           safeSetState(() {});
           authManager.updateAuthUserData(
             authenticationToken: currentAuthenticationToken,
@@ -92,17 +91,19 @@ class _InicioWidgetState extends State<InicioWidget>
           FFAppState().token = '';
           FFAppState().user = UserStruct.fromSerializableMap(jsonDecode('{}'));
           safeSetState(() {});
-          GoRouter.of(context).prepareAuthEvent();
+          GoRouter.of(context).prepareAuthEvent(true);
           await authManager.signOut();
           GoRouter.of(context).clearRedirectLocation();
 
-          _navigate = () => context.goNamedAuth('inicio', context.mounted);
+          context.goNamedAuth(
+            'login',
+            context.mounted,
+            ignoreRedirect: true,
+          );
         }
       } else {
         return;
       }
-
-      _navigate();
     });
 
     animationsMap.addAll({

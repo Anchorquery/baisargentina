@@ -242,7 +242,7 @@ class _NavBarWithMiddleButtonWidgetState
                     size: 35.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('housign');
+                    context.pushNamed('housigns');
                   },
                 ),
                 FlutterFlowIconButton(

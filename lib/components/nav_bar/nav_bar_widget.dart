@@ -137,7 +137,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     size: 35.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('housign');
+                    context.pushNamed('housigns');
                   },
                 ),
                 FlutterFlowIconButton(

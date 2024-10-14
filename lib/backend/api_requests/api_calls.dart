@@ -429,6 +429,8 @@ class UserGroup {
     'Authorization': 'Bearer [token]',
   };
   static MeCall meCall = MeCall();
+  static UpdatemetadataComercioCall updatemetadataComercioCall =
+      UpdatemetadataComercioCall();
 }
 
 class MeCall {
@@ -440,7 +442,7 @@ class MeCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'me',
+      callName: 'me ',
       apiUrl: '${baseUrl}/users/me',
       callType: ApiCallType.GET,
       headers: {
@@ -460,6 +462,63 @@ class MeCall {
         response,
         r'''$''',
       );
+}
+
+class UpdatemetadataComercioCall {
+  Future<ApiCallResponse> call({
+    String? urlUbicacion = '',
+    String? endDate = '',
+    String? startDate = '',
+    bool? domingo,
+    bool? sabado,
+    bool? viernes,
+    bool? jueves,
+    bool? miercoles,
+    bool? martes,
+    bool? lunes,
+    String? description = '',
+    String? nameCommerce = '',
+    FFUploadedFile? picture,
+    List<FFUploadedFile>? imagesList,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+    final images = imagesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'updatemetadata comercio',
+      apiUrl: '${baseUrl}/users-permissions/users/saveCommerceMetadata',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'nameCommerce': nameCommerce,
+        'description': description,
+        'lunes': lunes,
+        'martes': martes,
+        'miercoles': miercoles,
+        'jueves': jueves,
+        'viernes': viernes,
+        'sabado': sabado,
+        'domingo': domingo,
+        'startDate': startDate,
+        'endDate': endDate,
+        'urlUbicacion': urlUbicacion,
+        'picture': picture,
+        'images': images,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End User Group Code
@@ -1359,6 +1418,238 @@ class RestarSuscripcionBebidaCall {
 }
 
 /// End plan Group Code
+
+/// Start Housing Group Code
+
+class HousingGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://server.baisargentina.com/api';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static ObtenerTodosLosHousingCall obtenerTodosLosHousingCall =
+      ObtenerTodosLosHousingCall();
+  static ObtenerUnHousingCall obtenerUnHousingCall = ObtenerUnHousingCall();
+}
+
+class ObtenerTodosLosHousingCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = HousingGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Obtener todos los housing',
+      apiUrl: '${baseUrl}/housigns',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  dynamic? pagination(dynamic response) => getJsonField(
+        response,
+        r'''$.meta.pagination''',
+      );
+}
+
+class ObtenerUnHousingCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = HousingGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Obtener un housing',
+      apiUrl: '${baseUrl}/housigns/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+}
+
+/// End Housing Group Code
+
+/// Start Estadisticas Group Code
+
+class EstadisticasGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://server.baisargentina.com/api';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static ObtenerPersonasVisitanLocalReservasCall
+      obtenerPersonasVisitanLocalReservasCall =
+      ObtenerPersonasVisitanLocalReservasCall();
+  static NumeroVistasPerfilCall numeroVistasPerfilCall =
+      NumeroVistasPerfilCall();
+  static NumeroDeEventosCall numeroDeEventosCall = NumeroDeEventosCall();
+  static ToasLasEstadisticasCall toasLasEstadisticasCall =
+      ToasLasEstadisticasCall();
+}
+
+class ObtenerPersonasVisitanLocalReservasCall {
+  Future<ApiCallResponse> call({
+    String? groupBy = '',
+    String? startDate = '',
+    String? endDate = '',
+    String? token = '',
+  }) async {
+    final baseUrl = EstadisticasGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Obtener personas visitan local reservas',
+      apiUrl: '${baseUrl}/bookings/estadisticas/reservas',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'groupBy': groupBy,
+        'startDate': startDate,
+        'endDate': endDate,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class NumeroVistasPerfilCall {
+  Future<ApiCallResponse> call({
+    String? groupBy = 'day',
+    String? startDate = '',
+    String? endDate = '',
+    String? token = '',
+  }) async {
+    final baseUrl = EstadisticasGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Numero vistas perfil',
+      apiUrl: '${baseUrl}/bookings/estadisticas/visita-perfil',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'groupBy': groupBy,
+        'startDate': startDate,
+        'endDate': endDate,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class NumeroDeEventosCall {
+  Future<ApiCallResponse> call({
+    String? groupBy = 'day',
+    String? startDate = '',
+    String? endDate = '',
+    String? token = '',
+  }) async {
+    final baseUrl = EstadisticasGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Numero de eventos',
+      apiUrl: '${baseUrl}/estadisticas/eventos',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'groupBy': groupBy,
+        'startDate': startDate,
+        'endDate': endDate,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ToasLasEstadisticasCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = EstadisticasGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'toas las estadisticas',
+      apiUrl: '${baseUrl}/bookings/estadisticas/todas',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Estadisticas Group Code
 
 class ApiRegisterCall {
   static Future<ApiCallResponse> call({

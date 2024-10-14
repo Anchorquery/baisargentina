@@ -35,7 +35,7 @@ class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (me)] action in userProfile widget.
+  // Stores action output result for [Backend Call - API (me )] action in userProfile widget.
   ApiCallResponse? apiResponseMe;
   // Stores action output result for [Backend Call - API (mi plan)] action in userProfile widget.
   ApiCallResponse? apiMyPlan;
@@ -47,7 +47,7 @@ class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
 
   // Stores action output result for [Backend Call - API (Single)] action in imagenDePerfil widget.
   ApiCallResponse? apiResult64y;
-  // Stores action output result for [Backend Call - API (me)] action in imagenDePerfil widget.
+  // Stores action output result for [Backend Call - API (me )] action in imagenDePerfil widget.
   ApiCallResponse? apiMeResponse;
   // Model for NavBarWithMiddleButton component.
   late NavBarWithMiddleButtonModel navBarWithMiddleButtonModel;

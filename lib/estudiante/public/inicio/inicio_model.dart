@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 class InicioModel extends FlutterFlowModel<InicioWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (me)] action in inicio widget.
+  // Stores action output result for [Backend Call - API (me )] action in inicio widget.
   ApiCallResponse? apiResponseMe;
 
   @override

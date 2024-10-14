@@ -755,7 +755,7 @@ class _EventWidgetState extends State<EventWidget> {
                                             },
                                             carouselController: _model
                                                     .carouselhousignController ??=
-                                                CarouselSliderController(),
+                                                CarouselController(),
                                             options: CarouselOptions(
                                               initialPage: max(0,
                                                   min(1, imagenes.length - 1)),
@@ -763,7 +763,7 @@ class _EventWidgetState extends State<EventWidget> {
                                               disableCenter: true,
                                               enlargeCenterPage: true,
                                               enlargeFactor: 0.25,
-                                              enableInfiniteScroll: true,
+                                              enableInfiniteScroll: false,
                                               scrollDirection: Axis.horizontal,
                                               autoPlay: false,
                                               onPageChanged: (index, _) => _model

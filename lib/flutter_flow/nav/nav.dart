@@ -108,10 +108,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'housign',
-          path: '/housign',
+          name: 'housigns',
+          path: '/housigns',
           requireAuth: true,
-          builder: (context, params) => HousignWidget(),
+          builder: (context, params) => HousignsWidget(),
         ),
         FFRoute(
           name: 'userProfile',
@@ -132,10 +132,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => TranviaWidget(),
         ),
         FFRoute(
-          name: 'buenosaireshousign',
-          path: '/buenosaireshousign',
+          name: 'housign',
+          path: '/housign',
           requireAuth: true,
-          builder: (context, params) => BuenosaireshousignWidget(),
+          builder: (context, params) => HousignWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'politicasdeReembolso',
@@ -296,28 +301,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HomeComercioWidget(),
         ),
         FFRoute(
-          name: 'HomeC',
-          path: '/homeC',
+          name: 'Estadisticas',
+          path: '/estadisticas',
           requireAuth: true,
-          builder: (context, params) => HomeCWidget(),
+          builder: (context, params) => EstadisticasWidget(),
         ),
         FFRoute(
           name: 'StatProfileViews',
           path: '/statProfileViews',
           requireAuth: true,
           builder: (context, params) => StatProfileViewsWidget(),
-        ),
-        FFRoute(
-          name: 'StatLocalViews',
-          path: '/statLocalViews',
-          requireAuth: true,
-          builder: (context, params) => StatLocalViewsWidget(),
-        ),
-        FFRoute(
-          name: 'StatEventosComercio',
-          path: '/statEventosComercio',
-          requireAuth: true,
-          builder: (context, params) => StatEventosComercioWidget(),
         ),
         FFRoute(
           name: 'HomeAdmin',
@@ -489,6 +482,62 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             id: params.getParam(
               'id',
               ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CreateHousing',
+          path: '/createHousing',
+          requireAuth: true,
+          builder: (context, params) => CreateHousingWidget(),
+        ),
+        FFRoute(
+          name: 'CrearFAQ',
+          path: '/crearFAQ',
+          requireAuth: true,
+          builder: (context, params) => CrearFAQWidget(),
+        ),
+        FFRoute(
+          name: 'CrearComercio',
+          path: '/crearComercio',
+          requireAuth: true,
+          builder: (context, params) => CrearComercioWidget(),
+        ),
+        FFRoute(
+          name: 'StatLocalViews',
+          path: '/statLocalViews',
+          requireAuth: true,
+          builder: (context, params) => StatLocalViewsWidget(),
+        ),
+        FFRoute(
+          name: 'StatEventosComercio',
+          path: '/statEventosComercio',
+          requireAuth: true,
+          builder: (context, params) => StatEventosComercioWidget(),
+        ),
+        FFRoute(
+          name: 'editarPerfilComercio',
+          path: '/editarPerfilComercio',
+          requireAuth: true,
+          builder: (context, params) => EditarPerfilComercioWidget(
+            data: params.getParam(
+              'data',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: CommercePerfilStruct.fromSerializableMap,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'editarPerfilComercioCopy',
+          path: '/editarPerfilComercioCopy',
+          requireAuth: true,
+          builder: (context, params) => EditarPerfilComercioCopyWidget(
+            data: params.getParam(
+              'data',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: CommercePerfilStruct.fromSerializableMap,
             ),
           ),
         )

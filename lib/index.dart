@@ -2,14 +2,13 @@
 export '/estudiante/public/inicio/inicio_widget.dart' show InicioWidget;
 export '/estudiante/public/registro/registro_widget.dart' show RegistroWidget;
 export '/estudiante/public/login/login_widget.dart' show LoginWidget;
-export '/estudiante/housing/housign/housign_widget.dart' show HousignWidget;
+export '/estudiante/housigns/housigns_widget.dart' show HousignsWidget;
 export '/estudiante/perfil/user_profile/user_profile_widget.dart'
     show UserProfileWidget;
 export '/estudiante/reservaexitosa/reservaexitosa_widget.dart'
     show ReservaexitosaWidget;
 export '/estudiante/tranvia/tranvia_widget.dart' show TranviaWidget;
-export '/estudiante/housing/buenosaireshousign/buenosaireshousign_widget.dart'
-    show BuenosaireshousignWidget;
+export '/estudiante/housign/housign_widget.dart' show HousignWidget;
 export '/estudiante/policy/politicasde_reembolso/politicasde_reembolso_widget.dart'
     show PoliticasdeReembolsoWidget;
 export '/estudiante/policy/nosotros/nosotros_widget.dart' show NosotrosWidget;
@@ -46,19 +45,16 @@ export '/estudiante/services/servicios/servicios_widget.dart'
     show ServiciosWidget;
 export '/comercio/home_comercio/home_comercio_widget.dart'
     show HomeComercioWidget;
-export '/comercio/home_c/home_c_widget.dart' show HomeCWidget;
+export '/comercio/estadisticas/estadisticas_widget.dart'
+    show EstadisticasWidget;
 export '/comercio/stat_profile_views/stat_profile_views_widget.dart'
     show StatProfileViewsWidget;
-export '/comercio/stat_local_views/stat_local_views_widget.dart'
-    show StatLocalViewsWidget;
-export '/comercio/stat_eventos_comercio/stat_eventos_comercio_widget.dart'
-    show StatEventosComercioWidget;
 export '/admin/home_admin/home_admin_widget.dart' show HomeAdminWidget;
 export '/comercio/establecer_contrasena/establecer_contrasena_widget.dart'
     show EstablecerContrasenaWidget;
 export '/admin/reservas_admin/reservas_admin_widget.dart'
     show ReservasAdminWidget;
-export '/admin/servicios/servicios_creados/servicios_creados_widget.dart'
+export '/admin/servicios_creados/servicios_creados_widget.dart'
     show ServiciosCreadosWidget;
 export '/estudiante/services/servicio/servicio_widget.dart' show ServicioWidget;
 export '/admin/servicios/crear_servicio/crear_servicio_widget.dart'
@@ -91,3 +87,17 @@ export '/estudiante/paymen_succces/paymen_succces_widget.dart'
     show PaymenSucccesWidget;
 export '/estudiante/planes/detalle_mi_plan/detalle_mi_plan_widget.dart'
     show DetalleMiPlanWidget;
+export '/admin/housign/create_housing/create_housing_widget.dart'
+    show CreateHousingWidget;
+export '/admin/f_a_qadmin/crear_f_a_q/crear_f_a_q_widget.dart'
+    show CrearFAQWidget;
+export '/admin/crear_comercio/crear_comercio/crear_comercio_widget.dart'
+    show CrearComercioWidget;
+export '/comercio/stat_local_views/stat_local_views_widget.dart'
+    show StatLocalViewsWidget;
+export '/comercio/stat_eventos_comercio/stat_eventos_comercio_widget.dart'
+    show StatEventosComercioWidget;
+export '/comercio/editar_perfil_comercio/editar_perfil_comercio_widget.dart'
+    show EditarPerfilComercioWidget;
+export '/comercio/editar_perfil_comercio_copy/editar_perfil_comercio_copy_widget.dart'
+    show EditarPerfilComercioCopyWidget;

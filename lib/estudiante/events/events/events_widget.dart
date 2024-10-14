@@ -37,6 +37,7 @@ class _EventsWidgetState extends State<EventsWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Function() _navigate = () {};
       await Future.wait([
         Future(() async {
           _model.apiResponseEvents = await EventsGroup.getEventsCall.call(
@@ -44,24 +45,36 @@ class _EventsWidgetState extends State<EventsWidget> {
           );
 
           if (!(_model.apiResponseEvents?.succeeded ?? true)) {
-            await showDialog(
-              context: context,
-              builder: (alertDialogContext) {
-                return AlertDialog(
-                  title: Text('Ha ocurrido un error'),
-                  content: Text(getJsonField(
-                    (_model.apiResponseEvents?.jsonBody ?? ''),
-                    r'''$.error''',
-                  ).toString().toString()),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext),
-                      child: Text('Ok'),
-                    ),
-                  ],
-                );
-              },
-            );
+            if ((_model.apiResponseEvents?.statusCode ?? 200) == 401) {
+              FFAppState().token = '';
+              safeSetState(() {});
+              authManager.updateAuthUserData();
+              GoRouter.of(context).prepareAuthEvent();
+              await authManager.signOut();
+              GoRouter.of(context).clearRedirectLocation();
+
+              _navigate = () => context.goNamedAuth('inicio', context.mounted);
+            } else {
+              await showDialog(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    title: Text('Ha ocurrido un error'),
+                    content: Text(getJsonField(
+                      (_model.apiResponseEvents?.jsonBody ?? ''),
+                      r'''$.error''',
+                    ).toString().toString()),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(alertDialogContext),
+                        child: Text('Ok'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+
             return;
           }
         }),
@@ -101,6 +114,8 @@ class _EventsWidgetState extends State<EventsWidget> {
           .cast<CategoryStruct>();
       _model.loading = false;
       safeSetState(() {});
+
+      _navigate();
     });
   }
 
@@ -113,6 +128,8 @@ class _EventsWidgetState extends State<EventsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -356,7 +373,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                 },
                                                 carouselController: _model
                                                         .carouselController ??=
-                                                    CarouselSliderController(),
+                                                    CarouselController(),
                                                 options: CarouselOptions(
                                                   initialPage: max(
                                                       0,
@@ -661,7 +678,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                                                                                 child: Text(
-                                                                                  dataItem.description,
+                                                                                  dataItem.description.maybeHandleOverflow(maxChars: 100),
                                                                                   maxLines: 4,
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Lato',

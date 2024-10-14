@@ -1,28 +1,56 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'home_c_model.dart';
-export 'home_c_model.dart';
+import 'estadisticas_model.dart';
+export 'estadisticas_model.dart';
 
-class HomeCWidget extends StatefulWidget {
-  const HomeCWidget({super.key});
+class EstadisticasWidget extends StatefulWidget {
+  const EstadisticasWidget({super.key});
 
   @override
-  State<HomeCWidget> createState() => _HomeCWidgetState();
+  State<EstadisticasWidget> createState() => _EstadisticasWidgetState();
 }
 
-class _HomeCWidgetState extends State<HomeCWidget> {
-  late HomeCModel _model;
+class _EstadisticasWidgetState extends State<EstadisticasWidget> {
+  late EstadisticasModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomeCModel());
+    _model = createModel(context, () => EstadisticasModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultwg0 =
+          await EstadisticasGroup.toasLasEstadisticasCall.call(
+        token: currentAuthenticationToken,
+      );
+
+      if ((_model.apiResultwg0?.succeeded ?? true)) {
+        _model.totalReservas = getJsonField(
+          (_model.apiResultwg0?.jsonBody ?? ''),
+          r'''$.data.totalReservas''',
+        );
+        _model.totalEventos = getJsonField(
+          (_model.apiResultwg0?.jsonBody ?? ''),
+          r'''$.data.totalEventos''',
+        );
+        _model.totalVisitasPerfil = getJsonField(
+          (_model.apiResultwg0?.jsonBody ?? ''),
+          r'''$.data.totalVisitasPerfil''',
+        );
+        _model.loading = false;
+        safeSetState(() {});
+      }
+    });
   }
 
   @override
@@ -51,10 +79,19 @@ class _HomeCWidgetState extends State<HomeCWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.chevron_left_rounded,
-                        color: Color(0xFFFF8F14),
-                        size: 24.0,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.safePop();
+                        },
+                        child: Icon(
+                          Icons.chevron_left_rounded,
+                          color: Color(0xFFFF8F14),
+                          size: 24.0,
+                        ),
                       ),
                       Padding(
                         padding:
@@ -108,7 +145,7 @@ class _HomeCWidgetState extends State<HomeCWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '0',
+                                  _model.totalVisitasPerfil.toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -189,7 +226,7 @@ class _HomeCWidgetState extends State<HomeCWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '0',
+                                  _model.totalReservas.toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -270,7 +307,7 @@ class _HomeCWidgetState extends State<HomeCWidget> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  '1',
+                                  _model.totalEventos.toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
