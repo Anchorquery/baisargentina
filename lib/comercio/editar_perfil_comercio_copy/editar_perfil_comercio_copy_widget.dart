@@ -1186,7 +1186,7 @@ class _EditarPerfilComercioCopyWidgetState
                                                                 },
                                                                 carouselController:
                                                                     _model.carouselController1 ??=
-                                                                        CarouselSliderController(),
+                                                                        CarouselController(),
                                                                 options:
                                                                     CarouselOptions(
                                                                   initialPage: max(
@@ -1276,7 +1276,7 @@ class _EditarPerfilComercioCopyWidgetState
                                                                 },
                                                                 carouselController:
                                                                     _model.carouselController2 ??=
-                                                                        CarouselSliderControllerroller(),
+                                                                        CarouselController(),
                                                                 options:
                                                                     CarouselOptions(
                                                                   initialPage: max(

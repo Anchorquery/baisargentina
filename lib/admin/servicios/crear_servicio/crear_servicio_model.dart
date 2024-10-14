@@ -57,7 +57,7 @@ class CrearServicioModel extends FlutterFlowModel<CrearServicioWidget> {
   int? categoryValue;
   FormFieldController<int>? categoryValueController;
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
+  CarouselController? carouselController;
   int carouselCurrentIndex = 1;
 
   bool isDataUploading = false;

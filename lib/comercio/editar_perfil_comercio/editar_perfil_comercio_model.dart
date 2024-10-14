@@ -66,11 +66,11 @@ class EditarPerfilComercioModel
   String? Function(BuildContext, String?)?
       textFieldUbicacionTextControllerValidator;
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController1;
+  CarouselController? carouselController1;
   int carouselCurrentIndex1 = 0;
 
   // State field(s) for Carousel widget.
-  CarouselSliderControllerroller? carouselController2;
+  CarouselController? carouselController2;
   int carouselCurrentIndex2 = 0;
 
   bool isDataUploading2 = false;
