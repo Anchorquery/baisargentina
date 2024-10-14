@@ -28,7 +28,7 @@ class ServicioModel extends FlutterFlowModel<ServicioWidget> {
   // Stores action output result for [Backend Call - API (findOneService)] action in servicio widget.
   ApiCallResponse? apiResultService;
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
+  CarouselController? carouselController;
   int carouselCurrentIndex = 1;
 
   // Stores action output result for [Backend Call - API (delete)] action in Icon widget.

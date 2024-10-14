@@ -31,7 +31,7 @@ class HousignModel extends FlutterFlowModel<HousignWidget> {
   // Stores action output result for [Backend Call - API (Obtener un housing)] action in housign widget.
   ApiCallResponse? apiResponseHousingId;
   // State field(s) for Carouselhousign widget.
-  CarouselSliderController? carouselhousignController;
+  CarouselController? carouselhousignController;
   int carouselhousignCurrentIndex = 1;
 
   // Model for loader component.

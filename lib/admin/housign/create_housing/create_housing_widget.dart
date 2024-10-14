@@ -942,7 +942,7 @@ class _CreateHousingWidgetState extends State<CreateHousingWidget>
                                                     },
                                                     carouselController: _model
                                                             .carouselController ??=
-                                                        CarouselSliderController(),
+                                                        CarouselController(),
                                                     options: CarouselOptions(
                                                       initialPage: max(
                                                           0,

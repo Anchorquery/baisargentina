@@ -259,7 +259,7 @@ class _ComercioProfileWidgetState extends State<ComercioProfileWidget> {
                       ),
                     ],
                     carouselController: _model.carouselController ??=
-                        CarouselSliderController(),
+                        CarouselController(),
                     options: CarouselOptions(
                       initialPage: 1,
                       viewportFraction: 0.5,

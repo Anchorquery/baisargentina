@@ -1603,7 +1603,7 @@ class NumeroDeEventosCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'Numero de eventos',
-      apiUrl: '${baseUrl}/estadisticas/eventos',
+      apiUrl: '${baseUrl}/bookings/estadisticas/eventos',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${token}',

@@ -53,7 +53,7 @@ class CreateHousingModel extends FlutterFlowModel<CreateHousingWidget> {
   TextEditingController? textController7;
   String? Function(BuildContext, String?)? textController7Validator;
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
+  CarouselController? carouselController;
   int carouselCurrentIndex = 1;
 
   bool isDataUploading = false;
