@@ -589,7 +589,7 @@ class _TranviaWidgetState extends State<TranviaWidget> {
                         ),
                       ],
                       carouselController: _model.carouselhousignController ??=
-                          CarouselController(),
+                          CarouselSliderController(),
                       options: CarouselOptions(
                         initialPage: 1,
                         viewportFraction: 0.5,
