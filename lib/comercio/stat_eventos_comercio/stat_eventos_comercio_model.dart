@@ -1,6 +1,7 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -28,6 +29,8 @@ class StatEventosComercioModel
 
   String? endDate;
 
+  bool loading = true;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (Numero de eventos)] action in StatEventosComercio widget.
@@ -38,11 +41,17 @@ class StatEventosComercioModel
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  // Model for loader component.
+  late LoaderModel loaderModel;
+
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    loaderModel = createModel(context, () => LoaderModel());
+  }
 
   @override
   void dispose() {
     tabBarController?.dispose();
+    loaderModel.dispose();
   }
 }

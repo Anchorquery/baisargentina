@@ -178,7 +178,7 @@ class _ServicioWidgetState extends State<ServicioWidget> {
                           );
                         },
                         carouselController: _model.carouselController ??=
-                            CarouselSliderController(),
+                            CarouselController(),
                         options: CarouselOptions(
                           initialPage: max(0, min(1, images.length - 1)),
                           viewportFraction: 0.5,

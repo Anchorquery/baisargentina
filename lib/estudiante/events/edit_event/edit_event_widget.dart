@@ -1944,7 +1944,7 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                                         },
                                                         carouselController: _model
                                                                 .carouselController ??=
-                                                            CarouselSliderController(),
+                                                            CarouselController(),
                                                         options:
                                                             CarouselOptions(
                                                           initialPage: max(

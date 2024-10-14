@@ -1185,7 +1185,7 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                                                 },
                                                                 carouselController:
                                                                     _model.carouselController1 ??=
-                                                                        CarouselSliderController(),
+                                                                        CarouselController(),
                                                                 options:
                                                                     CarouselOptions(
                                                                   initialPage: max(
@@ -1275,7 +1275,7 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                                                 },
                                                                 carouselController:
                                                                     _model.carouselController2 ??=
-                                                                        CarouselSliderController(),
+                                                                        CarouselController(),
                                                                 options:
                                                                     CarouselOptions(
                                                                   initialPage: max(

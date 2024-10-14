@@ -148,7 +148,7 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
+  CarouselController? carouselController;
   int carouselCurrentIndex = 1;
 
   bool isDataUploading2 = false;
