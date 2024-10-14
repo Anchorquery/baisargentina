@@ -715,7 +715,7 @@ class _CrearServicioWidgetState extends State<CrearServicioWidget>
                                                     },
                                                     carouselController: _model
                                                             .carouselController ??=
-                                                        CarouselController(),
+                                                        CarouselSliderController(),
                                                     options: CarouselOptions(
                                                       initialPage: max(
                                                           0,

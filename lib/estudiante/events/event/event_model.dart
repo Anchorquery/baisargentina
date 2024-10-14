@@ -48,7 +48,7 @@ class EventModel extends FlutterFlowModel<EventWidget> {
   // Stores action output result for [Backend Call - API (GetEvent)] action in event widget.
   ApiCallResponse? apiResponseEventId;
   // State field(s) for Carouselhousign widget.
-  CarouselController? carouselhousignController;
+  CarouselSliderController? carouselhousignController;
   int carouselhousignCurrentIndex = 1;
 
   // Stores action output result for [Backend Call - API (CreateReserve)] action in reservar widget.
