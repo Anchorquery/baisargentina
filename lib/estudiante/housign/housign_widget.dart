@@ -548,7 +548,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                                     },
                                     carouselController:
                                         _model.carouselhousignController ??=
-                                            CarouselController(),
+                                            CarouselSliderController(),
                                     options: CarouselOptions(
                                       initialPage:
                                           max(0, min(1, images.length - 1)),
