@@ -533,7 +533,6 @@ class _ReservaIdAdminWidgetState extends State<ReservaIdAdminWidget>
                             width: MediaQuery.sizeOf(context).width * 0.85,
                             height: MediaQuery.sizeOf(context).height * 0.12,
                             decoration: BoxDecoration(
-                              color: Color(0xFFF2F2F2),
                               borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(20.0),
                                 bottomRight: Radius.circular(20.0),
