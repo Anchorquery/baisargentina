@@ -35,12 +35,23 @@ class StatEventosComercioModel
 
   // Stores action output result for [Backend Call - API (Numero de eventos)] action in StatEventosComercio widget.
   ApiCallResponse? apiResultVisitasLocal;
-  DateTime? datePicked;
+  DateTime? datePicked1;
+  // Stores action output result for [Backend Call - API (Numero de eventos)] action in fechaInicioVentaLabel widget.
+  ApiCallResponse? apiResultxFiltroInitDate;
+  DateTime? datePicked2;
+  // Stores action output result for [Backend Call - API (Numero de eventos)] action in finFilterDaLabel widget.
+  ApiCallResponse? apiResultxFiltroEndDate;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  // Stores action output result for [Backend Call - API (Numero de eventos)] action in Tab widget.
+  ApiCallResponse? apiResultxaPorDia;
+  // Stores action output result for [Backend Call - API (Numero de eventos)] action in Tab widget.
+  ApiCallResponse? apiResultxaPorSemana;
+  // Stores action output result for [Backend Call - API (Numero de eventos)] action in Tab widget.
+  ApiCallResponse? apiResultxaPorMes;
   // Model for loader component.
   late LoaderModel loaderModel;
 

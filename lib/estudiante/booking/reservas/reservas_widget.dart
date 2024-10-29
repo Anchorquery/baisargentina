@@ -1,7 +1,6 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/empty_list/empty_list_widget.dart';
 import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -208,19 +207,6 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                               builder: (context) {
                                                 final data =
                                                     _model.items.toList();
-                                                if (data.isEmpty) {
-                                                  return Container(
-                                                    width: MediaQuery.sizeOf(
-                                                                context)
-                                                            .width *
-                                                        1.0,
-                                                    child: EmptyListWidget(
-                                                      message:
-                                                          'No hay reservas',
-                                                      error: 'Sin datos',
-                                                    ),
-                                                  );
-                                                }
 
                                                 return ListView.builder(
                                                   padding: EdgeInsets.zero,

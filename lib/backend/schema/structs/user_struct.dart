@@ -19,6 +19,7 @@ class UserStruct extends BaseStruct {
     bool? confirmed,
     bool? inArgentina,
     String? avatar,
+    String? phone,
   })  : _id = id,
         _name = name,
         _lastName = lastName,
@@ -29,7 +30,8 @@ class UserStruct extends BaseStruct {
         _role = role,
         _confirmed = confirmed,
         _inArgentina = inArgentina,
-        _avatar = avatar;
+        _avatar = avatar,
+        _phone = phone;
 
   // "id" field.
   int? _id;
@@ -112,6 +114,13 @@ class UserStruct extends BaseStruct {
 
   bool hasAvatar() => _avatar != null;
 
+  // "phone" field.
+  String? _phone;
+  String get phone => _phone ?? '';
+  set phone(String? val) => _phone = val;
+
+  bool hasPhone() => _phone != null;
+
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -124,6 +133,7 @@ class UserStruct extends BaseStruct {
         confirmed: data['confirmed'] as bool?,
         inArgentina: data['inArgentina'] as bool?,
         avatar: data['avatar'] as String?,
+        phone: data['phone'] as String?,
       );
 
   static UserStruct? maybeFromMap(dynamic data) =>
@@ -141,6 +151,7 @@ class UserStruct extends BaseStruct {
         'confirmed': _confirmed,
         'inArgentina': _inArgentina,
         'avatar': _avatar,
+        'phone': _phone,
       }.withoutNulls;
 
   @override
@@ -187,6 +198,10 @@ class UserStruct extends BaseStruct {
         ),
         'avatar': serializeParam(
           _avatar,
+          ParamType.String,
+        ),
+        'phone': serializeParam(
+          _phone,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -248,6 +263,11 @@ class UserStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        phone: deserializeParam(
+          data['phone'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -266,7 +286,8 @@ class UserStruct extends BaseStruct {
         role == other.role &&
         confirmed == other.confirmed &&
         inArgentina == other.inArgentina &&
-        avatar == other.avatar;
+        avatar == other.avatar &&
+        phone == other.phone;
   }
 
   @override
@@ -281,7 +302,8 @@ class UserStruct extends BaseStruct {
         role,
         confirmed,
         inArgentina,
-        avatar
+        avatar,
+        phone
       ]);
 }
 
@@ -297,6 +319,7 @@ UserStruct createUserStruct({
   bool? confirmed,
   bool? inArgentina,
   String? avatar,
+  String? phone,
 }) =>
     UserStruct(
       id: id,
@@ -310,4 +333,5 @@ UserStruct createUserStruct({
       confirmed: confirmed,
       inArgentina: inArgentina,
       avatar: avatar,
+      phone: phone,
     );

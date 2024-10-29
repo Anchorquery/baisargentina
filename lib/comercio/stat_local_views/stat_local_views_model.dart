@@ -34,9 +34,12 @@ class StatLocalViewsModel extends FlutterFlowModel<StatLocalViewsWidget> {
 
   // Stores action output result for [Backend Call - API (Obtener personas visitan local reservas)] action in StatLocalViews widget.
   ApiCallResponse? apiResultxa0;
-  DateTime? datePicked;
+  DateTime? datePicked1;
   // Stores action output result for [Backend Call - API (Obtener personas visitan local reservas)] action in fechaInicioVentaLabel widget.
   ApiCallResponse? apiResultxFiltroInitDate;
+  DateTime? datePicked2;
+  // Stores action output result for [Backend Call - API (Obtener personas visitan local reservas)] action in fechaFinLabel widget.
+  ApiCallResponse? apiResultxFiltroendDate;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>

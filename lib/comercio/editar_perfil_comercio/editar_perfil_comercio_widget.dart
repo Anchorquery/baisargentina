@@ -163,6 +163,43 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                   children: [
                                     Stack(
                                       children: [
+                                        Builder(
+                                          builder: (context) {
+                                            if (_model.uploadedLocalFile1 !=
+                                                    null &&
+                                                (_model.uploadedLocalFile1.bytes
+                                                        ?.isNotEmpty ??
+                                                    false)) {
+                                              return Container(
+                                                width: 100.0,
+                                                height: 100.0,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.memory(
+                                                  _model.uploadedLocalFile1
+                                                          .bytes ??
+                                                      Uint8List.fromList([]),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              );
+                                            } else {
+                                              return Container(
+                                                width: 120.0,
+                                                height: 120.0,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  widget!.data!.picture.url,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              );
+                                            }
+                                          },
+                                        ),
                                         InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -244,43 +281,6 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Builder(
-                                          builder: (context) {
-                                            if (_model.uploadedLocalFile1 !=
-                                                    null &&
-                                                (_model.uploadedLocalFile1.bytes
-                                                        ?.isNotEmpty ??
-                                                    false)) {
-                                              return Container(
-                                                width: 100.0,
-                                                height: 100.0,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.memory(
-                                                  _model.uploadedLocalFile1
-                                                          .bytes ??
-                                                      Uint8List.fromList([]),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              );
-                                            } else {
-                                              return Container(
-                                                width: 100.0,
-                                                height: 100.0,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Image.network(
-                                                  widget!.data!.picture.url,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              );
-                                            }
-                                          },
                                         ),
                                       ],
                                     ),

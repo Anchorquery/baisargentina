@@ -32,7 +32,7 @@ class _VerReservasEventoWidgetState extends State<VerReservasEventoWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('ReservasAdmin');
+      context.pushNamed('reservas');
     });
   }
 

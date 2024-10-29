@@ -152,7 +152,10 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                       child: Text(
-                        _model.cantidadEstudiantes.toString(),
+                        valueOrDefault<String>(
+                          _model.cantidadEstudiantes.toString(),
+                          '0',
+                        ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
                               color: Color(0xFFFF8F14),
@@ -165,14 +168,18 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                   ),
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      'Estudiantes registrados',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Lato',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 16.0,
-                            letterSpacing: 0.0,
-                          ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                      child: Text(
+                        'Estudiantes registrados',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Lato',
+                              color: FlutterFlowTheme.of(context).primary,
+                              fontSize: 16.0,
+                              letterSpacing: 0.0,
+                            ),
+                      ),
                     ),
                   ),
                   Align(
@@ -343,8 +350,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('EstOComer');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -446,8 +453,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('transacciones');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -541,7 +548,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('servicios');
+                                          context.pushNamed('serviciosCreados');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -643,8 +650,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('housigns');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -737,8 +744,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('AllChats');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -840,8 +847,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('FAQcreados');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -934,8 +941,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('AllTickets');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(

@@ -2,13 +2,13 @@
 export '/estudiante/public/inicio/inicio_widget.dart' show InicioWidget;
 export '/estudiante/public/registro/registro_widget.dart' show RegistroWidget;
 export '/estudiante/public/login/login_widget.dart' show LoginWidget;
-export '/estudiante/housigns/housigns_widget.dart' show HousignsWidget;
+export '/estudiante/housing/housigns/housigns_widget.dart' show HousignsWidget;
 export '/estudiante/perfil/user_profile/user_profile_widget.dart'
     show UserProfileWidget;
 export '/estudiante/reservaexitosa/reservaexitosa_widget.dart'
     show ReservaexitosaWidget;
 export '/estudiante/tranvia/tranvia_widget.dart' show TranviaWidget;
-export '/estudiante/housign/housign_widget.dart' show HousignWidget;
+export '/estudiante/housing/housign/housign_widget.dart' show HousignWidget;
 export '/estudiante/policy/politicasde_reembolso/politicasde_reembolso_widget.dart'
     show PoliticasdeReembolsoWidget;
 export '/estudiante/policy/nosotros/nosotros_widget.dart' show NosotrosWidget;
@@ -22,7 +22,6 @@ export '/estudiante/admin/validarqr/scaneo_exitoso/scaneo_exitoso_widget.dart'
     show ScaneoExitosoWidget;
 export '/estudiante/admin/validarqr/scaneo_error/scaneo_error_widget.dart'
     show ScaneoErrorWidget;
-export '/estudiante/perfil/edit/edit_widget.dart' show EditWidget;
 export '/estudiante/events/edit_event/edit_event_widget.dart'
     show EditEventWidget;
 export '/estudiante/booking/reserva_id/reserva_id_widget.dart'
@@ -52,9 +51,7 @@ export '/comercio/stat_profile_views/stat_profile_views_widget.dart'
 export '/admin/home_admin/home_admin_widget.dart' show HomeAdminWidget;
 export '/comercio/establecer_contrasena/establecer_contrasena_widget.dart'
     show EstablecerContrasenaWidget;
-export '/admin/reservas_admin/reservas_admin_widget.dart'
-    show ReservasAdminWidget;
-export '/admin/servicios_creados/servicios_creados_widget.dart'
+export '/admin/servicios/servicios_creados/servicios_creados_widget.dart'
     show ServiciosCreadosWidget;
 export '/estudiante/services/servicio/servicio_widget.dart' show ServicioWidget;
 export '/admin/servicios/crear_servicio/crear_servicio_widget.dart'
@@ -91,7 +88,7 @@ export '/admin/housign/create_housing/create_housing_widget.dart'
     show CreateHousingWidget;
 export '/admin/f_a_qadmin/crear_f_a_q/crear_f_a_q_widget.dart'
     show CrearFAQWidget;
-export '/admin/crear_comercio/crear_comercio/crear_comercio_widget.dart'
+export '/admin/users/crear_comercio/crear_comercio_widget.dart'
     show CrearComercioWidget;
 export '/comercio/stat_local_views/stat_local_views_widget.dart'
     show StatLocalViewsWidget;
@@ -101,3 +98,37 @@ export '/comercio/editar_perfil_comercio/editar_perfil_comercio_widget.dart'
     show EditarPerfilComercioWidget;
 export '/comercio/editar_perfil_comercio_copy/editar_perfil_comercio_copy_widget.dart'
     show EditarPerfilComercioCopyWidget;
+export '/admin/eventos_admin/categoria_eventos/categoria_eventos_widget.dart'
+    show CategoriaEventosWidget;
+export '/admin/eventos_admin/crear_categoria_e/crear_categoria_e_widget.dart'
+    show CrearCategoriaEWidget;
+export '/admin/eventos_admin/editar_categoria_e/editar_categoria_e_widget.dart'
+    show EditarCategoriaEWidget;
+export '/admin/transacciones/transaction_details/transaction_details_widget.dart'
+    show TransactionDetailsWidget;
+export '/tickets/see_or_create/see_or_create_widget.dart'
+    show SeeOrCreateWidget;
+export '/tickets/create_a_ticket/create_a_ticket_widget.dart'
+    show CreateATicketWidget;
+export '/tickets/all_tickets/all_tickets_widget.dart' show AllTicketsWidget;
+export '/admin/users/est_o_comer/est_o_comer_widget.dart' show EstOComerWidget;
+export '/admin/users/lista_estudiantes/lista_estudiantes_widget.dart'
+    show ListaEstudiantesWidget;
+export '/admin/users/perfile_estudiante/perfile_estudiante_widget.dart'
+    show PerfileEstudianteWidget;
+export '/admin/users/comercio_profile_a_d_m_i_n/comercio_profile_a_d_m_i_n_widget.dart'
+    show ComercioProfileADMINWidget;
+export '/admin/users/lista_comercio/lista_comercio_widget.dart'
+    show ListaComercioWidget;
+export '/estudiante/perfil/editar_perfil_user/editar_perfil_user_widget.dart'
+    show EditarPerfilUserWidget;
+export '/chat/all_chats/all_chats_widget.dart' show AllChatsWidget;
+export '/chat/chat/chat_widget.dart' show ChatWidget;
+export '/admin/f_a_qadmin/f_a_qcreados/f_a_qcreados_widget.dart'
+    show FAQcreadosWidget;
+export '/admin/eventos_admin/reservas_admin/reservas_admin_widget.dart'
+    show ReservasAdminWidget;
+export '/estudiante/perfil/edit_perfil_test/edit_perfil_test_widget.dart'
+    show EditPerfilTestWidget;
+export '/estudiante/booking/reserva_id_admin/reserva_id_admin_widget.dart'
+    show ReservaIdAdminWidget;

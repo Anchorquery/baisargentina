@@ -191,11 +191,12 @@ class _StatEventosComercioWidgetState extends State<StatEventosComercioWidget>
                                   0.0, 5.0, 0.0, 20.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  final _datePickedDate = await showDatePicker(
+                                  final _datePicked1Date = await showDatePicker(
                                     context: context,
                                     initialDate: getCurrentTimestamp,
                                     firstDate: DateTime(1900),
-                                    lastDate: getCurrentTimestamp,
+                                    lastDate:
+                                        (getCurrentTimestamp ?? DateTime(2050)),
                                     builder: (context, child) {
                                       return wrapInMaterialDatePickerTheme(
                                         context,
@@ -233,24 +234,87 @@ class _StatEventosComercioWidgetState extends State<StatEventosComercioWidget>
                                     },
                                   );
 
-                                  if (_datePickedDate != null) {
+                                  if (_datePicked1Date != null) {
                                     safeSetState(() {
-                                      _model.datePicked = DateTime(
-                                        _datePickedDate.year,
-                                        _datePickedDate.month,
-                                        _datePickedDate.day,
+                                      _model.datePicked1 = DateTime(
+                                        _datePicked1Date.year,
+                                        _datePicked1Date.month,
+                                        _datePicked1Date.day,
                                       );
                                     });
                                   }
+                                  _model.apiResultxFiltroInitDate =
+                                      await EstadisticasGroup
+                                          .numeroDeEventosCall
+                                          .call(
+                                    groupBy: 'day',
+                                    startDate: dateTimeFormat(
+                                      "d-M-y",
+                                      _model.datePicked1,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    token: currentAuthenticationToken,
+                                    endDate: dateTimeFormat(
+                                      "d-M-y",
+                                      _model.datePicked2,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                  );
+
+                                  if ((_model.apiResultxFiltroInitDate
+                                          ?.succeeded ??
+                                      true)) {
+                                    _model.data = EstaditicaStruct.maybeFromMap(
+                                        getJsonField(
+                                      (_model.apiResultxFiltroInitDate
+                                              ?.jsonBody ??
+                                          ''),
+                                      r'''$.data''',
+                                    ));
+                                    safeSetState(() {});
+                                    safeSetState(() {
+                                      _model.tabBarController!.animateTo(
+                                        0,
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.ease,
+                                      );
+                                    });
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Ha ocurrido un error'),
+                                          content: Text(getJsonField(
+                                            (_model.apiResultxFiltroInitDate
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.error''',
+                                          ).toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+
+                                  safeSetState(() {});
                                 },
-                                text: _model.datePicked != null
+                                text: _model.datePicked1 != null
                                     ? dateTimeFormat(
                                         "d/M/y",
-                                        _model.datePicked,
+                                        _model.datePicked1,
                                         locale: FFLocalizations.of(context)
                                             .languageCode,
                                       )
-                                    : 'Fecha de nacimiento',
+                                    : 'Fecha inicio',
                                 icon: Icon(
                                   Icons.calendar_today,
                                   size: 15.0,
@@ -279,9 +343,170 @@ class _StatEventosComercioWidgetState extends State<StatEventosComercioWidget>
                                 ),
                               ),
                             ),
+                            if (_model.datePicked1 != null)
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 20.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    final _datePicked2Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate: (_model.datePicked1 ??
+                                          DateTime(1900)),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (_datePicked2Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 = DateTime(
+                                          _datePicked2Date.year,
+                                          _datePicked2Date.month,
+                                          _datePicked2Date.day,
+                                        );
+                                      });
+                                    }
+                                    _model.apiResultxFiltroEndDate =
+                                        await EstadisticasGroup
+                                            .numeroDeEventosCall
+                                            .call(
+                                      groupBy: 'day',
+                                      startDate: dateTimeFormat(
+                                        "d-M-y",
+                                        _model.datePicked1,
+                                        locale: FFLocalizations.of(context)
+                                            .languageCode,
+                                      ),
+                                      token: currentAuthenticationToken,
+                                      endDate: dateTimeFormat(
+                                        "d-M-y",
+                                        _model.datePicked2,
+                                        locale: FFLocalizations.of(context)
+                                            .languageCode,
+                                      ),
+                                    );
+
+                                    if ((_model.apiResultxFiltroEndDate
+                                            ?.succeeded ??
+                                        true)) {
+                                      _model.data =
+                                          EstaditicaStruct.maybeFromMap(
+                                              getJsonField(
+                                        (_model.apiResultxFiltroEndDate
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.data''',
+                                      ));
+                                      safeSetState(() {});
+                                      safeSetState(() {
+                                        _model.tabBarController!.animateTo(
+                                          0,
+                                          duration: Duration(milliseconds: 300),
+                                          curve: Curves.ease,
+                                        );
+                                      });
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Ha ocurrido un error'),
+                                            content: Text(getJsonField(
+                                              (_model.apiResultxFiltroEndDate
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.error''',
+                                            ).toString()),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+
+                                    safeSetState(() {});
+                                  },
+                                  text: _model.datePicked2 != null
+                                      ? dateTimeFormat(
+                                          "d/M/y",
+                                          _model.datePicked2,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        )
+                                      : 'Fecha fin',
+                                  icon: Icon(
+                                    Icons.calendar_today,
+                                    size: 15.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 40.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: Color(0xFFEBEEF2),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          color: Colors.black,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(24.0),
+                                  ),
+                                ),
+                              ),
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: MediaQuery.sizeOf(context).height * 0.37,
+                              height: MediaQuery.sizeOf(context).height * 0.5,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -336,9 +561,125 @@ class _StatEventosComercioWidgetState extends State<StatEventosComercioWidget>
                                       controller: _model.tabBarController,
                                       onTap: (i) async {
                                         [
-                                          () async {},
-                                          () async {},
-                                          () async {}
+                                          () async {
+                                            _model.apiResultxaPorDia =
+                                                await EstadisticasGroup
+                                                    .numeroDeEventosCall
+                                                    .call(
+                                              groupBy: 'day',
+                                              token: currentAuthenticationToken,
+                                            );
+
+                                            if ((_model.apiResultxaPorDia
+                                                    ?.succeeded ??
+                                                true)) {
+                                              _model.data =
+                                                  EstaditicaStruct.maybeFromMap(
+                                                      getJsonField(
+                                                (_model.apiResultxaPorDia
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.data''',
+                                              ));
+                                              safeSetState(() {});
+                                            } else {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Ha ocurrido un error'),
+                                                    content: Text(getJsonField(
+                                                      (_model.apiResultxaPorDia
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      r'''$.error''',
+                                                    ).toString()),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            }
+
+                                            safeSetState(() {});
+                                          },
+                                          () async {
+                                            var _shouldSetState = false;
+                                            _model.apiResultxaPorSemana =
+                                                await EstadisticasGroup
+                                                    .numeroDeEventosCall
+                                                    .call(
+                                              groupBy: 'week',
+                                              token: currentAuthenticationToken,
+                                            );
+
+                                            _shouldSetState = true;
+                                            if ((_model.apiResultxaPorSemana
+                                                    ?.succeeded ??
+                                                true)) {
+                                              _model.data =
+                                                  EstaditicaStruct.maybeFromMap(
+                                                      getJsonField(
+                                                (_model.apiResultxaPorSemana
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.data''',
+                                              ));
+                                              safeSetState(() {});
+                                              if (_shouldSetState)
+                                                safeSetState(() {});
+                                              return;
+                                            } else {
+                                              if (_shouldSetState)
+                                                safeSetState(() {});
+                                              return;
+                                            }
+
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                          },
+                                          () async {
+                                            var _shouldSetState = false;
+                                            _model.apiResultxaPorMes =
+                                                await EstadisticasGroup
+                                                    .numeroDeEventosCall
+                                                    .call(
+                                              groupBy: 'month',
+                                              token: currentAuthenticationToken,
+                                            );
+
+                                            _shouldSetState = true;
+                                            if ((_model.apiResultxaPorMes
+                                                    ?.succeeded ??
+                                                true)) {
+                                              _model.data =
+                                                  EstaditicaStruct.maybeFromMap(
+                                                      getJsonField(
+                                                (_model.apiResultxaPorMes
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.data''',
+                                              ));
+                                              safeSetState(() {});
+                                              if (_shouldSetState)
+                                                safeSetState(() {});
+                                              return;
+                                            } else {
+                                              if (_shouldSetState)
+                                                safeSetState(() {});
+                                              return;
+                                            }
+
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                          }
                                         ][i]();
                                       },
                                     ),

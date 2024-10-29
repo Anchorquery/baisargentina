@@ -8,8 +8,8 @@ import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -678,7 +678,10 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                               Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                                                                                 child: Text(
-                                                                                  dataItem.description.maybeHandleOverflow(maxChars: 100),
+                                                                                  dataItem.description.maybeHandleOverflow(
+                                                                                    maxChars: 45,
+                                                                                    replacement: '…',
+                                                                                  ),
                                                                                   maxLines: 4,
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Lato',

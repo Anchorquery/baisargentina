@@ -210,7 +210,7 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
                                   0.0, 5.0, 0.0, 20.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  final _datePickedDate = await showDatePicker(
+                                  final _datePicked1Date = await showDatePicker(
                                     context: context,
                                     initialDate: getCurrentTimestamp,
                                     firstDate: DateTime(1900),
@@ -252,12 +252,12 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
                                     },
                                   );
 
-                                  if (_datePickedDate != null) {
+                                  if (_datePicked1Date != null) {
                                     safeSetState(() {
-                                      _model.datePicked = DateTime(
-                                        _datePickedDate.year,
-                                        _datePickedDate.month,
-                                        _datePickedDate.day,
+                                      _model.datePicked1 = DateTime(
+                                        _datePicked1Date.year,
+                                        _datePicked1Date.month,
+                                        _datePicked1Date.day,
                                       );
                                     });
                                   }
@@ -268,7 +268,7 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
                                     groupBy: 'day',
                                     startDate: dateTimeFormat(
                                       "d-M-y",
-                                      _model.datePicked,
+                                      _model.datePicked1,
                                       locale: FFLocalizations.of(context)
                                           .languageCode,
                                     ),
@@ -319,10 +319,10 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
 
                                   safeSetState(() {});
                                 },
-                                text: _model.datePicked != null
+                                text: _model.datePicked1 != null
                                     ? dateTimeFormat(
                                         "d/M/y",
-                                        _model.datePicked,
+                                        _model.datePicked1,
                                         locale: FFLocalizations.of(context)
                                             .languageCode,
                                       )
@@ -355,6 +355,167 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
                                 ),
                               ),
                             ),
+                            if (_model.datePicked1 != null)
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 20.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    final _datePicked2Date =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: getCurrentTimestamp,
+                                      firstDate: (_model.datePicked1 ??
+                                          DateTime(1900)),
+                                      lastDate: DateTime(2050),
+                                      builder: (context, child) {
+                                        return wrapInMaterialDatePickerTheme(
+                                          context,
+                                          child!,
+                                          headerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          headerForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          headerTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineLarge
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    fontSize: 32.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                          pickerBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          pickerForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          selectedDateTimeBackgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          selectedDateTimeForegroundColor:
+                                              FlutterFlowTheme.of(context).info,
+                                          actionButtonForegroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          iconSize: 24.0,
+                                        );
+                                      },
+                                    );
+
+                                    if (_datePicked2Date != null) {
+                                      safeSetState(() {
+                                        _model.datePicked2 = DateTime(
+                                          _datePicked2Date.year,
+                                          _datePicked2Date.month,
+                                          _datePicked2Date.day,
+                                        );
+                                      });
+                                    }
+                                    _model.apiResultxFiltroendDate =
+                                        await EstadisticasGroup
+                                            .obtenerPersonasVisitanLocalReservasCall
+                                            .call(
+                                      groupBy: 'day',
+                                      startDate: dateTimeFormat(
+                                        "d-M-y",
+                                        _model.datePicked1,
+                                        locale: FFLocalizations.of(context)
+                                            .languageCode,
+                                      ),
+                                      token: currentAuthenticationToken,
+                                      endDate: dateTimeFormat(
+                                        "d-M-y",
+                                        _model.datePicked2,
+                                        locale: FFLocalizations.of(context)
+                                            .languageCode,
+                                      ),
+                                    );
+
+                                    if ((_model.apiResultxFiltroendDate
+                                            ?.succeeded ??
+                                        true)) {
+                                      _model.data =
+                                          EstaditicaStruct.maybeFromMap(
+                                              getJsonField(
+                                        (_model.apiResultxFiltroendDate
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.data''',
+                                      ));
+                                      safeSetState(() {});
+                                      safeSetState(() {
+                                        _model.tabBarController!.animateTo(
+                                          0,
+                                          duration: Duration(milliseconds: 300),
+                                          curve: Curves.ease,
+                                        );
+                                      });
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Ha ocurrido un error'),
+                                            content: Text(getJsonField(
+                                              (_model.apiResultxaPorSemana
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.error''',
+                                            ).toString()),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+
+                                    safeSetState(() {});
+                                  },
+                                  text: _model.datePicked2 != null
+                                      ? dateTimeFormat(
+                                          "d/M/y",
+                                          _model.datePicked2,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        )
+                                      : 'Fecha de fin',
+                                  icon: Icon(
+                                    Icons.calendar_today,
+                                    size: 15.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: 40.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: Color(0xFFEBEEF2),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          color: Colors.black,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(24.0),
+                                  ),
+                                ),
+                              ),
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Container(
@@ -621,12 +782,17 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
                                                   .fromSTEB(
                                                       0.0, 20.0, 0.0, 0.0),
                                               child: SingleChildScrollView(
-                                                child: Column(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
                                                     Container(
-                                                      width: 370.0,
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          1.0,
                                                       height: 230.0,
                                                       child:
                                                           FlutterFlowBarChart(
@@ -645,10 +811,10 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
                                                         barBorderRadius:
                                                             BorderRadius
                                                                 .circular(8.0),
-                                                        groupSpace: 8.0,
+                                                        groupSpace: 40.0,
                                                         alignment:
                                                             BarChartAlignment
-                                                                .spaceAround,
+                                                                .spaceBetween,
                                                         chartStylingInfo:
                                                             ChartStylingInfo(
                                                           backgroundColor:
@@ -676,7 +842,7 @@ class _StatLocalViewsWidgetState extends State<StatLocalViewsWidget>
                                                           }(),
                                                           titleTextStyle:
                                                               TextStyle(
-                                                            fontSize: 10.0,
+                                                            fontSize: 8.0,
                                                           ),
                                                           showLabels: true,
                                                           labelTextStyle:

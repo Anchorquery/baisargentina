@@ -23,9 +23,11 @@ class ReservaIdWidget extends StatefulWidget {
   const ReservaIdWidget({
     super.key,
     required this.uuid,
-  });
+    bool? isAdmin,
+  }) : this.isAdmin = isAdmin ?? false;
 
   final String? uuid;
+  final bool isAdmin;
 
   @override
   State<ReservaIdWidget> createState() => _ReservaIdWidgetState();
@@ -319,7 +321,9 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget>
                             ),
                             Text(
                               '${_model.data?.owner?.firstname} ${_model.data?.owner?.lastname}'
-                                  .maybeHandleOverflow(maxChars: 100),
+                                  .maybeHandleOverflow(
+                                maxChars: 100,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -503,43 +507,44 @@ class _ReservaIdWidgetState extends State<ReservaIdWidget>
                             ),
                           ),
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20.0),
-                            bottomRight: Radius.circular(20.0),
-                            topLeft: Radius.circular(20.0),
-                            topRight: Radius.circular(20.0),
-                          ),
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 0.85,
-                            height: MediaQuery.sizeOf(context).height * 0.12,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF2F2F2),
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20.0),
-                                bottomRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0),
-                              ),
+                        if (widget!.isAdmin == false)
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
                             ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 5.0, 10.0, 5.0),
-                                child: Text(
-                                  'Estamos emocionados de contar contigo en este evento. Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. ¡Nos vemos pronto!',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        letterSpacing: 0.0,
-                                      ),
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width * 0.85,
+                              height: MediaQuery.sizeOf(context).height * 0.12,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFF2F2F2),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(20.0),
+                                  bottomRight: Radius.circular(20.0),
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                ),
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 5.0, 10.0, 5.0),
+                                  child: Text(
+                                    'Estamos emocionados de contar contigo en este evento. Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. ¡Nos vemos pronto!',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ).animateOnPageLoad(

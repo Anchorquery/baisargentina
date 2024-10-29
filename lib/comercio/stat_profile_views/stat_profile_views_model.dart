@@ -34,9 +34,12 @@ class StatProfileViewsModel extends FlutterFlowModel<StatProfileViewsWidget> {
 
   // Stores action output result for [Backend Call - API (Numero vistas perfil)] action in StatProfileViews widget.
   ApiCallResponse? apiResultNumeroVista;
-  DateTime? datePicked;
+  DateTime? datePicked1;
   // Stores action output result for [Backend Call - API (Numero vistas perfil)] action in fechaInicioVentaLabel widget.
   ApiCallResponse? apiResultNumeroVistaFilterInitDay;
+  DateTime? datePicked2;
+  // Stores action output result for [Backend Call - API (Numero vistas perfil)] action in fechaFinLabel widget.
+  ApiCallResponse? apiResultNumeroVistaFilterFinDay;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>

@@ -4,12 +4,12 @@ import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'reservas_admin_widget.dart' show ReservasAdminWidget;
+import 'lista_estudiantes_widget.dart' show ListaEstudiantesWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ReservasAdminModel extends FlutterFlowModel<ReservasAdminWidget> {
+class ListaEstudiantesModel extends FlutterFlowModel<ListaEstudiantesWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TabBar widget.

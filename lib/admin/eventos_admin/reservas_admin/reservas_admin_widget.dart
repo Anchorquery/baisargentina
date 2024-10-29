@@ -1,9 +1,11 @@
 import '/components/componentes_admin/aprobar_reserva/aprobar_reserva_widget.dart';
 import '/components/negar_reserva/negar_reserva_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +76,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              'Titulo del evento ',
+                              'Lista de reservas',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -85,21 +87,74 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                     fontWeight: FontWeight.w800,
                                   ),
                             ),
-                            Text(
-                              'Reservas',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    color: Color(0x92000000),
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
                           ],
                         ),
                       ),
                     ),
                   ],
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  child: FlutterFlowDropDown<String>(
+                    controller: _model.dropDownValueController ??=
+                        FormFieldController<String>(null),
+                    options: ['Option 1', 'Option 2', 'Option 3'],
+                    onChanged: (val) =>
+                        safeSetState(() => _model.dropDownValue = val),
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: 40.0,
+                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Lato',
+                          letterSpacing: 0.0,
+                        ),
+                    hintText: 'Ver reservas por evento',
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                    elevation: 2.0,
+                    borderColor: FlutterFlowTheme.of(context).primary,
+                    borderWidth: 0.0,
+                    borderRadius: 30.0,
+                    margin:
+                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                    hidesUnderline: true,
+                    isOverButton: false,
+                    isSearchable: false,
+                    isMultiSelect: false,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      print('Button pressed ...');
+                    },
+                    text: 'Descargar la lista seleccionada',
+                    icon: Icon(
+                      Icons.download,
+                      size: 15.0,
+                    ),
+                    options: FFButtonOptions(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Lato',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 0.0,
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
                 ),
                 Expanded(
                   child: Padding(
@@ -119,8 +174,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                 ),
                             unselectedLabelStyle: TextStyle(),
                             labelColor: Colors.white,
-                            unselectedLabelColor:
-                                FlutterFlowTheme.of(context).secondaryText,
+                            unselectedLabelColor: Colors.white,
                             backgroundColor:
                                 FlutterFlowTheme.of(context).tertiary,
                             borderWidth: 2.0,
@@ -134,7 +188,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                 text: 'Aprobadas',
                               ),
                               Tab(
-                                text: 'Negadas',
+                                text: 'Desaprobadas',
                               ),
                             ],
                             controller: _model.tabBarController,
@@ -188,7 +242,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Nombre de usuario',
+                                                    'Nombre de Usuario',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -199,7 +253,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                                         ),
                                                   ),
                                                   Text(
-                                                    'correodeusuario@gmail.com',
+                                                    'Titulo de evento',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -309,7 +363,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Nombre de usuario',
+                                                    'Nombre de Usuario',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -320,7 +374,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                                         ),
                                                   ),
                                                   Text(
-                                                    'correodeusuario@gmail.com',
+                                                    'Titulo de evento',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -344,7 +398,7 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                                                     0.0,
                                                                     0.0),
                                                         child: Text(
-                                                          'Negado',
+                                                          'Desaprobado',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium

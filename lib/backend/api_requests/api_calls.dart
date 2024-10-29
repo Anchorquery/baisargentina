@@ -255,6 +255,15 @@ class ReserveGroup {
   static FindmeCall findmeCall = FindmeCall();
   static FindmeOneCall findmeOneCall = FindmeOneCall();
   static VerificarReservaCall verificarReservaCall = VerificarReservaCall();
+  static FindReservasAdminCall findReservasAdminCall = FindReservasAdminCall();
+  static FindOneAdminCall findOneAdminCall = FindOneAdminCall();
+  static BuscarEstudiantePorEmailCall buscarEstudiantePorEmailCall =
+      BuscarEstudiantePorEmailCall();
+  static BuscarEventoPorNombreEventoCall buscarEventoPorNombreEventoCall =
+      BuscarEventoPorNombreEventoCall();
+  static CrearReservaAdminCall crearReservaAdminCall = CrearReservaAdminCall();
+  static CambiarEstadoRerservaCall cambiarEstadoRerservaCall =
+      CambiarEstadoRerservaCall();
 }
 
 class CreateReserveCall {
@@ -416,6 +425,204 @@ class VerificarReservaCall {
       );
 }
 
+class FindReservasAdminCall {
+  Future<ApiCallResponse> call({
+    String? groupBy = 'day',
+    String? startDate = '',
+    String? endDate = '',
+    String? ownerName = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'find reservas admin',
+      apiUrl: '${baseUrl}/bookings',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'groupBy': groupBy,
+        'startDate': startDate,
+        'endDate': endDate,
+        'ownerName': ownerName,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FindOneAdminCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'find one admin',
+      apiUrl: '${baseUrl}/bookings/${uuid}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class BuscarEstudiantePorEmailCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "email": "${email}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'buscar estudiante por email',
+      apiUrl: '${baseUrl}/bookings/buscar-estudiante-email/',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class BuscarEventoPorNombreEventoCall {
+  Future<ApiCallResponse> call({
+    String? nombre = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "nombre": "${nombre}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'buscar evento por nombre evento',
+      apiUrl: '${baseUrl}/bookings/buscar-evento-nombre/',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CrearReservaAdminCall {
+  Future<ApiCallResponse> call({
+    int? estudiante,
+    int? evento,
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "estudiante": ${estudiante},
+  "evento": ${evento}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'crear reserva admin',
+      apiUrl: '${baseUrl}/bookings/crear-admin-reserva-manual/',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CambiarEstadoRerservaCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? estado = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "estado": "${estado}",
+  "uuid": "${uuid}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'cambiarEstadoRerserva',
+      apiUrl: '${baseUrl}/bookings/cambiar-estado-reserva/',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End Reserve Group Code
 
 /// Start User Group Code
@@ -431,6 +638,7 @@ class UserGroup {
   static MeCall meCall = MeCall();
   static UpdatemetadataComercioCall updatemetadataComercioCall =
       UpdatemetadataComercioCall();
+  static MedataCall medataCall = MedataCall();
 }
 
 class MeCall {
@@ -511,6 +719,32 @@ class UpdatemetadataComercioCall {
         'images': images,
       },
       bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class MedataCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'medata',
+      apiUrl: '${baseUrl}/users-permissions/users/me-data',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

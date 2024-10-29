@@ -209,12 +209,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'edit',
-          path: '/edit',
-          requireAuth: true,
-          builder: (context, params) => EditWidget(),
-        ),
-        FFRoute(
           name: 'editEvent',
           path: '/editEvent',
           requireAuth: true,
@@ -233,6 +227,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             uuid: params.getParam(
               'uuid',
               ParamType.String,
+            ),
+            isAdmin: params.getParam(
+              'isAdmin',
+              ParamType.bool,
             ),
           ),
         ),
@@ -323,12 +321,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/establecerContrasena',
           requireAuth: true,
           builder: (context, params) => EstablecerContrasenaWidget(),
-        ),
-        FFRoute(
-          name: 'ReservasAdmin',
-          path: '/reservasAdmin',
-          requireAuth: true,
-          builder: (context, params) => ReservasAdminWidget(),
         ),
         FFRoute(
           name: 'serviciosCreados',
@@ -538,6 +530,129 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.DataStruct,
               isList: false,
               structBuilder: CommercePerfilStruct.fromSerializableMap,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'CategoriaEventos',
+          path: '/categoriaEventos',
+          requireAuth: true,
+          builder: (context, params) => CategoriaEventosWidget(),
+        ),
+        FFRoute(
+          name: 'CrearCategoriaE',
+          path: '/crearCategoriaE',
+          requireAuth: true,
+          builder: (context, params) => CrearCategoriaEWidget(),
+        ),
+        FFRoute(
+          name: 'EditarCategoriaE',
+          path: '/editarCategoriaE',
+          requireAuth: true,
+          builder: (context, params) => EditarCategoriaEWidget(),
+        ),
+        FFRoute(
+          name: 'TransactionDetails',
+          path: '/transactionDetails',
+          requireAuth: true,
+          builder: (context, params) => TransactionDetailsWidget(),
+        ),
+        FFRoute(
+          name: 'SeeOrCreate',
+          path: '/seeOrCreate',
+          requireAuth: true,
+          builder: (context, params) => SeeOrCreateWidget(),
+        ),
+        FFRoute(
+          name: 'CreateATicket',
+          path: '/createATicket',
+          requireAuth: true,
+          builder: (context, params) => CreateATicketWidget(),
+        ),
+        FFRoute(
+          name: 'AllTickets',
+          path: '/allTickets',
+          requireAuth: true,
+          builder: (context, params) => AllTicketsWidget(),
+        ),
+        FFRoute(
+          name: 'EstOComer',
+          path: '/estOComer',
+          requireAuth: true,
+          builder: (context, params) => EstOComerWidget(),
+        ),
+        FFRoute(
+          name: 'ListaEstudiantes',
+          path: '/listaEstudiantes',
+          requireAuth: true,
+          builder: (context, params) => ListaEstudiantesWidget(),
+        ),
+        FFRoute(
+          name: 'perfileEstudiante',
+          path: '/perfileEstudiante',
+          requireAuth: true,
+          builder: (context, params) => PerfileEstudianteWidget(),
+        ),
+        FFRoute(
+          name: 'ComercioProfileADMIN',
+          path: '/comercioProfileADMIN',
+          requireAuth: true,
+          builder: (context, params) => ComercioProfileADMINWidget(),
+        ),
+        FFRoute(
+          name: 'ListaComercio',
+          path: '/listaComercio',
+          requireAuth: true,
+          builder: (context, params) => ListaComercioWidget(),
+        ),
+        FFRoute(
+          name: 'editarPerfilUser',
+          path: '/editarPerfilUser',
+          requireAuth: true,
+          builder: (context, params) => EditarPerfilUserWidget(),
+        ),
+        FFRoute(
+          name: 'AllChats',
+          path: '/allChats',
+          requireAuth: true,
+          builder: (context, params) => AllChatsWidget(),
+        ),
+        FFRoute(
+          name: 'chat',
+          path: '/chat',
+          requireAuth: true,
+          builder: (context, params) => ChatWidget(),
+        ),
+        FFRoute(
+          name: 'FAQcreados',
+          path: '/fAQcreados',
+          requireAuth: true,
+          builder: (context, params) => FAQcreadosWidget(),
+        ),
+        FFRoute(
+          name: 'ReservasAdmin',
+          path: '/reservasAdmin',
+          requireAuth: true,
+          builder: (context, params) => ReservasAdminWidget(),
+        ),
+        FFRoute(
+          name: 'editPerfilTest',
+          path: '/editPerfilTest',
+          requireAuth: true,
+          builder: (context, params) => EditPerfilTestWidget(),
+        ),
+        FFRoute(
+          name: 'reservaIdAdmin',
+          path: '/reservaIdAdmin',
+          requireAuth: true,
+          builder: (context, params) => ReservaIdAdminWidget(
+            uuid: params.getParam(
+              'uuid',
+              ParamType.String,
+            ),
+            isAdmin: params.getParam(
+              'isAdmin',
+              ParamType.bool,
             ),
           ),
         )

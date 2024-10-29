@@ -68,8 +68,8 @@ class _ComercioProfileWidgetState extends State<ComercioProfileWidget> {
                         Stack(
                           children: [
                             Container(
-                              width: 100.0,
-                              height: 100.0,
+                              width: 120.0,
+                              height: 120.0,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
