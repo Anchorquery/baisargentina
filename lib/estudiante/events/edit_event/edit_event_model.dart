@@ -41,6 +41,16 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
 
   bool loading = true;
 
+  List<OrganizadorStruct> organizers = [];
+  void addToOrganizers(OrganizadorStruct item) => organizers.add(item);
+  void removeFromOrganizers(OrganizadorStruct item) => organizers.remove(item);
+  void removeAtIndexFromOrganizers(int index) => organizers.removeAt(index);
+  void insertAtIndexInOrganizers(int index, OrganizadorStruct item) =>
+      organizers.insert(index, item);
+  void updateOrganizersAtIndex(
+          int index, Function(OrganizadorStruct) updateFn) =>
+      organizers[index] = updateFn(organizers[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -48,6 +58,8 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
   ApiCallResponse? apiResponseEvent;
   // Stores action output result for [Backend Call - API (Api Get Categories)] action in editEvent widget.
   ApiCallResponse? apiResponseCategories;
+  // Stores action output result for [Backend Call - API (GetOrganizer)] action in editEvent widget.
+  ApiCallResponse? apiResponseOrganizers;
   // State field(s) for name widget.
   FocusNode? nameFocusNode;
   TextEditingController? nameTextController;
@@ -72,19 +84,16 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
     return null;
   }
 
+  // State field(s) for isBais widget.
+  bool? isBaisValue;
   // State field(s) for organizador widget.
-  FocusNode? organizadorFocusNode;
-  TextEditingController? organizadorTextController;
-  String? Function(BuildContext, String?)? organizadorTextControllerValidator;
-  String? _organizadorTextControllerValidator(
-      BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'nombre del oganizador';
-    }
-
-    return null;
-  }
-
+  int? organizadorValue;
+  FormFieldController<int>? organizadorValueController;
+  // State field(s) for nameOrganizerNoBais widget.
+  FocusNode? nameOrganizerNoBaisFocusNode;
+  TextEditingController? nameOrganizerNoBaisTextController;
+  String? Function(BuildContext, String?)?
+      nameOrganizerNoBaisTextControllerValidator;
   DateTime? datePicked1;
   DateTime? datePicked2;
   DateTime? datePicked3;
@@ -110,8 +119,8 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
   String? puedenAsistirValue;
   FormFieldController<String>? puedenAsistirValueController;
   // State field(s) for categoria-evento widget.
-  String? categoriaEventoValue;
-  FormFieldController<String>? categoriaEventoValueController;
+  int? categoriaEventoValue;
+  FormFieldController<int>? categoriaEventoValueController;
   // State field(s) for limiteDePersonas widget.
   FocusNode? limiteDePersonasFocusNode;
   TextEditingController? limiteDePersonasTextController;
@@ -126,9 +135,9 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
     return null;
   }
 
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
+  // State field(s) for type widget.
+  String? typeValue;
+  FormFieldController<String>? typeValueController;
   // State field(s) for precioDelTicket-evento widget.
   FocusNode? precioDelTicketEventoFocusNode;
   TextEditingController? precioDelTicketEventoTextController;
@@ -163,7 +172,6 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
   void initState(BuildContext context) {
     nameTextControllerValidator = _nameTextControllerValidator;
     placeUrlTextControllerValidator = _placeUrlTextControllerValidator;
-    organizadorTextControllerValidator = _organizadorTextControllerValidator;
     descripcionEventoTextControllerValidator =
         _descripcionEventoTextControllerValidator;
     limiteDePersonasTextControllerValidator =
@@ -181,8 +189,8 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
     placeUrlFocusNode?.dispose();
     placeUrlTextController?.dispose();
 
-    organizadorFocusNode?.dispose();
-    organizadorTextController?.dispose();
+    nameOrganizerNoBaisFocusNode?.dispose();
+    nameOrganizerNoBaisTextController?.dispose();
 
     descripcionEventoFocusNode?.dispose();
     descripcionEventoTextController?.dispose();

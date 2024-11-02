@@ -102,8 +102,8 @@ class CreateEventModel extends FlutterFlowModel<CreateEventWidget> {
   String? puedenAsistirValue;
   FormFieldController<String>? puedenAsistirValueController;
   // State field(s) for categoria-evento widget.
-  String? categoriaEventoValue;
-  FormFieldController<String>? categoriaEventoValueController;
+  int? categoriaEventoValue;
+  FormFieldController<int>? categoriaEventoValueController;
   // State field(s) for limiteDePersonas widget.
   FocusNode? limiteDePersonasFocusNode;
   TextEditingController? limiteDePersonasTextController;

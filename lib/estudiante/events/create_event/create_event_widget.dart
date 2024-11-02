@@ -1347,11 +1347,16 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 20.0),
-                                child: FlutterFlowDropDown<String>(
+                                child: FlutterFlowDropDown<int>(
                                   controller:
                                       _model.categoriaEventoValueController ??=
-                                          FormFieldController<String>(null),
-                                  options: _model.categories
+                                          FormFieldController<int>(
+                                    _model.categoriaEventoValue ??= 0,
+                                  ),
+                                  options: List<int>.from(_model.categories
+                                      .map((e) => e.id)
+                                      .toList()),
+                                  optionLabels: _model.categories
                                       .map((e) => valueOrDefault<String>(
                                             e.name,
                                             'text',

@@ -28,6 +28,9 @@ class EventStruct extends BaseStruct {
     String? description,
     bool? reservado,
     OwnerStruct? organizador,
+    String? detenerVentas,
+    bool? isBais,
+    String? nameOrganizerNoBais,
   })  : _id = id,
         _name = name,
         _type = type,
@@ -47,7 +50,10 @@ class EventStruct extends BaseStruct {
         _horaFinEvento = horaFinEvento,
         _description = description,
         _reservado = reservado,
-        _organizador = organizador;
+        _organizador = organizador,
+        _detenerVentas = detenerVentas,
+        _isBais = isBais,
+        _nameOrganizerNoBais = nameOrganizerNoBais;
 
   // "id" field.
   int? _id;
@@ -212,6 +218,27 @@ class EventStruct extends BaseStruct {
 
   bool hasOrganizador() => _organizador != null;
 
+  // "detenerVentas" field.
+  String? _detenerVentas;
+  String get detenerVentas => _detenerVentas ?? 'un_dia_antes';
+  set detenerVentas(String? val) => _detenerVentas = val;
+
+  bool hasDetenerVentas() => _detenerVentas != null;
+
+  // "isBais" field.
+  bool? _isBais;
+  bool get isBais => _isBais ?? true;
+  set isBais(bool? val) => _isBais = val;
+
+  bool hasIsBais() => _isBais != null;
+
+  // "nameOrganizerNoBais" field.
+  String? _nameOrganizerNoBais;
+  String get nameOrganizerNoBais => _nameOrganizerNoBais ?? '';
+  set nameOrganizerNoBais(String? val) => _nameOrganizerNoBais = val;
+
+  bool hasNameOrganizerNoBais() => _nameOrganizerNoBais != null;
+
   static EventStruct fromMap(Map<String, dynamic> data) => EventStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -236,6 +263,9 @@ class EventStruct extends BaseStruct {
         description: data['description'] as String?,
         reservado: data['reservado'] as bool?,
         organizador: OwnerStruct.maybeFromMap(data['organizador']),
+        detenerVentas: data['detenerVentas'] as String?,
+        isBais: data['isBais'] as bool?,
+        nameOrganizerNoBais: data['nameOrganizerNoBais'] as String?,
       );
 
   static EventStruct? maybeFromMap(dynamic data) =>
@@ -262,6 +292,9 @@ class EventStruct extends BaseStruct {
         'description': _description,
         'reservado': _reservado,
         'organizador': _organizador?.toMap(),
+        'detenerVentas': _detenerVentas,
+        'isBais': _isBais,
+        'nameOrganizerNoBais': _nameOrganizerNoBais,
       }.withoutNulls;
 
   @override
@@ -346,6 +379,18 @@ class EventStruct extends BaseStruct {
         'organizador': serializeParam(
           _organizador,
           ParamType.DataStruct,
+        ),
+        'detenerVentas': serializeParam(
+          _detenerVentas,
+          ParamType.String,
+        ),
+        'isBais': serializeParam(
+          _isBais,
+          ParamType.bool,
+        ),
+        'nameOrganizerNoBais': serializeParam(
+          _nameOrganizerNoBais,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -455,6 +500,21 @@ class EventStruct extends BaseStruct {
           false,
           structBuilder: OwnerStruct.fromSerializableMap,
         ),
+        detenerVentas: deserializeParam(
+          data['detenerVentas'],
+          ParamType.String,
+          false,
+        ),
+        isBais: deserializeParam(
+          data['isBais'],
+          ParamType.bool,
+          false,
+        ),
+        nameOrganizerNoBais: deserializeParam(
+          data['nameOrganizerNoBais'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -483,7 +543,10 @@ class EventStruct extends BaseStruct {
         horaFinEvento == other.horaFinEvento &&
         description == other.description &&
         reservado == other.reservado &&
-        organizador == other.organizador;
+        organizador == other.organizador &&
+        detenerVentas == other.detenerVentas &&
+        isBais == other.isBais &&
+        nameOrganizerNoBais == other.nameOrganizerNoBais;
   }
 
   @override
@@ -507,7 +570,10 @@ class EventStruct extends BaseStruct {
         horaFinEvento,
         description,
         reservado,
-        organizador
+        organizador,
+        detenerVentas,
+        isBais,
+        nameOrganizerNoBais
       ]);
 }
 
@@ -531,6 +597,9 @@ EventStruct createEventStruct({
   String? description,
   bool? reservado,
   OwnerStruct? organizador,
+  String? detenerVentas,
+  bool? isBais,
+  String? nameOrganizerNoBais,
 }) =>
     EventStruct(
       id: id,
@@ -552,4 +621,7 @@ EventStruct createEventStruct({
       description: description,
       reservado: reservado,
       organizador: organizador ?? OwnerStruct(),
+      detenerVentas: detenerVentas,
+      isBais: isBais,
+      nameOrganizerNoBais: nameOrganizerNoBais,
     );

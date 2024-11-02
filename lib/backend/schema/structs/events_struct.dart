@@ -17,6 +17,8 @@ class EventsStruct extends BaseStruct {
     TypeEvent? type,
     String? fecha,
     String? horaInicioEvento,
+    bool? isBais,
+    String? nameOrganizerNoBais,
   })  : _id = id,
         _name = name,
         _description = description,
@@ -25,7 +27,9 @@ class EventsStruct extends BaseStruct {
         _precio = precio,
         _type = type,
         _fecha = fecha,
-        _horaInicioEvento = horaInicioEvento;
+        _horaInicioEvento = horaInicioEvento,
+        _isBais = isBais,
+        _nameOrganizerNoBais = nameOrganizerNoBais;
 
   // "id" field.
   int? _id;
@@ -98,6 +102,20 @@ class EventsStruct extends BaseStruct {
 
   bool hasHoraInicioEvento() => _horaInicioEvento != null;
 
+  // "isBais" field.
+  bool? _isBais;
+  bool get isBais => _isBais ?? true;
+  set isBais(bool? val) => _isBais = val;
+
+  bool hasIsBais() => _isBais != null;
+
+  // "nameOrganizerNoBais" field.
+  String? _nameOrganizerNoBais;
+  String get nameOrganizerNoBais => _nameOrganizerNoBais ?? '';
+  set nameOrganizerNoBais(String? val) => _nameOrganizerNoBais = val;
+
+  bool hasNameOrganizerNoBais() => _nameOrganizerNoBais != null;
+
   static EventsStruct fromMap(Map<String, dynamic> data) => EventsStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -108,6 +126,8 @@ class EventsStruct extends BaseStruct {
         type: deserializeEnum<TypeEvent>(data['type']),
         fecha: data['fecha'] as String?,
         horaInicioEvento: data['horaInicioEvento'] as String?,
+        isBais: data['isBais'] as bool?,
+        nameOrganizerNoBais: data['nameOrganizerNoBais'] as String?,
       );
 
   static EventsStruct? maybeFromMap(dynamic data) =>
@@ -123,6 +143,8 @@ class EventsStruct extends BaseStruct {
         'type': _type?.serialize(),
         'fecha': _fecha,
         'horaInicioEvento': _horaInicioEvento,
+        'isBais': _isBais,
+        'nameOrganizerNoBais': _nameOrganizerNoBais,
       }.withoutNulls;
 
   @override
@@ -161,6 +183,14 @@ class EventsStruct extends BaseStruct {
         ),
         'horaInicioEvento': serializeParam(
           _horaInicioEvento,
+          ParamType.String,
+        ),
+        'isBais': serializeParam(
+          _isBais,
+          ParamType.bool,
+        ),
+        'nameOrganizerNoBais': serializeParam(
+          _nameOrganizerNoBais,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -213,6 +243,16 @@ class EventsStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        isBais: deserializeParam(
+          data['isBais'],
+          ParamType.bool,
+          false,
+        ),
+        nameOrganizerNoBais: deserializeParam(
+          data['nameOrganizerNoBais'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -229,7 +269,9 @@ class EventsStruct extends BaseStruct {
         precio == other.precio &&
         type == other.type &&
         fecha == other.fecha &&
-        horaInicioEvento == other.horaInicioEvento;
+        horaInicioEvento == other.horaInicioEvento &&
+        isBais == other.isBais &&
+        nameOrganizerNoBais == other.nameOrganizerNoBais;
   }
 
   @override
@@ -242,7 +284,9 @@ class EventsStruct extends BaseStruct {
         precio,
         type,
         fecha,
-        horaInicioEvento
+        horaInicioEvento,
+        isBais,
+        nameOrganizerNoBais
       ]);
 }
 
@@ -256,6 +300,8 @@ EventsStruct createEventsStruct({
   TypeEvent? type,
   String? fecha,
   String? horaInicioEvento,
+  bool? isBais,
+  String? nameOrganizerNoBais,
 }) =>
     EventsStruct(
       id: id,
@@ -267,4 +313,6 @@ EventsStruct createEventsStruct({
       type: type,
       fecha: fecha,
       horaInicioEvento: horaInicioEvento,
+      isBais: isBais,
+      nameOrganizerNoBais: nameOrganizerNoBais,
     );

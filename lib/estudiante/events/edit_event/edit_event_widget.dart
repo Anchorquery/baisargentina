@@ -57,7 +57,78 @@ class _EditEventWidgetState extends State<EditEventWidget>
             token: currentAuthenticationToken,
           );
 
-          if (!(_model.apiResponseEvent?.succeeded ?? true)) {
+          if ((_model.apiResponseEvent?.succeeded ?? true)) {
+            _model.event = EventStruct.maybeFromMap(getJsonField(
+              (_model.apiResponseEvent?.jsonBody ?? ''),
+              r'''$.data''',
+            ));
+            safeSetState(() {
+              _model.nameTextController?.text = _model.event!.name;
+              _model.nameTextController?.selection = TextSelection.collapsed(
+                  offset: _model.nameTextController!.text.length);
+            });
+            safeSetState(() {
+              _model.placeUrlTextController?.text =
+                  _model.placeUrlTextController.text;
+              _model.placeUrlTextController?.selection =
+                  TextSelection.collapsed(
+                      offset: _model.placeUrlTextController!.text.length);
+            });
+            safeSetState(() {
+              _model.nameOrganizerNoBaisTextController?.text =
+                  _model.event!.nameOrganizerNoBais;
+              _model.nameOrganizerNoBaisTextController?.selection =
+                  TextSelection.collapsed(
+                      offset: _model
+                          .nameOrganizerNoBaisTextController!.text.length);
+            });
+            safeSetState(() {
+              _model.descripcionEventoTextController?.text =
+                  _model.event!.description;
+              _model.descripcionEventoTextController?.selection =
+                  TextSelection.collapsed(
+                      offset:
+                          _model.descripcionEventoTextController!.text.length);
+            });
+            safeSetState(() {
+              _model.limiteDePersonasTextController?.text =
+                  _model.event!.limitePersonas.toString();
+              _model.limiteDePersonasTextController?.selection =
+                  TextSelection.collapsed(
+                      offset:
+                          _model.limiteDePersonasTextController!.text.length);
+            });
+            safeSetState(() {
+              _model.precioDelTicketEventoTextController?.text =
+                  _model.event!.precio.toString();
+              _model.precioDelTicketEventoTextController?.selection =
+                  TextSelection.collapsed(
+                      offset: _model
+                          .precioDelTicketEventoTextController!.text.length);
+            });
+            safeSetState(() {
+              _model.puedenAsistirValueController?.value =
+                  _model.event!.restriccion!.name;
+            });
+            safeSetState(() {
+              _model.categoriaEventoValueController?.value =
+                  _model.event!.category.id;
+            });
+            safeSetState(() {
+              _model.detenerventasValueController?.value =
+                  _model.event!.detenerVentas;
+            });
+            safeSetState(() {
+              _model.typeValueController?.value = _model.event!.type.name;
+            });
+            safeSetState(() {
+              _model.isBaisValue = _model.isBaisValue!;
+            });
+            safeSetState(() {
+              _model.organizadorValueController?.value =
+                  _model.event!.organizador.id;
+            });
+          } else {
             return;
           }
         }),
@@ -65,6 +136,28 @@ class _EditEventWidgetState extends State<EditEventWidget>
           _model.apiResponseCategories = await ApiGetCategoriesCall.call();
 
           if (!(_model.apiResponseCategories?.succeeded ?? true)) {
+            return;
+          }
+        }),
+        Future(() async {
+          _model.apiResponseOrganizers =
+              await EventsGroup.getOrganizerCall.call(
+            token: currentAuthenticationToken,
+          );
+
+          if ((_model.apiResponseCategories?.succeeded ?? true)) {
+            _model.organizers = (getJsonField(
+              (_model.apiResponseOrganizers?.jsonBody ?? ''),
+              r'''$.data''',
+              true,
+            )!
+                    .toList()
+                    .map<OrganizadorStruct?>(OrganizadorStruct.maybeFromMap)
+                    .toList() as Iterable<OrganizadorStruct?>)
+                .withoutNulls
+                .toList()
+                .cast<OrganizadorStruct>();
+          } else {
             return;
           }
         }),
@@ -77,8 +170,9 @@ class _EditEventWidgetState extends State<EditEventWidget>
     _model.placeUrlTextController ??= TextEditingController();
     _model.placeUrlFocusNode ??= FocusNode();
 
-    _model.organizadorTextController ??= TextEditingController();
-    _model.organizadorFocusNode ??= FocusNode();
+    _model.isBaisValue = true;
+    _model.nameOrganizerNoBaisTextController ??= TextEditingController();
+    _model.nameOrganizerNoBaisFocusNode ??= FocusNode();
 
     _model.descripcionEventoTextController ??= TextEditingController();
     _model.descripcionEventoFocusNode ??= FocusNode();
@@ -110,6 +204,25 @@ class _EditEventWidgetState extends State<EditEventWidget>
         ],
       ),
       'textFieldOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'dropDownOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -185,7 +298,7 @@ class _EditEventWidgetState extends State<EditEventWidget>
           ),
         ],
       ),
-      'dropDownOnPageLoadAnimation1': AnimationInfo(
+      'dropDownOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -223,7 +336,7 @@ class _EditEventWidgetState extends State<EditEventWidget>
           ),
         ],
       ),
-      'dropDownOnPageLoadAnimation2': AnimationInfo(
+      'dropDownOnPageLoadAnimation3': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -242,7 +355,7 @@ class _EditEventWidgetState extends State<EditEventWidget>
           ),
         ],
       ),
-      'dropDownOnPageLoadAnimation3': AnimationInfo(
+      'dropDownOnPageLoadAnimation4': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -602,80 +715,187 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                   ).animateOnPageLoad(animationsMap[
                                       'textFieldOnPageLoadAnimation2']!),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 0.0, 20.0, 20.0),
-                                  child: TextFormField(
-                                    controller:
-                                        _model.organizadorTextController,
-                                    focusNode: _model.organizadorFocusNode,
-                                    autofocus: true,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Nombre del organizador',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
+                                Align(
+                                  alignment: AlignmentDirectional(-1.0, -1.0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        30.0, 0.0, 0.0, 5.0),
+                                    child: Text(
+                                      'Evento Bais',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
                                             letterSpacing: 0.0,
                                           ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Lato',
-                                            letterSpacing: 0.0,
-                                          ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
-                                      ),
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              20.0, 0.0, 0.0, 0.0),
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Lato',
-                                          letterSpacing: 0.0,
-                                        ),
-                                    keyboardType: TextInputType.name,
-                                    validator: _model
-                                        .organizadorTextControllerValidator
-                                        .asValidator(context),
-                                  ).animateOnPageLoad(animationsMap[
-                                      'textFieldOnPageLoadAnimation3']!),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(-1.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        30.0, 0.0, 0.0, 0.0),
+                                    child: Switch.adaptive(
+                                      value: _model.isBaisValue!,
+                                      onChanged: (newValue) async {
+                                        safeSetState(() =>
+                                            _model.isBaisValue = newValue!);
+                                      },
+                                      activeColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      activeTrackColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      inactiveTrackColor:
+                                          FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      inactiveThumbColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                    ),
+                                  ),
+                                ),
+                                Builder(
+                                  builder: (context) {
+                                    if (_model.isBaisValue ?? false) {
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 15.0, 0.0, 20.0),
+                                        child: FlutterFlowDropDown<int>(
+                                          controller: _model
+                                                  .organizadorValueController ??=
+                                              FormFieldController<int>(
+                                            _model.organizadorValue ??=
+                                                _model.event?.organizador?.id,
+                                          ),
+                                          options: List<int>.from(_model
+                                              .organizers
+                                              .map((e) => e.id)
+                                              .toList()),
+                                          optionLabels: _model.organizers
+                                              .map((e) => e.name)
+                                              .toList(),
+                                          onChanged: (val) => safeSetState(() =>
+                                              _model.organizadorValue = val),
+                                          width: 348.0,
+                                          height: 56.0,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          hintText: 'Nombre del organizador',
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
+                                          fillColor: Color(0xFFF1F4F8),
+                                          elevation: 2.0,
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          borderWidth: 2.0,
+                                          borderRadius: 40.0,
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 4.0, 16.0, 4.0),
+                                          hidesUnderline: true,
+                                          isOverButton: true,
+                                          isSearchable: false,
+                                          isMultiSelect: false,
+                                        ).animateOnPageLoad(animationsMap[
+                                            'dropDownOnPageLoadAnimation1']!),
+                                      );
+                                    } else {
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 0.0, 20.0, 20.0),
+                                        child: TextFormField(
+                                          controller: _model
+                                              .nameOrganizerNoBaisTextController,
+                                          focusNode: _model
+                                              .nameOrganizerNoBaisFocusNode,
+                                          autofocus: true,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: 'Nombre del organizador',
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Lato',
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            hintStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Lato',
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(24.0),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(24.0),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(24.0),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(24.0),
+                                            ),
+                                            contentPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 0.0, 0.0, 0.0),
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Lato',
+                                                letterSpacing: 0.0,
+                                              ),
+                                          keyboardType: TextInputType.name,
+                                          validator: _model
+                                              .nameOrganizerNoBaisTextControllerValidator
+                                              .asValidator(context),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'textFieldOnPageLoadAnimation3']!),
+                                      );
+                                    }
+                                  },
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1262,8 +1482,13 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                   child: FlutterFlowDropDown<String>(
                                     controller:
                                         _model.detenerventasValueController ??=
-                                            FormFieldController<String>(null),
-                                    options: [
+                                            FormFieldController<String>(
+                                      _model.detenerventasValue ??=
+                                          _model.event?.detenerVentas,
+                                    ),
+                                    options: List<String>.from(
+                                        ['un_dia_antes', 'dos_dia_antes']),
+                                    optionLabels: [
                                       '1 dia antes del evento',
                                       '2 dia antes del evento'
                                     ],
@@ -1296,7 +1521,7 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                     isSearchable: false,
                                     isMultiSelect: false,
                                   ).animateOnPageLoad(animationsMap[
-                                      'dropDownOnPageLoadAnimation1']!),
+                                      'dropDownOnPageLoadAnimation2']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1382,8 +1607,13 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                   child: FlutterFlowDropDown<String>(
                                     controller:
                                         _model.puedenAsistirValueController ??=
-                                            FormFieldController<String>(null),
-                                    options: [
+                                            FormFieldController<String>(
+                                      _model.puedenAsistirValue ??=
+                                          _model.event?.restriccion?.name,
+                                    ),
+                                    options: List<String>.from(
+                                        ['todo_publico', 'mayores_edad']),
+                                    optionLabels: [
                                       'Solo estudiantes +18',
                                       'Cualquier persona'
                                     ],
@@ -1416,16 +1646,22 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                     isSearchable: false,
                                     isMultiSelect: false,
                                   ).animateOnPageLoad(animationsMap[
-                                      'dropDownOnPageLoadAnimation2']!),
+                                      'dropDownOnPageLoadAnimation3']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 20.0),
-                                  child: FlutterFlowDropDown<String>(
+                                  child: FlutterFlowDropDown<int>(
                                     controller: _model
                                             .categoriaEventoValueController ??=
-                                        FormFieldController<String>(null),
-                                    options: _model.categories
+                                        FormFieldController<int>(
+                                      _model.categoriaEventoValue ??=
+                                          _model.event?.category?.id,
+                                    ),
+                                    options: List<int>.from(_model.categories
+                                        .map((e) => e.id)
+                                        .toList()),
+                                    optionLabels: _model.categories
                                         .map((e) => valueOrDefault<String>(
                                               e.name,
                                               'text',
@@ -1460,7 +1696,7 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                     isSearchable: false,
                                     isMultiSelect: false,
                                   ).animateOnPageLoad(animationsMap[
-                                      'dropDownOnPageLoadAnimation3']!),
+                                      'dropDownOnPageLoadAnimation4']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1553,16 +1789,16 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                       ),
                                       FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController ??=
+                                                .typeValueController ??=
                                             FormFieldController<String>(null),
-                                        options: List<String>.from(
-                                            ['Gratis', 'Pago']),
+                                        options:
+                                            List<String>.from(['free', 'pay']),
                                         optionLabels: [
                                           'Evento Gratis',
                                           'Evento de  pago'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue = val),
+                                            () => _model.typeValue = val),
                                         width: 187.0,
                                         height: 45.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -2110,11 +2346,11 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                           await ApiCreateEventsCall.call(
                                         name: _model.nameTextController.text,
                                         description: _model
-                                            .organizadorTextController.text,
+                                            .descripcionEventoTextController
+                                            .text,
                                         placeUrl:
                                             _model.placeUrlTextController.text,
-                                        organizador: int.tryParse(_model
-                                            .organizadorTextController.text),
+                                        organizador: _model.organizadorValue,
                                         fecha: _model.datePicked2?.toString(),
                                         fechaInicioVenta:
                                             _model.datePicked1?.toString(),
@@ -2134,9 +2370,16 @@ class _EditEventWidgetState extends State<EditEventWidget>
                                           '150',
                                         ),
                                         token: currentAuthenticationToken,
-                                        type: _model.dropDownValue,
+                                        type: _model.typeValue,
                                         categoryId: _model.categoriaEventoValue,
                                         portada: _model.uploadedLocalFile1,
+                                        imagesList: _model.uploadedLocalFiles2,
+                                        isBais: _model.isBaisValue,
+                                        detenerVentas:
+                                            _model.detenerventasValue,
+                                        nameOrganizerNoBais: _model
+                                            .nameOrganizerNoBaisTextController
+                                            .text,
                                       );
 
                                       if ((_model.apiResult3i2?.succeeded ??

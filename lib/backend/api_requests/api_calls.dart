@@ -2277,7 +2277,10 @@ class ApiCreateEventsCall {
     FFUploadedFile? portada,
     String? token = '',
     String? type = 'pay',
-    String? categoryId = '',
+    int? categoryId,
+    bool? isBais = true,
+    String? detenerVentas = '',
+    String? nameOrganizerNoBais = '',
   }) async {
     final images = imagesList ?? [];
 
