@@ -394,6 +394,53 @@ class _HousignWidgetState extends State<HousignWidget> {
                             ],
                           ),
                         ),
+                        Align(
+                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                30.0, 10.0, 30.0, 10.0),
+                            child: RichText(
+                              textScaler: MediaQuery.of(context).textScaler,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Limite de personas:',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiary,
+                                          fontSize: 16.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                  ),
+                                  TextSpan(
+                                    text: '  2 ',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          fontSize: 16.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                  )
+                                ],
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lato',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               35.0, 10.0, 35.0, 10.0),
@@ -490,7 +537,8 @@ class _HousignWidgetState extends State<HousignWidget> {
                             ),
                           ),
                         ),
-                        if (true /* Warning: Trying to access variable not yet defined. */)
+                        if (_model.data?.images != null &&
+                            (_model.data?.images)!.isNotEmpty)
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),

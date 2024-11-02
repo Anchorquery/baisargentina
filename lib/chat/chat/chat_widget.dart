@@ -56,13 +56,22 @@ class _ChatWidgetState extends State<ChatWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          Icons.chevron_left_rounded,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.safePop();
+                          },
+                          child: Icon(
+                            Icons.chevron_left_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
                         ),
                         Text(
-                          'Nombre de usuario',
+                          'Soporte BAIS',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Lato',
@@ -84,8 +93,8 @@ class _ChatWidgetState extends State<ChatWidget> {
                             padding: EdgeInsets.all(2.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(40.0),
-                              child: Image.network(
-                                'https://source.unsplash.com/random/1280x720?user&2',
+                              child: Image.asset(
+                                'assets/images/INICIO_(2).jpg',
                                 width: 44.0,
                                 height: 44.0,
                                 fit: BoxFit.cover,

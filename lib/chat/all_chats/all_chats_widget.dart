@@ -45,15 +45,34 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          title: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-            child: Text(
-              'Mensajes a soporte',
-              style: FlutterFlowTheme.of(context).headlineLarge.override(
-                    fontFamily: 'Lato',
-                    letterSpacing: 0.0,
-                  ),
-            ),
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.safePop();
+                },
+                child: Icon(
+                  Icons.chevron_left_rounded,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24.0,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                child: Text(
+                  'Mensajes a soporte',
+                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                        fontFamily: 'Lato',
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ),
+            ],
           ),
           actions: [],
           centerTitle: false,

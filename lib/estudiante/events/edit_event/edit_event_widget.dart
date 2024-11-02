@@ -71,16 +71,13 @@ class _EditEventWidgetState extends State<EditEventWidget>
       ]);
     });
 
-    _model.nameTextController ??=
-        TextEditingController(text: _model.event?.name);
+    _model.nameTextController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
 
-    _model.placeUrlTextController ??=
-        TextEditingController(text: _model.event?.placeUrl);
+    _model.placeUrlTextController ??= TextEditingController();
     _model.placeUrlFocusNode ??= FocusNode();
 
-    _model.organizadorTextController ??=
-        TextEditingController(text: _model.event?.organizador?.id?.toString());
+    _model.organizadorTextController ??= TextEditingController();
     _model.organizadorFocusNode ??= FocusNode();
 
     _model.descripcionEventoTextController ??= TextEditingController();

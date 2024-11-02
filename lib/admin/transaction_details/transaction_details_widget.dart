@@ -1,15 +1,23 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'transaction_details_model.dart';
 export 'transaction_details_model.dart';
 
 class TransactionDetailsWidget extends StatefulWidget {
-  const TransactionDetailsWidget({super.key});
+  const TransactionDetailsWidget({
+    super.key,
+    required this.id,
+  });
+
+  final int? id;
 
   @override
   State<TransactionDetailsWidget> createState() =>
@@ -25,6 +33,24 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TransactionDetailsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiResultGetTransaccion =
+          await TransacctionGroup.buscarTransaccionAdminCall.call(
+        id: widget!.id,
+        token: currentAuthenticationToken,
+      );
+
+      if ((_model.apiResultGetTransaccion?.succeeded ?? true)) {
+        _model.data = getJsonField(
+          (_model.apiResultGetTransaccion?.jsonBody ?? ''),
+          r'''$.data''',
+        );
+        _model.loading = !(_model.loading ?? true);
+        safeSetState(() {});
+      }
+    });
   }
 
   @override
@@ -44,7 +70,7 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(25.0, 25.0, 25.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -86,7 +112,7 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: 'Pago',
+                                    text: 'Pago ',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -96,7 +122,10 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                                         ),
                                   ),
                                   TextSpan(
-                                    text: '\"Nombre de usuario\"',
+                                    text: getJsonField(
+                                      _model.data,
+                                      r'''$.client.firstname''',
+                                    ).toString(),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -104,6 +133,19 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                         ),
+                                  ),
+                                  TextSpan(
+                                    text: ' ',
+                                    style: TextStyle(),
+                                  ),
+                                  TextSpan(
+                                    text: getJsonField(
+                                      (_model.apiResultGetTransaccion
+                                              ?.jsonBody ??
+                                          ''),
+                                      r'''$.client.lastname''',
+                                    ).toString(),
+                                    style: TextStyle(),
                                   )
                                 ],
                                 style: FlutterFlowTheme.of(context)
@@ -160,7 +202,10 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                             ),
                       ),
                       Text(
-                        '12/07/2024',
+                        getJsonField(
+                          _model.data,
+                          r'''$.dateCreated''',
+                        ).toString(),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
                               letterSpacing: 0.0,
@@ -170,6 +215,42 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                     ],
                   ),
                 ),
+                if (getJsonField(
+                      _model.data,
+                      r'''$.ref''',
+                    ) !=
+                    null)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Refrencia',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                        Text(
+                          getJsonField(
+                            _model.data,
+                            r'''$.ref''',
+                          ).toString(),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Row(
@@ -186,7 +267,10 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                             ),
                       ),
                       Text(
-                        '\$25,00',
+                        '\$ ${getJsonField(
+                          _model.data,
+                          r'''$.product.price''',
+                        ).toString()}',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
                               color: FlutterFlowTheme.of(context).tertiary,
@@ -223,7 +307,10 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  'georgia.young@example.com',
+                                  getJsonField(
+                                    _model.data,
+                                    r'''$.client.email''',
+                                  ).toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -242,8 +329,8 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('unticketEXAMPLE');
                     },
                     text: 'Ver ticket',
                     options: FFButtonOptions(

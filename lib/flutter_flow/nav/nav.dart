@@ -158,10 +158,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => TerminosycondicionesWidget(),
         ),
         FFRoute(
-          name: 'create',
-          path: '/create',
+          name: 'createEvent',
+          path: '/createEvent',
           requireAuth: true,
-          builder: (context, params) => CreateWidget(),
+          builder: (context, params) => CreateEventWidget(),
         ),
         FFRoute(
           name: 'event',
@@ -364,12 +364,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CrearCategoriaDescuentoWidget(),
         ),
         FFRoute(
-          name: 'transacciones',
-          path: '/transacciones',
-          requireAuth: true,
-          builder: (context, params) => TransaccionesWidget(),
-        ),
-        FFRoute(
           name: 'Descuentos',
           path: '/descuentos',
           requireAuth: true,
@@ -555,7 +549,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'TransactionDetails',
           path: '/transactionDetails',
           requireAuth: true,
-          builder: (context, params) => TransactionDetailsWidget(),
+          builder: (context, params) => TransactionDetailsWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'SeeOrCreate',
@@ -597,7 +596,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ComercioProfileADMIN',
           path: '/comercioProfileADMIN',
           requireAuth: true,
-          builder: (context, params) => ComercioProfileADMINWidget(),
+          builder: (context, params) => ComercioProfileADMINWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'ListaComercio',
@@ -636,12 +640,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ReservasAdminWidget(),
         ),
         FFRoute(
-          name: 'editPerfilTest',
-          path: '/editPerfilTest',
-          requireAuth: true,
-          builder: (context, params) => EditPerfilTestWidget(),
-        ),
-        FFRoute(
           name: 'reservaIdAdmin',
           path: '/reservaIdAdmin',
           requireAuth: true,
@@ -655,6 +653,77 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.bool,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'perfileEstudianteDiego',
+          path: '/perfileEstudianteDiego',
+          requireAuth: true,
+          builder: (context, params) => PerfileEstudianteDiegoWidget(),
+        ),
+        FFRoute(
+          name: 'perfileEstudianteValentina',
+          path: '/perfileEstudianteValentina',
+          requireAuth: true,
+          builder: (context, params) => PerfileEstudianteValentinaWidget(),
+        ),
+        FFRoute(
+          name: 'perfileEstudianteJosma',
+          path: '/perfileEstudianteJosma',
+          requireAuth: true,
+          builder: (context, params) => PerfileEstudianteJosmaWidget(),
+        ),
+        FFRoute(
+          name: 'perfileEstudianteDaniel',
+          path: '/perfileEstudianteDaniel',
+          requireAuth: true,
+          builder: (context, params) => PerfileEstudianteDanielWidget(),
+        ),
+        FFRoute(
+          name: 'perfileEstudianteFernando',
+          path: '/perfileEstudianteFernando',
+          requireAuth: true,
+          builder: (context, params) => PerfileEstudianteFernandoWidget(),
+        ),
+        FFRoute(
+          name: 'unticketEXAMPLE',
+          path: '/unticketEXAMPLE',
+          requireAuth: true,
+          builder: (context, params) => UnticketEXAMPLEWidget(),
+        ),
+        FFRoute(
+          name: 'CREARoVER',
+          path: '/cREARoVER',
+          requireAuth: true,
+          builder: (context, params) => CREARoVERWidget(),
+        ),
+        FFRoute(
+          name: 'transaccionesNew',
+          path: '/transaccionesNew',
+          requireAuth: true,
+          builder: (context, params) => TransaccionesNewWidget(),
+        ),
+        FFRoute(
+          name: 'ListaHousingAdmin',
+          path: '/listaHousingAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListaHousingAdminWidget(),
+        ),
+        FFRoute(
+          name: 'editarHousing',
+          path: '/editarHousing',
+          requireAuth: true,
+          builder: (context, params) => EditarHousingWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ListaEventosAdmin',
+          path: '/listaEventosAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListaEventosAdminWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

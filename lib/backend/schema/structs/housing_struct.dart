@@ -20,6 +20,8 @@ class HousingStruct extends BaseStruct {
     List<FileDStruct>? images,
     int? habitaciones,
     double? area,
+    String? typeHousing,
+    int? limitPerson,
   })  : _title = title,
         _id = id,
         _description = description,
@@ -31,7 +33,9 @@ class HousingStruct extends BaseStruct {
         _urlContacto = urlContacto,
         _images = images,
         _habitaciones = habitaciones,
-        _area = area;
+        _area = area,
+        _typeHousing = typeHousing,
+        _limitPerson = limitPerson;
 
   // "title" field.
   String? _title;
@@ -136,6 +140,22 @@ class HousingStruct extends BaseStruct {
 
   bool hasArea() => _area != null;
 
+  // "typeHousing" field.
+  String? _typeHousing;
+  String get typeHousing => _typeHousing ?? 'habitacion';
+  set typeHousing(String? val) => _typeHousing = val;
+
+  bool hasTypeHousing() => _typeHousing != null;
+
+  // "limitPerson" field.
+  int? _limitPerson;
+  int get limitPerson => _limitPerson ?? 0;
+  set limitPerson(int? val) => _limitPerson = val;
+
+  void incrementLimitPerson(int amount) => limitPerson = limitPerson + amount;
+
+  bool hasLimitPerson() => _limitPerson != null;
+
   static HousingStruct fromMap(Map<String, dynamic> data) => HousingStruct(
         title: data['title'] as String?,
         id: castToType<int>(data['id']),
@@ -152,6 +172,8 @@ class HousingStruct extends BaseStruct {
         ),
         habitaciones: castToType<int>(data['habitaciones']),
         area: castToType<double>(data['area']),
+        typeHousing: data['typeHousing'] as String?,
+        limitPerson: castToType<int>(data['limitPerson']),
       );
 
   static HousingStruct? maybeFromMap(dynamic data) =>
@@ -170,6 +192,8 @@ class HousingStruct extends BaseStruct {
         'images': _images?.map((e) => e.toMap()).toList(),
         'habitaciones': _habitaciones,
         'area': _area,
+        'typeHousing': _typeHousing,
+        'limitPerson': _limitPerson,
       }.withoutNulls;
 
   @override
@@ -222,6 +246,14 @@ class HousingStruct extends BaseStruct {
         'area': serializeParam(
           _area,
           ParamType.double,
+        ),
+        'typeHousing': serializeParam(
+          _typeHousing,
+          ParamType.String,
+        ),
+        'limitPerson': serializeParam(
+          _limitPerson,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -289,6 +321,16 @@ class HousingStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
+        typeHousing: deserializeParam(
+          data['typeHousing'],
+          ParamType.String,
+          false,
+        ),
+        limitPerson: deserializeParam(
+          data['limitPerson'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -309,7 +351,9 @@ class HousingStruct extends BaseStruct {
         urlContacto == other.urlContacto &&
         listEquality.equals(images, other.images) &&
         habitaciones == other.habitaciones &&
-        area == other.area;
+        area == other.area &&
+        typeHousing == other.typeHousing &&
+        limitPerson == other.limitPerson;
   }
 
   @override
@@ -325,7 +369,9 @@ class HousingStruct extends BaseStruct {
         urlContacto,
         images,
         habitaciones,
-        area
+        area,
+        typeHousing,
+        limitPerson
       ]);
 }
 
@@ -341,6 +387,8 @@ HousingStruct createHousingStruct({
   String? urlContacto,
   int? habitaciones,
   double? area,
+  String? typeHousing,
+  int? limitPerson,
 }) =>
     HousingStruct(
       title: title,
@@ -354,4 +402,6 @@ HousingStruct createHousingStruct({
       urlContacto: urlContacto,
       habitaciones: habitaciones,
       area: area,
+      typeHousing: typeHousing,
+      limitPerson: limitPerson,
     );

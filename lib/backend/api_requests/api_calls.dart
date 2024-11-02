@@ -25,6 +25,7 @@ class EventsGroup {
   static GetEventsCall getEventsCall = GetEventsCall();
   static GetEventCall getEventCall = GetEventCall();
   static GetOrganizerCall getOrganizerCall = GetOrganizerCall();
+  static EliminarEventoCall eliminarEventoCall = EliminarEventoCall();
 }
 
 class GetEventsCall {
@@ -142,6 +143,34 @@ class GetOrganizerCall {
       ) as List?;
 }
 
+class EliminarEventoCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token =
+        'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMzA4OTkxOSwiZXhwIjoxNzI1NjgxOTE5fQ.F-1c8-nRWcHRqiHQjxtTwlXT-VImWmicIysfDQsSZfM',
+  }) async {
+    final baseUrl = EventsGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Eliminar evento',
+      apiUrl: '${baseUrl}/events/${id}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End Events Group Code
 
 /// Start Public Group Code
@@ -150,6 +179,8 @@ class PublicGroup {
   static String getBaseUrl() => 'https://server.baisargentina.com/api';
   static Map<String, String> headers = {};
   static LoginCall loginCall = LoginCall();
+  static CategoriaComerciosCall categoriaComerciosCall =
+      CategoriaComerciosCall();
 }
 
 class LoginCall {
@@ -237,6 +268,26 @@ class LoginCall {
         response,
         r'''$.user.role.id''',
       ));
+}
+
+class CategoriaComerciosCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = PublicGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'categoria comercios',
+      apiUrl: '${baseUrl}/commerce-categories/',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End Public Group Code
@@ -1114,6 +1165,7 @@ class RutasAdminGroup {
     'Authorization': 'Bearer [token]',
   };
   static GetUserStudentCall getUserStudentCall = GetUserStudentCall();
+  static CrarComercioCall crarComercioCall = CrarComercioCall();
 }
 
 class GetUserStudentCall {
@@ -1132,6 +1184,45 @@ class GetUserStudentCall {
         'Authorization': 'Bearer ${token}',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CrarComercioCall {
+  Future<ApiCallResponse> call({
+    String? nombre = '',
+    int? category,
+    String? email = '',
+    String? password = '',
+    String? token = '',
+  }) async {
+    final baseUrl = RutasAdminGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "nombre": "${nombre}",
+  "category": ${category},
+  "email": "${email}",
+  "password": "${password}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'crar comercio',
+      apiUrl: '${baseUrl}/users/comercios/crear',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1666,6 +1757,9 @@ class HousingGroup {
   static ObtenerTodosLosHousingCall obtenerTodosLosHousingCall =
       ObtenerTodosLosHousingCall();
   static ObtenerUnHousingCall obtenerUnHousingCall = ObtenerUnHousingCall();
+  static EliminarHousningCall eliminarHousningCall = EliminarHousningCall();
+  static CreearHousingCall creearHousingCall = CreearHousingCall();
+  static EditarHousingCall editarHousingCall = EditarHousingCall();
 }
 
 class ObtenerTodosLosHousingCall {
@@ -1734,6 +1828,144 @@ class ObtenerUnHousingCall {
         response,
         r'''$.data''',
       );
+}
+
+class EliminarHousningCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = HousingGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'eliminar housning',
+      apiUrl: '${baseUrl}/housigns/${id}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CreearHousingCall {
+  Future<ApiCallResponse> call({
+    String? title = '',
+    String? description = '',
+    String? caption = '',
+    double? price,
+    String? type = '',
+    List<FFUploadedFile>? imagesList,
+    FFUploadedFile? portada,
+    String? urlContacto = '',
+    int? banos,
+    int? habitaciones,
+    double? area,
+    String? typeHousing = '',
+    int? limitPerson = 0,
+    String? token = '',
+  }) async {
+    final baseUrl = HousingGroup.getBaseUrl(
+      token: token,
+    );
+    final images = imagesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'creear housing',
+      apiUrl: '${baseUrl}/housigns',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'title': title,
+        'description': description,
+        'caption': caption,
+        'price': price,
+        'type': type,
+        'images': images,
+        'portada': portada,
+        'urlContacto': urlContacto,
+        'banos': banos,
+        'habitaciones': habitaciones,
+        'area': area,
+        'typeHousing': typeHousing,
+        'limitPerson': limitPerson,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EditarHousingCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    int? limitPerson,
+    String? typeHousing = '',
+    double? area,
+    int? habitaciones,
+    int? banos,
+    String? urlContacto = '',
+    FFUploadedFile? portada,
+    List<FFUploadedFile>? imagesList,
+    double? price,
+    String? caption = '',
+    String? description = '',
+    String? title = '',
+    String? type = '',
+    String? token = '',
+  }) async {
+    final baseUrl = HousingGroup.getBaseUrl(
+      token: token,
+    );
+    final images = imagesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'editar Housing',
+      apiUrl: '${baseUrl}/housigns/${id}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'title': title,
+        'description': description,
+        'caption': caption,
+        'price': price,
+        'type': type,
+        'images': images,
+        'portada': portada,
+        'urlContacto': urlContacto,
+        'banos': banos,
+        'habitaciones': habitaciones,
+        'area': area,
+        'typeHousing': typeHousing,
+        'limitPerson': limitPerson,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End Housing Group Code
@@ -1884,6 +2116,86 @@ class ToasLasEstadisticasCall {
 }
 
 /// End Estadisticas Group Code
+
+/// Start Transacction Group Code
+
+class TransacctionGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://server.baisargentina.com/api';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static BuscarTransaccionesAdminCall buscarTransaccionesAdminCall =
+      BuscarTransaccionesAdminCall();
+  static BuscarTransaccionAdminCall buscarTransaccionAdminCall =
+      BuscarTransaccionAdminCall();
+}
+
+class BuscarTransaccionesAdminCall {
+  Future<ApiCallResponse> call({
+    String? endDate = '',
+    String? startDate = '',
+    String? groupBy = '',
+    String? owner = '',
+    String? token = '',
+  }) async {
+    final baseUrl = TransacctionGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'buscar transacciones admin',
+      apiUrl: '${baseUrl}/transacctions',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'endDate': endDate,
+        'startDate': startDate,
+        'groupBy': groupBy,
+        'ownerName': owner,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class BuscarTransaccionAdminCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = TransacctionGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'buscar  transaccion Admin',
+      apiUrl: '${baseUrl}/transacctions/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Transacction Group Code
 
 class ApiRegisterCall {
   static Future<ApiCallResponse> call({

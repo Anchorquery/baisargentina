@@ -737,7 +737,7 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                                   ).animateOnPageLoad(animationsMap[
                                                       'cardOnPageLoadAnimation']!),
                                                 );
-                                              }).divide(SizedBox(width: 20.0)),
+                                              }).divide(SizedBox(width: 10.0)),
                                             ),
                                           );
                                         },

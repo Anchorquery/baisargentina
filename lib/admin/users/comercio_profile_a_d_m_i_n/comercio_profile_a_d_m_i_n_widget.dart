@@ -10,7 +10,12 @@ import 'comercio_profile_a_d_m_i_n_model.dart';
 export 'comercio_profile_a_d_m_i_n_model.dart';
 
 class ComercioProfileADMINWidget extends StatefulWidget {
-  const ComercioProfileADMINWidget({super.key});
+  const ComercioProfileADMINWidget({
+    super.key,
+    required this.id,
+  });
+
+  final int? id;
 
   @override
   State<ComercioProfileADMINWidget> createState() =>
@@ -56,10 +61,19 @@ class _ComercioProfileADMINWidgetState
                 alignment: AlignmentDirectional(-1.0, -1.0),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 0.0, 25.0),
-                  child: Icon(
-                    Icons.chevron_left_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.safePop();
+                    },
+                    child: Icon(
+                      Icons.chevron_left_rounded,
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 24.0,
+                    ),
                   ),
                 ),
               ),
@@ -87,86 +101,91 @@ class _ComercioProfileADMINWidgetState
                             ),
                           ],
                         ),
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Crobar',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontSize: 32.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            RichText(
-                              textScaler: MediaQuery.of(context).textScaler,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Categoría: ',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Lato',
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  TextSpan(
-                                    text: 'Disco',
-                                    style: TextStyle(),
-                                  )
-                                ],
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      letterSpacing: 0.0,
-                                    ),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Comercio de prueba 2',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Lato',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        fontSize: 32.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                ),
                               ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Estado',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Lato',
-                                          fontSize: 18.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                              RichText(
+                                textScaler: MediaQuery.of(context).textScaler,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Categoría: ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: 'Disco',
+                                      style: TextStyle(),
+                                    )
+                                  ],
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Lato',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 10.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Estado',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            fontSize: 18.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
                                   ),
-                                ),
-                                Switch.adaptive(
-                                  value: _model.switchValue!,
-                                  onChanged: (newValue) async {
-                                    safeSetState(
-                                        () => _model.switchValue = newValue!);
-                                  },
-                                  activeColor:
-                                      FlutterFlowTheme.of(context).primary,
-                                  activeTrackColor:
-                                      FlutterFlowTheme.of(context).primary,
-                                  inactiveTrackColor:
-                                      FlutterFlowTheme.of(context).alternate,
-                                  inactiveThumbColor:
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                ),
-                              ],
-                            ),
-                          ],
+                                  Switch.adaptive(
+                                    value: _model.switchValue!,
+                                    onChanged: (newValue) async {
+                                      safeSetState(
+                                          () => _model.switchValue = newValue!);
+                                    },
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    activeTrackColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    inactiveTrackColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    inactiveThumbColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ].divide(SizedBox(width: 15.0)),
                     ),
@@ -202,7 +221,7 @@ class _ComercioProfileADMINWidgetState
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: 'ejemplo@gmail.com',
+                              labelText: 'correodeusuario55@gmail.com',
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

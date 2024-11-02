@@ -14,10 +14,11 @@ export '/estudiante/policy/politicasde_reembolso/politicasde_reembolso_widget.da
 export '/estudiante/policy/nosotros/nosotros_widget.dart' show NosotrosWidget;
 export '/estudiante/policy/terminosycondiciones/terminosycondiciones_widget.dart'
     show TerminosycondicionesWidget;
-export '/estudiante/events/create/create_widget.dart' show CreateWidget;
+export '/estudiante/events/create_event/create_event_widget.dart'
+    show CreateEventWidget;
 export '/estudiante/events/event/event_widget.dart' show EventWidget;
 export '/estudiante/events/events/events_widget.dart' show EventsWidget;
-export '/estudiante/booking/reservas/reservas_widget.dart' show ReservasWidget;
+export '/estudiante/reservas/reservas_widget.dart' show ReservasWidget;
 export '/estudiante/admin/validarqr/scaneo_exitoso/scaneo_exitoso_widget.dart'
     show ScaneoExitosoWidget;
 export '/estudiante/admin/validarqr/scaneo_error/scaneo_error_widget.dart'
@@ -62,8 +63,6 @@ export '/admin/descuentos/crear_decuento/crear_decuento_widget.dart'
     show CrearDecuentoWidget;
 export '/admin/descuentos/crear_categoria_descuento/crear_categoria_descuento_widget.dart'
     show CrearCategoriaDescuentoWidget;
-export '/admin/transacciones/transacciones/transacciones_widget.dart'
-    show TransaccionesWidget;
 export '/estudiante/discoint/descuentos/descuentos_widget.dart'
     show DescuentosWidget;
 export '/estudiante/services/services_by_category/services_by_category_widget.dart'
@@ -84,7 +83,7 @@ export '/estudiante/paymen_succces/paymen_succces_widget.dart'
     show PaymenSucccesWidget;
 export '/estudiante/planes/detalle_mi_plan/detalle_mi_plan_widget.dart'
     show DetalleMiPlanWidget;
-export '/admin/housign/create_housing/create_housing_widget.dart'
+export '/admin/housign_admin/create_housing/create_housing_widget.dart'
     show CreateHousingWidget;
 export '/admin/f_a_qadmin/crear_f_a_q/crear_f_a_q_widget.dart'
     show CrearFAQWidget;
@@ -104,7 +103,7 @@ export '/admin/eventos_admin/crear_categoria_e/crear_categoria_e_widget.dart'
     show CrearCategoriaEWidget;
 export '/admin/eventos_admin/editar_categoria_e/editar_categoria_e_widget.dart'
     show EditarCategoriaEWidget;
-export '/admin/transacciones/transaction_details/transaction_details_widget.dart'
+export '/admin/transaction_details/transaction_details_widget.dart'
     show TransactionDetailsWidget;
 export '/tickets/see_or_create/see_or_create_widget.dart'
     show SeeOrCreateWidget;
@@ -128,7 +127,27 @@ export '/admin/f_a_qadmin/f_a_qcreados/f_a_qcreados_widget.dart'
     show FAQcreadosWidget;
 export '/admin/eventos_admin/reservas_admin/reservas_admin_widget.dart'
     show ReservasAdminWidget;
-export '/estudiante/perfil/edit_perfil_test/edit_perfil_test_widget.dart'
-    show EditPerfilTestWidget;
 export '/estudiante/booking/reserva_id_admin/reserva_id_admin_widget.dart'
     show ReservaIdAdminWidget;
+export '/admin/users/perfile_estudiante_diego/perfile_estudiante_diego_widget.dart'
+    show PerfileEstudianteDiegoWidget;
+export '/admin/users/perfile_estudiante_valentina/perfile_estudiante_valentina_widget.dart'
+    show PerfileEstudianteValentinaWidget;
+export '/admin/perfile_estudiante_josma/perfile_estudiante_josma_widget.dart'
+    show PerfileEstudianteJosmaWidget;
+export '/admin/perfile_estudiante_daniel/perfile_estudiante_daniel_widget.dart'
+    show PerfileEstudianteDanielWidget;
+export '/admin/users/perfile_estudiante_fernando/perfile_estudiante_fernando_widget.dart'
+    show PerfileEstudianteFernandoWidget;
+export '/reservas/unticket_e_x_a_m_p_l_e/unticket_e_x_a_m_p_l_e_widget.dart'
+    show UnticketEXAMPLEWidget;
+export '/admin/servicios/c_r_e_a_ro_v_e_r/c_r_e_a_ro_v_e_r_widget.dart'
+    show CREARoVERWidget;
+export '/admin/transacciones/transacciones_new/transacciones_new_widget.dart'
+    show TransaccionesNewWidget;
+export '/admin/housign_admin/lista_housing_admin/lista_housing_admin_widget.dart'
+    show ListaHousingAdminWidget;
+export '/admin/housign_admin/editar_housing/editar_housing_widget.dart'
+    show EditarHousingWidget;
+export '/admin/eventos_admin/lista_eventos_admin/lista_eventos_admin_widget.dart'
+    show ListaEventosAdminWidget;

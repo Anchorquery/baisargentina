@@ -49,10 +49,19 @@ class _EstOComerWidgetState extends State<EstOComerWidget> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Icon(
-                      Icons.chevron_left_rounded,
-                      color: Color(0xFFFF8F14),
-                      size: 24.0,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.safePop();
+                      },
+                      child: Icon(
+                        Icons.chevron_left_rounded,
+                        color: Color(0xFFFF8F14),
+                        size: 24.0,
+                      ),
                     ),
                   ],
                 ),
@@ -72,8 +81,8 @@ class _EstOComerWidgetState extends State<EstOComerWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('ListaComercio');
                     },
                     text: 'Comercios',
                     options: FFButtonOptions(
@@ -98,8 +107,8 @@ class _EstOComerWidgetState extends State<EstOComerWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('ListaEstudiantes');
                     },
                     text: 'Estudiantes',
                     options: FFButtonOptions(

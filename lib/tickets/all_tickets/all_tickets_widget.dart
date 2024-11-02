@@ -136,7 +136,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.safePop();
+                                context.pushNamed('HomeAdmin');
                               },
                               child: Icon(
                                 Icons.chevron_left_rounded,
@@ -265,36 +265,9 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                             ),
                           ),
                         ),
-                        Row(
+                        Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: 'Descargar l. de tickets',
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      30.0, 0.0, 30.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        color: Colors.white,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(30.0),
-                                ),
-                              ),
-                            ),
                             Align(
                               alignment: AlignmentDirectional(-1.0, 0.0),
                               child: FFButtonWidget(
@@ -303,6 +276,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                 },
                                 text: 'Crear ticket manual',
                                 options: FFButtonOptions(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
                                   height: 40.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       30.0, 0.0, 30.0, 0.0),
@@ -316,13 +290,43 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                         color: Colors.white,
                                         fontSize: 12.0,
                                         letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                   elevation: 0.0,
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
                               ),
                             ),
-                          ],
+                            Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () {
+                                  print('Button pressed ...');
+                                },
+                                text: 'Descargar la de tickets',
+                                options: FFButtonOptions(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      30.0, 0.0, 30.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Lato',
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                              ),
+                            ),
+                          ].divide(SizedBox(height: 10.0)),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -575,7 +579,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               FFButtonWidget(
                                 onPressed: () async {
@@ -611,7 +615,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                 },
                                 text: 'Hoy',
                                 options: FFButtonOptions(
-                                  width: MediaQuery.sizeOf(context).width * 0.3,
+                                  width: MediaQuery.sizeOf(context).width * 0.2,
                                   height: 50.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
@@ -619,7 +623,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                       0.0, 0.0, 0.0, 0.0),
                                   color: _model.groupBy == 'day'
                                       ? FlutterFlowTheme.of(context).tertiary
-                                      : FlutterFlowTheme.of(context).secondary,
+                                      : Colors.white,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
@@ -629,7 +633,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                                 .secondary
                                             : FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        fontSize: 18.0,
+                                        fontSize: 14.0,
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 0.0,
@@ -675,7 +679,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                 },
                                 text: 'Semana',
                                 options: FFButtonOptions(
-                                  width: MediaQuery.sizeOf(context).width * 0.3,
+                                  width: MediaQuery.sizeOf(context).width * 0.2,
                                   height: 50.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
@@ -693,7 +697,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                                 .secondary
                                             : FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        fontSize: 18.0,
+                                        fontSize: 14.0,
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 0.0,
@@ -739,7 +743,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                 },
                                 text: 'Mes',
                                 options: FFButtonOptions(
-                                  width: MediaQuery.sizeOf(context).width * 0.3,
+                                  width: MediaQuery.sizeOf(context).width * 0.2,
                                   height: 50.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
@@ -757,7 +761,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                                                 .secondary
                                             : FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        fontSize: 18.0,
+                                        fontSize: 14.0,
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 0.0,

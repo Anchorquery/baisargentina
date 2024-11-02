@@ -48,17 +48,45 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
           (_model.apiObtenerMisDatos?.jsonBody ?? ''),
           r'''$.data''',
         ));
+        safeSetState(() {});
+        safeSetState(() {
+          _model.nameTextController?.text = _model.misdatos!.name;
+          _model.nameTextController?.selection = TextSelection.collapsed(
+              offset: _model.nameTextController!.text.length);
+        });
+        safeSetState(() {
+          _model.apellidoTextController?.text = _model.misdatos!.lastName;
+          _model.apellidoTextController?.selection = TextSelection.collapsed(
+              offset: _model.apellidoTextController!.text.length);
+        });
+        safeSetState(() {
+          _model.emailAddressTextController?.text = _model.misdatos!.email;
+          _model.emailAddressTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.emailAddressTextController!.text.length);
+        });
+        safeSetState(() {
+          _model.phoneNumberTextController?.text = _model.misdatos!.phone;
+          _model.phoneNumberTextController?.selection = TextSelection.collapsed(
+              offset: _model.phoneNumberTextController!.text.length);
+        });
+        safeSetState(() {
+          _model.universidadFieldTextController?.text =
+              _model.misdatos!.university;
+          _model.universidadFieldTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.universidadFieldTextController!.text.length);
+        });
+        safeSetState(() {
+          _model.estasEnArgentinaValueController?.value =
+              _model.misdatos!.inArgentina;
+        });
         _model.loading = !_model.loading;
         safeSetState(() {});
       }
     });
 
-    _model.campoNombreTextController ??=
-        TextEditingController(text: _model.misdatos?.name);
-    _model.campoNombreFocusNode ??= FocusNode();
-
-    _model.nameTextController ??=
-        TextEditingController(text: _model.misdatos?.name);
+    _model.nameTextController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
 
     _model.apellidoTextController ??= TextEditingController();
@@ -284,90 +312,6 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        child: TextFormField(
-                                          controller:
-                                              _model.campoNombreTextController,
-                                          focusNode:
-                                              _model.campoNombreFocusNode,
-                                          autofocus: false,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            isDense: true,
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Lato',
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                            hintText: 'TextField',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Lato',
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            focusedErrorBorder:
-                                                OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            filled: true,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Lato',
-                                                letterSpacing: 0.0,
-                                              ),
-                                          cursorColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          validator: _model
-                                              .campoNombreTextControllerValidator
-                                              .asValidator(context),
-                                        ),
-                                      ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 16.0),
@@ -904,7 +848,8 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                     controller: _model
                                             .estasEnArgentinaValueController ??=
                                         FormFieldController<bool>(
-                                      _model.estasEnArgentinaValue ??= false,
+                                      _model.estasEnArgentinaValue ??=
+                                          _model.misdatos?.inArgentina,
                                     ),
                                     options: List<bool>.from([true, false]),
                                     optionLabels: ['Si', 'No'],
@@ -1197,18 +1142,6 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                       borderRadius: BorderRadius.circular(24.0),
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    _model.misdatos?.name,
-                                    'dasd',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        letterSpacing: 0.0,
-                                      ),
                                 ),
                               ],
                             ),

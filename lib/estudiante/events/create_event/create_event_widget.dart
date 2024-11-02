@@ -19,19 +19,19 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'create_model.dart';
-export 'create_model.dart';
+import 'create_event_model.dart';
+export 'create_event_model.dart';
 
-class CreateWidget extends StatefulWidget {
-  const CreateWidget({super.key});
+class CreateEventWidget extends StatefulWidget {
+  const CreateEventWidget({super.key});
 
   @override
-  State<CreateWidget> createState() => _CreateWidgetState();
+  State<CreateEventWidget> createState() => _CreateEventWidgetState();
 }
 
-class _CreateWidgetState extends State<CreateWidget>
+class _CreateEventWidgetState extends State<CreateEventWidget>
     with TickerProviderStateMixin {
-  late CreateModel _model;
+  late CreateEventModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -40,7 +40,7 @@ class _CreateWidgetState extends State<CreateWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CreateModel());
+    _model = createModel(context, () => CreateEventModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {

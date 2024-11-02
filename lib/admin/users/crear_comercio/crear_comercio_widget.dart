@@ -1,9 +1,13 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'crear_comercio_model.dart';
@@ -26,14 +30,35 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
     super.initState();
     _model = createModel(context, () => CrearComercioModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.apiGetCategories = await PublicGroup.categoriaComerciosCall.call();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+      if ((_model.apiGetCategories?.succeeded ?? true)) {
+        _model.categorias = (getJsonField(
+          (_model.apiGetCategories?.jsonBody ?? ''),
+          r'''$.data''',
+          true,
+        )!
+                .toList()
+                .map<CategoryStruct?>(CategoryStruct.maybeFromMap)
+                .toList() as Iterable<CategoryStruct?>)
+            .withoutNulls
+            .toList()
+            .cast<CategoryStruct>();
+        _model.laoding = !(_model.laoding ?? true);
+        safeSetState(() {});
+        return;
+      } else {
+        return;
+      }
+    });
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    _model.nombreTextController ??= TextEditingController();
+    _model.nombreFocusNode ??= FocusNode();
+
+    _model.emailTextController ??= TextEditingController();
+    _model.emailFocusNode ??= FocusNode();
   }
 
   @override
@@ -117,8 +142,8 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           child: TextFormField(
-                            controller: _model.textController1,
-                            focusNode: _model.textFieldFocusNode1,
+                            controller: _model.nombreTextController,
+                            focusNode: _model.nombreFocusNode,
                             autofocus: false,
                             textInputAction: TextInputAction.next,
                             obscureText: false,
@@ -173,7 +198,7 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                                 ),
                             cursorColor:
                                 FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.textController1Validator
+                            validator: _model.nombreTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -197,8 +222,8 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           child: TextFormField(
-                            controller: _model.textController2,
-                            focusNode: _model.textFieldFocusNode2,
+                            controller: _model.emailTextController,
+                            focusNode: _model.emailFocusNode,
                             autofocus: false,
                             textInputAction: TextInputAction.next,
                             obscureText: false,
@@ -254,7 +279,7 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                             keyboardType: TextInputType.emailAddress,
                             cursorColor:
                                 FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.textController2Validator
+                            validator: _model.emailTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -272,135 +297,49 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                                   ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                        child: FlutterFlowDropDown<String>(
-                          controller: _model.dropDownValueController ??=
-                              FormFieldController<String>(null),
-                          options: ['Option 1', 'Option 2', 'Option 3'],
-                          onChanged: (val) =>
-                              safeSetState(() => _model.dropDownValue = val),
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: 40.0,
-                          textStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                          hintText: 'Selecciona la categoría',
-                          icon: Icon(
-                            Icons.keyboard_arrow_down_rounded,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 24.0,
-                          ),
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          elevation: 2.0,
-                          borderColor: FlutterFlowTheme.of(context).primary,
-                          borderWidth: 0.0,
-                          borderRadius: 30.0,
-                          margin: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 12.0, 0.0),
-                          hidesUnderline: true,
-                          isOverButton: false,
-                          isSearchable: false,
-                          isMultiSelect: false,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                        child: Text(
-                          'Contraseña',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          child: TextFormField(
-                            controller: _model.textController3,
-                            focusNode: _model.textFieldFocusNode3,
-                            autofocus: false,
-                            textInputAction: TextInputAction.done,
-                            obscureText: !_model.passwordVisibility,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              suffixIcon: InkWell(
-                                onTap: () => safeSetState(
-                                  () => _model.passwordVisibility =
-                                      !_model.passwordVisibility,
-                                ),
-                                focusNode: FocusNode(skipTraversal: true),
-                                child: Icon(
-                                  _model.passwordVisibility
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined,
-                                  size: 20.0,
-                                ),
-                              ),
+                      if (_model.laoding == false)
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 5.0, 0.0, 0.0),
+                          child: FlutterFlowDropDown<int>(
+                            controller: _model.categoryValueController ??=
+                                FormFieldController<int>(
+                              _model.categoryValue ??= 1,
                             ),
-                            style: FlutterFlowTheme.of(context)
+                            options: List<int>.from(
+                                _model.categorias.map((e) => e.id).toList()),
+                            optionLabels:
+                                _model.categorias.map((e) => e.name).toList(),
+                            onChanged: (val) =>
+                                safeSetState(() => _model.categoryValue = val),
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: 40.0,
+                            textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Lato',
                                   letterSpacing: 0.0,
                                 ),
-                            cursorColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.textController3Validator
-                                .asValidator(context),
+                            hintText: 'Selecciona la categoría',
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
+                            ),
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            elevation: 2.0,
+                            borderColor: FlutterFlowTheme.of(context).primary,
+                            borderWidth: 0.0,
+                            borderRadius: 30.0,
+                            margin: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 12.0, 0.0),
+                            hidesUnderline: true,
+                            isOverButton: false,
+                            isSearchable: false,
+                            isMultiSelect: false,
                           ),
                         ),
-                      ),
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
@@ -436,8 +375,51 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 30.0, 0.0, 0.0),
                           child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              var _shouldSetState = false;
+                              _model.apiGuardarComercio =
+                                  await RutasAdminGroup.crarComercioCall.call(
+                                nombre: _model.nombreTextController.text,
+                                category: _model.categoryValue,
+                                email: _model.emailTextController.text,
+                                token: currentAuthenticationToken,
+                              );
+
+                              _shouldSetState = true;
+                              if ((_model.apiGuardarComercio?.succeeded ??
+                                  true)) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Acción exiosa'),
+                                      content:
+                                          Text('Comercio creado exitosamente'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                safeSetState(() {
+                                  _model.nombreTextController?.clear();
+                                  _model.emailTextController?.clear();
+                                });
+                                safeSetState(() {
+                                  _model.categoryValueController?.reset();
+                                });
+                                if (_shouldSetState) safeSetState(() {});
+                                return;
+                              } else {
+                                if (_shouldSetState) safeSetState(() {});
+                                return;
+                              }
+
+                              if (_shouldSetState) safeSetState(() {});
                             },
                             text: 'Enviar invitación ​',
                             options: FFButtonOptions(

@@ -244,9 +244,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -338,9 +338,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -441,9 +441,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -454,7 +454,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('transacciones');
+                                          context.pushNamed('transaccionesNew');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -535,9 +535,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -548,7 +548,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('serviciosCreados');
+                                          context.pushNamed('CREARoVER');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -638,9 +638,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -651,7 +651,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('housigns');
+                                          context
+                                              .pushNamed('ListaHousingAdmin');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -727,14 +728,14 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 15.0),
                                     child: Text(
-                                      'Chat de soporte',
+                                      'Soporte',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -835,9 +836,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -929,9 +930,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Lato',
-                                            fontSize: 16.0,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w900,
                                           ),
                                     ),
                                   ),
@@ -1030,9 +1031,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Lato',
-                                          fontSize: 16.0,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w800,
+                                          fontWeight: FontWeight.w900,
                                         ),
                                   ),
                                 ),

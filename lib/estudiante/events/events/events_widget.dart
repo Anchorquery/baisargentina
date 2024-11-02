@@ -141,7 +141,7 @@ class _EventsWidgetState extends State<EventsWidget> {
             alignment: AlignmentDirectional(1.0, 0.8),
             child: FloatingActionButton(
               onPressed: () async {
-                context.pushNamed('create');
+                context.pushNamed('createEvent');
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
               elevation: 99.0,

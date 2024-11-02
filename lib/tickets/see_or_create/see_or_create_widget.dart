@@ -49,17 +49,26 @@ class _SeeOrCreateWidgetState extends State<SeeOrCreateWidget> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Icon(
-                      Icons.chevron_left_rounded,
-                      color: Color(0xFFFF8F14),
-                      size: 24.0,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.safePop();
+                      },
+                      child: Icon(
+                        Icons.chevron_left_rounded,
+                        color: Color(0xFFFF8F14),
+                        size: 24.0,
+                      ),
                     ),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 120.0, 0.0, 0.0),
                   child: Text(
-                    'Listas de\ntickets',
+                    'Tickets',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Lato',

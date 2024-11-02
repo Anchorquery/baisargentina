@@ -10,7 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
-import 'create_widget.dart' show CreateWidget;
+import 'create_event_widget.dart' show CreateEventWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class CreateModel extends FlutterFlowModel<CreateWidget> {
+class CreateEventModel extends FlutterFlowModel<CreateEventWidget> {
   ///  Local state fields for this page.
 
   List<CategoryStruct> categories = [];
@@ -46,9 +46,9 @@ class CreateModel extends FlutterFlowModel<CreateWidget> {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
-  // Stores action output result for [Backend Call - API (GetOrganizer)] action in create widget.
+  // Stores action output result for [Backend Call - API (GetOrganizer)] action in createEvent widget.
   ApiCallResponse? apiResponseOrganizers;
-  // Stores action output result for [Backend Call - API (Api Get Categories)] action in create widget.
+  // Stores action output result for [Backend Call - API (Api Get Categories)] action in createEvent widget.
   ApiCallResponse? apiResponseCategories;
   // State field(s) for name widget.
   FocusNode? nameFocusNode;

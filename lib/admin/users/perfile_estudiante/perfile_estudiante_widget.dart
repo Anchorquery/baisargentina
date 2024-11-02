@@ -53,10 +53,19 @@ class _PerfileEstudianteWidgetState extends State<PerfileEstudianteWidget> {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Icon(
-                        Icons.chevron_left_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.safePop();
+                        },
+                        child: Icon(
+                          Icons.chevron_left_rounded,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
                       ),
                       Expanded(
                         child: Column(

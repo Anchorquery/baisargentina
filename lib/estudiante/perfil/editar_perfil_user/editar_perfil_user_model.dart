@@ -42,10 +42,6 @@ class EditarPerfilUserModel extends FlutterFlowModel<EditarPerfilUserWidget> {
   ApiCallResponse? apiUpdateMe;
   // Stores action output result for [Backend Call - API (me )] action in imagenDePerfil widget.
   ApiCallResponse? apiMeResponse;
-  // State field(s) for CampoNombre widget.
-  FocusNode? campoNombreFocusNode;
-  TextEditingController? campoNombreTextController;
-  String? Function(BuildContext, String?)? campoNombreTextControllerValidator;
   // State field(s) for name widget.
   FocusNode? nameFocusNode;
   TextEditingController? nameTextController;
@@ -117,9 +113,6 @@ class EditarPerfilUserModel extends FlutterFlowModel<EditarPerfilUserWidget> {
 
   @override
   void dispose() {
-    campoNombreFocusNode?.dispose();
-    campoNombreTextController?.dispose();
-
     nameFocusNode?.dispose();
     nameTextController?.dispose();
 
