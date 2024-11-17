@@ -2,18 +2,20 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -27,10 +29,13 @@ class EditarPerfilUserWidget extends StatefulWidget {
   State<EditarPerfilUserWidget> createState() => _EditarPerfilUserWidgetState();
 }
 
-class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
+class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
+    with TickerProviderStateMixin {
   late EditarPerfilUserModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -39,47 +44,71 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiObtenerMisDatos = await UserGroup.medataCall.call(
+      _model.apiObtenerMisDatos = await UserGroup.meCall.call(
         token: currentAuthenticationToken,
       );
 
       if ((_model.apiObtenerMisDatos?.succeeded ?? true)) {
         _model.misdatos = UserStruct.maybeFromMap(getJsonField(
           (_model.apiObtenerMisDatos?.jsonBody ?? ''),
-          r'''$.data''',
+          r'''$''',
         ));
         safeSetState(() {});
         safeSetState(() {
           _model.nameTextController?.text = _model.misdatos!.name;
-          _model.nameTextController?.selection = TextSelection.collapsed(
-              offset: _model.nameTextController!.text.length);
+          _model.nameFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.nameTextController?.selection = TextSelection.collapsed(
+              offset: _model.nameTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.apellidoTextController?.text = _model.misdatos!.lastName;
-          _model.apellidoTextController?.selection = TextSelection.collapsed(
-              offset: _model.apellidoTextController!.text.length);
+          _model.apellidoFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.apellidoTextController?.selection = TextSelection.collapsed(
+              offset: _model.apellidoTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.emailAddressTextController?.text = _model.misdatos!.email;
-          _model.emailAddressTextController?.selection =
-              TextSelection.collapsed(
-                  offset: _model.emailAddressTextController!.text.length);
+          _model.emailAddressFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.emailAddressTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.emailAddressTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.phoneNumberTextController?.text = _model.misdatos!.phone;
-          _model.phoneNumberTextController?.selection = TextSelection.collapsed(
-              offset: _model.phoneNumberTextController!.text.length);
+          _model.phoneNumberFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.phoneNumberTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.phoneNumberTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.universidadFieldTextController?.text =
               _model.misdatos!.university;
-          _model.universidadFieldTextController?.selection =
-              TextSelection.collapsed(
-                  offset: _model.universidadFieldTextController!.text.length);
+          _model.universidadFieldFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.universidadFieldTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.universidadFieldTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.estasEnArgentinaValueController?.value =
               _model.misdatos!.inArgentina;
+        });
+        safeSetState(() {
+          _model.nacionalidadValueController?.value = _model.misdatos!.country;
         });
         _model.loading = !_model.loading;
         safeSetState(() {});
@@ -103,6 +132,28 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
 
     _model.universidadFieldTextController ??= TextEditingController();
     _model.universidadFieldFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'dropDownOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 200.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -211,14 +262,6 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                           if ((_model
                                                   .apiMeResponse?.succeeded ??
                                               true)) {
-                                            FFAppState().user =
-                                                UserStruct.maybeFromMap(
-                                                    getJsonField(
-                                              (_model.apiUpdateMe?.jsonBody ??
-                                                  ''),
-                                              r'''$''',
-                                            ))!;
-                                            FFAppState().update(() {});
                                             authManager.updateAuthUserData(
                                               authenticationToken:
                                                   currentAuthenticationToken,
@@ -233,6 +276,14 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                                 ).toString(),
                                               ),
                                             );
+                                            FFAppState().user =
+                                                UserStruct.maybeFromMap(
+                                                    getJsonField(
+                                              (_model.apiUpdateMe?.jsonBody ??
+                                                  ''),
+                                              r'''$''',
+                                            ))!;
+                                            safeSetState(() {});
                                           } else {
                                             if (_shouldSetState)
                                               safeSetState(() {});
@@ -765,7 +816,7 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                                                   context)
                                                               .languageCode,
                                                     )
-                                                  : 'Fecha de nacimiento',
+                                                  : _model.misdatos!.birth,
                                               icon: Icon(
                                                 Icons.calendar_today,
                                                 size: 15.0,
@@ -802,6 +853,279 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                                 borderRadius:
                                                     BorderRadius.circular(24.0),
                                               ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 50.0,
+                                              decoration: BoxDecoration(),
+                                              child: FlutterFlowDropDown<
+                                                  String>(
+                                                controller: _model
+                                                        .nacionalidadValueController ??=
+                                                    FormFieldController<String>(
+                                                  _model.nacionalidadValue ??=
+                                                      _model.misdatos?.country,
+                                                ),
+                                                options: [
+                                                  'Afganistán',
+                                                  'Albania',
+                                                  'Alemania',
+                                                  'Andorra',
+                                                  'Angola',
+                                                  'Antigua y Barbuda',
+                                                  'Antillas Holandesas',
+                                                  'Arabia Saudí',
+                                                  'Argelia',
+                                                  'Argentina',
+                                                  'Armenia',
+                                                  'Aruba',
+                                                  'Australia',
+                                                  'Austria',
+                                                  'Azerbaiyán',
+                                                  'Bahamas',
+                                                  'Bahrein',
+                                                  'Bangladés',
+                                                  'Barbados',
+                                                  'Bélgica',
+                                                  'Belice',
+                                                  'Benín',
+                                                  'Bermudas',
+                                                  'Bielorrusia',
+                                                  'Bolivia',
+                                                  'Botsuana',
+                                                  'Bosnia',
+                                                  'Brasil',
+                                                  'Brunei',
+                                                  'Bulgaria',
+                                                  'Burkina Faso',
+                                                  'Burundi',
+                                                  'Bután',
+                                                  'Cabo Verde',
+                                                  'Camboya',
+                                                  'Canadá',
+                                                  'Catar',
+                                                  'Chad',
+                                                  'Chile',
+                                                  'China',
+                                                  'Chipre',
+                                                  'Colombia',
+                                                  'Comoras',
+                                                  'Congo',
+                                                  'Corea del Norte',
+                                                  'Corea del Sur',
+                                                  'Costa de Marfil',
+                                                  'Costa Rica',
+                                                  'Croacia',
+                                                  'Cuba',
+                                                  'Dinamarca',
+                                                  'Dominica',
+                                                  'Ecuador',
+                                                  'Egipto',
+                                                  'El Salvador',
+                                                  'Emiratos Árabes Unidos',
+                                                  'Eritrea',
+                                                  'Eslovaquia',
+                                                  'Eslovenia',
+                                                  'España',
+                                                  'Estados Unidos de América',
+                                                  'Estonia',
+                                                  'Etiopía',
+                                                  'Fiyi',
+                                                  'Filipinas',
+                                                  'Finlandia',
+                                                  'Francia',
+                                                  'Gabón',
+                                                  'Gambia',
+                                                  'Georgia',
+                                                  'Ghana',
+                                                  'Grecia',
+                                                  'Guam',
+                                                  'Guatemala',
+                                                  'Guayana Francesa',
+                                                  'Guinea-Bissau',
+                                                  'Guinea Ecuatorial',
+                                                  'Guinea',
+                                                  'Guyana',
+                                                  'Granada',
+                                                  'Haití',
+                                                  'Honduras',
+                                                  'Hong Kong',
+                                                  'Hungría',
+                                                  'Holanda',
+                                                  'India',
+                                                  'Indonesia',
+                                                  'Irak',
+                                                  'Irán',
+                                                  'Irlanda',
+                                                  'Islandia',
+                                                  'Islas Caimán',
+                                                  'Islas Marshall',
+                                                  'Islas Salomón',
+                                                  'Israel',
+                                                  'Italia',
+                                                  'Jamaica',
+                                                  'Japón',
+                                                  'Jordania',
+                                                  'Kazajstán',
+                                                  'Kenia',
+                                                  'Kirguistán',
+                                                  'Kiribati',
+                                                  'Kósovo',
+                                                  'Kuwait',
+                                                  'Laos',
+                                                  'Lesotho',
+                                                  'Letonia',
+                                                  'Líbano',
+                                                  'Liberia',
+                                                  'Libia',
+                                                  'Liechtenstein',
+                                                  'Lituania',
+                                                  'Luxemburgo',
+                                                  'Macedonia',
+                                                  'Madagascar',
+                                                  'Malasia',
+                                                  'Malawi',
+                                                  'Maldivas',
+                                                  'Malí',
+                                                  'Malta',
+                                                  'Marianas del Norte',
+                                                  'Marruecos',
+                                                  'Mauricio',
+                                                  'Mauritania',
+                                                  'México',
+                                                  'Micronesia',
+                                                  'Mónaco',
+                                                  'Moldavia',
+                                                  'Mongolia',
+                                                  'Montenegro',
+                                                  'Mozambique',
+                                                  'Myanmar',
+                                                  'Namibia',
+                                                  'Nauru',
+                                                  'Nepal',
+                                                  'Nicaragua',
+                                                  'Níger',
+                                                  'Nigeria',
+                                                  'Noruega',
+                                                  'Nueva Zelanda',
+                                                  'Omán',
+                                                  'Orden de Malta',
+                                                  'Países Bajos',
+                                                  'Pakistán',
+                                                  'Palestina',
+                                                  'Palau',
+                                                  'Panamá',
+                                                  'Papúa Nueva Guinea',
+                                                  'Paraguay',
+                                                  'Perú',
+                                                  'Polonia',
+                                                  'Portugal',
+                                                  'Puerto Rico',
+                                                  'Reino Unido',
+                                                  'República Centroafricana',
+                                                  'República Checa',
+                                                  'República del Congo',
+                                                  'República Democrática del Congo ',
+                                                  'República Dominicana',
+                                                  'Ruanda',
+                                                  'Rumanía',
+                                                  'Rusia',
+                                                  'Sáhara Occidental',
+                                                  'Samoa Americana',
+                                                  'Samoa',
+                                                  'San Cristóbal y Nieves',
+                                                  'San Marino',
+                                                  'Santa Lucía',
+                                                  'Santo Tomé y Príncipe',
+                                                  'San Vicente y las Granadinas',
+                                                  'Senegal',
+                                                  'Serbia',
+                                                  'Seychelles',
+                                                  'Sierra Leona',
+                                                  'Singapur',
+                                                  'Siria',
+                                                  'Somalia',
+                                                  'Sri Lanka',
+                                                  'Sudáfrica',
+                                                  'Sudán',
+                                                  'Sudán del Sur',
+                                                  'Suecia',
+                                                  'Suiza',
+                                                  'Suazilandia',
+                                                  'Tailandia',
+                                                  'Taiwán',
+                                                  'Tanzania',
+                                                  'Tayikistán',
+                                                  'Tíbet',
+                                                  'Timor Oriental',
+                                                  'Togo',
+                                                  'Tonga',
+                                                  'Trinidad y Tobago',
+                                                  'Túnez',
+                                                  'Turkmenistán',
+                                                  'Turquía',
+                                                  'Tuvalu',
+                                                  'Ucrania',
+                                                  'Uganda',
+                                                  'Uruguay',
+                                                  'Uzbequistán',
+                                                  'Vanuatu',
+                                                  'Vaticano',
+                                                  'Venezuela',
+                                                  'Vietnam',
+                                                  'Wallis y Futuna',
+                                                  'Yemen',
+                                                  'Yibuti',
+                                                  'Zambia',
+                                                  'Zaire',
+                                                  'Zimbabue'
+                                                ],
+                                                onChanged: (val) =>
+                                                    safeSetState(() => _model
+                                                            .nacionalidadValue =
+                                                        val),
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                height: 40.0,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                hintText: 'Nacionalidad',
+                                                icon: Icon(
+                                                  Icons
+                                                      .keyboard_arrow_down_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 24.0,
+                                                ),
+                                                fillColor: Color(0xFFF1F4F8),
+                                                elevation: 2.0,
+                                                borderColor: Colors.transparent,
+                                                borderWidth: 0.0,
+                                                borderRadius: 30.0,
+                                                margin: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 12.0, 0.0),
+                                                hidesUnderline: true,
+                                                isOverButton: false,
+                                                isSearchable: false,
+                                                isMultiSelect: false,
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'dropDownOnPageLoadAnimation']!),
                                             ),
                                           ),
                                         ],
@@ -1053,27 +1377,34 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      _model.authRegisterResponse =
-                                          await ApiRegisterCall.call(
-                                        username:
-                                            _model.nameTextController.text,
-                                        password:
-                                            _model.passwordTextController.text,
+                                      _model.authUpdateResponse =
+                                          await UserGroup.updateUserCall.call(
+                                        country: _model.nacionalidadValue,
                                         email: _model
                                             .emailAddressTextController.text,
-                                        name:
-                                            random_data.randomName(true, true),
-                                        university: (_model
-                                                    .universidadFieldFocusNode
-                                                    ?.hasFocus ??
-                                                false)
-                                            .toString(),
-                                        birth: '2024-10-10',
-                                        country: 'country',
+                                        name: _model.nameTextController.text,
+                                        lastName:
+                                            _model.apellidoTextController.text,
+                                        birth: dateTimeFormat(
+                                          "d-M-y",
+                                          _model.datePicked,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        ),
+                                        phone: _model
+                                            .phoneNumberTextController.text,
+                                        inArgentina:
+                                            _model.estasEnArgentinaValue,
+                                        password:
+                                            _model.passwordTextController.text,
+                                        token: currentAuthenticationToken,
+                                        university: _model
+                                            .universidadFieldTextController
+                                            .text,
                                       );
 
-                                      if ((_model.authRegisterResponse
-                                              ?.succeeded ??
+                                      if ((_model
+                                              .authUpdateResponse?.succeeded ??
                                           true)) {
                                         await showDialog(
                                           context: context,
@@ -1094,23 +1425,26 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget> {
                                           },
                                         );
                                       } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Unable to ',
-                                              style: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondary,
-                                          ),
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Error'),
+                                              content: Text(getJsonField(
+                                                (_model.apiUpdateMe?.jsonBody ??
+                                                    ''),
+                                                r'''$.error''',
+                                              ).toString()),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         );
                                       }
 

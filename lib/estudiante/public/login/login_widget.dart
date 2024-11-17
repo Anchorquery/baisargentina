@@ -580,16 +580,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                   PublicGroup.loginCall.user(
                                 (_model.loginResponse?.jsonBody ?? ''),
                               ))!;
-                              if (currentUserData?.role == 1) {
-                                context.pushNamedAuth(
-                                    'HomeAdmin', context.mounted);
-                              } else if (currentUserData?.role == 4) {
-                                context.pushNamedAuth(
-                                    'HomeComercio', context.mounted);
-                              } else {
-                                context.pushNamedAuth(
-                                    'events', context.mounted);
-                              }
+
+                              context.goNamedAuth('pageInit', context.mounted);
 
                               if (_shouldSetState) safeSetState(() {});
                               return;

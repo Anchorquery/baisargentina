@@ -5,6 +5,7 @@ import 'package:from_css_color/from_css_color.dart';
 
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
+import '/backend/supabase/supabase.dart';
 
 import '../../flutter_flow/lat_lng.dart';
 import '../../flutter_flow/place.dart';
@@ -78,6 +79,9 @@ String? serializeParam(
 
       case ParamType.Enum:
         data = (param is Enum) ? param.serialize() : null;
+
+      case ParamType.SupabaseRow:
+        return json.encode((param as SupabaseDataRow).data);
 
       default:
         data = null;
@@ -157,6 +161,7 @@ enum ParamType {
 
   DataStruct,
   Enum,
+  SupabaseRow,
 }
 
 dynamic deserializeParam<T>(
@@ -213,6 +218,159 @@ dynamic deserializeParam<T>(
         return uploadedFileFromString(param);
       case ParamType.JSON:
         return json.decode(param);
+
+      case ParamType.SupabaseRow:
+        final data = json.decode(param) as Map<String, dynamic>;
+        switch (T) {
+          case MetadatosComerciosRow:
+            return MetadatosComerciosRow(data);
+          case TransacctionsClientLinksRow:
+            return TransacctionsClientLinksRow(data);
+          case BookingsSupervisorLinksRow:
+            return BookingsSupervisorLinksRow(data);
+          case ChatsLastMessageSeenByLinksRow:
+            return ChatsLastMessageSeenByLinksRow(data);
+          case UpPermissionsRow:
+            return UpPermissionsRow(data);
+          case StrapiApiTokenPermissionsTokenLinksRow:
+            return StrapiApiTokenPermissionsTokenLinksRow(data);
+          case CommerceCategoriesRow:
+            return CommerceCategoriesRow(data);
+          case StrapiWebhooksRow:
+            return StrapiWebhooksRow(data);
+          case StrapiTransferTokenPermissionsTokenLinksRow:
+            return StrapiTransferTokenPermissionsTokenLinksRow(data);
+          case EventCategoriesRow:
+            return EventCategoriesRow(data);
+          case HousignsCreadorLinksRow:
+            return HousignsCreadorLinksRow(data);
+          case SuscriptionsSuscriptorLinksRow:
+            return SuscriptionsSuscriptorLinksRow(data);
+          case AdminUsersRolesLinksRow:
+            return AdminUsersRolesLinksRow(data);
+          case ChatMessagesRow:
+            return ChatMessagesRow(data);
+          case ChatsRow:
+            return ChatsRow(data);
+          case StrapiDatabaseSchemaRow:
+            return StrapiDatabaseSchemaRow(data);
+          case UpPermissionsRoleLinksRow:
+            return UpPermissionsRoleLinksRow(data);
+          case MetadatosComerciosCategoryLinksRow:
+            return MetadatosComerciosCategoryLinksRow(data);
+          case ServicesServiceCategoryLinksRow:
+            return ServicesServiceCategoryLinksRow(data);
+          case StrapiGoogleAuthGoogleCredentialRow:
+            return StrapiGoogleAuthGoogleCredentialRow(data);
+          case StrapiApiTokensRow:
+            return StrapiApiTokensRow(data);
+          case SuscriptionsTransactionLinksRow:
+            return SuscriptionsTransactionLinksRow(data);
+          case ChatWithUsersRow:
+            return ChatWithUsersRow(data);
+          case StrapiReleasesRow:
+            return StrapiReleasesRow(data);
+          case EventsCategoryLinksRow:
+            return EventsCategoryLinksRow(data);
+          case StrapiReleaseActionsRow:
+            return StrapiReleaseActionsRow(data);
+          case UploadFoldersRow:
+            return UploadFoldersRow(data);
+          case ServicesRow:
+            return ServicesRow(data);
+          case BookingsRow:
+            return BookingsRow(data);
+          case MetadatosComerciosComercioLinksRow:
+            return MetadatosComerciosComercioLinksRow(data);
+          case ChatsLastMessageSentByLinksRow:
+            return ChatsLastMessageSentByLinksRow(data);
+          case AdminUsersRow:
+            return AdminUsersRow(data);
+          case AdminPermissionsRoleLinksRow:
+            return AdminPermissionsRoleLinksRow(data);
+          case AdminRolesRow:
+            return AdminRolesRow(data);
+          case AdminPermissionsRow:
+            return AdminPermissionsRow(data);
+          case StrapiTransferTokenPermissionsRow:
+            return StrapiTransferTokenPermissionsRow(data);
+          case FilesRelatedMorphsRow:
+            return FilesRelatedMorphsRow(data);
+          case StrapiReleaseActionsReleaseLinksRow:
+            return StrapiReleaseActionsReleaseLinksRow(data);
+          case ChatsUserALinksRow:
+            return ChatsUserALinksRow(data);
+          case ServicesCreatedLinksRow:
+            return ServicesCreatedLinksRow(data);
+          case SuscriptionsPlanLinksRow:
+            return SuscriptionsPlanLinksRow(data);
+          case TransacctionsRow:
+            return TransacctionsRow(data);
+          case StrapiMigrationsRow:
+            return StrapiMigrationsRow(data);
+          case ViewPerfilsRow:
+            return ViewPerfilsRow(data);
+          case EventsCreadorLinksRow:
+            return EventsCreadorLinksRow(data);
+          case I18nLocaleRow:
+            return I18nLocaleRow(data);
+          case EmailTemplatesRow:
+            return EmailTemplatesRow(data);
+          case ServiceCategoriesRow:
+            return ServiceCategoriesRow(data);
+          case HousignsRow:
+            return HousignsRow(data);
+          case FilesRow:
+            return FilesRow(data);
+          case StrapiTransferTokensRow:
+            return StrapiTransferTokensRow(data);
+          case PlansRow:
+            return PlansRow(data);
+          case DiscountsCreateLinksRow:
+            return DiscountsCreateLinksRow(data);
+          case SuscriptionsRow:
+            return SuscriptionsRow(data);
+          case UpRolesRow:
+            return UpRolesRow(data);
+          case ChatsUsersLinksRow:
+            return ChatsUsersLinksRow(data);
+          case EventsRow:
+            return EventsRow(data);
+          case EventsOrganizadorLinksRow:
+            return EventsOrganizadorLinksRow(data);
+          case ChatsUserBLinksRow:
+            return ChatsUserBLinksRow(data);
+          case BookingsEventLinksRow:
+            return BookingsEventLinksRow(data);
+          case DiscountsRow:
+            return DiscountsRow(data);
+          case FilesFolderLinksRow:
+            return FilesFolderLinksRow(data);
+          case ViewPerfilsComercioLinksRow:
+            return ViewPerfilsComercioLinksRow(data);
+          case DiscountsCommerceLinksRow:
+            return DiscountsCommerceLinksRow(data);
+          case ViewPerfilsVisualizadorLinksRow:
+            return ViewPerfilsVisualizadorLinksRow(data);
+          case StrapiCoreStoreSettingsRow:
+            return StrapiCoreStoreSettingsRow(data);
+          case StrapiApiTokenPermissionsRow:
+            return StrapiApiTokenPermissionsRow(data);
+          case DiscountCategoriesRow:
+            return DiscountCategoriesRow(data);
+          case DiscountsCategoryLinksRow:
+            return DiscountsCategoryLinksRow(data);
+          case UpUsersRoleLinksRow:
+            return UpUsersRoleLinksRow(data);
+          case BookingsOwnerLinksRow:
+            return BookingsOwnerLinksRow(data);
+          case UpUsersRow:
+            return UpUsersRow(data);
+          case UploadFoldersParentLinksRow:
+            return UploadFoldersParentLinksRow(data);
+          default:
+            return null;
+        }
 
       case ParamType.DataStruct:
         final data = json.decode(param) as Map<String, dynamic>? ?? {};

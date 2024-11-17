@@ -206,7 +206,7 @@ class _ListaHousingAdminWidgetState extends State<ListaHousingAdminWidget>
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                   child: Container(
-                    height: MediaQuery.sizeOf(context).height * 0.5,
+                    height: MediaQuery.sizeOf(context).height * 0.668,
                     decoration: BoxDecoration(),
                     child: RefreshIndicator(
                       color: FlutterFlowTheme.of(context).tertiary,

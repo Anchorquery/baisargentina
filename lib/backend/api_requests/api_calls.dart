@@ -690,6 +690,9 @@ class UserGroup {
   static UpdatemetadataComercioCall updatemetadataComercioCall =
       UpdatemetadataComercioCall();
   static MedataCall medataCall = MedataCall();
+  static UpdateUserCall updateUserCall = UpdateUserCall();
+  static FindUserCall findUserCall = FindUserCall();
+  static DeleteUserCall deleteUserCall = DeleteUserCall();
 }
 
 class MeCall {
@@ -792,6 +795,111 @@ class MedataCall {
       callName: 'medata',
       apiUrl: '${baseUrl}/users-permissions/users/me-data',
       callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateUserCall {
+  Future<ApiCallResponse> call({
+    String? country = '',
+    String? email = '',
+    String? name = '',
+    String? lastName = '',
+    String? birth = '',
+    String? phone = '',
+    bool? inArgentina,
+    String? password = '',
+    String? university = '',
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "country": "${country}",
+  "email": "${email}",
+  "name": "${name}",
+  "lastName": "${lastName}",
+  "birth": "${birth}",
+  "phone": "${phone}",
+  "inArgentina": ${inArgentina},
+  "password": "${password}",
+  "university": "${university}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updateUser',
+      apiUrl: '${baseUrl}/users-permissions/users/save-me',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FindUserCall {
+  Future<ApiCallResponse> call({
+    int? role,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'findUser',
+      apiUrl: '${baseUrl}/users',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'role': role,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class DeleteUserCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'delete user',
+      apiUrl: '${baseUrl}/users/${id}',
+      callType: ApiCallType.DELETE,
       headers: {
         'Authorization': 'Bearer ${token}',
       },
@@ -2196,6 +2304,166 @@ class BuscarTransaccionAdminCall {
 }
 
 /// End Transacction Group Code
+
+/// Start chat Group Code
+
+class ChatGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://server.baisargentina.com/api';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static BuscarOCrearChatCall buscarOCrearChatCall = BuscarOCrearChatCall();
+  static ListarChatsCall listarChatsCall = ListarChatsCall();
+  static CrearMensajeCall crearMensajeCall = CrearMensajeCall();
+  static AsignarUsuarioAChatCall asignarUsuarioAChatCall =
+      AsignarUsuarioAChatCall();
+}
+
+class BuscarOCrearChatCall {
+  Future<ApiCallResponse> call({
+    String? asunto = '',
+    String? description = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ChatGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "asunto": "${asunto}",
+  "description": "${description}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'buscar o crear chat',
+      apiUrl: '${baseUrl}/chats/',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ListarChatsCall {
+  Future<ApiCallResponse> call({
+    int? page = 1,
+    int? pageSize = 15,
+    int? pageCount = 0,
+    String? q = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ChatGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'listar chats',
+      apiUrl: '${baseUrl}/chats',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'page': page,
+        'pageSize': pageSize,
+        'pageCount': pageCount,
+        'q': q,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CrearMensajeCall {
+  Future<ApiCallResponse> call({
+    String? text = '',
+    String? chatUuid = '',
+    String? uuid = '',
+    String? chatId = '',
+    String? timestamp = '',
+    String? id = '',
+    List<FFUploadedFile>? imagesList,
+    String? token = '',
+  }) async {
+    final baseUrl = ChatGroup.getBaseUrl(
+      token: token,
+    );
+    final images = imagesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'crear mensaje',
+      apiUrl: '${baseUrl}/chat-messages',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'text': text,
+        'chat_uuid': chatUuid,
+        'uuid': uuid,
+        'timestamp': timestamp,
+        'chatId': chatId,
+        'images': images,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class AsignarUsuarioAChatCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ChatGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'asignar usuario a chat',
+      apiUrl: '${baseUrl}/chats/ingresar/${uuid}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'uuid': uuid,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End chat Group Code
 
 class ApiRegisterCall {
   static Future<ApiCallResponse> call({

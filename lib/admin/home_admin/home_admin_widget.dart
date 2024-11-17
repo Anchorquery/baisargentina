@@ -257,7 +257,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('events');
+                                          context
+                                              .pushNamed('ListaEventosAdmin');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -746,7 +747,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('AllChats');
+                                          context.pushNamed('ListadoChats');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -1044,7 +1045,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                         0.0, 0.0, 0.0, 15.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        context.pushNamed('Descuentos');
+                                        context
+                                            .pushNamed('CREARoVERDescuentos');
                                       },
                                       text: 'Ver más',
                                       options: FFButtonOptions(

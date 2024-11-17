@@ -602,7 +602,7 @@ class _RegistroWidgetState extends State<RegistroWidget>
                               child: FlutterFlowDropDown<String>(
                                 controller: _model.dropDownValueController ??=
                                     FormFieldController<String>(
-                                  _model.dropDownValue ??= 'Nacionalidad',
+                                  _model.dropDownValue ??= 'Argentina',
                                 ),
                                 options: [
                                   'Afganistán',

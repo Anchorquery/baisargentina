@@ -5,7 +5,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 class FFDevEnvironmentValues {
   static const String currentEnvironment = 'Production';
   static const String environmentValuesPath =
-      'assets/environment_values/production.json';
+      'assets/environment_values/environment.json';
 
   static final FFDevEnvironmentValues _instance =
       FFDevEnvironmentValues._internal();
@@ -22,6 +22,7 @@ class FFDevEnvironmentValues {
           await rootBundle.loadString(environmentValuesPath);
       final data = await json.decode(response);
       _apiUrl = data['apiUrl'];
+      _hostName = data['hostName'];
     } catch (e) {
       print('Error loading environment values: $e');
     }
@@ -29,4 +30,7 @@ class FFDevEnvironmentValues {
 
   String _apiUrl = '';
   String get apiUrl => _apiUrl;
+
+  String _hostName = '';
+  String get hostName => _hostName;
 }

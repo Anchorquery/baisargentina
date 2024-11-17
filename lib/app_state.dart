@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
 import '/backend/api_requests/api_manager.dart';
+import 'backend/supabase/supabase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -47,6 +48,41 @@ class FFAppState extends ChangeNotifier {
   set token(String value) {
     _token = value;
     prefs.setString('ff_token', value);
+  }
+
+  bool _isSocketConnected = false;
+  bool get isSocketConnected => _isSocketConnected;
+  set isSocketConnected(bool value) {
+    _isSocketConnected = value;
+  }
+
+  List<ChatMessageStruct> _listMessages = [];
+  List<ChatMessageStruct> get listMessages => _listMessages;
+  set listMessages(List<ChatMessageStruct> value) {
+    _listMessages = value;
+  }
+
+  void addToListMessages(ChatMessageStruct value) {
+    listMessages.add(value);
+  }
+
+  void removeFromListMessages(ChatMessageStruct value) {
+    listMessages.remove(value);
+  }
+
+  void removeAtIndexFromListMessages(int index) {
+    listMessages.removeAt(index);
+  }
+
+  void updateListMessagesAtIndex(
+    int index,
+    ChatMessageStruct Function(ChatMessageStruct) updateFn,
+  ) {
+    listMessages[index] = updateFn(_listMessages[index]);
+  }
+
+  void insertAtIndexInListMessages(int index, ChatMessageStruct value) {
+    listMessages.insert(index, value);
   }
 }
 

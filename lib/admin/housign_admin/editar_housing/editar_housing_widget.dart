@@ -60,51 +60,95 @@ class _EditarHousingWidgetState extends State<EditarHousingWidget>
         ));
         safeSetState(() {
           _model.tituloHousingfieldTextController?.text = _model.data!.title;
+          _model.tituloHousingfieldFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.tituloHousingfieldTextController?.selection = TextSelection(
+              baseOffset: 0,
+              extentOffset:
+                  _model.tituloHousingfieldTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.descriptionEditTextController?.text = _model.data!.description;
+          _model.descriptionEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.descriptionEditTextController?.selection = TextSelection(
+              baseOffset: 0,
+              extentOffset: _model.descriptionEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.captionFieldEditTextController?.text = _model.data!.caption;
-          _model.captionFieldEditTextController?.selection =
-              TextSelection.collapsed(
-                  offset: _model.captionFieldEditTextController!.text.length);
+          _model.captionFieldEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.captionFieldEditTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.captionFieldEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.linkToContactEditTextController?.text =
               _model.data!.urlContacto;
-          _model.linkToContactEditTextController?.selection =
-              TextSelection.collapsed(
-                  offset: _model.linkToContactEditTextController!.text.length);
+          _model.linkToContactEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.linkToContactEditTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.linkToContactEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.habitacionesTextController?.text =
               _model.data!.habitaciones.toString();
-          _model.habitacionesTextController?.selection =
-              TextSelection.collapsed(
-                  offset: _model.habitacionesTextController!.text.length);
+          _model.habitacionesFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.habitacionesTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.habitacionesTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.limitePersonaEditTextController?.text =
               _model.data!.limitPerson.toString();
-          _model.limitePersonaEditTextController?.selection =
-              TextSelection.collapsed(
-                  offset: _model.limitePersonaEditTextController!.text.length);
+          _model.limitePersonaEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.limitePersonaEditTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.limitePersonaEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.priceHEditTextController?.text = _model.data!.price.toString();
-          _model.priceHEditTextController?.selection = TextSelection.collapsed(
-              offset: _model.priceHEditTextController!.text.length);
+          _model.priceHEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.priceHEditTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.priceHEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.banosEditTextController?.text = _model.data!.banos.toString();
-          _model.banosEditTextController?.selection = TextSelection.collapsed(
-              offset: _model.banosEditTextController!.text.length);
+          _model.banosEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.banosEditTextController?.selection = TextSelection.collapsed(
+              offset: _model.banosEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.areaEditTextController?.text = _model.data!.area.toString();
-          _model.areaEditTextController?.selection = TextSelection.collapsed(
-              offset: _model.areaEditTextController!.text.length);
+          _model.areaEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.areaEditTextController?.selection = TextSelection.collapsed(
+              offset: _model.areaEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.typeHousingEditValueController?.value =

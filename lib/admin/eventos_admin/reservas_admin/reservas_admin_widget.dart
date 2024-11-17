@@ -174,7 +174,8 @@ class _ReservasAdminWidgetState extends State<ReservasAdminWidget>
                                 ),
                             unselectedLabelStyle: TextStyle(),
                             labelColor: Colors.white,
-                            unselectedLabelColor: Colors.white,
+                            unselectedLabelColor:
+                                FlutterFlowTheme.of(context).secondaryText,
                             backgroundColor:
                                 FlutterFlowTheme.of(context).tertiary,
                             borderWidth: 2.0,

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
+import '/backend/supabase/supabase.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
@@ -81,7 +82,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => RootPageContext.wrap(
-        appStateNotifier.loggedIn ? HomeAdminWidget() : InicioWidget(),
+        appStateNotifier.loggedIn ? PageInitWidget() : InicioWidget(),
         errorRoute: state.uri.toString(),
       ),
       routes: [
@@ -89,7 +90,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => RootPageContext.wrap(
-            appStateNotifier.loggedIn ? HomeAdminWidget() : InicioWidget(),
+            appStateNotifier.loggedIn ? PageInitWidget() : InicioWidget(),
           ),
         ),
         FFRoute(
@@ -428,7 +429,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ComercioProfile',
           path: '/comercioProfile',
           requireAuth: true,
-          builder: (context, params) => ComercioProfileWidget(),
+          builder: (context, params) => ComercioProfileWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'detallesPlan',
@@ -616,16 +622,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EditarPerfilUserWidget(),
         ),
         FFRoute(
-          name: 'AllChats',
-          path: '/allChats',
-          requireAuth: true,
-          builder: (context, params) => AllChatsWidget(),
-        ),
-        FFRoute(
-          name: 'chat',
-          path: '/chat',
-          requireAuth: true,
-          builder: (context, params) => ChatWidget(),
+          name: 'ListadoChats',
+          path: '/listadoChats',
+          builder: (context, params) => ListadoChatsWidget(),
         ),
         FFRoute(
           name: 'FAQcreados',
@@ -724,8 +723,68 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/listaEventosAdmin',
           requireAuth: true,
           builder: (context, params) => ListaEventosAdminWidget(),
+        ),
+        FFRoute(
+          name: 'ListaComercios',
+          path: '/listaComercios',
+          requireAuth: true,
+          builder: (context, params) => ListaComerciosWidget(),
+        ),
+        FFRoute(
+          name: 'CREARoVERDescuentos',
+          path: '/cREARoVERDescuentos',
+          requireAuth: true,
+          builder: (context, params) => CREARoVERDescuentosWidget(),
+        ),
+        FFRoute(
+          name: 'ListaDescuentosAdmin',
+          path: '/listaDescuentosAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListaDescuentosAdminWidget(),
+        ),
+        FFRoute(
+          name: 'PerfildecomercioById',
+          path: '/perfildecomercioById',
+          requireAuth: true,
+          builder: (context, params) => PerfildecomercioByIdWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'editarPerfilComercioAdmin',
+          path: '/editarPerfilComercioAdmin',
+          requireAuth: true,
+          builder: (context, params) => EditarPerfilComercioAdminWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'pageInit',
+          path: '/pageInit',
+          requireAuth: true,
+          builder: (context, params) => PageInitWidget(),
+        ),
+        FFRoute(
+          name: 'chatId',
+          path: '/chatId',
+          requireAuth: true,
+          builder: (context, params) => ChatIdWidget(
+            chatRef: params.getParam(
+              'chatRef',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ChatStruct.fromSerializableMap,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

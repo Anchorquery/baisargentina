@@ -121,8 +121,7 @@ export '/admin/users/lista_comercio/lista_comercio_widget.dart'
     show ListaComercioWidget;
 export '/estudiante/perfil/editar_perfil_user/editar_perfil_user_widget.dart'
     show EditarPerfilUserWidget;
-export '/chat/all_chats/all_chats_widget.dart' show AllChatsWidget;
-export '/chat/chat/chat_widget.dart' show ChatWidget;
+export '/chat/listado_chats/listado_chats_widget.dart' show ListadoChatsWidget;
 export '/admin/f_a_qadmin/f_a_qcreados/f_a_qcreados_widget.dart'
     show FAQcreadosWidget;
 export '/admin/eventos_admin/reservas_admin/reservas_admin_widget.dart'
@@ -151,3 +150,15 @@ export '/admin/housign_admin/editar_housing/editar_housing_widget.dart'
     show EditarHousingWidget;
 export '/admin/eventos_admin/lista_eventos_admin/lista_eventos_admin_widget.dart'
     show ListaEventosAdminWidget;
+export '/admin/users/lista_comercios/lista_comercios_widget.dart'
+    show ListaComerciosWidget;
+export '/admin/descuentos/c_r_e_a_ro_v_e_r_descuentos/c_r_e_a_ro_v_e_r_descuentos_widget.dart'
+    show CREARoVERDescuentosWidget;
+export '/admin/descuentos/lista_descuentos_admin/lista_descuentos_admin_widget.dart'
+    show ListaDescuentosAdminWidget;
+export '/admin/users/perfildecomercio_by_id/perfildecomercio_by_id_widget.dart'
+    show PerfildecomercioByIdWidget;
+export '/admin/users/editar_perfil_comercio_admin/editar_perfil_comercio_admin_widget.dart'
+    show EditarPerfilComercioAdminWidget;
+export '/page_init/page_init_widget.dart' show PageInitWidget;
+export '/chat/chat_id/chat_id_widget.dart' show ChatIdWidget;

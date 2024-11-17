@@ -10,7 +10,12 @@ import 'comercio_profile_model.dart';
 export 'comercio_profile_model.dart';
 
 class ComercioProfileWidget extends StatefulWidget {
-  const ComercioProfileWidget({super.key});
+  const ComercioProfileWidget({
+    super.key,
+    required this.id,
+  });
+
+  final int? id;
 
   @override
   State<ComercioProfileWidget> createState() => _ComercioProfileWidgetState();

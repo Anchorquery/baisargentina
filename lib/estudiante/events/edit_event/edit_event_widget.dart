@@ -64,47 +64,68 @@ class _EditEventWidgetState extends State<EditEventWidget>
             ));
             safeSetState(() {
               _model.nameTextController?.text = _model.event!.name;
-              _model.nameTextController?.selection = TextSelection.collapsed(
-                  offset: _model.nameTextController!.text.length);
+              _model.nameFocusNode?.requestFocus();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _model.nameTextController?.selection = TextSelection.collapsed(
+                  offset: _model.nameTextController!.text.length,
+                );
+              });
             });
             safeSetState(() {
               _model.placeUrlTextController?.text =
                   _model.placeUrlTextController.text;
-              _model.placeUrlTextController?.selection =
-                  TextSelection.collapsed(
-                      offset: _model.placeUrlTextController!.text.length);
+              _model.placeUrlFocusNode?.requestFocus();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _model.placeUrlTextController?.selection =
+                    TextSelection.collapsed(
+                  offset: _model.placeUrlTextController!.text.length,
+                );
+              });
             });
             safeSetState(() {
               _model.nameOrganizerNoBaisTextController?.text =
                   _model.event!.nameOrganizerNoBais;
-              _model.nameOrganizerNoBaisTextController?.selection =
-                  TextSelection.collapsed(
-                      offset: _model
-                          .nameOrganizerNoBaisTextController!.text.length);
+              _model.nameOrganizerNoBaisFocusNode?.requestFocus();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _model.nameOrganizerNoBaisTextController?.selection =
+                    TextSelection.collapsed(
+                  offset: _model.nameOrganizerNoBaisTextController!.text.length,
+                );
+              });
             });
             safeSetState(() {
               _model.descripcionEventoTextController?.text =
                   _model.event!.description;
-              _model.descripcionEventoTextController?.selection =
-                  TextSelection.collapsed(
-                      offset:
-                          _model.descripcionEventoTextController!.text.length);
+              _model.descripcionEventoFocusNode?.requestFocus();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _model.descripcionEventoTextController?.selection =
+                    TextSelection.collapsed(
+                  offset: _model.descripcionEventoTextController!.text.length,
+                );
+              });
             });
             safeSetState(() {
               _model.limiteDePersonasTextController?.text =
                   _model.event!.limitePersonas.toString();
-              _model.limiteDePersonasTextController?.selection =
-                  TextSelection.collapsed(
-                      offset:
-                          _model.limiteDePersonasTextController!.text.length);
+              _model.limiteDePersonasFocusNode?.requestFocus();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _model.limiteDePersonasTextController?.selection =
+                    TextSelection.collapsed(
+                  offset: _model.limiteDePersonasTextController!.text.length,
+                );
+              });
             });
             safeSetState(() {
               _model.precioDelTicketEventoTextController?.text =
                   _model.event!.precio.toString();
-              _model.precioDelTicketEventoTextController?.selection =
-                  TextSelection.collapsed(
-                      offset: _model
-                          .precioDelTicketEventoTextController!.text.length);
+              _model.precioDelTicketEventoFocusNode?.requestFocus();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _model.precioDelTicketEventoTextController?.selection =
+                    TextSelection.collapsed(
+                  offset:
+                      _model.precioDelTicketEventoTextController!.text.length,
+                );
+              });
             });
             safeSetState(() {
               _model.puedenAsistirValueController?.value =

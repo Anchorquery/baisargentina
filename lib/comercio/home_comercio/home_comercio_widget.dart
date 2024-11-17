@@ -486,7 +486,15 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('ComercioProfile');
+                                      context.pushNamed(
+                                        'ComercioProfile',
+                                        queryParameters: {
+                                          'id': serializeParam(
+                                            currentUserData?.id,
+                                            ParamType.int,
+                                          ),
+                                        }.withoutNulls,
+                                      );
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,

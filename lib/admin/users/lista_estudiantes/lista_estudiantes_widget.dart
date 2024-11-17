@@ -148,7 +148,8 @@ class _ListaEstudiantesWidgetState extends State<ListaEstudiantesWidget>
                                 ),
                             unselectedLabelStyle: TextStyle(),
                             labelColor: Colors.white,
-                            unselectedLabelColor: Colors.white,
+                            unselectedLabelColor:
+                                FlutterFlowTheme.of(context).secondaryText,
                             backgroundColor:
                                 FlutterFlowTheme.of(context).tertiary,
                             borderWidth: 2.0,

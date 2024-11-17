@@ -477,13 +477,19 @@ class _CreateATicketWidgetState extends State<CreateATicketWidget>
                                                 eventosItem,
                                                 r'''$.name''',
                                               ).toString();
-                                              _model.textController2
-                                                      ?.selection =
-                                                  TextSelection.collapsed(
-                                                      offset: _model
-                                                          .textController2!
-                                                          .text
-                                                          .length);
+                                              _model.textFieldFocusNode2
+                                                  ?.requestFocus();
+                                              WidgetsBinding.instance
+                                                  .addPostFrameCallback((_) {
+                                                _model.textController2
+                                                        ?.selection =
+                                                    TextSelection.collapsed(
+                                                  offset: _model
+                                                      .textController2!
+                                                      .text
+                                                      .length,
+                                                );
+                                              });
                                             });
                                             _model.selectEvent = getJsonField(
                                               eventosItem,

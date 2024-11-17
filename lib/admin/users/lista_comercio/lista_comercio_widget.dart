@@ -178,7 +178,7 @@ class _ListaComercioWidgetState extends State<ListaComercioWidget>
                                 ),
                             unselectedLabelStyle: TextStyle(),
                             labelColor: Colors.white,
-                            unselectedLabelColor: Colors.white,
+                            unselectedLabelColor: Color(0xFFE0E3E7),
                             backgroundColor:
                                 FlutterFlowTheme.of(context).tertiary,
                             unselectedBorderColor:

@@ -144,386 +144,386 @@ class _ListaEventosAdminWidgetState extends State<ListaEventosAdminWidget>
                         size: 24.0,
                       ),
                     ),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            'Lista Eventos',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 32.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w800,
-                                ),
+                    Text(
+                      'Lista Eventos',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Lato',
+                            color: FlutterFlowTheme.of(context).primary,
+                            fontSize: 32.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w800,
                           ),
-                        ],
-                      ),
                     ),
-                  ],
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed('createEvent');
-                        },
-                        text: 'Crear un evento',
-                        icon: Icon(
-                          Icons.add_circle,
-                          size: 15.0,
-                        ),
-                        options: FFButtonOptions(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                          elevation: 0.0,
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 10.0)),
+                  ].divide(SizedBox(width: 50.0)),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                  child: Container(
-                    height: MediaQuery.sizeOf(context).height * 0.3,
-                    decoration: BoxDecoration(),
-                    child: RefreshIndicator(
-                      color: FlutterFlowTheme.of(context).tertiary,
-                      onRefresh: () async {
-                        _model.apiResponseHopusingCopy =
-                            await HousingGroup.obtenerTodosLosHousingCall.call(
-                          token: currentAuthenticationToken,
-                        );
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed('createEvent');
+                    },
+                    text: 'Crear un evento',
+                    icon: Icon(
+                      Icons.add_circle,
+                      size: 15.0,
+                    ),
+                    options: FFButtonOptions(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Lato',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 0.0,
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                    child: Container(
+                      height: MediaQuery.sizeOf(context).height * 0.3,
+                      decoration: BoxDecoration(),
+                      child: RefreshIndicator(
+                        color: FlutterFlowTheme.of(context).tertiary,
+                        onRefresh: () async {
+                          _model.apiResponseHopusingCopy = await HousingGroup
+                              .obtenerTodosLosHousingCall
+                              .call(
+                            token: currentAuthenticationToken,
+                          );
 
-                        if ((_model.apiResponseHopusingCopy?.succeeded ??
-                            true)) {
-                          _model.data = (getJsonField(
-                            (_model.apiResponseHopusingCopy?.jsonBody ?? ''),
-                            r'''$.data''',
-                            true,
-                          )!
-                                  .toList()
-                                  .map<EventsStruct?>(EventsStruct.maybeFromMap)
-                                  .toList() as Iterable<EventsStruct?>)
-                              .withoutNulls
-                              .toList()
-                              .cast<EventsStruct>();
-                          safeSetState(() {});
-                          return;
-                        } else {
-                          return;
-                        }
-                      },
-                      child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 15.0, 0.0, 0.0),
-                              child: Builder(
-                                builder: (context) {
-                                  final events = _model.data.toList();
+                          if ((_model.apiResponseHopusingCopy?.succeeded ??
+                              true)) {
+                            _model.data = (getJsonField(
+                              (_model.apiResponseHopusingCopy?.jsonBody ?? ''),
+                              r'''$.data''',
+                              true,
+                            )!
+                                    .toList()
+                                    .map<EventsStruct?>(
+                                        EventsStruct.maybeFromMap)
+                                    .toList() as Iterable<EventsStruct?>)
+                                .withoutNulls
+                                .toList()
+                                .cast<EventsStruct>();
+                            safeSetState(() {});
+                            return;
+                          } else {
+                            return;
+                          }
+                        },
+                        child: SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 15.0, 0.0, 0.0),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final events = _model.data.toList();
 
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: events.length,
-                                    itemBuilder: (context, eventsIndex) {
-                                      final eventsItem = events[eventsIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            'housign',
-                                            queryParameters: {
-                                              'id': serializeParam(
-                                                eventsItem.id,
-                                                ParamType.int,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 15.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.network(
-                                                      eventsItem.portada.url,
-                                                      width: 70.0,
-                                                      height: 70.0,
-                                                      fit: BoxFit.cover,
-                                                    ),
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: events.length,
+                                        itemBuilder: (context, eventsIndex) {
+                                          final eventsItem =
+                                              events[eventsIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                'housign',
+                                                queryParameters: {
+                                                  'id': serializeParam(
+                                                    eventsItem.id,
+                                                    ParamType.int,
                                                   ),
-                                                  Column(
+                                                }.withoutNulls,
+                                              );
+                                            },
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 15.0),
+                                                  child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        eventsItem.name,
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Lato',
-                                                              fontSize: 16.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        child: Image.network(
+                                                          eventsItem
+                                                              .portada.url,
+                                                          width: 70.0,
+                                                          height: 70.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      context.pushNamed(
-                                                        'editEvent',
-                                                        queryParameters: {
-                                                          'id': serializeParam(
-                                                            eventsItem.id,
-                                                            ParamType.int,
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            eventsItem.name,
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Lato',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
                                                           ),
-                                                        }.withoutNulls,
-                                                      );
-                                                    },
-                                                    child: Icon(
-                                                      Icons.edit_square,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                        ],
+                                                      ),
+                                                      InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          context.pushNamed(
+                                                            'editEvent',
+                                                            queryParameters: {
+                                                              'id':
+                                                                  serializeParam(
+                                                                eventsItem.id,
+                                                                ParamType.int,
+                                                              ),
+                                                            }.withoutNulls,
+                                                          );
+                                                        },
+                                                        child: Icon(
+                                                          Icons.edit_square,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
                                                               .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      var _shouldSetState =
-                                                          false;
-                                                      var confirmDialogResponse =
-                                                          await showDialog<
-                                                                  bool>(
+                                                          size: 24.0,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          var _shouldSetState =
+                                                              false;
+                                                          var confirmDialogResponse =
+                                                              await showDialog<
+                                                                      bool>(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (alertDialogContext) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            'Eliminar Housing'),
+                                                                        content:
+                                                                            Text('¿Está seguro que desea eliminar este item?'),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext, false),
+                                                                            child:
+                                                                                Text('Cancelar'),
+                                                                          ),
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext, true),
+                                                                            child:
+                                                                                Text('Confirmar'),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  ) ??
+                                                                  false;
+                                                          if (confirmDialogResponse) {
+                                                            _model.apiResultlel =
+                                                                await EventsGroup
+                                                                    .eliminarEventoCall
+                                                                    .call(
+                                                              id: eventsItem.id,
+                                                              token:
+                                                                  currentAuthenticationToken,
+                                                            );
+
+                                                            _shouldSetState =
+                                                                true;
+                                                            if ((_model
+                                                                    .apiResultlel
+                                                                    ?.succeeded ??
+                                                                true)) {
+                                                              _model.data = [];
+                                                              _model.loading =
+                                                                  false;
+                                                              safeSetState(
+                                                                  () {});
+                                                              _model.apiResponseHopusing2 =
+                                                                  await EventsGroup
+                                                                      .getEventsCall
+                                                                      .call(
+                                                                token:
+                                                                    currentAuthenticationToken,
+                                                              );
+
+                                                              _shouldSetState =
+                                                                  true;
+                                                              if ((_model
+                                                                      .apiResponseEvents
+                                                                      ?.succeeded ??
+                                                                  true)) {
+                                                                _model
+                                                                    .data = (getJsonField(
+                                                                  (_model.apiResponseEvents
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.data''',
+                                                                  true,
+                                                                )!
+                                                                        .toList()
+                                                                        .map<EventsStruct?>(EventsStruct.maybeFromMap)
+                                                                        .toList() as Iterable<EventsStruct?>)
+                                                                    .withoutNulls
+                                                                    .toList()
+                                                                    .cast<EventsStruct>();
+                                                                _model.loading =
+                                                                    false;
+                                                                safeSetState(
+                                                                    () {});
+                                                                if (_shouldSetState)
+                                                                  safeSetState(
+                                                                      () {});
+                                                                return;
+                                                              } else {
+                                                                if (_shouldSetState)
+                                                                  safeSetState(
+                                                                      () {});
+                                                                return;
+                                                              }
+                                                            } else {
+                                                              await showDialog(
                                                                 context:
                                                                     context,
                                                                 builder:
                                                                     (alertDialogContext) {
                                                                   return AlertDialog(
                                                                     title: Text(
-                                                                        'Eliminar Housing'),
+                                                                        'Error'),
                                                                     content: Text(
-                                                                        '¿Está seguro que desea eliminar este item?'),
+                                                                        getJsonField(
+                                                                      (_model.apiResultlel
+                                                                              ?.jsonBody ??
+                                                                          ''),
+                                                                      r'''$.error''',
+                                                                    ).toString()),
                                                                     actions: [
                                                                       TextButton(
-                                                                        onPressed: () => Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            false),
+                                                                        onPressed:
+                                                                            () =>
+                                                                                Navigator.pop(alertDialogContext),
                                                                         child: Text(
-                                                                            'Cancelar'),
-                                                                      ),
-                                                                      TextButton(
-                                                                        onPressed: () => Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            true),
-                                                                        child: Text(
-                                                                            'Confirmar'),
+                                                                            'Ok'),
                                                                       ),
                                                                     ],
                                                                   );
                                                                 },
-                                                              ) ??
-                                                              false;
-                                                      if (confirmDialogResponse) {
-                                                        _model.apiResultlel =
-                                                            await EventsGroup
-                                                                .eliminarEventoCall
-                                                                .call(
-                                                          id: eventsItem.id,
-                                                          token:
-                                                              currentAuthenticationToken,
-                                                        );
+                                                              );
+                                                            }
 
-                                                        _shouldSetState = true;
-                                                        if ((_model.apiResultlel
-                                                                ?.succeeded ??
-                                                            true)) {
-                                                          _model.data = [];
-                                                          _model.loading =
-                                                              false;
-                                                          safeSetState(() {});
-                                                          _model.apiResponseHopusing2 =
-                                                              await EventsGroup
-                                                                  .getEventsCall
-                                                                  .call(
-                                                            token:
-                                                                currentAuthenticationToken,
-                                                          );
-
-                                                          _shouldSetState =
-                                                              true;
-                                                          if ((_model
-                                                                  .apiResponseEvents
-                                                                  ?.succeeded ??
-                                                              true)) {
-                                                            _model
-                                                                .data = (getJsonField(
-                                                              (_model.apiResponseEvents
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.data''',
-                                                              true,
-                                                            )!
-                                                                    .toList()
-                                                                    .map<EventsStruct?>(EventsStruct.maybeFromMap)
-                                                                    .toList() as Iterable<EventsStruct?>)
-                                                                .withoutNulls
-                                                                .toList()
-                                                                .cast<EventsStruct>();
-                                                            _model.loading =
-                                                                false;
-                                                            safeSetState(() {});
                                                             if (_shouldSetState)
                                                               safeSetState(
                                                                   () {});
                                                             return;
                                                           } else {
+                                                            Navigator.pop(
+                                                                context);
                                                             if (_shouldSetState)
                                                               safeSetState(
                                                                   () {});
                                                             return;
                                                           }
-                                                        } else {
-                                                          await showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return AlertDialog(
-                                                                title: Text(
-                                                                    'Error'),
-                                                                content: Text(
-                                                                    getJsonField(
-                                                                  (_model.apiResultlel
-                                                                          ?.jsonBody ??
-                                                                      ''),
-                                                                  r'''$.error''',
-                                                                ).toString()),
-                                                                actions: [
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext),
-                                                                    child: Text(
-                                                                        'Ok'),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          );
-                                                        }
 
-                                                        if (_shouldSetState)
-                                                          safeSetState(() {});
-                                                        return;
-                                                      } else {
-                                                        Navigator.pop(context);
-                                                        if (_shouldSetState)
-                                                          safeSetState(() {});
-                                                        return;
-                                                      }
-
-                                                      if (_shouldSetState)
-                                                        safeSetState(() {});
-                                                    },
-                                                    child: Icon(
-                                                      Icons.delete_sharp,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                          if (_shouldSetState)
+                                                            safeSetState(() {});
+                                                        },
+                                                        child: Icon(
+                                                          Icons.delete_sharp,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
                                                               .error,
-                                                      size: 24.0,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'rowOnPageLoadAnimation']!),
-                                            ),
-                                            Divider(
-                                              thickness: 1.0,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                                          size: 24.0,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'rowOnPageLoadAnimation']!),
+                                                ),
+                                                Divider(
+                                                  thickness: 1.0,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .alternate,
-                                            ).animateOnPageLoad(animationsMap[
-                                                'dividerOnPageLoadAnimation']!),
-                                          ],
-                                        ),
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'dividerOnPageLoadAnimation']!),
+                                              ],
+                                            ),
+                                          );
+                                        },
                                       );
                                     },
-                                  );
-                                },
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

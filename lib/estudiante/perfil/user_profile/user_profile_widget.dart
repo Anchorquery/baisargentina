@@ -1053,29 +1053,28 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed('reservas');
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 60.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFFF1F4F8),
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                        border: Border.all(
-                                          color: Color(0xFFE3E6E9),
-                                          width: 0.5,
-                                        ),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 60.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFF1F4F8),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      border: Border.all(
+                                        color: Color(0xFFE3E6E9),
+                                        width: 0.5,
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 12.0, 8.0, 12.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 12.0, 8.0, 12.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed('reservas');
+                                        },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -1121,41 +1120,31 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
-                                        'chat',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.leftToRight,
-                                          ),
-                                        },
-                                      );
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 60.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFF1F4F8),
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                          border: Border.all(
-                                            color: Color(0xFFE3E6E9),
-                                            width: 0.5,
-                                          ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 60.0,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFFF1F4F8),
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                        border: Border.all(
+                                          color: Color(0xFFE3E6E9),
+                                          width: 0.5,
                                         ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8.0, 12.0, 8.0, 12.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 12.0, 8.0, 12.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed('ListadoChats');
+                                          },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
