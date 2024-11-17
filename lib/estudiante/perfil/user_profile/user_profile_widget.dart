@@ -685,14 +685,14 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                                 Duration(
                                                                     milliseconds:
                                                                         500),
-                                                            imageUrl:
-                                                                currentUserData!
-                                                                    .qrImage,
+                                                            imageUrl: _model
+                                                                .myPlan!
+                                                                .qrImage,
                                                             fit: BoxFit.contain,
                                                           ),
                                                           allowRotation: false,
-                                                          tag: currentUserData!
-                                                              .qrImage,
+                                                          tag: _model
+                                                              .myPlan!.qrImage,
                                                           useHeroAnimation:
                                                               true,
                                                         ),
@@ -700,8 +700,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                     );
                                                   },
                                                   child: Hero(
-                                                    tag: currentUserData!
-                                                        .qrImage,
+                                                    tag: _model.myPlan!.qrImage,
                                                     transitionOnUserGestures:
                                                         true,
                                                     child: ClipRRect(
@@ -717,9 +716,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                             Duration(
                                                                 milliseconds:
                                                                     500),
-                                                        imageUrl:
-                                                            currentUserData!
-                                                                .qrImage,
+                                                        imageUrl: _model
+                                                            .myPlan!.qrImage,
                                                         width:
                                                             MediaQuery.sizeOf(
                                                                         context)
