@@ -685,11 +685,14 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                                 Duration(
                                                                     milliseconds:
                                                                         500),
-                                                            imageUrl: '',
+                                                            imageUrl:
+                                                                currentUserData!
+                                                                    .qrImage,
                                                             fit: BoxFit.contain,
                                                           ),
                                                           allowRotation: false,
-                                                          tag: 'imageTag2',
+                                                          tag: currentUserData!
+                                                              .qrImage,
                                                           useHeroAnimation:
                                                               true,
                                                         ),
@@ -697,7 +700,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                     );
                                                   },
                                                   child: Hero(
-                                                    tag: 'imageTag2',
+                                                    tag: currentUserData!
+                                                        .qrImage,
                                                     transitionOnUserGestures:
                                                         true,
                                                     child: ClipRRect(
@@ -713,7 +717,9 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                             Duration(
                                                                 milliseconds:
                                                                     500),
-                                                        imageUrl: '',
+                                                        imageUrl:
+                                                            currentUserData!
+                                                                .qrImage,
                                                         width:
                                                             MediaQuery.sizeOf(
                                                                         context)
