@@ -25,4 +25,3 @@ export 'file_d_struct.dart';
 export 'pagination_struct.dart';
 export 'plan_struct.dart';
 export 'user_chat_struct.dart';
-export 'user_register_struct.dart';

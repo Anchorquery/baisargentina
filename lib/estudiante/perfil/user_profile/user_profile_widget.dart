@@ -685,14 +685,11 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                                 Duration(
                                                                     milliseconds:
                                                                         500),
-                                                            imageUrl: _model
-                                                                .myPlan!
-                                                                .qrImage,
+                                                            imageUrl: '',
                                                             fit: BoxFit.contain,
                                                           ),
                                                           allowRotation: false,
-                                                          tag: _model
-                                                              .myPlan!.qrImage,
+                                                          tag: 'imageTag2',
                                                           useHeroAnimation:
                                                               true,
                                                         ),
@@ -700,7 +697,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                     );
                                                   },
                                                   child: Hero(
-                                                    tag: _model.myPlan!.qrImage,
+                                                    tag: 'imageTag2',
                                                     transitionOnUserGestures:
                                                         true,
                                                     child: ClipRRect(
@@ -716,8 +713,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                                             Duration(
                                                                 milliseconds:
                                                                     500),
-                                                        imageUrl: _model
-                                                            .myPlan!.qrImage,
+                                                        imageUrl: '',
                                                         width:
                                                             MediaQuery.sizeOf(
                                                                         context)
