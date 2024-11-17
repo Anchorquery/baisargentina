@@ -84,6 +84,35 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInListMessages(int index, ChatMessageStruct value) {
     listMessages.insert(index, value);
   }
+
+  List<ChatStruct> _listChats = [];
+  List<ChatStruct> get listChats => _listChats;
+  set listChats(List<ChatStruct> value) {
+    _listChats = value;
+  }
+
+  void addToListChats(ChatStruct value) {
+    listChats.add(value);
+  }
+
+  void removeFromListChats(ChatStruct value) {
+    listChats.remove(value);
+  }
+
+  void removeAtIndexFromListChats(int index) {
+    listChats.removeAt(index);
+  }
+
+  void updateListChatsAtIndex(
+    int index,
+    ChatStruct Function(ChatStruct) updateFn,
+  ) {
+    listChats[index] = updateFn(_listChats[index]);
+  }
+
+  void insertAtIndexInListChats(int index, ChatStruct value) {
+    listChats.insert(index, value);
+  }
 }
 
 void _safeInit(Function() initializeField) {

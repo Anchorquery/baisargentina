@@ -34,12 +34,14 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().listChats = [];
+      safeSetState(() {});
       _model.apiCargarChats = await ChatGroup.listarChatsCall.call(
         token: currentAuthenticationToken,
       );
 
       if ((_model.apiCargarChats?.succeeded ?? true)) {
-        _model.chats = (getJsonField(
+        FFAppState().listChats = (getJsonField(
           (_model.apiCargarChats?.jsonBody ?? ''),
           r'''$.data''',
           true,
@@ -50,6 +52,7 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
             .withoutNulls
             .toList()
             .cast<ChatStruct>();
+        safeSetState(() {});
         _model.loading = !(_model.loading ?? true);
         _model.pagination = PaginationStruct.maybeFromMap(getJsonField(
           (_model.apiCargarChats?.jsonBody ?? ''),
@@ -72,6 +75,8 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -229,134 +234,108 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Container(
-                    height: MediaQuery.sizeOf(context).height * 1.0,
-                    constraints: BoxConstraints(
-                      maxHeight: MediaQuery.sizeOf(context).height * 0.7,
-                    ),
-                    decoration: BoxDecoration(),
-                    child: Builder(
-                      builder: (context) {
-                        if (!_model.loading!) {
-                          return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 0.0),
-                            child: Builder(
-                              builder: (context) {
-                                final data = _model.chats.toList();
-                                if (data.isEmpty) {
-                                  return EmptyListWidget(
-                                    message: 'Sin chats',
-                                    error: 'Ha ocurrido un error',
+                Builder(
+                  builder: (context) {
+                    if (!_model.loading!) {
+                      return Container(
+                        height: MediaQuery.sizeOf(context).height * 0.911,
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.sizeOf(context).height * 0.7,
+                        ),
+                        decoration: BoxDecoration(),
+                        alignment: AlignmentDirectional(0.0, -1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 8.0, 0.0, 0.0),
+                          child: Builder(
+                            builder: (context) {
+                              final data = FFAppState().listChats.toList();
+                              if (data.isEmpty) {
+                                return EmptyListWidget(
+                                  message: 'Sin chats',
+                                  error: 'Ha ocurrido un error',
+                                );
+                              }
+
+                              return RefreshIndicator(
+                                key: Key('RefreshIndicator_dh3ky8wv'),
+                                color: FlutterFlowTheme.of(context).tertiary,
+                                onRefresh: () async {
+                                  _model.loading = true;
+                                  safeSetState(() {});
+                                  _model.apiResultu3gCopy =
+                                      await ChatGroup.listarChatsCall.call(
+                                    token: currentAuthenticationToken,
                                   );
-                                }
 
-                                return RefreshIndicator(
-                                  key: Key('RefreshIndicator_dh3ky8wv'),
-                                  color: FlutterFlowTheme.of(context).tertiary,
-                                  onRefresh: () async {
-                                    _model.loading = true;
+                                  if ((_model.apiResultu3gCopy?.succeeded ??
+                                      true)) {
+                                    _model.chats = (getJsonField(
+                                      (_model.apiResultu3gCopy?.jsonBody ?? ''),
+                                      r'''$.data''',
+                                      true,
+                                    )!
+                                            .toList()
+                                            .map<ChatStruct?>(
+                                                ChatStruct.maybeFromMap)
+                                            .toList() as Iterable<ChatStruct?>)
+                                        .withoutNulls
+                                        .toList()
+                                        .cast<ChatStruct>();
+                                    _model.pagination =
+                                        PaginationStruct.maybeFromMap(
+                                            getJsonField(
+                                      (_model.apiResultu3gCopy?.jsonBody ?? ''),
+                                      r'''$.pagination''',
+                                    ));
+                                    _model.loading = !(_model.loading ?? true);
                                     safeSetState(() {});
-                                    _model.apiResultu3gCopy =
-                                        await ChatGroup.listarChatsCall.call(
-                                      token: currentAuthenticationToken,
-                                    );
+                                  }
+                                },
+                                child: SingleChildScrollView(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children:
+                                        List.generate(data.length, (dataIndex) {
+                                      final dataItem = data[dataIndex];
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 1.0, 0.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            var _shouldSetState = false;
+                                            if (currentUserData?.role == 1) {
+                                              _model.apiResult36m =
+                                                  await ChatGroup
+                                                      .asignarUsuarioAChatCall
+                                                      .call(
+                                                token:
+                                                    currentAuthenticationToken,
+                                                uuid: dataItem.uuid,
+                                              );
 
-                                    if ((_model.apiResultu3gCopy?.succeeded ??
-                                        true)) {
-                                      _model.chats = (getJsonField(
-                                        (_model.apiResultu3gCopy?.jsonBody ??
-                                            ''),
-                                        r'''$.data''',
-                                        true,
-                                      )!
-                                                  .toList()
-                                                  .map<ChatStruct?>(
-                                                      ChatStruct.maybeFromMap)
-                                                  .toList()
-                                              as Iterable<ChatStruct?>)
-                                          .withoutNulls
-                                          .toList()
-                                          .cast<ChatStruct>();
-                                      _model.pagination =
-                                          PaginationStruct.maybeFromMap(
-                                              getJsonField(
-                                        (_model.apiResultu3gCopy?.jsonBody ??
-                                            ''),
-                                        r'''$.pagination''',
-                                      ));
-                                      _model.loading =
-                                          !(_model.loading ?? true);
-                                      safeSetState(() {});
-                                    }
-                                  },
-                                  child: SingleChildScrollView(
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: List.generate(data.length,
-                                          (dataIndex) {
-                                        final dataItem = data[dataIndex];
-                                        return Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 1.0, 0.0, 0.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              var _shouldSetState = false;
-                                              if (currentUserData?.role == 1) {
-                                                _model.apiResult36m =
-                                                    await ChatGroup
-                                                        .asignarUsuarioAChatCall
-                                                        .call(
-                                                  token:
-                                                      currentAuthenticationToken,
-                                                  uuid: dataItem.uuid,
-                                                );
-
-                                                _shouldSetState = true;
-                                                if ((_model.apiResult36m
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  context.pushNamed(
-                                                    'chatId',
-                                                    queryParameters: {
-                                                      'chatRef': serializeParam(
-                                                        ChatStruct.maybeFromMap(
-                                                            getJsonField(
-                                                          (_model.apiResult36m
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.data''',
-                                                        )),
-                                                        ParamType.DataStruct,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-
-                                                  if (_shouldSetState)
-                                                    safeSetState(() {});
-                                                  return;
-                                                } else {
-                                                  if (_shouldSetState)
-                                                    safeSetState(() {});
-                                                  return;
-                                                }
-                                              } else {
+                                              _shouldSetState = true;
+                                              if ((_model.apiResult36m
+                                                      ?.succeeded ??
+                                                  true)) {
                                                 context.pushNamed(
                                                   'chatId',
                                                   queryParameters: {
                                                     'chatRef': serializeParam(
-                                                      dataItem,
+                                                      ChatStruct.maybeFromMap(
+                                                          getJsonField(
+                                                        (_model.apiResult36m
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                        r'''$.data''',
+                                                      )),
                                                       ParamType.DataStruct,
                                                     ),
                                                   }.withoutNulls,
@@ -365,95 +344,125 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                                 if (_shouldSetState)
                                                   safeSetState(() {});
                                                 return;
+                                              } else {
+                                                if (_shouldSetState)
+                                                  safeSetState(() {});
+                                                return;
                                               }
+                                            } else {
+                                              context.pushNamed(
+                                                'chatId',
+                                                queryParameters: {
+                                                  'chatRef': serializeParam(
+                                                    dataItem,
+                                                    ParamType.DataStruct,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
 
                                               if (_shouldSetState)
                                                 safeSetState(() {});
-                                            },
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              elevation: 0.0,
-                                              shape: RoundedRectangleBorder(
+                                              return;
+                                            }
+
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                          },
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            elevation: 0.0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
+                                            ),
+                                            child: Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
                                                 borderRadius:
                                                     BorderRadius.circular(0.0),
                                               ),
-                                              child: Container(
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.0),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(12.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Container(
-                                                        width: 44.0,
-                                                        height: 44.0,
-                                                        decoration:
-                                                            BoxDecoration(
+                                              child: Padding(
+                                                padding: EdgeInsets.all(12.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      width: 44.0,
+                                                      height: 44.0,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent1,
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .accent1,
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          border: Border.all(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            width: 2.0,
-                                                          ),
+                                                              .primary,
+                                                          width: 2.0,
                                                         ),
-                                                        child: Stack(
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(2.0),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            40.0),
-                                                                child:
-                                                                    CachedNetworkImage(
-                                                                  fadeInDuration:
-                                                                      Duration(
-                                                                          milliseconds:
-                                                                              500),
-                                                                  fadeOutDuration:
-                                                                      Duration(
-                                                                          milliseconds:
-                                                                              500),
-                                                                  imageUrl:
-                                                                      dataItem
-                                                                          .user
-                                                                          .avatar,
-                                                                  width: 44.0,
-                                                                  height: 44.0,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
+                                                      ),
+                                                      child: Stack(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    2.0),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          40.0),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                fadeInDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                fadeOutDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                imageUrl:
+                                                                    dataItem
+                                                                        .user
+                                                                        .avatar,
+                                                                width: 44.0,
+                                                                height: 44.0,
+                                                                fit: BoxFit
+                                                                    .cover,
                                                               ),
                                                             ),
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      1.0, 1.0),
-                                                              child: Container(
-                                                                width: 10.0,
-                                                                height: 10.0,
-                                                                decoration:
-                                                                    BoxDecoration(
+                                                          ),
+                                                          Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    1.0, 1.0),
+                                                            child: Container(
+                                                              width: 10.0,
+                                                              height: 10.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: dataItem
+                                                                            .user
+                                                                            .isOnline ==
+                                                                        true
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .success
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                border:
+                                                                    Border.all(
                                                                   color: dataItem
                                                                               .user
                                                                               .isOnline ==
@@ -464,85 +473,46 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                                                       : FlutterFlowTheme.of(
                                                                               context)
                                                                           .error,
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: dataItem.user.isOnline ==
-                                                                            true
-                                                                        ? FlutterFlowTheme.of(context)
-                                                                            .success
-                                                                        : FlutterFlowTheme.of(context)
-                                                                            .error,
-                                                                  ),
                                                                 ),
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        1.0,
-                                                                        1.0),
                                                               ),
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      1.0, 1.0),
                                                             ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      8.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    dataItem
-                                                                        .user
-                                                                        .name,
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyLarge
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Lato',
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child: Text(
-                                                                  dataItem
-                                                                      .lastMessage,
+                                                    ),
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    8.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  dataItem.user
+                                                                      .name,
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .labelMedium
+                                                                      .bodyLarge
                                                                       .override(
                                                                         fontFamily:
                                                                             'Lato',
@@ -550,77 +520,102 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                                                             0.0,
                                                                       ),
                                                                 ),
-                                                              ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      dataItem
-                                                                          .lastMessageTime,
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelSmall
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Lato',
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
+                                                              ],
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Text(
+                                                                dataItem
+                                                                    .lastMessage,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Lato',
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                     ),
-                                                                  ),
-                                                                  Icon(
-                                                                    Icons
-                                                                        .chevron_right_rounded,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryText,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    dataItem
+                                                                        .lastMessageTime,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .start,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelSmall
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Lato',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Icon(
+                                                                  Icons
+                                                                      .chevron_right_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  size: 24.0,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        );
-                                      }),
-                                    ),
+                                        ),
+                                      );
+                                    }),
                                   ),
-                                );
-                              },
-                            ),
-                          );
-                        } else {
-                          return wrapWithModel(
-                            model: _model.loaderModel,
-                            updateCallback: () => safeSetState(() {}),
-                            child: LoaderWidget(),
-                          );
-                        }
-                      },
-                    ),
-                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    } else {
+                      return wrapWithModel(
+                        model: _model.loaderModel,
+                        updateCallback: () => safeSetState(() {}),
+                        child: LoaderWidget(),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
