@@ -41,6 +41,14 @@ class SocketService {
     _socket!.onConnect((_) {
       print('Conectado al socket');
       FFAppState().isSocketConnected = true;
+
+      // Intentar volver a unirse a la sala después de reconectar
+      String? roomId = FFAppState().currentRoomId;
+      if (roomId != null && roomId.isNotEmpty) {
+        emit('join_room', {'roomId': roomId});
+        print('Reconectado y unido a la sala: $roomId');
+      }
+
       _socket!.emit('connect_user', {});
     });
 

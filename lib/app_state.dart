@@ -125,6 +125,12 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInListChats(int index, ChatStruct value) {
     listChats.insert(index, value);
   }
+
+  String _currentRoomId = '';
+  String get currentRoomId => _currentRoomId;
+  set currentRoomId(String value) {
+    _currentRoomId = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

@@ -61,9 +61,9 @@ class EventsModel extends FlutterFlowModel<EventsWidget> {
   ApiCallResponse? apiResponseGetEventsbyCategory;
   // Stores action output result for [Backend Call - API (GetEvents)] action in Text widget.
   ApiCallResponse? apiResponseGetEventsbyCategoryCopy;
-  // Stores action output result for [Backend Call - API (GetEvents)] action in ListView widget.
+  // Stores action output result for [Backend Call - API (GetEvents)] action in Column widget.
   ApiCallResponse? apiResponseEventsCopy;
-  // Stores action output result for [Backend Call - API (Api Get Categories)] action in ListView widget.
+  // Stores action output result for [Backend Call - API (Api Get Categories)] action in Column widget.
   ApiCallResponse? apiResponseCategoriesCopy;
   // Model for NavBarWithMiddleButton component.
   late NavBarWithMiddleButtonModel navBarWithMiddleButtonModel;

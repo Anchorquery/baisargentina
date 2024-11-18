@@ -23,8 +23,7 @@ export '/estudiante/admin/validarqr/scaneo_exitoso/scaneo_exitoso_widget.dart'
     show ScaneoExitosoWidget;
 export '/estudiante/admin/validarqr/scaneo_error/scaneo_error_widget.dart'
     show ScaneoErrorWidget;
-export '/estudiante/events/edit_event/edit_event_widget.dart'
-    show EditEventWidget;
+export '/estudiante/edit_event/edit_event_widget.dart' show EditEventWidget;
 export '/estudiante/booking/reserva_id/reserva_id_widget.dart'
     show ReservaIdWidget;
 export '/estudiante/admin/validarqr/detalle_reserva/detalle_reserva_widget.dart'

@@ -73,6 +73,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                   );
                 },
               );
+              return;
             }
 
             return;
@@ -408,337 +409,374 @@ class _EventsWidgetState extends State<EventsWidget> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 90.0),
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Builder(
-                                            builder: (context) {
-                                              final data =
-                                                  _model.items.toList();
-                                              if (data.isEmpty) {
-                                                return Container(
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          1.0,
-                                                  child: EmptyListWidget(
-                                                    message:
-                                                        'No hay eventos para esta categoria',
-                                                    error: 'Sin datos',
-                                                  ),
-                                                );
-                                              }
+                                    child: RefreshIndicator(
+                                      key: Key('RefreshIndicator_ijarrkrk'),
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      onRefresh: () async {
+                                        await Future.wait([
+                                          Future(() async {
+                                            _model.apiResponseEventsCopy =
+                                                await EventsGroup.getEventsCall
+                                                    .call(
+                                              token: currentAuthenticationToken,
+                                            );
 
-                                              return RefreshIndicator(
-                                                key: Key(
-                                                    'RefreshIndicator_6hut1c67'),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiary,
-                                                onRefresh: () async {
-                                                  await Future.wait([
-                                                    Future(() async {
-                                                      _model.apiResponseEventsCopy =
-                                                          await EventsGroup
-                                                              .getEventsCall
-                                                              .call(
-                                                        token:
-                                                            currentAuthenticationToken,
-                                                      );
-
-                                                      if (!(_model
-                                                              .apiResponseEventsCopy
-                                                              ?.succeeded ??
-                                                          true)) {
-                                                        await showDialog(
-                                                          context: context,
-                                                          builder:
-                                                              (alertDialogContext) {
-                                                            return AlertDialog(
-                                                              title: Text(
-                                                                  'Ha ocurrido un error'),
-                                                              content: Text(
-                                                                  'Intente luego'),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext),
-                                                                  child: Text(
-                                                                      'Ok'),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        );
-                                                        return;
-                                                      }
-                                                    }),
-                                                    Future(() async {
-                                                      _model.apiResponseCategoriesCopy =
-                                                          await ApiGetCategoriesCall
-                                                              .call();
-
-                                                      if (!(_model
-                                                              .apiResponseCategoriesCopy
-                                                              ?.succeeded ??
-                                                          true)) {
-                                                        return;
-                                                      }
-                                                    }),
-                                                  ]);
+                                            if (!(_model.apiResponseEventsCopy
+                                                    ?.succeeded ??
+                                                true)) {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Ha ocurrido un error'),
+                                                    content:
+                                                        Text('Intente luego'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
                                                 },
-                                                child: ListView.builder(
-                                                  padding: EdgeInsets.zero,
-                                                  primary: false,
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount: data.length,
-                                                  itemBuilder:
-                                                      (context, dataIndex) {
-                                                    final dataItem =
-                                                        data[dataIndex];
-                                                    return Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  25.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Stack(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0.0, 0.0),
-                                                        children: [
-                                                          InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              context.pushNamed(
-                                                                'event',
-                                                                queryParameters:
-                                                                    {
-                                                                  'id':
-                                                                      serializeParam(
-                                                                    dataItem.id,
-                                                                    ParamType
-                                                                        .int,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                              );
-                                                            },
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        20.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        20.0),
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        20.0),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        20.0),
-                                                              ),
-                                                              child: Container(
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    0.9,
-                                                                height: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .height *
-                                                                    0.176,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Color(
-                                                                      0xFFF7F8FA),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            20.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            20.0),
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            20.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            20.0),
-                                                                  ),
+                                              );
+                                              return;
+                                            }
+                                          }),
+                                          Future(() async {
+                                            _model.apiResponseCategoriesCopy =
+                                                await ApiGetCategoriesCall
+                                                    .call();
+
+                                            if (!(_model
+                                                    .apiResponseCategoriesCopy
+                                                    ?.succeeded ??
+                                                true)) {
+                                              return;
+                                            }
+                                          }),
+                                        ]);
+                                        _model.items = (getJsonField(
+                                          (_model.apiResponseEventsCopy
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.data''',
+                                          true,
+                                        )!
+                                                    .toList()
+                                                    .map<EventsStruct?>(
+                                                        EventsStruct.maybeFromMap)
+                                                    .toList()
+                                                as Iterable<EventsStruct?>)
+                                            .withoutNulls
+                                            .toList()
+                                            .cast<EventsStruct>();
+                                        _model.pagination =
+                                            PaginationStruct.maybeFromMap(
+                                                getJsonField(
+                                          (_model.apiResponseEventsCopy
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.data.pagination''',
+                                        ));
+                                        _model.categories = (getJsonField(
+                                          (_model.apiResponseCategoriesCopy
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.data''',
+                                          true,
+                                        )!
+                                                    .toList()
+                                                    .map<CategoryStruct?>(
+                                                        CategoryStruct.maybeFromMap)
+                                                    .toList()
+                                                as Iterable<CategoryStruct?>)
+                                            .withoutNulls
+                                            .toList()
+                                            .cast<CategoryStruct>();
+                                        safeSetState(() {});
+                                      },
+                                      child: SingleChildScrollView(
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Builder(
+                                              builder: (context) {
+                                                final data =
+                                                    _model.items.toList();
+                                                if (data.isEmpty) {
+                                                  return Container(
+                                                    width: MediaQuery.sizeOf(
+                                                                context)
+                                                            .width *
+                                                        1.0,
+                                                    child: EmptyListWidget(
+                                                      message:
+                                                          'No hay eventos para esta categoria',
+                                                      error: 'Sin datos',
+                                                    ),
+                                                  );
+                                                }
+
+                                                return RefreshIndicator(
+                                                  key: Key(
+                                                      'RefreshIndicator_6hut1c67'),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .tertiary,
+                                                  onRefresh: () async {},
+                                                  child: ListView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    primary: false,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount: data.length,
+                                                    itemBuilder:
+                                                        (context, dataIndex) {
+                                                      final dataItem =
+                                                          data[dataIndex];
+                                                      return Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    25.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Stack(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          children: [
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                context
+                                                                    .pushNamed(
+                                                                  'event',
+                                                                  queryParameters:
+                                                                      {
+                                                                    'id':
+                                                                        serializeParam(
+                                                                      dataItem
+                                                                          .id,
+                                                                      ParamType
+                                                                          .int,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          20.0),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          20.0),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          20.0),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          20.0),
                                                                 ),
-                                                                child: InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
-                                                                      .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    context
-                                                                        .pushNamed(
-                                                                      'event',
-                                                                      queryParameters:
-                                                                          {
-                                                                        'id':
-                                                                            serializeParam(
-                                                                          dataItem
-                                                                              .id,
-                                                                          ParamType
-                                                                              .int,
-                                                                        ),
-                                                                      }.withoutNulls,
-                                                                    );
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            10.0,
-                                                                            10.0,
-                                                                            10.0,
-                                                                            10.0),
-                                                                        child:
-                                                                            ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                          child:
-                                                                              CachedNetworkImage(
-                                                                            fadeInDuration:
-                                                                                Duration(milliseconds: 500),
-                                                                            fadeOutDuration:
-                                                                                Duration(milliseconds: 500),
-                                                                            imageUrl:
-                                                                                getJsonField(
-                                                                              dataItem.portada.toMap(),
-                                                                              r'''$.url''',
-                                                                            ).toString(),
-                                                                            width:
-                                                                                116.0,
-                                                                            height:
-                                                                                200.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                            alignment:
-                                                                                Alignment(1.0, 1.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width *
+                                                                      0.9,
+                                                                  height: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .height *
+                                                                      0.176,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Color(
+                                                                        0xFFF7F8FA),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .only(
+                                                                      bottomLeft:
+                                                                          Radius.circular(
+                                                                              20.0),
+                                                                      bottomRight:
+                                                                          Radius.circular(
+                                                                              20.0),
+                                                                      topLeft: Radius
+                                                                          .circular(
+                                                                              20.0),
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              20.0),
+                                                                    ),
+                                                                  ),
+                                                                  child:
+                                                                      InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      context
+                                                                          .pushNamed(
+                                                                        'event',
+                                                                        queryParameters:
+                                                                            {
+                                                                          'id':
+                                                                              serializeParam(
+                                                                            dataItem.id,
+                                                                            ParamType.int,
                                                                           ),
-                                                                        ),
-                                                                      ),
-                                                                      Expanded(
-                                                                        child:
-                                                                            Padding(
+                                                                        }.withoutNulls,
+                                                                      );
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
                                                                               10.0,
                                                                               10.0,
-                                                                              0.0),
+                                                                              10.0,
+                                                                              10.0),
                                                                           child:
-                                                                              Column(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              Text(
-                                                                                dataItem.name,
-                                                                                style: FlutterFlowTheme.of(context).titleLarge.override(
-                                                                                      fontFamily: 'Lato',
-                                                                                      fontSize: 16.0,
-                                                                                      letterSpacing: 0.0,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                    ),
-                                                                              ),
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
-                                                                                child: Text(
-                                                                                  dataItem.description.maybeHandleOverflow(
-                                                                                    maxChars: 45,
-                                                                                    replacement: '…',
-                                                                                  ),
-                                                                                  maxLines: 4,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Lato',
-                                                                                        fontSize: 14.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                              RichText(
-                                                                                textScaler: MediaQuery.of(context).textScaler,
-                                                                                text: TextSpan(
-                                                                                  children: [
-                                                                                    TextSpan(
-                                                                                      text: dataItem.type == TypeEvent.free
-                                                                                          ? 'Gratis'
-                                                                                          : valueOrDefault<String>(
-                                                                                              formatNumber(
-                                                                                                dataItem.precio,
-                                                                                                formatType: FormatType.decimal,
-                                                                                                decimalType: DecimalType.automatic,
-                                                                                                currency: '\$',
-                                                                                              ),
-                                                                                              '0',
-                                                                                            ),
-                                                                                      style: TextStyle(
-                                                                                        color: FlutterFlowTheme.of(context).tertiary,
-                                                                                        fontWeight: FontWeight.w900,
-                                                                                        fontSize: 24.0,
-                                                                                      ),
-                                                                                    )
-                                                                                  ],
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Lato',
-                                                                                        fontSize: 10.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                            ],
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8.0),
+                                                                            child:
+                                                                                CachedNetworkImage(
+                                                                              fadeInDuration: Duration(milliseconds: 500),
+                                                                              fadeOutDuration: Duration(milliseconds: 500),
+                                                                              imageUrl: getJsonField(
+                                                                                dataItem.portada.toMap(),
+                                                                                r'''$.url''',
+                                                                              ).toString(),
+                                                                              width: 116.0,
+                                                                              height: 200.0,
+                                                                              fit: BoxFit.cover,
+                                                                              alignment: Alignment(1.0, 1.0),
+                                                                            ),
                                                                           ),
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                        Expanded(
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                10.0,
+                                                                                10.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Column(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                Text(
+                                                                                  dataItem.name,
+                                                                                  style: FlutterFlowTheme.of(context).titleLarge.override(
+                                                                                        fontFamily: 'Lato',
+                                                                                        fontSize: 16.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        fontWeight: FontWeight.bold,
+                                                                                      ),
+                                                                                ),
+                                                                                Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                                                                                  child: Text(
+                                                                                    dataItem.description.maybeHandleOverflow(
+                                                                                      maxChars: 45,
+                                                                                      replacement: '…',
+                                                                                    ),
+                                                                                    maxLines: 4,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Lato',
+                                                                                          fontSize: 14.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                RichText(
+                                                                                  textScaler: MediaQuery.of(context).textScaler,
+                                                                                  text: TextSpan(
+                                                                                    children: [
+                                                                                      TextSpan(
+                                                                                        text: dataItem.type == TypeEvent.free
+                                                                                            ? 'Gratis'
+                                                                                            : valueOrDefault<String>(
+                                                                                                formatNumber(
+                                                                                                  dataItem.precio,
+                                                                                                  formatType: FormatType.decimal,
+                                                                                                  decimalType: DecimalType.automatic,
+                                                                                                  currency: '\$',
+                                                                                                ),
+                                                                                                '0',
+                                                                                              ),
+                                                                                        style: TextStyle(
+                                                                                          color: FlutterFlowTheme.of(context).tertiary,
+                                                                                          fontWeight: FontWeight.w900,
+                                                                                          fontSize: 24.0,
+                                                                                        ),
+                                                                                      )
+                                                                                    ],
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Lato',
+                                                                                          fontSize: 10.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ],
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

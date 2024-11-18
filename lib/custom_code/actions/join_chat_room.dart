@@ -18,6 +18,9 @@ Future joinChatRoom(String roomId) async {
     return;
   }
 
+  // Guardar el ID de la sala en el estado global
+  FFAppState().currentRoomId = roomId;
+
   // Emitir evento para unirse a la sala de chat
   String event = 'join_room';
   Map<String, dynamic> joinData = {'roomId': roomId};
