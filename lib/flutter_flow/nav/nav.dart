@@ -288,10 +288,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => DetallesDePlanBasicWidget(),
         ),
         FFRoute(
-          name: 'servicios',
-          path: '/servicios',
+          name: 'ListarServicios',
+          path: '/listarServicios',
           requireAuth: true,
-          builder: (context, params) => ServiciosWidget(),
+          builder: (context, params) => ListarServiciosWidget(),
         ),
         FFRoute(
           name: 'HomeComercio',

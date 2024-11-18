@@ -22,6 +22,16 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
+      if (prefs.containsKey('ff_user')) {
+        try {
+          final serializedData = prefs.getString('ff_user') ?? '{}';
+          _user = UserStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
+    _safeInit(() {
       _token = prefs.getString('ff_token') ?? _token;
     });
   }
@@ -37,10 +47,12 @@ class FFAppState extends ChangeNotifier {
   UserStruct get user => _user;
   set user(UserStruct value) {
     _user = value;
+    prefs.setString('ff_user', value.serialize());
   }
 
   void updateUserStruct(Function(UserStruct) updateFn) {
     updateFn(_user);
+    prefs.setString('ff_user', _user.serialize());
   }
 
   String _token = '';

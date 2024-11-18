@@ -134,7 +134,7 @@ class _CREARoVERWidgetState extends State<CREARoVERWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('serviciosCreados');
+                      context.pushNamed('ListarServicios');
                     },
                     text: 'Ver servicios',
                     options: FFButtonOptions(

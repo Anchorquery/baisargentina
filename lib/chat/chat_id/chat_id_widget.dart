@@ -259,6 +259,7 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 15.0),
                               child: Container(
+                                decoration: BoxDecoration(),
                                 child: wrapWithModel(
                                   model: _model.chatThreadModels.getModel(
                                     messageDataItem.uuid,

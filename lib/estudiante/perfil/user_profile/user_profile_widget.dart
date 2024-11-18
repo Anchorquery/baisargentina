@@ -62,6 +62,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                   (_model.apiResponseMe?.jsonBody ?? ''),
                   r'''$.avatar''',
                 ).toString(),
+                id: getJsonField(
+                  (_model.apiResponseMe?.jsonBody ?? ''),
+                  r'''$.id''',
+                ),
               ),
             );
             _model.idUser = getJsonField(

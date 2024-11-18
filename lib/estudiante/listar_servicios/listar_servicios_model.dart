@@ -6,14 +6,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'servicios_widget.dart' show ServiciosWidget;
+import 'listar_servicios_widget.dart' show ListarServiciosWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ServiciosModel extends FlutterFlowModel<ServiciosWidget> {
+class ListarServiciosModel extends FlutterFlowModel<ListarServiciosWidget> {
   ///  Local state fields for this page.
 
   bool loading = false;
@@ -40,7 +40,7 @@ class ServiciosModel extends FlutterFlowModel<ServiciosWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (Find category)] action in servicios widget.
+  // Stores action output result for [Backend Call - API (Find category)] action in ListarServicios widget.
   ApiCallResponse? apiResponseCategoryService;
 
   @override

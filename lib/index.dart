@@ -41,8 +41,8 @@ export '/password_recovery/new_password/new_password_widget.dart'
 export '/estudiante/planes/planes/planes_widget.dart' show PlanesWidget;
 export '/estudiante/planes/detalles_de_plan_basic/detalles_de_plan_basic_widget.dart'
     show DetallesDePlanBasicWidget;
-export '/estudiante/services/servicios/servicios_widget.dart'
-    show ServiciosWidget;
+export '/estudiante/listar_servicios/listar_servicios_widget.dart'
+    show ListarServiciosWidget;
 export '/comercio/home_comercio/home_comercio_widget.dart'
     show HomeComercioWidget;
 export '/comercio/estadisticas/estadisticas_widget.dart'

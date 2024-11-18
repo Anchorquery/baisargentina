@@ -306,7 +306,7 @@ class _ServicioWidgetState extends State<ServicioWidget> {
                                     }(),
                                   );
 
-                                  context.goNamed('servicios');
+                                  context.goNamed('ListarServicios');
                                 } else {
                                   await showDialog(
                                     context: context,
