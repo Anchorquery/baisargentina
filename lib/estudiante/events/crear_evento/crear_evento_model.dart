@@ -1,7 +1,6 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
@@ -11,7 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
-import 'edit_event_widget.dart' show EditEventWidget;
+import 'crear_evento_widget.dart' show CrearEventoWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class EditEventModel extends FlutterFlowModel<EditEventWidget> {
+class CrearEventoModel extends FlutterFlowModel<CrearEventoWidget> {
   ///  Local state fields for this page.
 
   List<CategoryStruct> categories = [];
@@ -33,13 +32,6 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
       categories.insert(index, item);
   void updateCategoriesAtIndex(int index, Function(CategoryStruct) updateFn) =>
       categories[index] = updateFn(categories[index]);
-
-  EventStruct? event;
-  void updateEventStruct(Function(EventStruct) updateFn) {
-    updateFn(event ??= EventStruct());
-  }
-
-  bool loading = true;
 
   List<OrganizadorStruct> organizers = [];
   void addToOrganizers(OrganizadorStruct item) => organizers.add(item);
@@ -54,12 +46,10 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
-  // Stores action output result for [Backend Call - API (GetEvent)] action in editEvent widget.
-  ApiCallResponse? apiResponseEvent;
-  // Stores action output result for [Backend Call - API (Api Get Categories)] action in editEvent widget.
-  ApiCallResponse? apiResponseCategories;
-  // Stores action output result for [Backend Call - API (GetOrganizer)] action in editEvent widget.
+  // Stores action output result for [Backend Call - API (GetOrganizer)] action in CrearEvento widget.
   ApiCallResponse? apiResponseOrganizers;
+  // Stores action output result for [Backend Call - API (Api Get Categories)] action in CrearEvento widget.
+  ApiCallResponse? apiResponseCategories;
   // State field(s) for name widget.
   FocusNode? nameFocusNode;
   TextEditingController? nameTextController;
@@ -135,9 +125,9 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
     return null;
   }
 
-  // State field(s) for type widget.
-  String? typeValue;
-  FormFieldController<String>? typeValueController;
+  // State field(s) for tipoEvento widget.
+  String? tipoEventoValue;
+  FormFieldController<String>? tipoEventoValueController;
   // State field(s) for precioDelTicket-evento widget.
   FocusNode? precioDelTicketEventoFocusNode;
   TextEditingController? precioDelTicketEventoTextController;
@@ -163,10 +153,10 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
   bool isDataUploading2 = false;
   List<FFUploadedFile> uploadedLocalFiles2 = [];
 
+  // Stores action output result for [Validate Form] action in creandoevento widget.
+  bool? validarForm;
   // Stores action output result for [Backend Call - API (Api CreateEvents)] action in creandoevento widget.
   ApiCallResponse? apiResult3i2;
-  // Model for loader component.
-  late LoaderModel loaderModel;
 
   @override
   void initState(BuildContext context) {
@@ -178,7 +168,6 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
         _limiteDePersonasTextControllerValidator;
     precioDelTicketEventoTextControllerValidator =
         _precioDelTicketEventoTextControllerValidator;
-    loaderModel = createModel(context, () => LoaderModel());
   }
 
   @override
@@ -200,7 +189,5 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
 
     precioDelTicketEventoFocusNode?.dispose();
     precioDelTicketEventoTextController?.dispose();
-
-    loaderModel.dispose();
   }
 }

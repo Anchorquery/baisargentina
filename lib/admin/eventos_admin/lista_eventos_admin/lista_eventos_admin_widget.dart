@@ -160,7 +160,7 @@ class _ListaEventosAdminWidgetState extends State<ListaEventosAdminWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('createEvent');
+                      context.pushNamed('CrearEvento');
                     },
                     text: 'Crear un evento',
                     icon: Icon(
@@ -325,7 +325,7 @@ class _ListaEventosAdminWidgetState extends State<ListaEventosAdminWidget>
                                                             Colors.transparent,
                                                         onTap: () async {
                                                           context.pushNamed(
-                                                            'editEvent',
+                                                            'EditarEvento',
                                                             queryParameters: {
                                                               'id':
                                                                   serializeParam(

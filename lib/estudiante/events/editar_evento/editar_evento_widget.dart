@@ -20,11 +20,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'edit_event_model.dart';
-export 'edit_event_model.dart';
+import 'editar_evento_model.dart';
+export 'editar_evento_model.dart';
 
-class EditEventWidget extends StatefulWidget {
-  const EditEventWidget({
+class EditarEventoWidget extends StatefulWidget {
+  const EditarEventoWidget({
     super.key,
     required this.id,
   });
@@ -32,12 +32,12 @@ class EditEventWidget extends StatefulWidget {
   final int? id;
 
   @override
-  State<EditEventWidget> createState() => _EditEventWidgetState();
+  State<EditarEventoWidget> createState() => _EditarEventoWidgetState();
 }
 
-class _EditEventWidgetState extends State<EditEventWidget>
+class _EditarEventoWidgetState extends State<EditarEventoWidget>
     with TickerProviderStateMixin {
-  late EditEventModel _model;
+  late EditarEventoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -46,7 +46,7 @@ class _EditEventWidgetState extends State<EditEventWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EditEventModel());
+    _model = createModel(context, () => EditarEventoModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {

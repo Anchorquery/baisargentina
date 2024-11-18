@@ -159,10 +159,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => TerminosycondicionesWidget(),
         ),
         FFRoute(
-          name: 'createEvent',
-          path: '/createEvent',
+          name: 'CrearEvento',
+          path: '/crearEvento',
           requireAuth: true,
-          builder: (context, params) => CreateEventWidget(),
+          builder: (context, params) => CrearEventoWidget(),
         ),
         FFRoute(
           name: 'event',
@@ -210,10 +210,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'editEvent',
-          path: '/editEvent',
+          name: 'EditarEvento',
+          path: '/editarEvento',
           requireAuth: true,
-          builder: (context, params) => EditEventWidget(
+          builder: (context, params) => EditarEventoWidget(
             id: params.getParam(
               'id',
               ParamType.int,

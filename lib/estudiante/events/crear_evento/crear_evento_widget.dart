@@ -19,19 +19,19 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'create_event_model.dart';
-export 'create_event_model.dart';
+import 'crear_evento_model.dart';
+export 'crear_evento_model.dart';
 
-class CreateEventWidget extends StatefulWidget {
-  const CreateEventWidget({super.key});
+class CrearEventoWidget extends StatefulWidget {
+  const CrearEventoWidget({super.key});
 
   @override
-  State<CreateEventWidget> createState() => _CreateEventWidgetState();
+  State<CrearEventoWidget> createState() => _CrearEventoWidgetState();
 }
 
-class _CreateEventWidgetState extends State<CreateEventWidget>
+class _CrearEventoWidgetState extends State<CrearEventoWidget>
     with TickerProviderStateMixin {
-  late CreateEventModel _model;
+  late CrearEventoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -40,7 +40,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CreateEventModel());
+    _model = createModel(context, () => CrearEventoModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -93,6 +93,10 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
 
     _model.placeUrlTextController ??= TextEditingController();
     _model.placeUrlFocusNode ??= FocusNode();
+
+    _model.isBaisValue = true;
+    _model.nameOrganizerNoBaisTextController ??= TextEditingController();
+    _model.nameOrganizerNoBaisFocusNode ??= FocusNode();
 
     _model.descripcionEventoTextController ??= TextEditingController();
     _model.descripcionEventoFocusNode ??= FocusNode();
@@ -173,6 +177,25 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
           ),
         ],
       ),
+      'textFieldOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'rowOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -230,7 +253,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
           ),
         ],
       ),
-      'textFieldOnPageLoadAnimation3': AnimationInfo(
+      'textFieldOnPageLoadAnimation4': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -306,7 +329,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
           ),
         ],
       ),
-      'textFieldOnPageLoadAnimation4': AnimationInfo(
+      'textFieldOnPageLoadAnimation5': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -537,115 +560,248 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                                     .asValidator(context),
                               ).animateOnPageLoad(animationsMap[
                                   'textFieldOnPageLoadAnimation1']!),
-                              TextFormField(
-                                controller: _model.placeUrlTextController,
-                                focusNode: _model.placeUrlFocusNode,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Lugar del evento',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 0.0, 0.0, 0.0),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      letterSpacing: 0.0,
-                                    ),
-                                validator: _model
-                                    .placeUrlTextControllerValidator
-                                    .asValidator(context),
-                              ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation2']!),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 15.0, 0.0, 20.0),
-                                child: FlutterFlowDropDown<int>(
-                                  controller:
-                                      _model.organizadorValueController ??=
-                                          FormFieldController<int>(
-                                    _model.organizadorValue ??= 0,
+                                    0.0, 0.0, 0.0, 20.0),
+                                child: TextFormField(
+                                  controller: _model.placeUrlTextController,
+                                  focusNode: _model.placeUrlFocusNode,
+                                  autofocus: true,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelText: 'Lugar del evento',
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
+                                    contentPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 0.0, 0.0, 0.0),
                                   ),
-                                  options: List<int>.from(_model.organizers
-                                      .map((e) => e.id)
-                                      .toList()),
-                                  optionLabels: _model.organizers
-                                      .map((e) => e.name)
-                                      .toList(),
-                                  onChanged: (val) => safeSetState(
-                                      () => _model.organizadorValue = val),
-                                  width: 348.0,
-                                  height: 56.0,
-                                  textStyle: FlutterFlowTheme.of(context)
+                                  style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Lato',
                                         letterSpacing: 0.0,
                                       ),
-                                  hintText: 'Nombre del organizador',
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_down_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24.0,
-                                  ),
-                                  fillColor: Color(0xFFF1F4F8),
-                                  elevation: 2.0,
-                                  borderColor:
-                                      FlutterFlowTheme.of(context).alternate,
-                                  borderWidth: 2.0,
-                                  borderRadius: 40.0,
-                                  margin: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 4.0, 16.0, 4.0),
-                                  hidesUnderline: true,
-                                  isOverButton: true,
-                                  isSearchable: false,
-                                  isMultiSelect: false,
+                                  validator: _model
+                                      .placeUrlTextControllerValidator
+                                      .asValidator(context),
                                 ).animateOnPageLoad(animationsMap[
-                                    'dropDownOnPageLoadAnimation1']!),
+                                    'textFieldOnPageLoadAnimation2']!),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, -1.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 5.0),
+                                  child: Text(
+                                    'Evento Bais',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Switch.adaptive(
+                                  value: _model.isBaisValue!,
+                                  onChanged: (newValue) async {
+                                    safeSetState(
+                                        () => _model.isBaisValue = newValue!);
+                                  },
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  activeTrackColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  inactiveTrackColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  inactiveThumbColor:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                ),
+                              ),
+                              Builder(
+                                builder: (context) {
+                                  if (_model.isBaisValue == false) {
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 15.0, 0.0, 20.0),
+                                      child: FlutterFlowDropDown<int>(
+                                        controller: _model
+                                                .organizadorValueController ??=
+                                            FormFieldController<int>(
+                                          _model.organizadorValue ??= 0,
+                                        ),
+                                        options: List<int>.from(_model
+                                            .organizers
+                                            .map((e) => e.id)
+                                            .toList()),
+                                        optionLabels: _model.organizers
+                                            .map((e) => e.name)
+                                            .toList(),
+                                        onChanged: (val) => safeSetState(() =>
+                                            _model.organizadorValue = val),
+                                        width: 348.0,
+                                        height: 56.0,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        hintText: 'Nombre del organizador',
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                        fillColor: Color(0xFFF1F4F8),
+                                        elevation: 2.0,
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .alternate,
+                                        borderWidth: 2.0,
+                                        borderRadius: 40.0,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 4.0, 16.0, 4.0),
+                                        hidesUnderline: true,
+                                        isOverButton: true,
+                                        isSearchable: false,
+                                        isMultiSelect: false,
+                                      ).animateOnPageLoad(animationsMap[
+                                          'dropDownOnPageLoadAnimation1']!),
+                                    );
+                                  } else {
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 20.0, 0.0, 20.0),
+                                      child: TextFormField(
+                                        controller: _model
+                                            .nameOrganizerNoBaisTextController,
+                                        focusNode:
+                                            _model.nameOrganizerNoBaisFocusNode,
+                                        autofocus: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Nombre del organizador',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          contentPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  20.0, 0.0, 0.0, 0.0),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        keyboardType: TextInputType.name,
+                                        validator: _model
+                                            .nameOrganizerNoBaisTextControllerValidator
+                                            .asValidator(context),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'textFieldOnPageLoadAnimation3']!),
+                                    );
+                                  }
+                                },
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -1185,8 +1341,13 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                                 child: FlutterFlowDropDown<String>(
                                   controller:
                                       _model.detenerventasValueController ??=
-                                          FormFieldController<String>(null),
-                                  options: [
+                                          FormFieldController<String>(
+                                    _model.detenerventasValue ??=
+                                        'un_dia_antes',
+                                  ),
+                                  options: List<String>.from(
+                                      ['un_dia_antes', 'dos_dias_antes']),
+                                  optionLabels: [
                                     '1 dia antes del evento',
                                     '2 dia antes del evento'
                                   ],
@@ -1299,7 +1460,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                                         .asValidator(context),
                                   ),
                                 ).animateOnPageLoad(animationsMap[
-                                    'textFieldOnPageLoadAnimation3']!),
+                                    'textFieldOnPageLoadAnimation4']!),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -1485,16 +1646,16 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                                     ),
                                     FlutterFlowDropDown<String>(
                                       controller:
-                                          _model.dropDownValueController ??=
+                                          _model.tipoEventoValueController ??=
                                               FormFieldController<String>(null),
                                       options:
-                                          List<String>.from(['Gratis', 'Pago']),
+                                          List<String>.from(['free', 'pay']),
                                       optionLabels: [
                                         'Evento Gratis',
                                         'Evento de  pago'
                                       ],
                                       onChanged: (val) => safeSetState(
-                                          () => _model.dropDownValue = val),
+                                          () => _model.tipoEventoValue = val),
                                       width: 187.0,
                                       height: 45.0,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -1594,7 +1755,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                                     .precioDelTicketEventoTextControllerValidator
                                     .asValidator(context),
                               ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation4']!),
+                                  'textFieldOnPageLoadAnimation5']!),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
@@ -2019,27 +2180,42 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                                     0.0, 10.0, 0.0, 10.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    _model.validarForm = true;
                                     if (_model.formKey.currentState == null ||
                                         !_model.formKey.currentState!
                                             .validate()) {
+                                      safeSetState(
+                                          () => _model.validarForm = false);
                                       return;
                                     }
                                     if (_model.datePicked1 == null) {
+                                      _model.validarForm = false;
+                                      safeSetState(() {});
                                       return;
                                     }
                                     if (_model.datePicked2 == null) {
+                                      _model.validarForm = false;
+                                      safeSetState(() {});
                                       return;
                                     }
                                     if (_model.datePicked3 == null) {
+                                      _model.validarForm = false;
+                                      safeSetState(() {});
                                       return;
                                     }
                                     if (_model.datePicked4 == null) {
+                                      _model.validarForm = false;
+                                      safeSetState(() {});
                                       return;
                                     }
                                     if (_model.puedenAsistirValue == null) {
+                                      _model.validarForm = false;
+                                      safeSetState(() {});
                                       return;
                                     }
                                     if (_model.categoriaEventoValue == null) {
+                                      _model.validarForm = false;
+                                      safeSetState(() {});
                                       return;
                                     }
                                     _model.apiResult3i2 =
@@ -2069,10 +2245,15 @@ class _CreateEventWidgetState extends State<CreateEventWidget>
                                         '150',
                                       ),
                                       token: currentAuthenticationToken,
-                                      type: _model.dropDownValue,
+                                      type: _model.tipoEventoValue,
                                       categoryId: _model.categoriaEventoValue,
                                       portada: _model.uploadedLocalFile1,
                                       imagesList: _model.uploadedLocalFiles2,
+                                      nameOrganizerNoBais: _model
+                                          .nameOrganizerNoBaisTextController
+                                          .text,
+                                      isBais: _model.isBaisValue,
+                                      detenerVentas: _model.detenerventasValue,
                                     );
 
                                     if ((_model.apiResult3i2?.succeeded ??

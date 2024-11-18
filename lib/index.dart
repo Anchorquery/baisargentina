@@ -14,8 +14,8 @@ export '/estudiante/policy/politicasde_reembolso/politicasde_reembolso_widget.da
 export '/estudiante/policy/nosotros/nosotros_widget.dart' show NosotrosWidget;
 export '/estudiante/policy/terminosycondiciones/terminosycondiciones_widget.dart'
     show TerminosycondicionesWidget;
-export '/estudiante/events/create_event/create_event_widget.dart'
-    show CreateEventWidget;
+export '/estudiante/events/crear_evento/crear_evento_widget.dart'
+    show CrearEventoWidget;
 export '/estudiante/events/event/event_widget.dart' show EventWidget;
 export '/estudiante/events/events/events_widget.dart' show EventsWidget;
 export '/estudiante/reservas/reservas_widget.dart' show ReservasWidget;
@@ -23,7 +23,8 @@ export '/estudiante/admin/validarqr/scaneo_exitoso/scaneo_exitoso_widget.dart'
     show ScaneoExitosoWidget;
 export '/estudiante/admin/validarqr/scaneo_error/scaneo_error_widget.dart'
     show ScaneoErrorWidget;
-export '/estudiante/edit_event/edit_event_widget.dart' show EditEventWidget;
+export '/estudiante/events/editar_evento/editar_evento_widget.dart'
+    show EditarEventoWidget;
 export '/estudiante/booking/reserva_id/reserva_id_widget.dart'
     show ReservaIdWidget;
 export '/estudiante/admin/validarqr/detalle_reserva/detalle_reserva_widget.dart'
