@@ -15,25 +15,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'events_model.dart';
-export 'events_model.dart';
+import 'listar_eventos_model.dart';
+export 'listar_eventos_model.dart';
 
-class EventsWidget extends StatefulWidget {
-  const EventsWidget({super.key});
+class ListarEventosWidget extends StatefulWidget {
+  const ListarEventosWidget({super.key});
 
   @override
-  State<EventsWidget> createState() => _EventsWidgetState();
+  State<ListarEventosWidget> createState() => _ListarEventosWidgetState();
 }
 
-class _EventsWidgetState extends State<EventsWidget> {
-  late EventsModel _model;
+class _ListarEventosWidgetState extends State<ListarEventosWidget> {
+  late ListarEventosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EventsModel());
+    _model = createModel(context, () => ListarEventosModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -570,7 +570,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                               onTap: () async {
                                                                 context
                                                                     .pushNamed(
-                                                                  'event',
+                                                                  'Evento',
                                                                   queryParameters:
                                                                       {
                                                                     'id':
@@ -649,7 +649,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                         () async {
                                                                       context
                                                                           .pushNamed(
-                                                                        'event',
+                                                                        'Evento',
                                                                         queryParameters:
                                                                             {
                                                                           'id':
@@ -679,10 +679,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                                 CachedNetworkImage(
                                                                               fadeInDuration: Duration(milliseconds: 500),
                                                                               fadeOutDuration: Duration(milliseconds: 500),
-                                                                              imageUrl: getJsonField(
-                                                                                dataItem.portada.toMap(),
-                                                                                r'''$.url''',
-                                                                              ).toString(),
+                                                                              imageUrl: dataItem.portada.url,
                                                                               width: 116.0,
                                                                               height: 200.0,
                                                                               fit: BoxFit.cover,

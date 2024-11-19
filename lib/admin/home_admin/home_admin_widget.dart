@@ -52,7 +52,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
 
         return;
       } else {
-        context.pushNamed('events');
+        context.pushNamed('ListarEventos');
 
         return;
       }
@@ -258,7 +258,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           context
-                                              .pushNamed('ListaEventosAdmin');
+                                              .pushNamed('ListarEventosAdmin');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(

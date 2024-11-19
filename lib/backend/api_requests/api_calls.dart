@@ -693,6 +693,8 @@ class UserGroup {
   static UpdateUserCall updateUserCall = UpdateUserCall();
   static FindUserCall findUserCall = FindUserCall();
   static DeleteUserCall deleteUserCall = DeleteUserCall();
+  static ObtenerPerfilComercioCall obtenerPerfilComercioCall =
+      ObtenerPerfilComercioCall();
 }
 
 class MeCall {
@@ -900,6 +902,33 @@ class DeleteUserCall {
       callName: 'delete user',
       apiUrl: '${baseUrl}/users/${id}',
       callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ObtenerPerfilComercioCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'obtenerPerfilComercio',
+      apiUrl: '${baseUrl}/users-permissions/users/perfil-commerce/${id}',
+      callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${token}',
       },

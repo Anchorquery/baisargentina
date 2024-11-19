@@ -515,7 +515,7 @@ class _ReservaexitosaWidgetState extends State<ReservaexitosaWidget>
                             ),
                             FFButtonWidget(
                               onPressed: () async {
-                                context.pushNamed('events');
+                                context.pushNamed('ListarEventos');
                               },
                               text: 'Ver màs eventos',
                               options: FFButtonOptions(

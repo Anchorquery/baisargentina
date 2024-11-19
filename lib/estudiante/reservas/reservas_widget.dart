@@ -244,7 +244,7 @@ class _ReservasWidgetState extends State<ReservasWidget> {
                                                                     .transparent,
                                                             onTap: () async {
                                                               context.pushNamed(
-                                                                'event',
+                                                                'Evento',
                                                                 queryParameters:
                                                                     {
                                                                   'id':

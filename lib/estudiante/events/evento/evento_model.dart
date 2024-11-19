@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'event_widget.dart' show EventWidget;
+import 'evento_widget.dart' show EventoWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
@@ -17,7 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class EventModel extends FlutterFlowModel<EventWidget> {
+class EventoModel extends FlutterFlowModel<EventoWidget> {
   ///  Local state fields for this page.
 
   int? id;
@@ -43,9 +43,11 @@ class EventModel extends FlutterFlowModel<EventWidget> {
 
   bool loading = true;
 
+  double? price;
+
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (GetEvent)] action in event widget.
+  // Stores action output result for [Backend Call - API (GetEvent)] action in Evento widget.
   ApiCallResponse? apiResponseEventId;
   // State field(s) for Carouselhousign widget.
   CarouselSliderController? carouselhousignController;

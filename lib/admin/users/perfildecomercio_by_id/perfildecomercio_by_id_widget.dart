@@ -52,26 +52,28 @@ class _PerfildecomercioByIdWidgetState
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Align(
-                alignment: AlignmentDirectional(-1.0, -1.0),
-                child: Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(25.0, 50.0, 0.0, 25.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.safePop();
-                    },
-                    child: Icon(
-                      Icons.chevron_left_rounded,
-                      color: FlutterFlowTheme.of(context).primary,
-                      size: 24.0,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(25.0, 30.0, 0.0, 25.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.safePop();
+                      },
+                      child: Icon(
+                        Icons.chevron_left_rounded,
+                        color: FlutterFlowTheme.of(context).primary,
+                        size: 25.0,
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),

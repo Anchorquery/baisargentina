@@ -10,7 +10,6 @@ class EventStruct extends BaseStruct {
   EventStruct({
     int? id,
     String? name,
-    TypeEvent? type,
     String? nombreComercio,
     String? placeUrl,
     String? placeDescription,
@@ -31,9 +30,9 @@ class EventStruct extends BaseStruct {
     String? detenerVentas,
     bool? isBais,
     String? nameOrganizerNoBais,
+    String? type,
   })  : _id = id,
         _name = name,
-        _type = type,
         _nombreComercio = nombreComercio,
         _placeUrl = placeUrl,
         _placeDescription = placeDescription,
@@ -53,7 +52,8 @@ class EventStruct extends BaseStruct {
         _organizador = organizador,
         _detenerVentas = detenerVentas,
         _isBais = isBais,
-        _nameOrganizerNoBais = nameOrganizerNoBais;
+        _nameOrganizerNoBais = nameOrganizerNoBais,
+        _type = type;
 
   // "id" field.
   int? _id;
@@ -70,13 +70,6 @@ class EventStruct extends BaseStruct {
   set name(String? val) => _name = val;
 
   bool hasName() => _name != null;
-
-  // "type" field.
-  TypeEvent? _type;
-  TypeEvent get type => _type ?? TypeEvent.pay;
-  set type(TypeEvent? val) => _type = val;
-
-  bool hasType() => _type != null;
 
   // "nombreComercio" field.
   String? _nombreComercio;
@@ -239,10 +232,16 @@ class EventStruct extends BaseStruct {
 
   bool hasNameOrganizerNoBais() => _nameOrganizerNoBais != null;
 
+  // "type" field.
+  String? _type;
+  String get type => _type ?? 'pay';
+  set type(String? val) => _type = val;
+
+  bool hasType() => _type != null;
+
   static EventStruct fromMap(Map<String, dynamic> data) => EventStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
-        type: deserializeEnum<TypeEvent>(data['type']),
         nombreComercio: data['nombreComercio'] as String?,
         placeUrl: data['placeUrl'] as String?,
         placeDescription: data['placeDescription'] as String?,
@@ -266,6 +265,7 @@ class EventStruct extends BaseStruct {
         detenerVentas: data['detenerVentas'] as String?,
         isBais: data['isBais'] as bool?,
         nameOrganizerNoBais: data['nameOrganizerNoBais'] as String?,
+        type: data['type'] as String?,
       );
 
   static EventStruct? maybeFromMap(dynamic data) =>
@@ -274,7 +274,6 @@ class EventStruct extends BaseStruct {
   Map<String, dynamic> toMap() => {
         'id': _id,
         'name': _name,
-        'type': _type?.serialize(),
         'nombreComercio': _nombreComercio,
         'placeUrl': _placeUrl,
         'placeDescription': _placeDescription,
@@ -295,6 +294,7 @@ class EventStruct extends BaseStruct {
         'detenerVentas': _detenerVentas,
         'isBais': _isBais,
         'nameOrganizerNoBais': _nameOrganizerNoBais,
+        'type': _type,
       }.withoutNulls;
 
   @override
@@ -306,10 +306,6 @@ class EventStruct extends BaseStruct {
         'name': serializeParam(
           _name,
           ParamType.String,
-        ),
-        'type': serializeParam(
-          _type,
-          ParamType.Enum,
         ),
         'nombreComercio': serializeParam(
           _nombreComercio,
@@ -392,6 +388,10 @@ class EventStruct extends BaseStruct {
           _nameOrganizerNoBais,
           ParamType.String,
         ),
+        'type': serializeParam(
+          _type,
+          ParamType.String,
+        ),
       }.withoutNulls;
 
   static EventStruct fromSerializableMap(Map<String, dynamic> data) =>
@@ -404,11 +404,6 @@ class EventStruct extends BaseStruct {
         name: deserializeParam(
           data['name'],
           ParamType.String,
-          false,
-        ),
-        type: deserializeParam<TypeEvent>(
-          data['type'],
-          ParamType.Enum,
           false,
         ),
         nombreComercio: deserializeParam(
@@ -515,6 +510,11 @@ class EventStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        type: deserializeParam(
+          data['type'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -526,7 +526,6 @@ class EventStruct extends BaseStruct {
     return other is EventStruct &&
         id == other.id &&
         name == other.name &&
-        type == other.type &&
         nombreComercio == other.nombreComercio &&
         placeUrl == other.placeUrl &&
         placeDescription == other.placeDescription &&
@@ -546,14 +545,14 @@ class EventStruct extends BaseStruct {
         organizador == other.organizador &&
         detenerVentas == other.detenerVentas &&
         isBais == other.isBais &&
-        nameOrganizerNoBais == other.nameOrganizerNoBais;
+        nameOrganizerNoBais == other.nameOrganizerNoBais &&
+        type == other.type;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
         id,
         name,
-        type,
         nombreComercio,
         placeUrl,
         placeDescription,
@@ -573,14 +572,14 @@ class EventStruct extends BaseStruct {
         organizador,
         detenerVentas,
         isBais,
-        nameOrganizerNoBais
+        nameOrganizerNoBais,
+        type
       ]);
 }
 
 EventStruct createEventStruct({
   int? id,
   String? name,
-  TypeEvent? type,
   String? nombreComercio,
   String? placeUrl,
   String? placeDescription,
@@ -600,11 +599,11 @@ EventStruct createEventStruct({
   String? detenerVentas,
   bool? isBais,
   String? nameOrganizerNoBais,
+  String? type,
 }) =>
     EventStruct(
       id: id,
       name: name,
-      type: type,
       nombreComercio: nombreComercio,
       placeUrl: placeUrl,
       placeDescription: placeDescription,
@@ -624,4 +623,5 @@ EventStruct createEventStruct({
       detenerVentas: detenerVentas,
       isBais: isBais,
       nameOrganizerNoBais: nameOrganizerNoBais,
+      type: type,
     );

@@ -190,7 +190,7 @@ class _PaymenSucccesWidgetState extends State<PaymenSucccesWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('events');
+                        context.pushNamed('ListarEventos');
                       },
                       text: 'Salir',
                       options: FFButtonOptions(

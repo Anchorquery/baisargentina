@@ -165,10 +165,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CrearEventoWidget(),
         ),
         FFRoute(
-          name: 'event',
-          path: '/event',
+          name: 'Evento',
+          path: '/evento',
           requireAuth: true,
-          builder: (context, params) => EventWidget(
+          builder: (context, params) => EventoWidget(
             id: params.getParam(
               'id',
               ParamType.int,
@@ -176,10 +176,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'events',
-          path: '/events',
+          name: 'ListarEventos',
+          path: '/listarEventos',
           requireAuth: true,
-          builder: (context, params) => EventsWidget(),
+          builder: (context, params) => ListarEventosWidget(),
         ),
         FFRoute(
           name: 'reservas',
@@ -719,10 +719,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ListaEventosAdmin',
-          path: '/listaEventosAdmin',
+          name: 'ListarEventosAdmin',
+          path: '/listarEventosAdmin',
           requireAuth: true,
-          builder: (context, params) => ListaEventosAdminWidget(),
+          builder: (context, params) => ListarEventosAdminWidget(),
         ),
         FFRoute(
           name: 'ListaComercios',

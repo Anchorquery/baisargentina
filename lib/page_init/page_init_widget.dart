@@ -42,7 +42,7 @@ class _PageInitWidgetState extends State<PageInitWidget> {
 
         return;
       } else {
-        context.pushNamed('events');
+        context.pushNamed('ListarEventos');
 
         return;
       }

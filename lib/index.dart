@@ -16,8 +16,9 @@ export '/estudiante/policy/terminosycondiciones/terminosycondiciones_widget.dart
     show TerminosycondicionesWidget;
 export '/estudiante/events/crear_evento/crear_evento_widget.dart'
     show CrearEventoWidget;
-export '/estudiante/events/event/event_widget.dart' show EventWidget;
-export '/estudiante/events/events/events_widget.dart' show EventsWidget;
+export '/estudiante/events/evento/evento_widget.dart' show EventoWidget;
+export '/estudiante/events/listar_eventos/listar_eventos_widget.dart'
+    show ListarEventosWidget;
 export '/estudiante/reservas/reservas_widget.dart' show ReservasWidget;
 export '/estudiante/admin/validarqr/scaneo_exitoso/scaneo_exitoso_widget.dart'
     show ScaneoExitosoWidget;
@@ -148,8 +149,8 @@ export '/admin/housign_admin/lista_housing_admin/lista_housing_admin_widget.dart
     show ListaHousingAdminWidget;
 export '/admin/housign_admin/editar_housing/editar_housing_widget.dart'
     show EditarHousingWidget;
-export '/admin/eventos_admin/lista_eventos_admin/lista_eventos_admin_widget.dart'
-    show ListaEventosAdminWidget;
+export '/admin/eventos_admin/listar_eventos_admin/listar_eventos_admin_widget.dart'
+    show ListarEventosAdminWidget;
 export '/admin/users/lista_comercios/lista_comercios_widget.dart'
     show ListaComerciosWidget;
 export '/admin/descuentos/c_r_e_a_ro_v_e_r_descuentos/c_r_e_a_ro_v_e_r_descuentos_widget.dart'

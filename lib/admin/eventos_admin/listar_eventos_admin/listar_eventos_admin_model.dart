@@ -6,14 +6,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'lista_eventos_admin_widget.dart' show ListaEventosAdminWidget;
+import 'listar_eventos_admin_widget.dart' show ListarEventosAdminWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ListaEventosAdminModel extends FlutterFlowModel<ListaEventosAdminWidget> {
+class ListarEventosAdminModel
+    extends FlutterFlowModel<ListarEventosAdminWidget> {
   ///  Local state fields for this page.
 
   List<EventsStruct> data = [];
@@ -29,7 +30,7 @@ class ListaEventosAdminModel extends FlutterFlowModel<ListaEventosAdminWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (GetEvents)] action in ListaEventosAdmin widget.
+  // Stores action output result for [Backend Call - API (GetEvents)] action in ListarEventosAdmin widget.
   ApiCallResponse? apiResponseEvents;
   // Stores action output result for [Backend Call - API (Obtener todos los housing)] action in Column widget.
   ApiCallResponse? apiResponseHopusingCopy;

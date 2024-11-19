@@ -2259,7 +2259,7 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                     if ((_model.apiResult3i2?.succeeded ??
                                         true)) {
                                       context.goNamed(
-                                        'event',
+                                        'Evento',
                                         queryParameters: {
                                           'id': serializeParam(
                                             getJsonField(

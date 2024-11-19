@@ -130,7 +130,7 @@ class _NavBarWithMiddleButtonWidgetState
                       size: 35.0,
                     ),
                     onPressed: () async {
-                      context.pushNamed('events');
+                      context.pushNamed('ListarEventos');
                     },
                   ),
                 FlutterFlowIconButton(
