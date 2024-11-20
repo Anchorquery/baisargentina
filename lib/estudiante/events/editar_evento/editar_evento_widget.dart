@@ -17,7 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'editar_evento_model.dart';
@@ -62,6 +64,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
               (_model.apiResponseEvent?.jsonBody ?? ''),
               r'''$.data''',
             ));
+            safeSetState(() {});
             safeSetState(() {
               _model.nameTextController?.text = _model.event!.name;
               _model.nameFocusNode?.requestFocus();
@@ -72,8 +75,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
               });
             });
             safeSetState(() {
-              _model.placeUrlTextController?.text =
-                  _model.placeUrlTextController.text;
+              _model.placeUrlTextController?.text = _model.event!.placeUrl;
               _model.placeUrlFocusNode?.requestFocus();
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 _model.placeUrlTextController?.selection =
@@ -149,6 +151,13 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
               _model.organizadorValueController?.value =
                   _model.event!.organizador.id;
             });
+            safeSetState(() {
+              _model.categoriaEventoValueController?.value =
+                  _model.event!.category.id;
+            });
+            safeSetState(() {
+              _model.typeValueController?.value = _model.event!.type;
+            });
             _model.loading = false;
             safeSetState(() {});
             return;
@@ -160,10 +169,22 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
           _model.apiResponseCategories = await ApiGetCategoriesCall.call();
 
           if ((_model.apiResponseCategories?.succeeded ?? true)) {
+            _model.categories = (getJsonField(
+              (_model.apiResponseCategories?.jsonBody ?? ''),
+              r'''$.data''',
+              true,
+            )!
+                    .toList()
+                    .map<CategoryStruct?>(CategoryStruct.maybeFromMap)
+                    .toList() as Iterable<CategoryStruct?>)
+                .withoutNulls
+                .toList()
+                .cast<CategoryStruct>();
+            safeSetState(() {});
+            return;
+          } else {
             return;
           }
-
-          return;
         }),
         Future(() async {
           _model.apiResponseOrganizers =
@@ -183,6 +204,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                 .withoutNulls
                 .toList()
                 .cast<OrganizadorStruct>();
+            safeSetState(() {});
             return;
           } else {
             return;
@@ -939,6 +961,8 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                         20.0, 0.0, 20.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -1044,13 +1068,17 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                                   context)
                                                               .languageCode,
                                                     )
-                                                  : _model.event!.fecha,
+                                                  : _model
+                                                      .event!.fechaInicioVenta,
                                               icon: Icon(
                                                 Icons.calendar_today,
                                                 size: 15.0,
                                               ),
                                               options: FFButtonOptions(
-                                                width: 160.0,
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        0.35,
                                                 height: 40.0,
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -1191,13 +1219,16 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                                     context)
                                                                 .languageCode,
                                                       )
-                                                    : 'Fecha',
+                                                    : _model.event!.fecha,
                                                 icon: Icon(
                                                   Icons.calendar_today,
                                                   size: 15.0,
                                                 ),
                                                 options: FFButtonOptions(
-                                                  width: 160.0,
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          0.35,
                                                   height: 40.0,
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -1240,6 +1271,8 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                         20.0, 10.0, 20.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -1344,13 +1377,17 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                                   context)
                                                               .languageCode,
                                                     )
-                                                  : 'Hora inicio',
+                                                  : _model
+                                                      .event!.horaInicioEvento,
                                               icon: Icon(
                                                 Icons.access_time_filled,
                                                 size: 15.0,
                                               ),
                                               options: FFButtonOptions(
-                                                width: 160.0,
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        0.35,
                                                 height: 40.0,
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -1492,13 +1529,17 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                                     context)
                                                                 .languageCode,
                                                       )
-                                                    : 'Hora fin',
+                                                    : _model
+                                                        .event!.horaFinEvento,
                                                 icon: Icon(
                                                   Icons.access_time_filled,
                                                   size: 15.0,
                                                 ),
                                                 options: FFButtonOptions(
-                                                  width: 160.0,
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          0.36,
                                                   height: 40.0,
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -1856,15 +1897,15 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                           ),
                                         ),
                                         FlutterFlowDropDown<String>(
-                                          controller: _model
-                                                  .typeValueController ??=
-                                              FormFieldController<String>(null),
+                                          controller:
+                                              _model.typeValueController ??=
+                                                  FormFieldController<String>(
+                                            _model.typeValue ??=
+                                                _model.event?.type,
+                                          ),
                                           options: List<String>.from(
                                               ['free', 'pay']),
-                                          optionLabels: [
-                                            'Evento Gratis',
-                                            'Evento de  pago'
-                                          ],
+                                          optionLabels: ['Gratis', 'Pago'],
                                           onChanged: (val) => safeSetState(
                                               () => _model.typeValue = val),
                                           width: 187.0,
@@ -2062,6 +2103,81 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                 ),
                                               ),
                                             ),
+                                          if ((_model.uploadedLocalFile1 ==
+                                                      null ||
+                                                  (_model.uploadedLocalFile1
+                                                          .bytes?.isEmpty ??
+                                                      true)) &&
+                                              (_model.event?.portada != null))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 0.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await Navigator.push(
+                                                    context,
+                                                    PageTransition(
+                                                      type: PageTransitionType
+                                                          .fade,
+                                                      child:
+                                                          FlutterFlowExpandedImageView(
+                                                        image: OctoImage(
+                                                          placeholderBuilder:
+                                                              (_) => SizedBox
+                                                                  .expand(
+                                                            child: Image(
+                                                              image: BlurHashImage(
+                                                                  _model
+                                                                      .event!
+                                                                      .portada
+                                                                      .blurhash),
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                          image: NetworkImage(
+                                                            _model.event!
+                                                                .portada.url,
+                                                          ),
+                                                          fit: BoxFit.contain,
+                                                        ),
+                                                        allowRotation: true,
+                                                        useHeroAnimation: false,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                  child: OctoImage(
+                                                    placeholderBuilder: (_) =>
+                                                        SizedBox.expand(
+                                                      child: Image(
+                                                        image: BlurHashImage(
+                                                            _model
+                                                                .event!
+                                                                .portada
+                                                                .blurhash),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                    image: NetworkImage(
+                                                      _model.event!.portada.url,
+                                                    ),
+                                                    width: 230.0,
+                                                    height: 200.0,
+                                                    fit: BoxFit.fitWidth,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           Align(
                                             alignment:
                                                 AlignmentDirectional(0.0, 0.0),
@@ -2203,51 +2319,156 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  1.0,
-                                              decoration: BoxDecoration(),
-                                              child: Visibility(
-                                                visible: _model
-                                                        .uploadedLocalFiles2
-                                                        .length >
-                                                    0,
+                                            if (_model.uploadedLocalFiles2
+                                                    .length >
+                                                0)
+                                              Container(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                decoration: BoxDecoration(),
+                                                child: Visibility(
+                                                  visible: _model
+                                                          .uploadedLocalFiles2
+                                                          .length >
+                                                      0,
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 20.0,
+                                                                0.0, 0.0),
+                                                    child: Builder(
+                                                      builder: (context) {
+                                                        final imagesEvent = _model
+                                                            .uploadedLocalFiles2
+                                                            .toList();
+
+                                                        return Container(
+                                                          width:
+                                                              double.infinity,
+                                                          height: 180.0,
+                                                          child: CarouselSlider
+                                                              .builder(
+                                                            itemCount:
+                                                                imagesEvent
+                                                                    .length,
+                                                            itemBuilder: (context,
+                                                                imagesEventIndex,
+                                                                _) {
+                                                              final imagesEventItem =
+                                                                  imagesEvent[
+                                                                      imagesEventIndex];
+                                                              return ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                child: Image
+                                                                    .memory(
+                                                                  imagesEventItem
+                                                                          .bytes ??
+                                                                      Uint8List
+                                                                          .fromList(
+                                                                              []),
+                                                                  width: 300.0,
+                                                                  height: 200.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              );
+                                                            },
+                                                            carouselController:
+                                                                _model.carouselController1 ??=
+                                                                    CarouselSliderController(),
+                                                            options:
+                                                                CarouselOptions(
+                                                              initialPage: max(
+                                                                  0,
+                                                                  min(
+                                                                      1,
+                                                                      imagesEvent
+                                                                              .length -
+                                                                          1)),
+                                                              viewportFraction:
+                                                                  0.5,
+                                                              disableCenter:
+                                                                  false,
+                                                              enlargeCenterPage:
+                                                                  true,
+                                                              enlargeFactor:
+                                                                  0.25,
+                                                              enableInfiniteScroll:
+                                                                  false,
+                                                              scrollDirection:
+                                                                  Axis.horizontal,
+                                                              autoPlay: false,
+                                                              onPageChanged:
+                                                                  (index, _) =>
+                                                                      _model.carouselCurrentIndex1 =
+                                                                          index,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            if (_model.event!.images.length > 0)
+                                              Container(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                decoration: BoxDecoration(),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 20.0, 0.0, 0.0),
                                                   child: Builder(
                                                     builder: (context) {
-                                                      final imagesEvent = _model
-                                                          .uploadedLocalFiles2
-                                                          .toList();
+                                                      final imagesfromserver =
+                                                          _model.event?.images
+                                                                  ?.toList() ??
+                                                              [];
 
                                                       return Container(
                                                         width: double.infinity,
                                                         height: 180.0,
                                                         child: CarouselSlider
                                                             .builder(
-                                                          itemCount: imagesEvent
-                                                              .length,
+                                                          itemCount:
+                                                              imagesfromserver
+                                                                  .length,
                                                           itemBuilder: (context,
-                                                              imagesEventIndex,
+                                                              imagesfromserverIndex,
                                                               _) {
-                                                            final imagesEventItem =
-                                                                imagesEvent[
-                                                                    imagesEventIndex];
+                                                            final imagesfromserverItem =
+                                                                imagesfromserver[
+                                                                    imagesfromserverIndex];
                                                             return ClipRRect(
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
                                                                           8.0),
-                                                              child:
-                                                                  Image.memory(
-                                                                imagesEventItem
-                                                                        .bytes ??
-                                                                    Uint8List
-                                                                        .fromList(
-                                                                            []),
+                                                              child: OctoImage(
+                                                                placeholderBuilder:
+                                                                    (_) => SizedBox
+                                                                        .expand(
+                                                                  child: Image(
+                                                                    image: BlurHashImage(
+                                                                        imagesfromserverItem
+                                                                            .blurhash),
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                ),
+                                                                image:
+                                                                    NetworkImage(
+                                                                  imagesfromserverItem
+                                                                      .url,
+                                                                ),
                                                                 width: 300.0,
                                                                 height: 200.0,
                                                                 fit: BoxFit
@@ -2256,7 +2477,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                             );
                                                           },
                                                           carouselController: _model
-                                                                  .carouselController ??=
+                                                                  .carouselController2 ??=
                                                               CarouselSliderController(),
                                                           options:
                                                               CarouselOptions(
@@ -2264,7 +2485,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                                 0,
                                                                 min(
                                                                     1,
-                                                                    imagesEvent
+                                                                    imagesfromserver
                                                                             .length -
                                                                         1)),
                                                             viewportFraction:
@@ -2281,7 +2502,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                             autoPlay: false,
                                                             onPageChanged: (index,
                                                                     _) =>
-                                                                _model.carouselCurrentIndex =
+                                                                _model.carouselCurrentIndex2 =
                                                                     index,
                                                           ),
                                                         ),
@@ -2290,7 +2511,6 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                   ),
                                                 ),
                                               ),
-                                            ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
@@ -2404,74 +2624,44 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                         0.0, 10.0, 0.0, 10.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        if (_model.formKey.currentState ==
-                                                null ||
-                                            !_model.formKey.currentState!
-                                                .validate()) {
-                                          return;
-                                        }
-                                        if (_model.datePicked1 == null) {
-                                          return;
-                                        }
-                                        if (_model.datePicked2 == null) {
-                                          return;
-                                        }
-                                        if (_model.datePicked3 == null) {
-                                          return;
-                                        }
-                                        if (_model.datePicked4 == null) {
-                                          return;
-                                        }
-                                        if (_model.puedenAsistirValue == null) {
-                                          return;
-                                        }
-                                        if (_model.categoriaEventoValue ==
-                                            null) {
-                                          return;
-                                        }
-                                        _model.apiResult3i2 =
-                                            await ApiCreateEventsCall.call(
+                                        _model.apiResult3i2 = await EventsGroup
+                                            .actualizarEventoCall
+                                            .call(
                                           name: _model.nameTextController.text,
                                           description: _model
                                               .descripcionEventoTextController
                                               .text,
+                                          imagesList:
+                                              _model.uploadedLocalFiles2,
+                                          category: _model.categoriaEventoValue,
+                                          type: _model.typeValue,
+                                          portada: _model.uploadedLocalFile1,
                                           placeUrl: _model
                                               .placeUrlTextController.text,
-                                          organizador: _model.organizadorValue,
-                                          fecha: _model.datePicked2?.toString(),
                                           fechaInicioVenta:
                                               _model.datePicked1?.toString(),
                                           fechaFinVenta:
-                                              _model.datePicked2?.toString(),
+                                              _model.datePicked4?.toString(),
                                           horaInicioEvento:
                                               _model.datePicked3?.toString(),
-                                          horaFinEvento:
-                                              _model.datePicked4?.toString(),
-                                          precio: _model
-                                              .precioDelTicketEventoTextController
-                                              .text,
+                                          fecha: _model.datePicked2?.toString(),
                                           restriccion:
                                               _model.puedenAsistirValue,
-                                          limitePersonas:
-                                              valueOrDefault<String>(
-                                            _model
-                                                .limiteDePersonasTextController
-                                                .text,
-                                            '150',
-                                          ),
-                                          token: currentAuthenticationToken,
-                                          type: _model.typeValue,
-                                          categoryId:
-                                              _model.categoriaEventoValue,
-                                          portada: _model.uploadedLocalFile1,
-                                          imagesList:
-                                              _model.uploadedLocalFiles2,
+                                          limitePersonas: int.tryParse(_model
+                                              .limiteDePersonasTextController
+                                              .text),
+                                          organizador: _model.organizadorValue,
                                           isBais: _model.isBaisValue,
                                           detenerVentas:
                                               _model.detenerventasValue,
                                           nameOrganizerNoBais: _model
                                               .nameOrganizerNoBaisTextController
                                               .text,
+                                          precio: double.tryParse(_model
+                                              .precioDelTicketEventoTextController
+                                              .text),
+                                          token: currentAuthenticationToken,
+                                          id: widget!.id,
                                         );
 
                                         if ((_model.apiResult3i2?.succeeded ??
@@ -2493,6 +2683,23 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .secondary,
                                             ),
+                                          );
+                                        } else {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('Error'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           );
                                         }
 

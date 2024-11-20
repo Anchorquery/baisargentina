@@ -13,13 +13,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'listar_eventos_model.dart';
 export 'listar_eventos_model.dart';
 
 class ListarEventosWidget extends StatefulWidget {
-  const ListarEventosWidget({super.key});
+  const ListarEventosWidget({
+    super.key,
+    bool? admin,
+  }) : this.admin = admin ?? true;
+
+  final bool admin;
 
   @override
   State<ListarEventosWidget> createState() => _ListarEventosWidgetState();
@@ -676,10 +683,16 @@ class _ListarEventosWidgetState extends State<ListarEventosWidget> {
                                                                             borderRadius:
                                                                                 BorderRadius.circular(8.0),
                                                                             child:
-                                                                                CachedNetworkImage(
-                                                                              fadeInDuration: Duration(milliseconds: 500),
-                                                                              fadeOutDuration: Duration(milliseconds: 500),
-                                                                              imageUrl: dataItem.portada.url,
+                                                                                OctoImage(
+                                                                              placeholderBuilder: (_) => SizedBox.expand(
+                                                                                child: Image(
+                                                                                  image: BlurHashImage(dataItem.portada.blurhash),
+                                                                                  fit: BoxFit.cover,
+                                                                                ),
+                                                                              ),
+                                                                              image: CachedNetworkImageProvider(
+                                                                                dataItem.portada.url,
+                                                                              ),
                                                                               width: 116.0,
                                                                               height: 200.0,
                                                                               fit: BoxFit.cover,

@@ -100,7 +100,7 @@ class _DetallesDePlanBasicWidgetState extends State<DetallesDePlanBasicWidget>
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('userProfile');
+                          context.pushNamed('PerfilUsuarioEstudiante');
                         },
                         child: Icon(
                           Icons.chevron_left_rounded,

@@ -26,11 +26,13 @@ class EventsGroup {
   static GetEventCall getEventCall = GetEventCall();
   static GetOrganizerCall getOrganizerCall = GetOrganizerCall();
   static EliminarEventoCall eliminarEventoCall = EliminarEventoCall();
+  static ActualizarEventoCall actualizarEventoCall = ActualizarEventoCall();
 }
 
 class GetEventsCall {
   Future<ApiCallResponse> call({
     String? categoryId = '0',
+    bool? listAdmin,
     String? token =
         'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMzA4OTkxOSwiZXhwIjoxNzI1NjgxOTE5fQ.F-1c8-nRWcHRqiHQjxtTwlXT-VImWmicIysfDQsSZfM',
   }) async {
@@ -47,6 +49,7 @@ class GetEventsCall {
       },
       params: {
         'categoryId': categoryId,
+        'listAdmin': listAdmin,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -161,6 +164,77 @@ class EliminarEventoCall {
         'Authorization': 'Bearer ${token}',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ActualizarEventoCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    List<FFUploadedFile>? imagesList,
+    int? category,
+    String? type = '',
+    FFUploadedFile? portada,
+    String? placeUrl = '',
+    String? placeDescription = '',
+    String? nombreComercio = '',
+    String? fechaInicioVenta = '',
+    String? fechaFinVenta = '',
+    String? horaInicioEvento = '',
+    String? fecha = '',
+    String? restriccion = '',
+    int? limitePersonas,
+    int? organizador,
+    bool? isBais,
+    String? detenerVentas = '',
+    String? nameOrganizerNoBais = '',
+    double? precio,
+    int? id,
+    String? token =
+        'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMzA4OTkxOSwiZXhwIjoxNzI1NjgxOTE5fQ.F-1c8-nRWcHRqiHQjxtTwlXT-VImWmicIysfDQsSZfM',
+  }) async {
+    final baseUrl = EventsGroup.getBaseUrl(
+      token: token,
+    );
+    final images = imagesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'actualizar evento',
+      apiUrl: '${baseUrl}/events/${id}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'name': name,
+        'description': description,
+        'images': images,
+        'category': category,
+        'type': type,
+        'portada': portada,
+        'placeUrl': placeUrl,
+        'placeDescription': placeDescription,
+        'nombreComercio': nombreComercio,
+        'fechaInicioVenta': fechaInicioVenta,
+        'fechaFinVenta': fechaFinVenta,
+        'horaInicioEvento': horaInicioEvento,
+        'fecha': fecha,
+        'restriccion': restriccion,
+        'limitePersonas': limitePersonas,
+        'organizador': organizador,
+        'precio': precio,
+        'isBais': isBais,
+        'detenerVentas': detenerVentas,
+        'nameOrganizerNoBais': nameOrganizerNoBais,
+      },
+      bodyType: BodyType.MULTIPART,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

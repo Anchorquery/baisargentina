@@ -11,7 +11,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
-import 'user_profile_widget.dart' show UserProfileWidget;
+import 'perfil_usuario_estudiante_widget.dart'
+    show PerfilUsuarioEstudianteWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
+class PerfilUsuarioEstudianteModel
+    extends FlutterFlowModel<PerfilUsuarioEstudianteWidget> {
   ///  Local state fields for this page.
 
   bool loading = true;
@@ -36,9 +38,9 @@ class UserProfileModel extends FlutterFlowModel<UserProfileWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (me )] action in userProfile widget.
+  // Stores action output result for [Backend Call - API (me )] action in PerfilUsuarioEstudiante widget.
   ApiCallResponse? apiResponseMe;
-  // Stores action output result for [Backend Call - API (mi plan)] action in userProfile widget.
+  // Stores action output result for [Backend Call - API (mi plan)] action in PerfilUsuarioEstudiante widget.
   ApiCallResponse? apiMyPlan;
   // Model for loader component.
   late LoaderModel loaderModel;

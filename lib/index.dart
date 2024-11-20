@@ -3,8 +3,8 @@ export '/estudiante/public/inicio/inicio_widget.dart' show InicioWidget;
 export '/estudiante/public/registro/registro_widget.dart' show RegistroWidget;
 export '/estudiante/public/login/login_widget.dart' show LoginWidget;
 export '/estudiante/housing/housigns/housigns_widget.dart' show HousignsWidget;
-export '/estudiante/perfil/user_profile/user_profile_widget.dart'
-    show UserProfileWidget;
+export '/estudiante/perfil/perfil_usuario_estudiante/perfil_usuario_estudiante_widget.dart'
+    show PerfilUsuarioEstudianteWidget;
 export '/estudiante/reservaexitosa/reservaexitosa_widget.dart'
     show ReservaexitosaWidget;
 export '/estudiante/tranvia/tranvia_widget.dart' show TranviaWidget;

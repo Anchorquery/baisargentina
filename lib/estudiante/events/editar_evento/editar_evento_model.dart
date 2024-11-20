@@ -18,7 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -157,13 +159,17 @@ class EditarEventoModel extends FlutterFlowModel<EditarEventoWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
-  int carouselCurrentIndex = 1;
+  CarouselSliderController? carouselController1;
+  int carouselCurrentIndex1 = 1;
+
+  // State field(s) for Carousel widget.
+  CarouselSliderController? carouselController2;
+  int carouselCurrentIndex2 = 1;
 
   bool isDataUploading2 = false;
   List<FFUploadedFile> uploadedLocalFiles2 = [];
 
-  // Stores action output result for [Backend Call - API (Api CreateEvents)] action in creandoevento widget.
+  // Stores action output result for [Backend Call - API (actualizar evento)] action in creandoevento widget.
   ApiCallResponse? apiResult3i2;
   // Model for loader component.
   late LoaderModel loaderModel;

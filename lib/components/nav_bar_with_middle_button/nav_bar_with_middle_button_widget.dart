@@ -256,7 +256,7 @@ class _NavBarWithMiddleButtonWidgetState
                     size: 35.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('userProfile');
+                    context.pushNamed('PerfilUsuarioEstudiante');
                   },
                 ),
               ],

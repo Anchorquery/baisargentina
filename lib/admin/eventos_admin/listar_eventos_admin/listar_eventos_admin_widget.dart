@@ -9,7 +9,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'listar_eventos_admin_model.dart';
 export 'listar_eventos_admin_model.dart';
@@ -39,6 +41,7 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResponseEvents = await EventsGroup.getEventsCall.call(
         token: currentAuthenticationToken,
+        listAdmin: true,
       );
 
       if ((_model.apiResponseEvents?.succeeded ?? true)) {
@@ -135,7 +138,14 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('HomeAdmin');
+                        if (currentUserData?.role == 1) {
+                          context.pushNamed('HomeAdmin');
+
+                          return;
+                        } else {
+                          context.safePop();
+                          return;
+                        }
                       },
                       child: Icon(
                         Icons.chevron_left_rounded,
@@ -202,16 +212,16 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
                           return RefreshIndicator(
                             color: FlutterFlowTheme.of(context).tertiary,
                             onRefresh: () async {
-                              _model.apiResponseHopusingCopy =
-                                  await HousingGroup.obtenerTodosLosHousingCall
-                                      .call(
+                              _model.apiResponseRefreshEvents =
+                                  await EventsGroup.getEventsCall.call(
+                                listAdmin: true,
                                 token: currentAuthenticationToken,
                               );
 
-                              if ((_model.apiResponseHopusingCopy?.succeeded ??
+                              if ((_model.apiResponseRefreshEvents?.succeeded ??
                                   true)) {
                                 _model.data = (getJsonField(
-                                  (_model.apiResponseHopusingCopy?.jsonBody ??
+                                  (_model.apiResponseRefreshEvents?.jsonBody ??
                                       ''),
                                   r'''$.data''',
                                   true,
@@ -263,8 +273,19 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
                                           ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              eventosItem.portada.url,
+                                            child: OctoImage(
+                                              placeholderBuilder: (_) =>
+                                                  SizedBox.expand(
+                                                child: Image(
+                                                  image: BlurHashImage(
+                                                      eventosItem
+                                                          .portada.blurhash),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              image: NetworkImage(
+                                                eventosItem.portada.url,
+                                              ),
                                               width: 70.0,
                                               height: 70.0,
                                               fit: BoxFit.cover,

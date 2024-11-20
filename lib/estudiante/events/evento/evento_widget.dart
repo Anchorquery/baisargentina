@@ -12,7 +12,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'evento_model.dart';
@@ -140,11 +142,21 @@ class _EventoWidgetState extends State<EventoWidget> {
                                         topLeft: Radius.circular(0.0),
                                         topRight: Radius.circular(0.0),
                                       ),
-                                      child: Image.network(
-                                        getJsonField(
-                                          _model.portada!.toMap(),
-                                          r'''$.url''',
-                                        ).toString(),
+                                      child: OctoImage(
+                                        placeholderBuilder: (_) =>
+                                            SizedBox.expand(
+                                          child: Image(
+                                            image: BlurHashImage(
+                                                _model.portada!.blurhash),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        image: NetworkImage(
+                                          getJsonField(
+                                            _model.portada!.toMap(),
+                                            r'''$.url''',
+                                          ).toString(),
+                                        ),
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
@@ -519,7 +531,7 @@ class _EventoWidgetState extends State<EventoWidget> {
                                               ],
                                             ),
                                           ),
-                                          if (_model.data?.type == 'pago')
+                                          if (_model.data?.type == 'pay')
                                             Container(
                                               width: 100.0,
                                               height: 135.0,
@@ -945,22 +957,25 @@ class _EventoWidgetState extends State<EventoWidget> {
                                                           .fade,
                                                       child:
                                                           FlutterFlowExpandedImageView(
-                                                        image:
-                                                            CachedNetworkImage(
-                                                          fadeInDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                          fadeOutDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      500),
-                                                          imageUrl:
-                                                              getJsonField(
-                                                            imagenesItem
-                                                                .toMap(),
-                                                            r'''$.url''',
-                                                          ).toString(),
+                                                        image: OctoImage(
+                                                          placeholderBuilder:
+                                                              (_) => SizedBox
+                                                                  .expand(
+                                                            child: Image(
+                                                              image: BlurHashImage(
+                                                                  imagenesItem
+                                                                      .blurhash),
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                          image:
+                                                              CachedNetworkImageProvider(
+                                                            getJsonField(
+                                                              imagenesItem
+                                                                  .toMap(),
+                                                              r'''$.url''',
+                                                            ).toString(),
+                                                          ),
                                                           fit: BoxFit.contain,
                                                         ),
                                                         allowRotation: false,
@@ -984,15 +999,23 @@ class _EventoWidgetState extends State<EventoWidget> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
-                                                    child: CachedNetworkImage(
-                                                      fadeInDuration: Duration(
-                                                          milliseconds: 500),
-                                                      fadeOutDuration: Duration(
-                                                          milliseconds: 500),
-                                                      imageUrl: getJsonField(
-                                                        imagenesItem.toMap(),
-                                                        r'''$.url''',
-                                                      ).toString(),
+                                                    child: OctoImage(
+                                                      placeholderBuilder: (_) =>
+                                                          SizedBox.expand(
+                                                        child: Image(
+                                                          image: BlurHashImage(
+                                                              imagenesItem
+                                                                  .blurhash),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      image:
+                                                          CachedNetworkImageProvider(
+                                                        getJsonField(
+                                                          imagenesItem.toMap(),
+                                                          r'''$.url''',
+                                                        ).toString(),
+                                                      ),
                                                       width: 300.0,
                                                       height: 200.0,
                                                       fit: BoxFit.cover,

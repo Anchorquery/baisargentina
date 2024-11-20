@@ -20,19 +20,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'user_profile_model.dart';
-export 'user_profile_model.dart';
+import 'perfil_usuario_estudiante_model.dart';
+export 'perfil_usuario_estudiante_model.dart';
 
-class UserProfileWidget extends StatefulWidget {
-  const UserProfileWidget({super.key});
+class PerfilUsuarioEstudianteWidget extends StatefulWidget {
+  const PerfilUsuarioEstudianteWidget({super.key});
 
   @override
-  State<UserProfileWidget> createState() => _UserProfileWidgetState();
+  State<PerfilUsuarioEstudianteWidget> createState() =>
+      _PerfilUsuarioEstudianteWidgetState();
 }
 
-class _UserProfileWidgetState extends State<UserProfileWidget>
-    with TickerProviderStateMixin {
-  late UserProfileModel _model;
+class _PerfilUsuarioEstudianteWidgetState
+    extends State<PerfilUsuarioEstudianteWidget> with TickerProviderStateMixin {
+  late PerfilUsuarioEstudianteModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -41,7 +42,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => UserProfileModel());
+    _model = createModel(context, () => PerfilUsuarioEstudianteModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -280,6 +281,26 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
         ],
       ),
       'containerOnPageLoadAnimation8': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 100.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 100.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation9': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 100.ms),
@@ -1148,6 +1169,74 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 60.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFF1F4F8),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      border: Border.all(
+                                        color: Color(0xFFE3E6E9),
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 12.0, 8.0, 12.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context
+                                              .pushNamed('ListarEventosAdmin');
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: 40.0,
+                                              height: 40.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Icons.event,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      12.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Eventos',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ).animateOnPageLoad(animationsMap[
+                                      'containerOnPageLoadAnimation4']!),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 12.0, 16.0, 0.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30.0),
                                     child: Container(
@@ -1214,7 +1303,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                       ),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
-                                      'containerOnPageLoadAnimation4']!),
+                                      'containerOnPageLoadAnimation5']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1282,7 +1371,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                       ),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
-                                      'containerOnPageLoadAnimation5']!),
+                                      'containerOnPageLoadAnimation6']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1350,7 +1439,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                       ),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
-                                      'containerOnPageLoadAnimation6']!),
+                                      'containerOnPageLoadAnimation7']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1420,7 +1509,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                       ),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
-                                      'containerOnPageLoadAnimation7']!),
+                                      'containerOnPageLoadAnimation8']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1492,7 +1581,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget>
                                       ),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
-                                      'containerOnPageLoadAnimation8']!),
+                                      'containerOnPageLoadAnimation9']!),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(

@@ -10,7 +10,9 @@ import 'listar_eventos_admin_widget.dart' show ListarEventosAdminWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class ListarEventosAdminModel
@@ -32,8 +34,8 @@ class ListarEventosAdminModel
 
   // Stores action output result for [Backend Call - API (GetEvents)] action in ListarEventosAdmin widget.
   ApiCallResponse? apiResponseEvents;
-  // Stores action output result for [Backend Call - API (Obtener todos los housing)] action in Column widget.
-  ApiCallResponse? apiResponseHopusingCopy;
+  // Stores action output result for [Backend Call - API (GetEvents)] action in Column widget.
+  ApiCallResponse? apiResponseRefreshEvents;
   // Stores action output result for [Backend Call - API (Eliminar evento)] action in Icon widget.
   ApiCallResponse? apiResultlel;
   // Stores action output result for [Backend Call - API (GetEvents)] action in Icon widget.

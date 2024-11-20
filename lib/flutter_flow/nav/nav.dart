@@ -115,10 +115,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HousignsWidget(),
         ),
         FFRoute(
-          name: 'userProfile',
-          path: '/userProfile',
+          name: 'PerfilUsuarioEstudiante',
+          path: '/perfilUsuarioEstudiante',
           requireAuth: true,
-          builder: (context, params) => UserProfileWidget(),
+          builder: (context, params) => PerfilUsuarioEstudianteWidget(),
         ),
         FFRoute(
           name: 'reservaexitosa',
@@ -179,7 +179,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ListarEventos',
           path: '/listarEventos',
           requireAuth: true,
-          builder: (context, params) => ListarEventosWidget(),
+          builder: (context, params) => ListarEventosWidget(
+            admin: params.getParam(
+              'admin',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
           name: 'reservas',
