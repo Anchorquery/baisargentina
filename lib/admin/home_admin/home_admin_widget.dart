@@ -352,7 +352,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('EstOComer');
+                                          context.pushNamed(
+                                              'SeleccionarTipoUsuario');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -549,7 +550,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('CREARoVER');
+                                          context.pushNamed(
+                                              'SeleccionarAccionServicio');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(

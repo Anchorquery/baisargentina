@@ -12,7 +12,9 @@ import 'home_comercio_widget.dart' show HomeComercioWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class HomeComercioModel extends FlutterFlowModel<HomeComercioWidget> {

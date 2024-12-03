@@ -431,10 +431,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ComercioProfile',
-          path: '/comercioProfile',
+          name: 'MiPerfilComercio',
+          path: '/miPerfilComercio',
           requireAuth: true,
-          builder: (context, params) => ComercioProfileWidget(
+          builder: (context, params) => MiPerfilComercioWidget(
             id: params.getParam(
               'id',
               ParamType.int,
@@ -489,16 +489,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CreateHousingWidget(),
         ),
         FFRoute(
-          name: 'CrearFAQ',
-          path: '/crearFAQ',
-          requireAuth: true,
-          builder: (context, params) => CrearFAQWidget(),
-        ),
-        FFRoute(
           name: 'CrearComercio',
           path: '/crearComercio',
           requireAuth: true,
-          builder: (context, params) => CrearComercioWidget(),
+          builder: (context, params) => CrearComercioWidget(
+            isEstuadiante: params.getParam(
+              'isEstuadiante',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
           name: 'StatLocalViews',
@@ -516,27 +515,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'editarPerfilComercio',
           path: '/editarPerfilComercio',
           requireAuth: true,
-          builder: (context, params) => EditarPerfilComercioWidget(
-            data: params.getParam(
-              'data',
-              ParamType.DataStruct,
-              isList: false,
-              structBuilder: CommercePerfilStruct.fromSerializableMap,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'editarPerfilComercioCopy',
-          path: '/editarPerfilComercioCopy',
-          requireAuth: true,
-          builder: (context, params) => EditarPerfilComercioCopyWidget(
-            data: params.getParam(
-              'data',
-              ParamType.DataStruct,
-              isList: false,
-              structBuilder: CommercePerfilStruct.fromSerializableMap,
-            ),
-          ),
+          builder: (context, params) => EditarPerfilComercioWidget(),
         ),
         FFRoute(
           name: 'CategoriaEventos',
@@ -586,39 +565,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AllTicketsWidget(),
         ),
         FFRoute(
-          name: 'EstOComer',
-          path: '/estOComer',
+          name: 'SeleccionarTipoUsuario',
+          path: '/seleccionarTipoUsuario',
           requireAuth: true,
-          builder: (context, params) => EstOComerWidget(),
+          builder: (context, params) => SeleccionarTipoUsuarioWidget(),
         ),
         FFRoute(
-          name: 'ListaEstudiantes',
-          path: '/listaEstudiantes',
+          name: 'PerfilEstudianteById',
+          path: '/perfilEstudianteById',
           requireAuth: true,
-          builder: (context, params) => ListaEstudiantesWidget(),
-        ),
-        FFRoute(
-          name: 'perfileEstudiante',
-          path: '/perfileEstudiante',
-          requireAuth: true,
-          builder: (context, params) => PerfileEstudianteWidget(),
-        ),
-        FFRoute(
-          name: 'ComercioProfileADMIN',
-          path: '/comercioProfileADMIN',
-          requireAuth: true,
-          builder: (context, params) => ComercioProfileADMINWidget(
+          builder: (context, params) => PerfilEstudianteByIdWidget(
             id: params.getParam(
               'id',
               ParamType.int,
             ),
           ),
-        ),
-        FFRoute(
-          name: 'ListaComercio',
-          path: '/listaComercio',
-          requireAuth: true,
-          builder: (context, params) => ListaComercioWidget(),
         ),
         FFRoute(
           name: 'editarPerfilUser',
@@ -695,10 +656,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => UnticketEXAMPLEWidget(),
         ),
         FFRoute(
-          name: 'CREARoVER',
-          path: '/cREARoVER',
+          name: 'SeleccionarAccionServicio',
+          path: '/seleccionarAccionServicio',
           requireAuth: true,
-          builder: (context, params) => CREARoVERWidget(),
+          builder: (context, params) => SeleccionarAccionServicioWidget(),
         ),
         FFRoute(
           name: 'transaccionesNew',
@@ -730,10 +691,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ListarEventosAdminWidget(),
         ),
         FFRoute(
-          name: 'ListaComercios',
-          path: '/listaComercios',
+          name: 'ListaUsuarioComercios',
+          path: '/listaUsuarioComercios',
           requireAuth: true,
-          builder: (context, params) => ListaComerciosWidget(),
+          builder: (context, params) => ListaUsuarioComerciosWidget(),
         ),
         FFRoute(
           name: 'CREARoVERDescuentos',
@@ -748,21 +709,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ListaDescuentosAdminWidget(),
         ),
         FFRoute(
-          name: 'PerfildecomercioById',
-          path: '/perfildecomercioById',
+          name: 'PerfilComercioById',
+          path: '/perfilComercioById',
           requireAuth: true,
-          builder: (context, params) => PerfildecomercioByIdWidget(
-            id: params.getParam(
-              'id',
-              ParamType.int,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'editarPerfilComercioAdmin',
-          path: '/editarPerfilComercioAdmin',
-          requireAuth: true,
-          builder: (context, params) => EditarPerfilComercioAdminWidget(
+          builder: (context, params) => PerfilComercioByIdWidget(
             id: params.getParam(
               'id',
               ParamType.int,
@@ -785,6 +735,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.DataStruct,
               isList: false,
               structBuilder: ChatStruct.fromSerializableMap,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ListaUsuarioEstudiantes',
+          path: '/listaUsuarioEstudiantes',
+          requireAuth: true,
+          builder: (context, params) => ListaUsuarioEstudiantesWidget(),
+        ),
+        FFRoute(
+          name: 'CrearEstudiante',
+          path: '/crearEstudiante',
+          requireAuth: true,
+          builder: (context, params) => CrearEstudianteWidget(),
+        ),
+        FFRoute(
+          name: 'planesCopy',
+          path: '/planesCopy',
+          requireAuth: true,
+          builder: (context, params) => PlanesCopyWidget(),
+        ),
+        FFRoute(
+          name: 'CrearFAQ',
+          path: '/crearFAQ',
+          requireAuth: true,
+          builder: (context, params) => CrearFAQWidget(),
+        ),
+        FFRoute(
+          name: 'editarPerfilComercioAdmin',
+          path: '/editarPerfilComercioAdmin',
+          requireAuth: true,
+          builder: (context, params) => EditarPerfilComercioAdminWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
             ),
           ),
         )

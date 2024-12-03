@@ -761,14 +761,16 @@ class UserGroup {
     'Authorization': 'Bearer [token]',
   };
   static MeCall meCall = MeCall();
-  static UpdatemetadataComercioCall updatemetadataComercioCall =
-      UpdatemetadataComercioCall();
-  static MedataCall medataCall = MedataCall();
+  static UpdateMetaDataComercioCall updateMetaDataComercioCall =
+      UpdateMetaDataComercioCall();
+  static MeDataCall meDataCall = MeDataCall();
   static UpdateUserCall updateUserCall = UpdateUserCall();
   static FindUserCall findUserCall = FindUserCall();
   static DeleteUserCall deleteUserCall = DeleteUserCall();
   static ObtenerPerfilComercioCall obtenerPerfilComercioCall =
       ObtenerPerfilComercioCall();
+  static UpdateMetaComercioAdminCall updateMetaComercioAdminCall =
+      UpdateMetaComercioAdminCall();
 }
 
 class MeCall {
@@ -802,7 +804,7 @@ class MeCall {
       );
 }
 
-class UpdatemetadataComercioCall {
+class UpdateMetaDataComercioCall {
   Future<ApiCallResponse> call({
     String? urlUbicacion = '',
     String? endDate = '',
@@ -826,7 +828,7 @@ class UpdatemetadataComercioCall {
     final images = imagesList ?? [];
 
     return ApiManager.instance.makeApiCall(
-      callName: 'updatemetadata comercio',
+      callName: 'UpdateMetaDataComercio',
       apiUrl: '${baseUrl}/users-permissions/users/saveCommerceMetadata',
       callType: ApiCallType.POST,
       headers: {
@@ -859,7 +861,7 @@ class UpdatemetadataComercioCall {
   }
 }
 
-class MedataCall {
+class MeDataCall {
   Future<ApiCallResponse> call({
     String? token = '',
   }) async {
@@ -868,7 +870,7 @@ class MedataCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'medata',
+      callName: 'MeData',
       apiUrl: '${baseUrl}/users-permissions/users/me-data',
       callType: ApiCallType.GET,
       headers: {
@@ -915,7 +917,7 @@ class UpdateUserCall {
   "university": "${university}"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'updateUser',
+      callName: 'UpdateUser',
       apiUrl: '${baseUrl}/users-permissions/users/save-me',
       callType: ApiCallType.POST,
       headers: {
@@ -1007,6 +1009,67 @@ class ObtenerPerfilComercioCall {
         'Authorization': 'Bearer ${token}',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateMetaComercioAdminCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? urlUbicacion = '',
+    String? endDate = '',
+    String? startDate = '',
+    bool? domingo,
+    bool? sabado,
+    bool? viernes,
+    bool? jueves,
+    bool? miercoles,
+    bool? martes,
+    bool? lunes,
+    String? description = '',
+    String? nameCommerce = '',
+    FFUploadedFile? picture,
+    List<FFUploadedFile>? imagesList,
+    int? category,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+    final images = imagesList ?? [];
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'UpdateMetaComercioAdmin',
+      apiUrl:
+          '${baseUrl}/users-permissions/users/saveCommerceMetadataAdmin/${id}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'urlUbicacion': urlUbicacion,
+        'endDate': endDate,
+        'startDate': startDate,
+        'domingo': domingo,
+        'sabado': sabado,
+        'viernes': viernes,
+        'jueves': jueves,
+        'miercoles': miercoles,
+        'martes': martes,
+        'lunes': lunes,
+        'description': description,
+        'nameCommerce': nameCommerce,
+        'picture': picture,
+        'images': images,
+        'category': category,
+      },
+      bodyType: BodyType.MULTIPART,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1376,7 +1439,8 @@ class RutasAdminGroup {
     'Authorization': 'Bearer [token]',
   };
   static GetUserStudentCall getUserStudentCall = GetUserStudentCall();
-  static CrarComercioCall crarComercioCall = CrarComercioCall();
+  static CrarUserComercioOEstudianteCall crarUserComercioOEstudianteCall =
+      CrarUserComercioOEstudianteCall();
 }
 
 class GetUserStudentCall {
@@ -1405,12 +1469,12 @@ class GetUserStudentCall {
   }
 }
 
-class CrarComercioCall {
+class CrarUserComercioOEstudianteCall {
   Future<ApiCallResponse> call({
-    String? nombre = '',
+    String? name = '',
     int? category,
     String? email = '',
-    String? password = '',
+    int? role,
     String? token = '',
   }) async {
     final baseUrl = RutasAdminGroup.getBaseUrl(
@@ -1419,14 +1483,14 @@ class CrarComercioCall {
 
     final ffApiRequestBody = '''
 {
-  "nombre": "${nombre}",
+  "name": "${name}",
   "category": ${category},
   "email": "${email}",
-  "password": "${password}"
+  "role": ${role}
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'crar comercio',
-      apiUrl: '${baseUrl}/users/comercios/crear',
+      callName: 'crar user comercio o estudiante',
+      apiUrl: '${baseUrl}/users-permissions/users/custom/crear',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${token}',

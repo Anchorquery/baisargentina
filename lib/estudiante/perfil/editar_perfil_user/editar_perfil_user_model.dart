@@ -102,7 +102,7 @@ class EditarPerfilUserModel extends FlutterFlowModel<EditarPerfilUserWidget> {
   TextEditingController? universidadFieldTextController;
   String? Function(BuildContext, String?)?
       universidadFieldTextControllerValidator;
-  // Stores action output result for [Backend Call - API (updateUser)] action in crearcuenta widget.
+  // Stores action output result for [Backend Call - API (UpdateUser)] action in crearcuenta widget.
   ApiCallResponse? authUpdateResponse;
   // Model for loader component.
   late LoaderModel loaderModel;

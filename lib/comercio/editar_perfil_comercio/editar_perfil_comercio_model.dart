@@ -76,7 +76,7 @@ class EditarPerfilComercioModel
   bool isDataUploading2 = false;
   List<FFUploadedFile> uploadedLocalFiles2 = [];
 
-  // Stores action output result for [Backend Call - API (updatemetadata comercio)] action in Button widget.
+  // Stores action output result for [Backend Call - API (UpdateMetaDataComercio)] action in Button widget.
   ApiCallResponse? apiResultbmb;
 
   @override

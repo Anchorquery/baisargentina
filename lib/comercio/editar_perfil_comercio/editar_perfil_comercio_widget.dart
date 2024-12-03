@@ -20,12 +20,7 @@ import 'editar_perfil_comercio_model.dart';
 export 'editar_perfil_comercio_model.dart';
 
 class EditarPerfilComercioWidget extends StatefulWidget {
-  const EditarPerfilComercioWidget({
-    super.key,
-    required this.data,
-  });
-
-  final CommercePerfilStruct? data;
+  const EditarPerfilComercioWidget({super.key});
 
   @override
   State<EditarPerfilComercioWidget> createState() =>
@@ -58,22 +53,66 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
           r'''$.metadata''',
         ));
         safeSetState(() {});
+        safeSetState(() {
+          _model.textFieldNombreComercioTextController?.text =
+              _model.perfil!.nameCommerce;
+          _model.textFieldNombreComercioFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.textFieldNombreComercioTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.textFieldNombreComercioTextController!.text.length,
+            );
+          });
+        });
+        safeSetState(() {
+          _model.textFieldUbicacionTextController?.text =
+              _model.perfil!.urlUbicacion;
+          _model.textFieldUbicacionFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.textFieldUbicacionTextController?.selection =
+                TextSelection.collapsed(
+              offset: _model.textFieldUbicacionTextController!.text.length,
+            );
+          });
+        });
+        safeSetState(() {
+          _model.switchLunesValue = _model.perfil!.lunes;
+        });
+        safeSetState(() {
+          _model.switchMartesValue = _model.perfil!.martes;
+        });
+        safeSetState(() {
+          _model.switchMiercolesValue = _model.perfil!.miercoles;
+        });
+        safeSetState(() {
+          _model.switchJuevesValue = _model.perfil!.jueves;
+        });
+        safeSetState(() {
+          _model.switchViernesValue = _model.perfil!.viernes;
+        });
+        safeSetState(() {
+          _model.switchSabadoValue = _model.perfil!.sabado;
+        });
+        safeSetState(() {
+          _model.switchDomingoValue = _model.perfil!.domingo;
+        });
+        return;
+      } else {
+        return;
       }
     });
 
-    _model.textFieldNombreComercioTextController ??=
-        TextEditingController(text: widget!.data?.nameCommerce);
+    _model.textFieldNombreComercioTextController ??= TextEditingController();
     _model.textFieldNombreComercioFocusNode ??= FocusNode();
 
-    _model.switchLunesValue = widget!.data!.lunes;
-    _model.switchMartesValue = widget!.data!.martes;
-    _model.switchMiercolesValue = widget!.data!.miercoles;
-    _model.switchJuevesValue = widget!.data!.jueves;
-    _model.switchViernesValue = widget!.data!.viernes;
-    _model.switchSabadoValue = widget!.data!.sabado;
-    _model.switchDomingoValue = widget!.data!.domingo;
-    _model.textFieldUbicacionTextController ??=
-        TextEditingController(text: widget!.data?.urlUbicacion);
+    _model.switchLunesValue = false;
+    _model.switchMartesValue = false;
+    _model.switchMiercolesValue = false;
+    _model.switchJuevesValue = false;
+    _model.switchViernesValue = false;
+    _model.switchSabadoValue = false;
+    _model.switchDomingoValue = false;
+    _model.textFieldUbicacionTextController ??= TextEditingController();
     _model.textFieldUbicacionFocusNode ??= FocusNode();
 
     animationsMap.addAll({
@@ -193,7 +232,7 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Image.network(
-                                                  widget!.data!.picture.url,
+                                                  _model.perfil!.picture.url,
                                                   fit: BoxFit.cover,
                                                 ),
                                               );
@@ -787,7 +826,7 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                                             context)
                                                         .languageCode,
                                                   )
-                                                : widget!.data!.startDate,
+                                                : _model.perfil!.startDate,
                                             icon: Icon(
                                               Icons.access_time_filled,
                                               size: 15.0,
@@ -928,7 +967,7 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                                             context)
                                                         .languageCode,
                                                   )
-                                                : widget!.data!.endDate,
+                                                : _model.perfil!.endDate,
                                             icon: Icon(
                                               Icons.access_time_filled,
                                               size: 15.0,
@@ -1233,8 +1272,8 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                                                     0.0),
                                                         child: Builder(
                                                           builder: (context) {
-                                                            final images = widget!
-                                                                    .data
+                                                            final images = _model
+                                                                    .perfil
                                                                     ?.images
                                                                     ?.toList() ??
                                                                 [];
@@ -1429,7 +1468,7 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                             child: FFButtonWidget(
                               onPressed: () async {
                                 _model.apiResultbmb = await UserGroup
-                                    .updatemetadataComercioCall
+                                    .updateMetaDataComercioCall
                                     .call(
                                   urlUbicacion: _model
                                       .textFieldUbicacionTextController.text,

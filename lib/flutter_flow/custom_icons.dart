@@ -12,6 +12,7 @@ class FFIcons {
   static const String _estadisticasFamily = 'Estadisticas';
   static const String _icomoonFamily = 'Icomoon';
   static const String _iconosAdminFamily = 'IconosAdmin';
+  static const String _planesFamily = 'Planes';
 
   // menu-icons
   static const IconData kdescuentos =
@@ -66,4 +67,10 @@ class FFIcons {
       IconData(0xe900, fontFamily: _iconosAdminFamily);
   static const IconData ktransacciones =
       IconData(0xe901, fontFamily: _iconosAdminFamily);
+
+  // planes
+  static const IconData kavion1 = IconData(0xe900, fontFamily: _planesFamily);
+  static const IconData kestrellas =
+      IconData(0xe901, fontFamily: _planesFamily);
+  static const IconData kfiesta1 = IconData(0xe902, fontFamily: _planesFamily);
 }

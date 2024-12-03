@@ -50,7 +50,7 @@ class _LoaderWidgetState extends State<LoaderWidget> {
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: Image.asset(
-              'assets/images/Spinner@1x-1.0s-200px-200px_(1).gif',
+              'assets/images/1495.gif',
               width: 70.0,
               height: 70.0,
               fit: BoxFit.contain,

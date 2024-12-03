@@ -230,7 +230,7 @@ class _FaqWidgetState extends State<FaqWidget> with TickerProviderStateMixin {
                         ),
                         TextSpan(
                           text:
-                              '\n\n\nPara cancelar su suscripción, vaya a la configuración de su cuenta en la aplicación y seleccione la opción de cancelar suscripción. Si cancela dentro de los primeros 14 días, recibirá un reembolso completo. No se otorgarán reembolsos por cancelaciones realizadas después de este período.\n',
+                              '\n\n\nPara cancelar su suscripción, vaya al perfil  de su cuenta en la aplicación y seleccione la opción de cancelar suscripción. Si cancela dentro de los primeros 14 días, recibirá un reembolso completo. No se otorgarán reembolsos por cancelaciones realizadas después de este período. Al cancelar tu suscripción, perderás acceso a los beneficios exclusivos de nuestra aplicación a partir de la fecha de renovación de tu próximo pago.\n',
                           style: TextStyle(),
                         ),
                         TextSpan(

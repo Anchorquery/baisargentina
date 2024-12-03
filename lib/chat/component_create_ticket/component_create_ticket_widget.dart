@@ -185,7 +185,7 @@ class _ComponentCreateTicketWidgetState
                               textCapitalization: TextCapitalization.words,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Descripcion del problema',
+                                labelText: 'Descripción del problema',
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(

@@ -14,7 +14,12 @@ import 'crear_comercio_model.dart';
 export 'crear_comercio_model.dart';
 
 class CrearComercioWidget extends StatefulWidget {
-  const CrearComercioWidget({super.key});
+  const CrearComercioWidget({
+    super.key,
+    bool? isEstuadiante,
+  }) : this.isEstuadiante = isEstuadiante ?? false;
+
+  final bool isEstuadiante;
 
   @override
   State<CrearComercioWidget> createState() => _CrearComercioWidgetState();
@@ -78,7 +83,7 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(25.0, 30.0, 25.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -297,7 +302,7 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                                   ),
                         ),
                       ),
-                      if (_model.laoding == false)
+                      if (!_model.laoding!)
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 5.0, 0.0, 0.0),
@@ -377,12 +382,14 @@ class _CrearComercioWidgetState extends State<CrearComercioWidget> {
                           child: FFButtonWidget(
                             onPressed: () async {
                               var _shouldSetState = false;
-                              _model.apiGuardarComercio =
-                                  await RutasAdminGroup.crarComercioCall.call(
-                                nombre: _model.nombreTextController.text,
+                              _model.apiGuardarComercio = await RutasAdminGroup
+                                  .crarUserComercioOEstudianteCall
+                                  .call(
+                                name: _model.nombreTextController.text,
                                 category: _model.categoryValue,
                                 email: _model.emailTextController.text,
                                 token: currentAuthenticationToken,
+                                role: widget!.isEstuadiante ? 3 : 4,
                               );
 
                               _shouldSetState = true;

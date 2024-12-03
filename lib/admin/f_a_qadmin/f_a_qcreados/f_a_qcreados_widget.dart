@@ -594,8 +594,8 @@ class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
                     child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        context.pushNamed('CrearFAQ');
                       },
                       text: 'Crear nueva FAQ',
                       icon: Icon(

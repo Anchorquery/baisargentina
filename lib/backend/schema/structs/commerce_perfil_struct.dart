@@ -22,6 +22,7 @@ class CommercePerfilStruct extends BaseStruct {
     String? endDate,
     FileDStruct? picture,
     List<FileDStruct>? images,
+    CategoryStruct? category,
   })  : _nameCommerce = nameCommerce,
         _description = description,
         _urlUbicacion = urlUbicacion,
@@ -35,7 +36,8 @@ class CommercePerfilStruct extends BaseStruct {
         _startDate = startDate,
         _endDate = endDate,
         _picture = picture,
-        _images = images;
+        _images = images,
+        _category = category;
 
   // "nameCommerce" field.
   String? _nameCommerce;
@@ -143,6 +145,17 @@ class CommercePerfilStruct extends BaseStruct {
 
   bool hasImages() => _images != null;
 
+  // "category" field.
+  CategoryStruct? _category;
+  CategoryStruct get category => _category ?? CategoryStruct();
+  set category(CategoryStruct? val) => _category = val;
+
+  void updateCategory(Function(CategoryStruct) updateFn) {
+    updateFn(_category ??= CategoryStruct());
+  }
+
+  bool hasCategory() => _category != null;
+
   static CommercePerfilStruct fromMap(Map<String, dynamic> data) =>
       CommercePerfilStruct(
         nameCommerce: data['nameCommerce'] as String?,
@@ -162,6 +175,7 @@ class CommercePerfilStruct extends BaseStruct {
           data['images'],
           FileDStruct.fromMap,
         ),
+        category: CategoryStruct.maybeFromMap(data['category']),
       );
 
   static CommercePerfilStruct? maybeFromMap(dynamic data) => data is Map
@@ -183,6 +197,7 @@ class CommercePerfilStruct extends BaseStruct {
         'endDate': _endDate,
         'picture': _picture?.toMap(),
         'images': _images?.map((e) => e.toMap()).toList(),
+        'category': _category?.toMap(),
       }.withoutNulls;
 
   @override
@@ -243,6 +258,10 @@ class CommercePerfilStruct extends BaseStruct {
           _images,
           ParamType.DataStruct,
           isList: true,
+        ),
+        'category': serializeParam(
+          _category,
+          ParamType.DataStruct,
         ),
       }.withoutNulls;
 
@@ -320,6 +339,12 @@ class CommercePerfilStruct extends BaseStruct {
           true,
           structBuilder: FileDStruct.fromSerializableMap,
         ),
+        category: deserializeStructParam(
+          data['category'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: CategoryStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -342,7 +367,8 @@ class CommercePerfilStruct extends BaseStruct {
         startDate == other.startDate &&
         endDate == other.endDate &&
         picture == other.picture &&
-        listEquality.equals(images, other.images);
+        listEquality.equals(images, other.images) &&
+        category == other.category;
   }
 
   @override
@@ -360,7 +386,8 @@ class CommercePerfilStruct extends BaseStruct {
         startDate,
         endDate,
         picture,
-        images
+        images,
+        category
       ]);
 }
 
@@ -378,6 +405,7 @@ CommercePerfilStruct createCommercePerfilStruct({
   String? startDate,
   String? endDate,
   FileDStruct? picture,
+  CategoryStruct? category,
 }) =>
     CommercePerfilStruct(
       nameCommerce: nameCommerce,
@@ -393,4 +421,5 @@ CommercePerfilStruct createCommercePerfilStruct({
       startDate: startDate,
       endDate: endDate,
       picture: picture ?? FileDStruct(),
+      category: category ?? CategoryStruct(),
     );

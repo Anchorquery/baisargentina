@@ -799,7 +799,7 @@ class _EventoWidgetState extends State<EventoWidget> {
                                                       TapGestureRecognizer()
                                                         ..onTap = () async {
                                                           context.pushNamed(
-                                                            'PerfildecomercioById',
+                                                            'PerfilComercioById',
                                                             queryParameters: {
                                                               'id':
                                                                   serializeParam(

@@ -11,7 +11,9 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'home_comercio_model.dart';
 export 'home_comercio_model.dart';
@@ -115,21 +117,25 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                  'editarPerfilComercio',
-                                                  queryParameters: {
-                                                    'data': serializeParam(
-                                                      _model.data,
-                                                      ParamType.DataStruct,
-                                                    ),
-                                                  }.withoutNulls,
-                                                );
+                                                    'editarPerfilComercio');
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         120.0),
-                                                child: Image.network(
-                                                  _model.data!.picture.url,
+                                                child: OctoImage(
+                                                  placeholderBuilder: (_) =>
+                                                      SizedBox.expand(
+                                                    child: Image(
+                                                      image: BlurHashImage(
+                                                          _model.data!.picture
+                                                              .blurhash),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  image: NetworkImage(
+                                                    _model.data!.picture.url,
+                                                  ),
                                                   width: 80.0,
                                                   height: 80.0,
                                                   fit: BoxFit.cover,
@@ -145,14 +151,7 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                  'editarPerfilComercioCopy',
-                                                  queryParameters: {
-                                                    'data': serializeParam(
-                                                      _model.data,
-                                                      ParamType.DataStruct,
-                                                    ),
-                                                  }.withoutNulls,
-                                                );
+                                                    'editarPerfilComercio');
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
@@ -487,7 +486,7 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
                                       context.pushNamed(
-                                        'ComercioProfile',
+                                        'MiPerfilComercio',
                                         queryParameters: {
                                           'id': serializeParam(
                                             currentUserData?.id,

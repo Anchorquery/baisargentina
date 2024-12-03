@@ -3,7 +3,7 @@ export '/estudiante/public/inicio/inicio_widget.dart' show InicioWidget;
 export '/estudiante/public/registro/registro_widget.dart' show RegistroWidget;
 export '/estudiante/public/login/login_widget.dart' show LoginWidget;
 export '/estudiante/housing/housigns/housigns_widget.dart' show HousignsWidget;
-export '/estudiante/perfil/perfil_usuario_estudiante/perfil_usuario_estudiante_widget.dart'
+export '/estudiante/perfil_usuario_estudiante/perfil_usuario_estudiante_widget.dart'
     show PerfilUsuarioEstudianteWidget;
 export '/estudiante/reservaexitosa/reservaexitosa_widget.dart'
     show ReservaexitosaWidget;
@@ -39,7 +39,7 @@ export '/password_recovery/codigo_de_validacion/codigo_de_validacion_widget.dart
     show CodigoDeValidacionWidget;
 export '/password_recovery/new_password/new_password_widget.dart'
     show NewPasswordWidget;
-export '/estudiante/planes/planes/planes_widget.dart' show PlanesWidget;
+export '/estudiante/planes/planes_widget.dart' show PlanesWidget;
 export '/estudiante/planes/detalles_de_plan_basic/detalles_de_plan_basic_widget.dart'
     show DetallesDePlanBasicWidget;
 export '/estudiante/listar_servicios/listar_servicios_widget.dart'
@@ -76,8 +76,8 @@ export '/admin/descuentos/editar_decuento/editar_decuento_widget.dart'
     show EditarDecuentoWidget;
 export '/admin/descuentos/editar_categoria_descuento/editar_categoria_descuento_widget.dart'
     show EditarCategoriaDescuentoWidget;
-export '/comercio/comercio_profile/comercio_profile_widget.dart'
-    show ComercioProfileWidget;
+export '/comercio/mi_perfil_comercio/mi_perfil_comercio_widget.dart'
+    show MiPerfilComercioWidget;
 export '/estudiante/planes/detalles_plan/detalles_plan_widget.dart'
     show DetallesPlanWidget;
 export '/estudiante/paymen_succces/paymen_succces_widget.dart'
@@ -86,8 +86,6 @@ export '/estudiante/planes/detalle_mi_plan/detalle_mi_plan_widget.dart'
     show DetalleMiPlanWidget;
 export '/admin/housign_admin/create_housing/create_housing_widget.dart'
     show CreateHousingWidget;
-export '/admin/f_a_qadmin/crear_f_a_q/crear_f_a_q_widget.dart'
-    show CrearFAQWidget;
 export '/admin/users/crear_comercio/crear_comercio_widget.dart'
     show CrearComercioWidget;
 export '/comercio/stat_local_views/stat_local_views_widget.dart'
@@ -96,8 +94,6 @@ export '/comercio/stat_eventos_comercio/stat_eventos_comercio_widget.dart'
     show StatEventosComercioWidget;
 export '/comercio/editar_perfil_comercio/editar_perfil_comercio_widget.dart'
     show EditarPerfilComercioWidget;
-export '/comercio/editar_perfil_comercio_copy/editar_perfil_comercio_copy_widget.dart'
-    show EditarPerfilComercioCopyWidget;
 export '/admin/eventos_admin/categoria_eventos/categoria_eventos_widget.dart'
     show CategoriaEventosWidget;
 export '/admin/eventos_admin/crear_categoria_e/crear_categoria_e_widget.dart'
@@ -111,15 +107,10 @@ export '/tickets/see_or_create/see_or_create_widget.dart'
 export '/tickets/create_a_ticket/create_a_ticket_widget.dart'
     show CreateATicketWidget;
 export '/tickets/all_tickets/all_tickets_widget.dart' show AllTicketsWidget;
-export '/admin/users/est_o_comer/est_o_comer_widget.dart' show EstOComerWidget;
-export '/admin/users/lista_estudiantes/lista_estudiantes_widget.dart'
-    show ListaEstudiantesWidget;
-export '/admin/users/perfile_estudiante/perfile_estudiante_widget.dart'
-    show PerfileEstudianteWidget;
-export '/admin/users/comercio_profile_a_d_m_i_n/comercio_profile_a_d_m_i_n_widget.dart'
-    show ComercioProfileADMINWidget;
-export '/admin/users/lista_comercio/lista_comercio_widget.dart'
-    show ListaComercioWidget;
+export '/admin/users/seleccionar_tipo_usuario/seleccionar_tipo_usuario_widget.dart'
+    show SeleccionarTipoUsuarioWidget;
+export '/admin/users/perfil_estudiante_by_id/perfil_estudiante_by_id_widget.dart'
+    show PerfilEstudianteByIdWidget;
 export '/estudiante/perfil/editar_perfil_user/editar_perfil_user_widget.dart'
     show EditarPerfilUserWidget;
 export '/chat/listado_chats/listado_chats_widget.dart' show ListadoChatsWidget;
@@ -141,8 +132,8 @@ export '/admin/users/perfile_estudiante_fernando/perfile_estudiante_fernando_wid
     show PerfileEstudianteFernandoWidget;
 export '/reservas/unticket_e_x_a_m_p_l_e/unticket_e_x_a_m_p_l_e_widget.dart'
     show UnticketEXAMPLEWidget;
-export '/admin/servicios/c_r_e_a_ro_v_e_r/c_r_e_a_ro_v_e_r_widget.dart'
-    show CREARoVERWidget;
+export '/admin/servicios/seleccionar_accion_servicio/seleccionar_accion_servicio_widget.dart'
+    show SeleccionarAccionServicioWidget;
 export '/admin/transacciones/transacciones_new/transacciones_new_widget.dart'
     show TransaccionesNewWidget;
 export '/admin/housign_admin/lista_housing_admin/lista_housing_admin_widget.dart'
@@ -151,15 +142,22 @@ export '/admin/housign_admin/editar_housing/editar_housing_widget.dart'
     show EditarHousingWidget;
 export '/admin/eventos_admin/listar_eventos_admin/listar_eventos_admin_widget.dart'
     show ListarEventosAdminWidget;
-export '/admin/users/lista_comercios/lista_comercios_widget.dart'
-    show ListaComerciosWidget;
+export '/admin/users/lista_usuario_comercios/lista_usuario_comercios_widget.dart'
+    show ListaUsuarioComerciosWidget;
 export '/admin/descuentos/c_r_e_a_ro_v_e_r_descuentos/c_r_e_a_ro_v_e_r_descuentos_widget.dart'
     show CREARoVERDescuentosWidget;
 export '/admin/descuentos/lista_descuentos_admin/lista_descuentos_admin_widget.dart'
     show ListaDescuentosAdminWidget;
-export '/admin/users/perfildecomercio_by_id/perfildecomercio_by_id_widget.dart'
-    show PerfildecomercioByIdWidget;
-export '/admin/users/editar_perfil_comercio_admin/editar_perfil_comercio_admin_widget.dart'
-    show EditarPerfilComercioAdminWidget;
+export '/admin/users/perfil_comercio_by_id/perfil_comercio_by_id_widget.dart'
+    show PerfilComercioByIdWidget;
 export '/page_init/page_init_widget.dart' show PageInitWidget;
 export '/chat/chat_id/chat_id_widget.dart' show ChatIdWidget;
+export '/admin/users/lista_usuario_estudiantes/lista_usuario_estudiantes_widget.dart'
+    show ListaUsuarioEstudiantesWidget;
+export '/admin/users/crear_estudiante/crear_estudiante_widget.dart'
+    show CrearEstudianteWidget;
+export '/estudiante/planes_copy/planes_copy_widget.dart' show PlanesCopyWidget;
+export '/admin/f_a_qadmin/crear_f_a_q/crear_f_a_q_widget.dart'
+    show CrearFAQWidget;
+export '/comercio/editar_perfil_comercio_admin/editar_perfil_comercio_admin_widget.dart'
+    show EditarPerfilComercioAdminWidget;

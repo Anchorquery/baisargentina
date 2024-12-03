@@ -41,7 +41,7 @@ class CrearComercioModel extends FlutterFlowModel<CrearComercioWidget> {
   // State field(s) for category widget.
   int? categoryValue;
   FormFieldController<int>? categoryValueController;
-  // Stores action output result for [Backend Call - API (crar comercio)] action in Button widget.
+  // Stores action output result for [Backend Call - API (crar user comercio o estudiante)] action in Button widget.
   ApiCallResponse? apiGuardarComercio;
 
   @override
