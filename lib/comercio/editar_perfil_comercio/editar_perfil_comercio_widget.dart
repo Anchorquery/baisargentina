@@ -419,22 +419,23 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                                                 .asValidator(context),
                                           ),
                                         ),
-                                        if (currentUserUid == '250000')
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 5.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Disco',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Lato',
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 5.0, 0.0, 0.0),
+                                          child: Text(
+                                            valueOrDefault<String>(
+                                              _model.perfil?.category?.name,
+                                              'Sin categoria',
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Lato',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
+                                        ),
                                       ],
                                     ),
                                   ].divide(SizedBox(width: 15.0)),

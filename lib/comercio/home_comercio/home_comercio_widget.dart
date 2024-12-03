@@ -184,7 +184,7 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                                 Text(
                                                   valueOrDefault<String>(
                                                     _model.data?.nameCommerce,
-                                                    ' c',
+                                                    'Nombre',
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -196,7 +196,10 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                                       ),
                                                 ),
                                                 Text(
-                                                  'Categoria de comercio',
+                                                  valueOrDefault<String>(
+                                                    _model.data?.category?.name,
+                                                    'Sin categoria',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -485,15 +488,7 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed(
-                                        'MiPerfilComercio',
-                                        queryParameters: {
-                                          'id': serializeParam(
-                                            currentUserData?.id,
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
-                                      );
+                                      context.pushNamed('MiPerfilComercio');
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,

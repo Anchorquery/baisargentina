@@ -771,6 +771,8 @@ class UserGroup {
       ObtenerPerfilComercioCall();
   static UpdateMetaComercioAdminCall updateMetaComercioAdminCall =
       UpdateMetaComercioAdminCall();
+  static ObtenerPerfilEstudianteCall obtenerPerfilEstudianteCall =
+      ObtenerPerfilEstudianteCall();
 }
 
 class MeCall {
@@ -1070,6 +1072,33 @@ class UpdateMetaComercioAdminCall {
         'category': category,
       },
       bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ObtenerPerfilEstudianteCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'obtenerPerfilEstudiante',
+      apiUrl: '${baseUrl}/users-permissions/users/perfil-estudiante/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

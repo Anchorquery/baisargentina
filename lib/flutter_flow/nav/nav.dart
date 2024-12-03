@@ -431,17 +431,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'MiPerfilComercio',
-          path: '/miPerfilComercio',
-          requireAuth: true,
-          builder: (context, params) => MiPerfilComercioWidget(
-            id: params.getParam(
-              'id',
-              ParamType.int,
-            ),
-          ),
-        ),
-        FFRoute(
           name: 'detallesPlan',
           path: '/detallesPlan',
           requireAuth: true,
@@ -620,12 +609,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'perfileEstudianteDiego',
-          path: '/perfileEstudianteDiego',
-          requireAuth: true,
-          builder: (context, params) => PerfileEstudianteDiegoWidget(),
-        ),
-        FFRoute(
           name: 'perfileEstudianteValentina',
           path: '/perfileEstudianteValentina',
           requireAuth: true,
@@ -642,12 +625,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/perfileEstudianteDaniel',
           requireAuth: true,
           builder: (context, params) => PerfileEstudianteDanielWidget(),
-        ),
-        FFRoute(
-          name: 'perfileEstudianteFernando',
-          path: '/perfileEstudianteFernando',
-          requireAuth: true,
-          builder: (context, params) => PerfileEstudianteFernandoWidget(),
         ),
         FFRoute(
           name: 'unticketEXAMPLE',
@@ -772,6 +749,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.int,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'MiPerfilComercio',
+          path: '/miPerfilComercio',
+          requireAuth: true,
+          builder: (context, params) => MiPerfilComercioWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

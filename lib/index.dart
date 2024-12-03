@@ -76,8 +76,6 @@ export '/admin/descuentos/editar_decuento/editar_decuento_widget.dart'
     show EditarDecuentoWidget;
 export '/admin/descuentos/editar_categoria_descuento/editar_categoria_descuento_widget.dart'
     show EditarCategoriaDescuentoWidget;
-export '/comercio/mi_perfil_comercio/mi_perfil_comercio_widget.dart'
-    show MiPerfilComercioWidget;
 export '/estudiante/planes/detalles_plan/detalles_plan_widget.dart'
     show DetallesPlanWidget;
 export '/estudiante/paymen_succces/paymen_succces_widget.dart'
@@ -120,16 +118,12 @@ export '/admin/eventos_admin/reservas_admin/reservas_admin_widget.dart'
     show ReservasAdminWidget;
 export '/estudiante/booking/reserva_id_admin/reserva_id_admin_widget.dart'
     show ReservaIdAdminWidget;
-export '/admin/users/perfile_estudiante_diego/perfile_estudiante_diego_widget.dart'
-    show PerfileEstudianteDiegoWidget;
-export '/admin/users/perfile_estudiante_valentina/perfile_estudiante_valentina_widget.dart'
+export '/admin/perfile_estudiante_valentina/perfile_estudiante_valentina_widget.dart'
     show PerfileEstudianteValentinaWidget;
 export '/admin/perfile_estudiante_josma/perfile_estudiante_josma_widget.dart'
     show PerfileEstudianteJosmaWidget;
 export '/admin/perfile_estudiante_daniel/perfile_estudiante_daniel_widget.dart'
     show PerfileEstudianteDanielWidget;
-export '/admin/users/perfile_estudiante_fernando/perfile_estudiante_fernando_widget.dart'
-    show PerfileEstudianteFernandoWidget;
 export '/reservas/unticket_e_x_a_m_p_l_e/unticket_e_x_a_m_p_l_e_widget.dart'
     show UnticketEXAMPLEWidget;
 export '/admin/servicios/seleccionar_accion_servicio/seleccionar_accion_servicio_widget.dart'
@@ -161,3 +155,5 @@ export '/admin/f_a_qadmin/crear_f_a_q/crear_f_a_q_widget.dart'
     show CrearFAQWidget;
 export '/comercio/editar_perfil_comercio_admin/editar_perfil_comercio_admin_widget.dart'
     show EditarPerfilComercioAdminWidget;
+export '/comercio/mi_perfil_comercio/mi_perfil_comercio_widget.dart'
+    show MiPerfilComercioWidget;
