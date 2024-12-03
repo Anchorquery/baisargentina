@@ -24,21 +24,24 @@ class ChatsRow extends SupabaseDataRow {
   set lastMessageTime(DateTime? value) =>
       setField<DateTime>('last_message_time', value);
 
-  int? get groupChatId => getField<int>('group_chat_id');
-  set groupChatId(int? value) => setField<int>('group_chat_id', value);
-
   DateTime? get createdAt => getField<DateTime>('created_at');
   set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
 
   DateTime? get updatedAt => getField<DateTime>('updated_at');
   set updatedAt(DateTime? value) => setField<DateTime>('updated_at', value);
 
-  DateTime? get publishedAt => getField<DateTime>('published_at');
-  set publishedAt(DateTime? value) => setField<DateTime>('published_at', value);
-
   int? get createdById => getField<int>('created_by_id');
   set createdById(int? value) => setField<int>('created_by_id', value);
 
   int? get updatedById => getField<int>('updated_by_id');
   set updatedById(int? value) => setField<int>('updated_by_id', value);
+
+  String? get uuid => getField<String>('uuid');
+  set uuid(String? value) => setField<String>('uuid', value);
+
+  String? get state => getField<String>('state');
+  set state(String? value) => setField<String>('state', value);
+
+  String? get name => getField<String>('name');
+  set name(String? value) => setField<String>('name', value);
 }

@@ -30,9 +30,6 @@ class CommerceCategoriesRow extends SupabaseDataRow {
   DateTime? get updatedAt => getField<DateTime>('updated_at');
   set updatedAt(DateTime? value) => setField<DateTime>('updated_at', value);
 
-  DateTime? get publishedAt => getField<DateTime>('published_at');
-  set publishedAt(DateTime? value) => setField<DateTime>('published_at', value);
-
   int? get createdById => getField<int>('created_by_id');
   set createdById(int? value) => setField<int>('created_by_id', value);
 

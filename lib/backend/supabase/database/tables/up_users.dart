@@ -78,4 +78,14 @@ class UpUsersRow extends SupabaseDataRow {
 
   int? get updatedById => getField<int>('updated_by_id');
   set updatedById(int? value) => setField<int>('updated_by_id', value);
+
+  bool? get isOnline => getField<bool>('is_online');
+  set isOnline(bool? value) => setField<bool>('is_online', value);
+
+  DateTime? get lastTimeConexion => getField<DateTime>('last_time_conexion');
+  set lastTimeConexion(DateTime? value) =>
+      setField<DateTime>('last_time_conexion', value);
+
+  bool? get isInvited => getField<bool>('is_invited');
+  set isInvited(bool? value) => setField<bool>('is_invited', value);
 }

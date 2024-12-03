@@ -57,10 +57,15 @@ class _EditarPerfilComercioAdminWidgetState
       );
 
       if ((_model.apiResulteme?.succeeded ?? true)) {
+        _model.categoriasComercios = await CommerceCategoriesTable().queryRows(
+          queryFn: (q) => q,
+        );
         _model.perfil = CommercePerfilStruct.maybeFromMap(getJsonField(
           (_model.apiResulteme?.jsonBody ?? ''),
           r'''$.metadata''',
         ));
+        _model.categorias =
+            _model.categoriasComercios!.toList().cast<CommerceCategoriesRow>();
         safeSetState(() {});
         safeSetState(() {
           _model.textFieldNombreComercioTextController?.text =
@@ -874,7 +879,7 @@ class _EditarPerfilComercioAdminWidgetState
                                             },
                                             text: _model.datePicked1 != null
                                                 ? dateTimeFormat(
-                                                    "jm",
+                                                    "Hm",
                                                     _model.datePicked1,
                                                     locale: FFLocalizations.of(
                                                             context)
@@ -1015,7 +1020,7 @@ class _EditarPerfilComercioAdminWidgetState
                                             },
                                             text: _model.datePicked2 != null
                                                 ? dateTimeFormat(
-                                                    "jm",
+                                                    "Hm",
                                                     _model.datePicked2,
                                                     locale: FFLocalizations.of(
                                                             context)
@@ -1527,8 +1532,22 @@ class _EditarPerfilComercioAdminWidgetState
                                   id: widget!.id,
                                   urlUbicacion: _model
                                       .textFieldUbicacionTextController.text,
-                                  endDate: _model.datePicked2?.toString(),
-                                  startDate: _model.datePicked1?.toString(),
+                                  endDate: _model.datePicked2 != null
+                                      ? dateTimeFormat(
+                                          "HH:mm:ss.SSS",
+                                          _model.datePicked2,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        )
+                                      : _model.perfil?.endDate,
+                                  startDate: _model.datePicked1 != null
+                                      ? dateTimeFormat(
+                                          "HH:mm:ss.SSS",
+                                          _model.datePicked1,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        )
+                                      : _model.perfil?.startDate,
                                   domingo: _model.switchDomingoValue,
                                   sabado: _model.switchSabadoValue,
                                   viernes: _model.switchViernesValue,

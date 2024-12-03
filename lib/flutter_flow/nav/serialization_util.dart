@@ -266,8 +266,6 @@ dynamic deserializeParam<T>(
             return StrapiApiTokensRow(data);
           case SuscriptionsTransactionLinksRow:
             return SuscriptionsTransactionLinksRow(data);
-          case ChatWithUsersRow:
-            return ChatWithUsersRow(data);
           case StrapiReleasesRow:
             return StrapiReleasesRow(data);
           case EventsCategoryLinksRow:
@@ -298,8 +296,6 @@ dynamic deserializeParam<T>(
             return FilesRelatedMorphsRow(data);
           case StrapiReleaseActionsReleaseLinksRow:
             return StrapiReleaseActionsReleaseLinksRow(data);
-          case ChatsUserALinksRow:
-            return ChatsUserALinksRow(data);
           case ServicesCreatedLinksRow:
             return ServicesCreatedLinksRow(data);
           case SuscriptionsPlanLinksRow:
@@ -310,6 +306,8 @@ dynamic deserializeParam<T>(
             return StrapiMigrationsRow(data);
           case ViewPerfilsRow:
             return ViewPerfilsRow(data);
+          case ChatMessagesChatLinksRow:
+            return ChatMessagesChatLinksRow(data);
           case EventsCreadorLinksRow:
             return EventsCreadorLinksRow(data);
           case I18nLocaleRow:
@@ -338,8 +336,6 @@ dynamic deserializeParam<T>(
             return EventsRow(data);
           case EventsOrganizadorLinksRow:
             return EventsOrganizadorLinksRow(data);
-          case ChatsUserBLinksRow:
-            return ChatsUserBLinksRow(data);
           case BookingsEventLinksRow:
             return BookingsEventLinksRow(data);
           case DiscountsRow:
@@ -366,6 +362,8 @@ dynamic deserializeParam<T>(
             return BookingsOwnerLinksRow(data);
           case UpUsersRow:
             return UpUsersRow(data);
+          case ChatMessagesUserLinksRow:
+            return ChatMessagesUserLinksRow(data);
           case UploadFoldersParentLinksRow:
             return UploadFoldersParentLinksRow(data);
           default:

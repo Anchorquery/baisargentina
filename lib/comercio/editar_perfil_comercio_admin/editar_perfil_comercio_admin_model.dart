@@ -48,6 +48,8 @@ class EditarPerfilComercioAdminModel
 
   // Stores action output result for [Backend Call - API (obtenerPerfilComercio)] action in editarPerfilComercioAdmin widget.
   ApiCallResponse? apiResulteme;
+  // Stores action output result for [Backend Call - Query Rows] action in editarPerfilComercioAdmin widget.
+  List<CommerceCategoriesRow>? categoriasComercios;
   // Model for loader component.
   late LoaderModel loaderModel;
   bool isDataUploading1 = false;
