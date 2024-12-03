@@ -52,11 +52,11 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
       }
     });
 
-    _model.nombreTextController ??= TextEditingController();
-    _model.nombreFocusNode ??= FocusNode();
+    _model.nombreEstudianteTextController ??= TextEditingController();
+    _model.nombreEstudianteFocusNode ??= FocusNode();
 
-    _model.emailTextController ??= TextEditingController();
-    _model.emailFocusNode ??= FocusNode();
+    _model.emailEstudianteTextController ??= TextEditingController();
+    _model.emailEstudianteFocusNode ??= FocusNode();
   }
 
   @override
@@ -76,7 +76,7 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(25.0, 30.0, 25.0, 0.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -140,8 +140,8 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           child: TextFormField(
-                            controller: _model.nombreTextController,
-                            focusNode: _model.nombreFocusNode,
+                            controller: _model.nombreEstudianteTextController,
+                            focusNode: _model.nombreEstudianteFocusNode,
                             autofocus: false,
                             textInputAction: TextInputAction.next,
                             obscureText: false,
@@ -196,7 +196,8 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
                                 ),
                             cursorColor:
                                 FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.nombreTextControllerValidator
+                            validator: _model
+                                .nombreEstudianteTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -220,8 +221,8 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           child: TextFormField(
-                            controller: _model.emailTextController,
-                            focusNode: _model.emailFocusNode,
+                            controller: _model.emailEstudianteTextController,
+                            focusNode: _model.emailEstudianteFocusNode,
                             autofocus: false,
                             textInputAction: TextInputAction.next,
                             obscureText: false,
@@ -277,22 +278,10 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
                             keyboardType: TextInputType.emailAddress,
                             cursorColor:
                                 FlutterFlowTheme.of(context).primaryText,
-                            validator: _model.emailTextControllerValidator
+                            validator: _model
+                                .emailEstudianteTextControllerValidator
                                 .asValidator(context),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                        child: Text(
-                          'Categoría de comercio',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
                         ),
                       ),
                       Padding(
@@ -332,24 +321,28 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
                           child: FFButtonWidget(
                             onPressed: () async {
                               var _shouldSetState = false;
-                              _model.apiGuardarComercio = await RutasAdminGroup
-                                  .crarUserComercioOEstudianteCall
-                                  .call(
-                                name: _model.nombreTextController.text,
-                                email: _model.emailTextController.text,
+                              _model.apiGuardarEstudiante =
+                                  await RutasAdminGroup
+                                      .crarUserComercioOEstudianteCall
+                                      .call(
+                                name:
+                                    _model.nombreEstudianteTextController.text,
+                                email:
+                                    _model.emailEstudianteTextController.text,
                                 token: currentAuthenticationToken,
+                                role: 3,
                               );
 
                               _shouldSetState = true;
-                              if ((_model.apiGuardarComercio?.succeeded ??
+                              if ((_model.apiGuardarEstudiante?.succeeded ??
                                   true)) {
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
                                       title: Text('Acción exiosa'),
-                                      content:
-                                          Text('Comercio creado exitosamente'),
+                                      content: Text(
+                                          'Estudiante creado exitosamente'),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
@@ -360,6 +353,11 @@ class _CrearEstudianteWidgetState extends State<CrearEstudianteWidget> {
                                     );
                                   },
                                 );
+                                safeSetState(() {
+                                  _model.nombreEstudianteTextController
+                                      ?.clear();
+                                  _model.emailEstudianteTextController?.clear();
+                                });
                                 if (_shouldSetState) safeSetState(() {});
                                 return;
                               } else {

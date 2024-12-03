@@ -202,15 +202,7 @@ class _ListaUsuarioEstudiantesWidgetState
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed(
-                            'CrearComercio',
-                            queryParameters: {
-                              'isEstuadiante': serializeParam(
-                                true,
-                                ParamType.bool,
-                              ),
-                            }.withoutNulls,
-                          );
+                          context.pushNamed('CrearEstudiante');
                         },
                         text: 'Crear estudiante',
                         icon: Icon(

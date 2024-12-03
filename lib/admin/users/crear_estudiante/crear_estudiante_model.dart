@@ -28,26 +28,28 @@ class CrearEstudianteModel extends FlutterFlowModel<CrearEstudianteWidget> {
 
   // Stores action output result for [Backend Call - API (categoria comercios)] action in CrearEstudiante widget.
   ApiCallResponse? apiGetCategories;
-  // State field(s) for nombre widget.
-  FocusNode? nombreFocusNode;
-  TextEditingController? nombreTextController;
-  String? Function(BuildContext, String?)? nombreTextControllerValidator;
-  // State field(s) for email widget.
-  FocusNode? emailFocusNode;
-  TextEditingController? emailTextController;
-  String? Function(BuildContext, String?)? emailTextControllerValidator;
-  // Stores action output result for [Backend Call - API (crar user comercio o estudiante)] action in Button widget.
-  ApiCallResponse? apiGuardarComercio;
+  // State field(s) for nombreEstudiante widget.
+  FocusNode? nombreEstudianteFocusNode;
+  TextEditingController? nombreEstudianteTextController;
+  String? Function(BuildContext, String?)?
+      nombreEstudianteTextControllerValidator;
+  // State field(s) for emailEstudiante widget.
+  FocusNode? emailEstudianteFocusNode;
+  TextEditingController? emailEstudianteTextController;
+  String? Function(BuildContext, String?)?
+      emailEstudianteTextControllerValidator;
+  // Stores action output result for [Backend Call - API (crar user comercio o estudiante)] action in EnviarInvitacion widget.
+  ApiCallResponse? apiGuardarEstudiante;
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    nombreFocusNode?.dispose();
-    nombreTextController?.dispose();
+    nombreEstudianteFocusNode?.dispose();
+    nombreEstudianteTextController?.dispose();
 
-    emailFocusNode?.dispose();
-    emailTextController?.dispose();
+    emailEstudianteFocusNode?.dispose();
+    emailEstudianteTextController?.dispose();
   }
 }
