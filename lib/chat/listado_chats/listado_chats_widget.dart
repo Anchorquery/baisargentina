@@ -125,7 +125,15 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('PerfilUsuarioEstudiante');
+                  if (FFAppState().user.role == 1) {
+                    context.pushNamed('HomeAdmin');
+
+                    return;
+                  } else {
+                    context.pushNamed('PerfilUsuarioEstudiante');
+
+                    return;
+                  }
                 },
                 child: Icon(
                   Icons.chevron_left_rounded,
