@@ -609,24 +609,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'perfileEstudianteValentina',
-          path: '/perfileEstudianteValentina',
-          requireAuth: true,
-          builder: (context, params) => PerfileEstudianteValentinaWidget(),
-        ),
-        FFRoute(
-          name: 'perfileEstudianteJosma',
-          path: '/perfileEstudianteJosma',
-          requireAuth: true,
-          builder: (context, params) => PerfileEstudianteJosmaWidget(),
-        ),
-        FFRoute(
-          name: 'perfileEstudianteDaniel',
-          path: '/perfileEstudianteDaniel',
-          requireAuth: true,
-          builder: (context, params) => PerfileEstudianteDanielWidget(),
-        ),
-        FFRoute(
           name: 'unticketEXAMPLE',
           path: '/unticketEXAMPLE',
           requireAuth: true,
@@ -755,6 +737,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/miPerfilComercio',
           requireAuth: true,
           builder: (context, params) => MiPerfilComercioWidget(),
+        ),
+        FFRoute(
+          name: 'editarPerfilUserAdmin',
+          path: '/editarPerfilUserAdmin',
+          requireAuth: true,
+          builder: (context, params) => EditarPerfilUserAdminWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

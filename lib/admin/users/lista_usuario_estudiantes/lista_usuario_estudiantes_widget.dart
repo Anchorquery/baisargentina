@@ -391,7 +391,7 @@ class _ListaUsuarioEstudiantesWidgetState
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                        'editarPerfilComercioAdmin',
+                                                        'editarPerfilUserAdmin',
                                                         queryParameters: {
                                                           'id': serializeParam(
                                                             getJsonField(
@@ -433,7 +433,7 @@ class _ListaUsuarioEstudiantesWidgetState
                                                                     (alertDialogContext) {
                                                                   return AlertDialog(
                                                                     title: Text(
-                                                                        'Eliminar Housing'),
+                                                                        'Eliminar Usuario'),
                                                                     content: Text(
                                                                         '¿Está seguro que desea eliminar este item?'),
                                                                     actions: [

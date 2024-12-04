@@ -21,6 +21,8 @@ class UserStruct extends BaseStruct {
     String? avatar,
     String? phone,
     String? qrImage,
+    String? dni,
+    String? pasaporte,
   })  : _id = id,
         _name = name,
         _lastName = lastName,
@@ -33,7 +35,9 @@ class UserStruct extends BaseStruct {
         _inArgentina = inArgentina,
         _avatar = avatar,
         _phone = phone,
-        _qrImage = qrImage;
+        _qrImage = qrImage,
+        _dni = dni,
+        _pasaporte = pasaporte;
 
   // "id" field.
   int? _id;
@@ -130,6 +134,20 @@ class UserStruct extends BaseStruct {
 
   bool hasQrImage() => _qrImage != null;
 
+  // "dni" field.
+  String? _dni;
+  String get dni => _dni ?? '';
+  set dni(String? val) => _dni = val;
+
+  bool hasDni() => _dni != null;
+
+  // "pasaporte" field.
+  String? _pasaporte;
+  String get pasaporte => _pasaporte ?? '';
+  set pasaporte(String? val) => _pasaporte = val;
+
+  bool hasPasaporte() => _pasaporte != null;
+
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -144,6 +162,8 @@ class UserStruct extends BaseStruct {
         avatar: data['avatar'] as String?,
         phone: data['phone'] as String?,
         qrImage: data['qrImage'] as String?,
+        dni: data['dni'] as String?,
+        pasaporte: data['pasaporte'] as String?,
       );
 
   static UserStruct? maybeFromMap(dynamic data) =>
@@ -163,6 +183,8 @@ class UserStruct extends BaseStruct {
         'avatar': _avatar,
         'phone': _phone,
         'qrImage': _qrImage,
+        'dni': _dni,
+        'pasaporte': _pasaporte,
       }.withoutNulls;
 
   @override
@@ -217,6 +239,14 @@ class UserStruct extends BaseStruct {
         ),
         'qrImage': serializeParam(
           _qrImage,
+          ParamType.String,
+        ),
+        'dni': serializeParam(
+          _dni,
+          ParamType.String,
+        ),
+        'pasaporte': serializeParam(
+          _pasaporte,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -288,6 +318,16 @@ class UserStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        dni: deserializeParam(
+          data['dni'],
+          ParamType.String,
+          false,
+        ),
+        pasaporte: deserializeParam(
+          data['pasaporte'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -308,7 +348,9 @@ class UserStruct extends BaseStruct {
         inArgentina == other.inArgentina &&
         avatar == other.avatar &&
         phone == other.phone &&
-        qrImage == other.qrImage;
+        qrImage == other.qrImage &&
+        dni == other.dni &&
+        pasaporte == other.pasaporte;
   }
 
   @override
@@ -325,7 +367,9 @@ class UserStruct extends BaseStruct {
         inArgentina,
         avatar,
         phone,
-        qrImage
+        qrImage,
+        dni,
+        pasaporte
       ]);
 }
 
@@ -343,6 +387,8 @@ UserStruct createUserStruct({
   String? avatar,
   String? phone,
   String? qrImage,
+  String? dni,
+  String? pasaporte,
 }) =>
     UserStruct(
       id: id,
@@ -358,4 +404,6 @@ UserStruct createUserStruct({
       avatar: avatar,
       phone: phone,
       qrImage: qrImage,
+      dni: dni,
+      pasaporte: pasaporte,
     );

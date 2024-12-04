@@ -1,7 +1,7 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/componentes_admin/cancelar_suscripcion/cancelar_suscripcion_widget.dart';
+import '/components/cancelar_suscripcion/cancelar_suscripcion_widget.dart';
 import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';

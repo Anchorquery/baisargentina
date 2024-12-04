@@ -765,6 +765,7 @@ class UserGroup {
       UpdateMetaDataComercioCall();
   static MeDataCall meDataCall = MeDataCall();
   static UpdateUserCall updateUserCall = UpdateUserCall();
+  static UpdateUserAdminCall updateUserAdminCall = UpdateUserAdminCall();
   static FindUserCall findUserCall = FindUserCall();
   static DeleteUserCall deleteUserCall = DeleteUserCall();
   static ObtenerPerfilComercioCall obtenerPerfilComercioCall =
@@ -921,6 +922,56 @@ class UpdateUserCall {
     return ApiManager.instance.makeApiCall(
       callName: 'UpdateUser',
       apiUrl: '${baseUrl}/users-permissions/users/save-me',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateUserAdminCall {
+  Future<ApiCallResponse> call({
+    String? country = '',
+    String? email = '',
+    String? name = '',
+    String? lastName = '',
+    String? birth = '',
+    String? phone = '',
+    bool? inArgentina,
+    String? password = '',
+    String? university = '',
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "country": "${country}",
+  "email": "${email}",
+  "name": "${name}",
+  "lastName": "${lastName}",
+  "birth": "${birth}",
+  "phone": "${phone}",
+  "inArgentina": ${inArgentina},
+  "password": "${password}",
+  "university": "${university}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'UpdateUserAdmin',
+      apiUrl: '${baseUrl}/users-permissions/users/save-user-admin/${id}',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${token}',
@@ -1467,12 +1518,13 @@ class RutasAdminGroup {
   static Map<String, String> headers = {
     'Authorization': 'Bearer [token]',
   };
-  static GetUserStudentCall getUserStudentCall = GetUserStudentCall();
+  static ObtenerCantidadEstudiantesCall obtenerCantidadEstudiantesCall =
+      ObtenerCantidadEstudiantesCall();
   static CrarUserComercioOEstudianteCall crarUserComercioOEstudianteCall =
       CrarUserComercioOEstudianteCall();
 }
 
-class GetUserStudentCall {
+class ObtenerCantidadEstudiantesCall {
   Future<ApiCallResponse> call({
     String? token = '',
   }) async {
@@ -1481,7 +1533,7 @@ class GetUserStudentCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'get user student',
+      callName: 'ObtenerCantidadEstudiantes',
       apiUrl: '${baseUrl}/users-permissions/users/getUserEstudiante',
       callType: ApiCallType.GET,
       headers: {

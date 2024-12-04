@@ -22,6 +22,8 @@ class PerfilEstudianteByIdModel
 
   // Stores action output result for [Backend Call - API (obtenerPerfilEstudiante)] action in PerfilEstudianteById widget.
   ApiCallResponse? apiGerPerfilEstudiante;
+  // State field(s) for Switch widget.
+  bool? switchValue;
   // Model for loader component.
   late LoaderModel loaderModel;
 

@@ -18,7 +18,7 @@ class HomeAdminModel extends FlutterFlowModel<HomeAdminWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (get user student)] action in HomeAdmin widget.
+  // Stores action output result for [Backend Call - API (ObtenerCantidadEstudiantes)] action in HomeAdmin widget.
   ApiCallResponse? apiResulAdminHome;
 
   @override

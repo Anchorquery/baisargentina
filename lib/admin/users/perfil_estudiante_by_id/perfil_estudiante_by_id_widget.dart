@@ -50,8 +50,16 @@ class _PerfilEstudianteByIdWidgetState
         );
         _model.loading = !_model.loading;
         safeSetState(() {});
+        safeSetState(() {
+          _model.switchValue = !getJsonField(
+            _model.data,
+            r'''$.blocked''',
+          );
+        });
       }
     });
+
+    _model.switchValue = false;
   }
 
   @override
@@ -74,7 +82,8 @@ class _PerfilEstudianteByIdWidgetState
             builder: (context) {
               if (!_model.loading) {
                 return Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 30.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -427,7 +436,10 @@ class _PerfilEstudianteByIdWidgetState
                                           ),
                                     ),
                                     Text(
-                                      'Estandar',
+                                      getJsonField(
+                                        _model.data,
+                                        r'''$.membresiaName''',
+                                      ).toString(),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -459,7 +471,12 @@ class _PerfilEstudianteByIdWidgetState
                                           ),
                                     ),
                                     Text(
-                                      'Si',
+                                      getJsonField(
+                                        _model.data,
+                                        r'''$.inArgentina''',
+                                      )
+                                          ? 'Si'
+                                          : 'No',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -489,6 +506,23 @@ class _PerfilEstudianteByIdWidgetState
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                           ),
+                                    ),
+                                    Switch.adaptive(
+                                      value: _model.switchValue!,
+                                      onChanged: (newValue) async {
+                                        safeSetState(() =>
+                                            _model.switchValue = newValue!);
+                                      },
+                                      activeColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      activeTrackColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      inactiveTrackColor:
+                                          FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      inactiveThumbColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
                                     ),
                                   ],
                                 ),
@@ -569,18 +603,42 @@ class _PerfilEstudianteByIdWidgetState
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    'https://picsum.photos/seed/68/600',
-                                    width: 200.0,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                              Builder(
+                                builder: (context) {
+                                  if (getJsonField(
+                                        _model.data,
+                                        r'''$.dni''',
+                                      ) !=
+                                      null) {
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          getJsonField(
+                                            _model.data,
+                                            r'''$.dni''',
+                                          ).toString(),
+                                          width: 200.0,
+                                          height: 200.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/no-hay-archivos.jpg',
+                                        width: 200.0,
+                                        height: 200.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),

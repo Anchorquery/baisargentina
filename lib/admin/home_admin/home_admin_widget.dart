@@ -31,7 +31,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (currentUserData?.role == 1) {
         _model.apiResulAdminHome =
-            await RutasAdminGroup.getUserStudentCall.call(
+            await RutasAdminGroup.obtenerCantidadEstudiantesCall.call(
           token: currentAuthenticationToken,
         );
 

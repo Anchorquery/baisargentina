@@ -118,12 +118,6 @@ export '/admin/eventos_admin/reservas_admin/reservas_admin_widget.dart'
     show ReservasAdminWidget;
 export '/estudiante/booking/reserva_id_admin/reserva_id_admin_widget.dart'
     show ReservaIdAdminWidget;
-export '/admin/perfile_estudiante_valentina/perfile_estudiante_valentina_widget.dart'
-    show PerfileEstudianteValentinaWidget;
-export '/admin/perfile_estudiante_josma/perfile_estudiante_josma_widget.dart'
-    show PerfileEstudianteJosmaWidget;
-export '/admin/perfile_estudiante_daniel/perfile_estudiante_daniel_widget.dart'
-    show PerfileEstudianteDanielWidget;
 export '/reservas/unticket_e_x_a_m_p_l_e/unticket_e_x_a_m_p_l_e_widget.dart'
     show UnticketEXAMPLEWidget;
 export '/admin/servicios/seleccionar_accion_servicio/seleccionar_accion_servicio_widget.dart'
@@ -157,3 +151,5 @@ export '/comercio/editar_perfil_comercio_admin/editar_perfil_comercio_admin_widg
     show EditarPerfilComercioAdminWidget;
 export '/comercio/mi_perfil_comercio/mi_perfil_comercio_widget.dart'
     show MiPerfilComercioWidget;
+export '/estudiante/perfil/editar_perfil_user_admin/editar_perfil_user_admin_widget.dart'
+    show EditarPerfilUserAdminWidget;
