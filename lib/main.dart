@@ -1,3 +1,4 @@
+import '/custom_code/actions/index.dart' as actions;
 import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,10 @@ void main() async {
 
   final environmentValues = FFDevEnvironmentValues();
   await environmentValues.initialize();
+
+  // Start initial custom actions code
+  await actions.addSentryIo();
+  // End initial custom actions code
 
   await SupaFlow.initialize();
 

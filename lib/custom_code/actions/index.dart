@@ -5,3 +5,4 @@ export 'join_chat_room.dart' show joinChatRoom;
 export 'add_socket_listener_list_chats.dart' show addSocketListenerListChats;
 export 'listen_to_new_chat_message_action.dart'
     show listenToNewChatMessageAction;
+export 'add_sentry_io.dart' show addSentryIo;
