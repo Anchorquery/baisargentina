@@ -18,6 +18,7 @@ class ChatMessageStruct extends BaseStruct {
     UserChatStruct? user,
     String? timestamp,
     int? userId,
+    List<FileDStruct>? images,
   })  : _chat = chat,
         _text = text,
         _image = image,
@@ -27,7 +28,8 @@ class ChatMessageStruct extends BaseStruct {
         _isMe = isMe,
         _user = user,
         _timestamp = timestamp,
-        _userId = userId;
+        _userId = userId,
+        _images = images;
 
   // "chat" field.
   ChatStruct? _chat;
@@ -109,6 +111,17 @@ class ChatMessageStruct extends BaseStruct {
 
   bool hasUserId() => _userId != null;
 
+  // "images" field.
+  List<FileDStruct>? _images;
+  List<FileDStruct> get images => _images ?? const [];
+  set images(List<FileDStruct>? val) => _images = val;
+
+  void updateImages(Function(List<FileDStruct>) updateFn) {
+    updateFn(_images ??= []);
+  }
+
+  bool hasImages() => _images != null;
+
   static ChatMessageStruct fromMap(Map<String, dynamic> data) =>
       ChatMessageStruct(
         chat: ChatStruct.maybeFromMap(data['chat']),
@@ -121,6 +134,10 @@ class ChatMessageStruct extends BaseStruct {
         user: UserChatStruct.maybeFromMap(data['user']),
         timestamp: data['timestamp'] as String?,
         userId: castToType<int>(data['user_id']),
+        images: getStructList(
+          data['images'],
+          FileDStruct.fromMap,
+        ),
       );
 
   static ChatMessageStruct? maybeFromMap(dynamic data) => data is Map
@@ -138,6 +155,7 @@ class ChatMessageStruct extends BaseStruct {
         'user': _user?.toMap(),
         'timestamp': _timestamp,
         'user_id': _userId,
+        'images': _images?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
 
   @override
@@ -181,6 +199,11 @@ class ChatMessageStruct extends BaseStruct {
         'user_id': serializeParam(
           _userId,
           ParamType.int,
+        ),
+        'images': serializeParam(
+          _images,
+          ParamType.DataStruct,
+          isList: true,
         ),
       }.withoutNulls;
 
@@ -238,6 +261,12 @@ class ChatMessageStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
+        images: deserializeStructParam<FileDStruct>(
+          data['images'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: FileDStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -245,6 +274,7 @@ class ChatMessageStruct extends BaseStruct {
 
   @override
   bool operator ==(Object other) {
+    const listEquality = ListEquality();
     return other is ChatMessageStruct &&
         chat == other.chat &&
         text == other.text &&
@@ -255,12 +285,24 @@ class ChatMessageStruct extends BaseStruct {
         isMe == other.isMe &&
         user == other.user &&
         timestamp == other.timestamp &&
-        userId == other.userId;
+        userId == other.userId &&
+        listEquality.equals(images, other.images);
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [chat, text, image, video, file, uuid, isMe, user, timestamp, userId]);
+  int get hashCode => const ListEquality().hash([
+        chat,
+        text,
+        image,
+        video,
+        file,
+        uuid,
+        isMe,
+        user,
+        timestamp,
+        userId,
+        images
+      ]);
 }
 
 ChatMessageStruct createChatMessageStruct({
