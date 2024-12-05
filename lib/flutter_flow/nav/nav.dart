@@ -127,12 +127,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ReservaexitosaWidget(),
         ),
         FFRoute(
-          name: 'tranvia',
-          path: '/tranvia',
-          requireAuth: true,
-          builder: (context, params) => TranviaWidget(),
-        ),
-        FFRoute(
           name: 'housign',
           path: '/housign',
           requireAuth: true,
@@ -356,10 +350,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CrearCategoriaServicioWidget(),
         ),
         FFRoute(
-          name: 'CrearDecuento',
-          path: '/crearDecuento',
+          name: 'CrearDescuento',
+          path: '/crearDescuento',
           requireAuth: true,
-          builder: (context, params) => CrearDecuentoWidget(),
+          builder: (context, params) => CrearDescuentoWidget(),
         ),
         FFRoute(
           name: 'CrearCategoriaDescuento',
@@ -407,10 +401,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'editarDecuento',
-          path: '/editarDecuento',
+          name: 'EditarDescuento',
+          path: '/editarDescuento',
           requireAuth: true,
-          builder: (context, params) => EditarDecuentoWidget(
+          builder: (context, params) => EditarDescuentoWidget(
             uuid: params.getParam(
               'uuid',
               ParamType.String,
@@ -418,7 +412,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'editarCategoriaDescuento',
+          name: 'EditarCategoriaDescuento',
           path: '/editarCategoriaDescuento',
           requireAuth: true,
           builder: (context, params) => EditarCategoriaDescuentoWidget(

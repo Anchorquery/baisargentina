@@ -16,6 +16,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ChatIdModel extends FlutterFlowModel<ChatIdWidget> {
+  ///  Local state fields for this page.
+
+  List<FFUploadedFile> imagenes = [];
+  void addToImagenes(FFUploadedFile item) => imagenes.add(item);
+  void removeFromImagenes(FFUploadedFile item) => imagenes.remove(item);
+  void removeAtIndexFromImagenes(int index) => imagenes.removeAt(index);
+  void insertAtIndexInImagenes(int index, FFUploadedFile item) =>
+      imagenes.insert(index, item);
+  void updateImagenesAtIndex(int index, Function(FFUploadedFile) updateFn) =>
+      imagenes[index] = updateFn(imagenes[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -28,10 +39,16 @@ class ChatIdModel extends FlutterFlowModel<ChatIdWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Validate Form] action in IconButton widget.
+  bool? validacionForm;
   // Stores action output result for [Custom Action - createRandomUuid] action in IconButton widget.
   String? messageUuid;
   // Stores action output result for [Backend Call - API (crear mensaje)] action in IconButton widget.
   ApiCallResponse? apiEnviarMensaje;
+  // Stores action output result for [Custom Action - createRandomUuid] action in IconButton widget.
+  String? messageUuid2;
+  // Stores action output result for [Backend Call - API (crear mensaje)] action in IconButton widget.
+  ApiCallResponse? apiEnviarMensajeImagesSinTexto;
 
   @override
   void initState(BuildContext context) {

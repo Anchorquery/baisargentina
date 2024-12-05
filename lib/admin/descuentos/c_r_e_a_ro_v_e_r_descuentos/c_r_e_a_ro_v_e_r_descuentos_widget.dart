@@ -83,7 +83,7 @@ class _CREARoVERDescuentosWidgetState extends State<CREARoVERDescuentosWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('CrearDecuento');
+                      context.pushNamed('CrearDescuento');
                     },
                     text: 'Crear Descuento',
                     options: FFButtonOptions(

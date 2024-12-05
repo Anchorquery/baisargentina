@@ -7,7 +7,6 @@ export '/estudiante/mi_perfil_estudiante/mi_perfil_estudiante_widget.dart'
     show MiPerfilEstudianteWidget;
 export '/estudiante/reservaexitosa/reservaexitosa_widget.dart'
     show ReservaexitosaWidget;
-export '/estudiante/tranvia/tranvia_widget.dart' show TranviaWidget;
 export '/estudiante/housing/housign/housign_widget.dart' show HousignWidget;
 export '/estudiante/policy/politicasde_reembolso/politicasde_reembolso_widget.dart'
     show PoliticasdeReembolsoWidget;
@@ -58,8 +57,8 @@ export '/admin/servicios/crear_servicio/crear_servicio_widget.dart'
     show CrearServicioWidget;
 export '/admin/servicios/crear_categoria_servicio/crear_categoria_servicio_widget.dart'
     show CrearCategoriaServicioWidget;
-export '/admin/descuentos/crear_decuento/crear_decuento_widget.dart'
-    show CrearDecuentoWidget;
+export '/admin/descuentos/crear_descuento/crear_descuento_widget.dart'
+    show CrearDescuentoWidget;
 export '/admin/descuentos/crear_categoria_descuento/crear_categoria_descuento_widget.dart'
     show CrearCategoriaDescuentoWidget;
 export '/estudiante/discoint/descuentos/descuentos_widget.dart'
@@ -70,8 +69,8 @@ export '/admin/servicios/editar_servicio/editar_servicio_widget.dart'
     show EditarServicioWidget;
 export '/admin/servicios/editar_categoria_servicio/editar_categoria_servicio_widget.dart'
     show EditarCategoriaServicioWidget;
-export '/admin/descuentos/editar_decuento/editar_decuento_widget.dart'
-    show EditarDecuentoWidget;
+export '/admin/descuentos/editar_descuento/editar_descuento_widget.dart'
+    show EditarDescuentoWidget;
 export '/admin/descuentos/editar_categoria_descuento/editar_categoria_descuento_widget.dart'
     show EditarCategoriaDescuentoWidget;
 export '/estudiante/planes/detalles_plan/detalles_plan_widget.dart'

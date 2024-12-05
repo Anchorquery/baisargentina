@@ -2,7 +2,6 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/chat/component_create_ticket/component_create_ticket_widget.dart';
-import '/components/empty_list/empty_list_widget.dart';
 import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -258,12 +257,6 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                           child: Builder(
                             builder: (context) {
                               final data = FFAppState().listChats.toList();
-                              if (data.isEmpty) {
-                                return EmptyListWidget(
-                                  message: 'Sin chats',
-                                  error: 'Ha ocurrido un error',
-                                );
-                              }
 
                               return RefreshIndicator(
                                 key: Key('RefreshIndicator_dh3ky8wv'),

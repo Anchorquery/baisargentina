@@ -37,8 +37,7 @@ class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResponseHopusing =
-          await HousingGroup.obtenerTodosLosHousingCall.call(
+      _model.apiResponseHopusing = await DiscoinGroup.findDescuentosCall.call(
         token: currentAuthenticationToken,
       );
 
@@ -49,12 +48,12 @@ class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
           true,
         )!
                 .toList()
-                .map<HousingStruct?>(HousingStruct.maybeFromMap)
-                .toList() as Iterable<HousingStruct?>)
+                .map<DiscountsStruct?>(DiscountsStruct.maybeFromMap)
+                .toList() as Iterable<DiscountsStruct?>)
             .withoutNulls
             .toList()
-            .cast<HousingStruct>();
-        _model.loading = true;
+            .cast<DiscountsStruct>();
+        _model.loading = !_model.loading;
         safeSetState(() {});
         return;
       } else {
@@ -212,7 +211,7 @@ class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
                       color: FlutterFlowTheme.of(context).tertiary,
                       onRefresh: () async {
                         _model.apiResponseHopusingCopy =
-                            await HousingGroup.obtenerTodosLosHousingCall.call(
+                            await DiscoinGroup.findDescuentosCall.call(
                           token: currentAuthenticationToken,
                         );
 
@@ -224,12 +223,12 @@ class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
                             true,
                           )!
                                   .toList()
-                                  .map<HousingStruct?>(
-                                      HousingStruct.maybeFromMap)
-                                  .toList() as Iterable<HousingStruct?>)
+                                  .map<DiscountsStruct?>(
+                                      DiscountsStruct.maybeFromMap)
+                                  .toList() as Iterable<DiscountsStruct?>)
                               .withoutNulls
                               .toList()
-                              .cast<HousingStruct>();
+                              .cast<DiscountsStruct>();
                           safeSetState(() {});
                           return;
                         } else {
@@ -246,111 +245,89 @@ class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
                                   0.0, 15.0, 0.0, 0.0),
                               child: Builder(
                                 builder: (context) {
-                                  final housings = _model.data.toList();
+                                  final descuentos = _model.data.toList();
 
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     primary: false,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
-                                    itemCount: housings.length,
-                                    itemBuilder: (context, housingsIndex) {
-                                      final housingsItem =
-                                          housings[housingsIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            'housign',
-                                            queryParameters: {
-                                              'id': serializeParam(
-                                                housingsItem.id,
-                                                ParamType.int,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 15.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.network(
-                                                      'https://picsum.photos/seed/996/600',
-                                                      width: 70.0,
-                                                      height: 70.0,
-                                                      fit: BoxFit.cover,
+                                    itemCount: descuentos.length,
+                                    itemBuilder: (context, descuentosIndex) {
+                                      final descuentosItem =
+                                          descuentos[descuentosIndex];
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 15.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    descuentosItem.image,
+                                                    width: 70.0,
+                                                    height: 70.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      descuentosItem.name,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Lato',
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
                                                     ),
-                                                  ),
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Titulo de descuento',
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Lato',
-                                                              fontSize: 16.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Icon(
-                                                    Icons.edit_square,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    size: 24.0,
-                                                  ),
-                                                  Icon(
-                                                    Icons.delete_sharp,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    size: 24.0,
-                                                  ),
-                                                ],
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'rowOnPageLoadAnimation']!),
-                                            ),
-                                            Divider(
-                                              thickness: 1.0,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
+                                                  ],
+                                                ),
+                                                Icon(
+                                                  Icons.edit_square,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 24.0,
+                                                ),
+                                                Icon(
+                                                  Icons.delete_sharp,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  size: 24.0,
+                                                ),
+                                              ],
                                             ).animateOnPageLoad(animationsMap[
-                                                'dividerOnPageLoadAnimation']!),
-                                          ],
-                                        ),
+                                                'rowOnPageLoadAnimation']!),
+                                          ),
+                                          Divider(
+                                            thickness: 1.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ).animateOnPageLoad(animationsMap[
+                                              'dividerOnPageLoadAnimation']!),
+                                        ],
                                       );
                                     },
                                   );

@@ -179,7 +179,7 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
             alignment: AlignmentDirectional(1.0, 0.8),
             child: FloatingActionButton(
               onPressed: () async {
-                context.pushNamed('CrearDecuento');
+                context.pushNamed('CrearDescuento');
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
               elevation: 8.0,

@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'editar_decuento_model.dart';
-export 'editar_decuento_model.dart';
+import 'editar_descuento_model.dart';
+export 'editar_descuento_model.dart';
 
-class EditarDecuentoWidget extends StatefulWidget {
-  const EditarDecuentoWidget({
+class EditarDescuentoWidget extends StatefulWidget {
+  const EditarDescuentoWidget({
     super.key,
     required this.uuid,
   });
@@ -21,18 +21,18 @@ class EditarDecuentoWidget extends StatefulWidget {
   final String? uuid;
 
   @override
-  State<EditarDecuentoWidget> createState() => _EditarDecuentoWidgetState();
+  State<EditarDescuentoWidget> createState() => _EditarDescuentoWidgetState();
 }
 
-class _EditarDecuentoWidgetState extends State<EditarDecuentoWidget> {
-  late EditarDecuentoModel _model;
+class _EditarDescuentoWidgetState extends State<EditarDescuentoWidget> {
+  late EditarDescuentoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EditarDecuentoModel());
+    _model = createModel(context, () => EditarDescuentoModel());
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -81,7 +81,7 @@ class _EditarDecuentoWidgetState extends State<EditarDecuentoWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              'Crear descuento',
+                              'Editar descuento',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
