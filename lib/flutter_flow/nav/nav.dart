@@ -115,10 +115,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HousignsWidget(),
         ),
         FFRoute(
-          name: 'PerfilUsuarioEstudiante',
-          path: '/perfilUsuarioEstudiante',
+          name: 'MiPerfilEstudiante',
+          path: '/miPerfilEstudiante',
           requireAuth: true,
-          builder: (context, params) => PerfilUsuarioEstudianteWidget(),
+          builder: (context, params) => MiPerfilEstudianteWidget(),
         ),
         FFRoute(
           name: 'reservaexitosa',
@@ -343,6 +343,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'id',
               ParamType.int,
             ),
+            asdasd: params.getParam(
+              'asdasd',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -352,10 +356,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CrearServicioWidget(),
         ),
         FFRoute(
-          name: 'CrearCategoria',
-          path: '/crearCategoria',
+          name: 'CrearCategoriaServicio',
+          path: '/crearCategoriaServicio',
           requireAuth: true,
-          builder: (context, params) => CrearCategoriaWidget(),
+          builder: (context, params) => CrearCategoriaServicioWidget(),
         ),
         FFRoute(
           name: 'CrearDecuento',
@@ -748,6 +752,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.int,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'ListarServiciosAdmin',
+          path: '/listarServiciosAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListarServiciosAdminWidget(),
+        ),
+        FFRoute(
+          name: 'ListarCategoriasServiciosAdmin',
+          path: '/listarCategoriasServiciosAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListarCategoriasServiciosAdminWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

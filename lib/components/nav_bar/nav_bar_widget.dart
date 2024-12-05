@@ -151,7 +151,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     size: 35.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('PerfilUsuarioEstudiante');
+                    context.pushNamed('MiPerfilEstudiante');
                   },
                 ),
               ],

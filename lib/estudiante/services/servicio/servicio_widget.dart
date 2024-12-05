@@ -18,9 +18,11 @@ class ServicioWidget extends StatefulWidget {
   const ServicioWidget({
     super.key,
     required this.id,
+    this.asdasd,
   });
 
   final int? id;
+  final String? asdasd;
 
   @override
   State<ServicioWidget> createState() => _ServicioWidgetState();

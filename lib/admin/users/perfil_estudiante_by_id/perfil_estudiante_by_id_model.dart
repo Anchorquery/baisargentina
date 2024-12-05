@@ -24,6 +24,10 @@ class PerfilEstudianteByIdModel
   ApiCallResponse? apiGerPerfilEstudiante;
   // State field(s) for Switch widget.
   bool? switchValue;
+  // Stores action output result for [Backend Call - API (AdminUdatepUserStra)] action in Switch widget.
+  ApiCallResponse? apiResulte77;
+  // Stores action output result for [Backend Call - API (AdminUdatepUserStra)] action in Switch widget.
+  ApiCallResponse? apiResulte77Copy;
   // Model for loader component.
   late LoaderModel loaderModel;
 

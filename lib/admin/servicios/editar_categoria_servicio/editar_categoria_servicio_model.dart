@@ -15,7 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -34,19 +36,19 @@ class EditarCategoriaServicioModel
 
   // Stores action output result for [Backend Call - API (findOneCtegory)] action in EditarCategoriaServicio widget.
   ApiCallResponse? apiResultGetCategpry;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for nombre widget.
+  FocusNode? nombreFocusNode;
+  TextEditingController? nombreTextController;
+  String? Function(BuildContext, String?)? nombreTextControllerValidator;
+  // State field(s) for descripcion widget.
+  FocusNode? descripcionFocusNode;
+  TextEditingController? descripcionTextController;
+  String? Function(BuildContext, String?)? descripcionTextControllerValidator;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
-  // Stores action output result for [Backend Call - API (crear categoria)] action in Button widget.
+  // Stores action output result for [Backend Call - API (EditarCategoriaServicio)] action in Button widget.
   ApiCallResponse? apiResultCreateCategory;
   // Model for loader component.
   late LoaderModel loaderModel;
@@ -58,11 +60,11 @@ class EditarCategoriaServicioModel
 
   @override
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    nombreFocusNode?.dispose();
+    nombreTextController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    descripcionFocusNode?.dispose();
+    descripcionTextController?.dispose();
 
     loaderModel.dispose();
   }

@@ -774,6 +774,8 @@ class UserGroup {
       UpdateMetaComercioAdminCall();
   static ObtenerPerfilEstudianteCall obtenerPerfilEstudianteCall =
       ObtenerPerfilEstudianteCall();
+  static AdminUdatepUserStraCall adminUdatepUserStraCall =
+      AdminUdatepUserStraCall();
 }
 
 class MeCall {
@@ -1160,6 +1162,40 @@ class ObtenerPerfilEstudianteCall {
   }
 }
 
+class AdminUdatepUserStraCall {
+  Future<ApiCallResponse> call({
+    bool? blocked,
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"blocked":${blocked}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'AdminUdatepUserStra',
+      apiUrl: '${baseUrl}/users/${id}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End User Group Code
 
 /// Start Upload Media Group Code
@@ -1267,7 +1303,11 @@ class ServicesGroup {
   static FindOneServiceCall findOneServiceCall = FindOneServiceCall();
   static CreatedCall createdCall = CreatedCall();
   static CrearCategoriaCall crearCategoriaCall = CrearCategoriaCall();
+  static EditarCategoriaServicioCall editarCategoriaServicioCall =
+      EditarCategoriaServicioCall();
   static DeleteCall deleteCall = DeleteCall();
+  static EliminarCategoriaServiciosCall eliminarCategoriaServiciosCall =
+      EliminarCategoriaServiciosCall();
 }
 
 class FindCall {
@@ -1479,6 +1519,41 @@ class CrearCategoriaCall {
   }
 }
 
+class EditarCategoriaServicioCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    FFUploadedFile? image,
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = ServicesGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'EditarCategoriaServicio',
+      apiUrl: '${baseUrl}/services/update-category/${id}',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'name': name,
+        'description': description,
+        'image': image,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class DeleteCall {
   Future<ApiCallResponse> call({
     int? id,
@@ -1491,6 +1566,33 @@ class DeleteCall {
     return ApiManager.instance.makeApiCall(
       callName: 'delete',
       apiUrl: '${baseUrl}/services/${id}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EliminarCategoriaServiciosCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = ServicesGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'EliminarCategoriaServicios',
+      apiUrl: '${baseUrl}/service-categories/${id}',
       callType: ApiCallType.DELETE,
       headers: {
         'Authorization': 'Bearer ${token}',
@@ -2910,4 +3012,15 @@ String _serializeJson(dynamic jsonVar, [bool isList = false]) {
     }
     return isList ? '[]' : '{}';
   }
+}
+
+String? escapeStringForJson(String? input) {
+  if (input == null) {
+    return null;
+  }
+  return input
+      .replaceAll('\\', '\\\\')
+      .replaceAll('"', '\\"')
+      .replaceAll('\n', '\\n')
+      .replaceAll('\t', '\\t');
 }

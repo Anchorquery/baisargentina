@@ -21,20 +21,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'perfil_usuario_estudiante_model.dart';
-export 'perfil_usuario_estudiante_model.dart';
+import 'mi_perfil_estudiante_model.dart';
+export 'mi_perfil_estudiante_model.dart';
 
-class PerfilUsuarioEstudianteWidget extends StatefulWidget {
-  const PerfilUsuarioEstudianteWidget({super.key});
+class MiPerfilEstudianteWidget extends StatefulWidget {
+  const MiPerfilEstudianteWidget({super.key});
 
   @override
-  State<PerfilUsuarioEstudianteWidget> createState() =>
-      _PerfilUsuarioEstudianteWidgetState();
+  State<MiPerfilEstudianteWidget> createState() =>
+      _MiPerfilEstudianteWidgetState();
 }
 
-class _PerfilUsuarioEstudianteWidgetState
-    extends State<PerfilUsuarioEstudianteWidget> with TickerProviderStateMixin {
-  late PerfilUsuarioEstudianteModel _model;
+class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
+    with TickerProviderStateMixin {
+  late MiPerfilEstudianteModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -43,7 +43,7 @@ class _PerfilUsuarioEstudianteWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => PerfilUsuarioEstudianteModel());
+    _model = createModel(context, () => MiPerfilEstudianteModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {

@@ -130,7 +130,7 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
 
                     return;
                   } else {
-                    context.pushNamed('PerfilUsuarioEstudiante');
+                    context.pushNamed('MiPerfilEstudiante');
 
                     return;
                   }

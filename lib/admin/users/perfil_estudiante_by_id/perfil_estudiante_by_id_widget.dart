@@ -512,6 +512,95 @@ class _PerfilEstudianteByIdWidgetState
                                       onChanged: (newValue) async {
                                         safeSetState(() =>
                                             _model.switchValue = newValue!);
+                                        if (newValue!) {
+                                          var _shouldSetState = false;
+                                          _model.apiResulte77 = await UserGroup
+                                              .adminUdatepUserStraCall
+                                              .call(
+                                            blocked: false,
+                                            token: currentAuthenticationToken,
+                                            id: widget!.id,
+                                          );
+
+                                          _shouldSetState = true;
+                                          if ((_model.apiResulte77?.succeeded ??
+                                              true)) {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Usuario marcado como activo'),
+                                                  content: Text(
+                                                      'El usuario podrá hacer login. '),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                            return;
+                                          } else {
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                            return;
+                                          }
+
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                        } else {
+                                          var _shouldSetState = false;
+                                          _model.apiResulte77Copy =
+                                              await UserGroup
+                                                  .adminUdatepUserStraCall
+                                                  .call(
+                                            blocked: true,
+                                            token: currentAuthenticationToken,
+                                            id: widget!.id,
+                                          );
+
+                                          _shouldSetState = true;
+                                          if ((_model.apiResulte77Copy
+                                                  ?.succeeded ??
+                                              true)) {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Usuario marcado como bloqueado'),
+                                                  content: Text(
+                                                      'El usuario no tendrá acceso a la app. '),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                            return;
+                                          } else {
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                            return;
+                                          }
+
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                        }
                                       },
                                       activeColor:
                                           FlutterFlowTheme.of(context).primary,

@@ -14,19 +14,20 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'crear_categoria_model.dart';
-export 'crear_categoria_model.dart';
+import 'crear_categoria_servicio_model.dart';
+export 'crear_categoria_servicio_model.dart';
 
-class CrearCategoriaWidget extends StatefulWidget {
-  const CrearCategoriaWidget({super.key});
+class CrearCategoriaServicioWidget extends StatefulWidget {
+  const CrearCategoriaServicioWidget({super.key});
 
   @override
-  State<CrearCategoriaWidget> createState() => _CrearCategoriaWidgetState();
+  State<CrearCategoriaServicioWidget> createState() =>
+      _CrearCategoriaServicioWidgetState();
 }
 
-class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
-    with TickerProviderStateMixin {
-  late CrearCategoriaModel _model;
+class _CrearCategoriaServicioWidgetState
+    extends State<CrearCategoriaServicioWidget> with TickerProviderStateMixin {
+  late CrearCategoriaServicioModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -35,7 +36,7 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CrearCategoriaModel());
+    _model = createModel(context, () => CrearCategoriaServicioModel());
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -85,7 +86,7 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(25.0, 30.0, 25.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -113,7 +114,7 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'Crear servicio',
+                                'Crear categoria de servicio',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -502,6 +503,7 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                                       0.0, 30.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      var _shouldSetState = false;
                                       _model.apiResultCreateCategory =
                                           await ServicesGroup.crearCategoriaCall
                                               .call(
@@ -512,6 +514,7 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                                         token: currentAuthenticationToken,
                                       );
 
+                                      _shouldSetState = true;
                                       if ((_model.apiResultCreateCategory
                                               ?.succeeded ??
                                           true)) {
@@ -546,6 +549,9 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                                             );
                                           },
                                         );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
                                       } else {
                                         await showDialog(
                                           context: context,
@@ -570,9 +576,12 @@ class _CrearCategoriaWidgetState extends State<CrearCategoriaWidget>
                                             );
                                           },
                                         );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
                                       }
 
-                                      safeSetState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
                                     },
                                     text: 'Publicar',
                                     options: FFButtonOptions(
