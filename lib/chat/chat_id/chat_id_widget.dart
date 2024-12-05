@@ -299,7 +299,7 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      if (_model.uploadedLocalFiles.isNotEmpty)
+                      if (_model.imagenes.length > 0)
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
