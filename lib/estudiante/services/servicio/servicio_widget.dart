@@ -357,7 +357,7 @@ class _ServicioWidgetState extends State<ServicioWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               context.pushNamed(
-                                'editarServicio',
+                                'EditarServicio',
                                 queryParameters: {
                                   'id': serializeParam(
                                     widget!.id,

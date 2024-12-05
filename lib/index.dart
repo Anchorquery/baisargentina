@@ -53,8 +53,6 @@ export '/comercio/stat_profile_views/stat_profile_views_widget.dart'
 export '/admin/home_admin/home_admin_widget.dart' show HomeAdminWidget;
 export '/comercio/establecer_contrasena/establecer_contrasena_widget.dart'
     show EstablecerContrasenaWidget;
-export '/admin/servicios/servicios_creados/servicios_creados_widget.dart'
-    show ServiciosCreadosWidget;
 export '/estudiante/services/servicio/servicio_widget.dart' show ServicioWidget;
 export '/admin/servicios/crear_servicio/crear_servicio_widget.dart'
     show CrearServicioWidget;

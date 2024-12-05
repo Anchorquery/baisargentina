@@ -35,7 +35,7 @@ class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (Find category)] action in editarServicio widget.
+  // Stores action output result for [Backend Call - API (Find category)] action in EditarServicio widget.
   ApiCallResponse? apiResultGetCategories;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;

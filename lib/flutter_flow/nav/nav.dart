@@ -329,12 +329,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EstablecerContrasenaWidget(),
         ),
         FFRoute(
-          name: 'serviciosCreados',
-          path: '/serviciosCreados',
-          requireAuth: true,
-          builder: (context, params) => ServiciosCreadosWidget(),
-        ),
-        FFRoute(
           name: 'servicio',
           path: '/servicio',
           requireAuth: true,
@@ -391,7 +385,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'editarServicio',
+          name: 'EditarServicio',
           path: '/editarServicio',
           requireAuth: true,
           builder: (context, params) => EditarServicioWidget(

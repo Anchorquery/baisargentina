@@ -337,7 +337,7 @@ class _ListarServiciosAdminWidgetState extends State<ListarServiciosAdminWidget>
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               context.pushNamed(
-                                                'editarServicio',
+                                                'EditarServicio',
                                                 queryParameters: {
                                                   'id': serializeParam(
                                                     serviciosItem.id,
