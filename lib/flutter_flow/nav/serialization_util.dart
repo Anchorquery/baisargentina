@@ -240,6 +240,8 @@ dynamic deserializeParam<T>(
             return StrapiWebhooksRow(data);
           case StrapiTransferTokenPermissionsTokenLinksRow:
             return StrapiTransferTokenPermissionsTokenLinksRow(data);
+          case FaqsRow:
+            return FaqsRow(data);
           case EventCategoriesRow:
             return EventCategoriesRow(data);
           case HousignsCreadorLinksRow:

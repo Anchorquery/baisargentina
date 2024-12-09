@@ -40,7 +40,7 @@ class MiPerfilEstudianteModel
 
   // Stores action output result for [Backend Call - API (me )] action in MiPerfilEstudiante widget.
   ApiCallResponse? apiResponseMe;
-  // Stores action output result for [Backend Call - API (mi plan)] action in MiPerfilEstudiante widget.
+  // Stores action output result for [Backend Call - API (MiPlan)] action in MiPerfilEstudiante widget.
   ApiCallResponse? apiMyPlan;
   // Model for loader component.
   late LoaderModel loaderModel;

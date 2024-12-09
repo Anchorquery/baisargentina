@@ -43,7 +43,7 @@ class PlanesCopyModel extends FlutterFlowModel<PlanesCopyWidget> {
 
   // Stores action output result for [Backend Call - API (Bucar planes)] action in planesCopy widget.
   ApiCallResponse? apiBuscarPlanes;
-  // Stores action output result for [Backend Call - API (mi plan)] action in planesCopy widget.
+  // Stores action output result for [Backend Call - API (MiPlan)] action in planesCopy widget.
   ApiCallResponse? apiMyPlan;
   // Model for loader component.
   late LoaderModel loaderModel;

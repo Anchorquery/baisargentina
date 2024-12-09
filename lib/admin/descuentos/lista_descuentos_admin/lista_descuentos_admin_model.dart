@@ -36,7 +36,7 @@ class ListaDescuentosAdminModel
   ApiCallResponse? apiResponseHopusing;
   // Stores action output result for [Backend Call - API (Find descuentos)] action in Column widget.
   ApiCallResponse? apiResponseHopusingCopy;
-  // Stores action output result for [Backend Call - API (eliminar)] action in IcondeleteDescuento widget.
+  // Stores action output result for [Backend Call - API (EliminarDescuento)] action in IcondeleteDescuento widget.
   ApiCallResponse? apiResultbwl;
 
   @override

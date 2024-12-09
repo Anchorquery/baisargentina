@@ -381,7 +381,7 @@ class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
                                                   onTap: () async {
                                                     _model.apiResultbwl =
                                                         await DiscoinGroup
-                                                            .eliminarCall
+                                                            .eliminarDescuentoCall
                                                             .call(
                                                       token:
                                                           currentAuthenticationToken,

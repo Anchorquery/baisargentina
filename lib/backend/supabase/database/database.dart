@@ -14,6 +14,7 @@ export 'tables/strapi_api_token_permissions_token_links.dart';
 export 'tables/commerce_categories.dart';
 export 'tables/strapi_webhooks.dart';
 export 'tables/strapi_transfer_token_permissions_token_links.dart';
+export 'tables/faqs.dart';
 export 'tables/event_categories.dart';
 export 'tables/housigns_creador_links.dart';
 export 'tables/suscriptions_suscriptor_links.dart';

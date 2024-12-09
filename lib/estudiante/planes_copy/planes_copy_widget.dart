@@ -675,7 +675,7 @@ class _PlanesCopyWidgetState extends State<PlanesCopyWidget>
                                                     Colors.transparent,
                                                 onTap: () async {
                                                   context.pushNamed(
-                                                    'detallesPlan',
+                                                    'DetallesPlan',
                                                     queryParameters: {
                                                       'id': serializeParam(
                                                         listaplanesItem.id,

@@ -28,7 +28,7 @@ class DetalleReservaModel extends FlutterFlowModel<DetalleReservaWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (findme One)] action in detalleReserva widget.
+  // Stores action output result for [Backend Call - API (findme One)] action in DetalleReserva widget.
   ApiCallResponse? apiResponseFindMeBooking;
   // Model for loader component.
   late LoaderModel loaderModel;

@@ -235,7 +235,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'detalleReserva',
+          name: 'DetalleReserva',
           path: '/detalleReserva',
           requireAuth: true,
           builder: (context, params) => DetalleReservaWidget(
@@ -275,13 +275,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => NewPasswordWidget(),
         ),
         FFRoute(
-          name: 'planes',
-          path: '/planes',
+          name: 'PlanesDeMembresia',
+          path: '/planesDeMembresia',
           requireAuth: true,
-          builder: (context, params) => PlanesWidget(),
+          builder: (context, params) => PlanesDeMembresiaWidget(),
         ),
         FFRoute(
-          name: 'detallesDePlanBasic',
+          name: 'DetallesDePlanBasic',
           path: '/detallesDePlanBasic',
           requireAuth: true,
           builder: (context, params) => DetallesDePlanBasicWidget(),
@@ -417,18 +417,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'EditarCategoriaDescuento',
-          path: '/editarCategoriaDescuento',
-          requireAuth: true,
-          builder: (context, params) => EditarCategoriaDescuentoWidget(
-            uuid: params.getParam(
-              'uuid',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'detallesPlan',
+          name: 'DetallesPlan',
           path: '/detallesPlan',
           requireAuth: true,
           builder: (context, params) => DetallesPlanWidget(
@@ -458,7 +447,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'detalleMiPlan',
+          name: 'DetalleMiPlan',
           path: '/detalleMiPlan',
           requireAuth: true,
           builder: (context, params) => DetalleMiPlanWidget(
@@ -498,7 +487,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => StatEventosComercioWidget(),
         ),
         FFRoute(
-          name: 'editarPerfilComercio',
+          name: 'EditarPerfilComercio',
           path: '/editarPerfilComercio',
           requireAuth: true,
           builder: (context, params) => EditarPerfilComercioWidget(),
@@ -568,7 +557,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'editarPerfilUser',
+          name: 'EditarPerfilUser',
           path: '/editarPerfilUser',
           requireAuth: true,
           builder: (context, params) => EditarPerfilUserWidget(),
@@ -579,10 +568,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ListadoChatsWidget(),
         ),
         FFRoute(
-          name: 'FAQcreados',
-          path: '/fAQcreados',
+          name: 'ListadoFAQ',
+          path: '/listadoFAQ',
           requireAuth: true,
-          builder: (context, params) => FAQcreadosWidget(),
+          builder: (context, params) => ListadoFAQWidget(),
         ),
         FFRoute(
           name: 'ReservasAdmin',
@@ -630,7 +619,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ListaHousingAdminWidget(),
         ),
         FFRoute(
-          name: 'editarHousing',
+          name: 'EditarHousing',
           path: '/editarHousing',
           requireAuth: true,
           builder: (context, params) => EditarHousingWidget(
@@ -653,10 +642,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ListaUsuarioComerciosWidget(),
         ),
         FFRoute(
-          name: 'CREARoVERDescuentos',
-          path: '/cREARoVERDescuentos',
+          name: 'SeleccionarAccionDescuentos',
+          path: '/seleccionarAccionDescuentos',
           requireAuth: true,
-          builder: (context, params) => CREARoVERDescuentosWidget(),
+          builder: (context, params) => SeleccionarAccionDescuentosWidget(),
         ),
         FFRoute(
           name: 'ListaDescuentosAdmin',
@@ -713,13 +702,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PlanesCopyWidget(),
         ),
         FFRoute(
-          name: 'CrearFAQ',
-          path: '/crearFAQ',
-          requireAuth: true,
-          builder: (context, params) => CrearFAQWidget(),
-        ),
-        FFRoute(
-          name: 'editarPerfilComercioAdmin',
+          name: 'EditarPerfilComercioAdmin',
           path: '/editarPerfilComercioAdmin',
           requireAuth: true,
           builder: (context, params) => EditarPerfilComercioAdminWidget(
@@ -736,7 +719,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => MiPerfilComercioWidget(),
         ),
         FFRoute(
-          name: 'editarPerfilUserAdmin',
+          name: 'EditarPerfilUserAdmin',
           path: '/editarPerfilUserAdmin',
           requireAuth: true,
           builder: (context, params) => EditarPerfilUserAdminWidget(
@@ -774,6 +757,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/listaCategoriaDescuentosAdmin',
           requireAuth: true,
           builder: (context, params) => ListaCategoriaDescuentosAdminWidget(),
+        ),
+        FFRoute(
+          name: 'CrearEditarFAQ',
+          path: '/crearEditarFAQ',
+          requireAuth: true,
+          builder: (context, params) => CrearEditarFAQWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ListarFAQAdmin',
+          path: '/listarFAQAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListarFAQAdminWidget(),
+        ),
+        FFRoute(
+          name: 'ListadoFAQCopy',
+          path: '/listadoFAQCopy',
+          requireAuth: true,
+          builder: (context, params) => ListadoFAQCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

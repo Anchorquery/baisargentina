@@ -31,7 +31,7 @@ class EditarPerfilComercioModel
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (me )] action in editarPerfilComercio widget.
+  // Stores action output result for [Backend Call - API (me )] action in EditarPerfilComercio widget.
   ApiCallResponse? apiResulteme;
   // Model for loader component.
   late LoaderModel loaderModel;

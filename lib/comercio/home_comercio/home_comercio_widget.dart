@@ -117,7 +117,7 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                    'editarPerfilComercio');
+                                                    'EditarPerfilComercio');
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
@@ -151,7 +151,7 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                    'editarPerfilComercio');
+                                                    'EditarPerfilComercio');
                                               },
                                               child: ClipRRect(
                                                 borderRadius:

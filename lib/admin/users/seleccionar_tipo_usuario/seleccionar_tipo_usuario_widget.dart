@@ -47,6 +47,7 @@ class _SeleccionarTipoUsuarioWidgetState
             padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -67,18 +68,15 @@ class _SeleccionarTipoUsuarioWidgetState
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 120.0, 0.0, 0.0),
-                  child: Text(
-                    'Selecciona el tipo de usuario',
-                    textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Lato',
-                          fontSize: 45.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w800,
-                        ),
-                  ),
+                Text(
+                  'Selecciona el tipo de usuario',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Lato',
+                        fontSize: 45.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w800,
+                      ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
@@ -135,7 +133,9 @@ class _SeleccionarTipoUsuarioWidgetState
                     ),
                   ),
                 ),
-              ],
+              ]
+                  .addToStart(SizedBox(height: 30.0))
+                  .addToEnd(SizedBox(height: 30.0)),
             ),
           ),
         ),

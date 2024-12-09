@@ -4,26 +4,27 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'c_r_e_a_ro_v_e_r_descuentos_model.dart';
-export 'c_r_e_a_ro_v_e_r_descuentos_model.dart';
+import 'seleccionar_accion_descuentos_model.dart';
+export 'seleccionar_accion_descuentos_model.dart';
 
-class CREARoVERDescuentosWidget extends StatefulWidget {
-  const CREARoVERDescuentosWidget({super.key});
+class SeleccionarAccionDescuentosWidget extends StatefulWidget {
+  const SeleccionarAccionDescuentosWidget({super.key});
 
   @override
-  State<CREARoVERDescuentosWidget> createState() =>
-      _CREARoVERDescuentosWidgetState();
+  State<SeleccionarAccionDescuentosWidget> createState() =>
+      _SeleccionarAccionDescuentosWidgetState();
 }
 
-class _CREARoVERDescuentosWidgetState extends State<CREARoVERDescuentosWidget> {
-  late CREARoVERDescuentosModel _model;
+class _SeleccionarAccionDescuentosWidgetState
+    extends State<SeleccionarAccionDescuentosWidget> {
+  late SeleccionarAccionDescuentosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CREARoVERDescuentosModel());
+    _model = createModel(context, () => SeleccionarAccionDescuentosModel());
   }
 
   @override
@@ -43,7 +44,7 @@ class _CREARoVERDescuentosWidgetState extends State<CREARoVERDescuentosWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(25.0, 30.0, 25.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -83,9 +84,9 @@ class _CREARoVERDescuentosWidgetState extends State<CREARoVERDescuentosWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('CrearDescuento');
+                      context.pushNamed('ListaCategoriaDescuentosAdmin');
                     },
-                    text: 'Crear Descuento',
+                    text: 'Listado de categorías',
                     options: FFButtonOptions(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       height: 40.0,
@@ -109,9 +110,9 @@ class _CREARoVERDescuentosWidgetState extends State<CREARoVERDescuentosWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('CrearEditarCategoriaDescuento');
+                      context.pushNamed('ListaDescuentosAdmin');
                     },
-                    text: 'Crear categoría',
+                    text: 'Listado de descuentos',
                     options: FFButtonOptions(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       height: 40.0,
@@ -127,35 +128,6 @@ class _CREARoVERDescuentosWidgetState extends State<CREARoVERDescuentosWidget> {
                                 letterSpacing: 0.0,
                               ),
                       elevation: 0.0,
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('ListaDescuentosAdmin');
-                    },
-                    text: 'Ver descuentos creados',
-                    options: FFButtonOptions(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Colors.white,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).primary,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 0.0,
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primary,
-                      ),
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),

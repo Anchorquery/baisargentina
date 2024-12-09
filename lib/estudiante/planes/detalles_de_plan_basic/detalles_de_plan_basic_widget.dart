@@ -208,7 +208,7 @@ class _DetallesDePlanBasicWidgetState extends State<DetallesDePlanBasicWidget>
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('planes');
+                        context.pushNamed('PlanesDeMembresia');
                       },
                       child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,

@@ -10,8 +10,10 @@ class CategoryStruct extends BaseStruct {
   CategoryStruct({
     int? id,
     String? name,
+    String? description,
   })  : _id = id,
-        _name = name;
+        _name = name,
+        _description = description;
 
   // "id" field.
   int? _id;
@@ -29,9 +31,17 @@ class CategoryStruct extends BaseStruct {
 
   bool hasName() => _name != null;
 
+  // "description" field.
+  String? _description;
+  String get description => _description ?? '';
+  set description(String? val) => _description = val;
+
+  bool hasDescription() => _description != null;
+
   static CategoryStruct fromMap(Map<String, dynamic> data) => CategoryStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
+        description: data['description'] as String?,
       );
 
   static CategoryStruct? maybeFromMap(dynamic data) =>
@@ -40,6 +50,7 @@ class CategoryStruct extends BaseStruct {
   Map<String, dynamic> toMap() => {
         'id': _id,
         'name': _name,
+        'description': _description,
       }.withoutNulls;
 
   @override
@@ -50,6 +61,10 @@ class CategoryStruct extends BaseStruct {
         ),
         'name': serializeParam(
           _name,
+          ParamType.String,
+        ),
+        'description': serializeParam(
+          _description,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -66,6 +81,11 @@ class CategoryStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        description: deserializeParam(
+          data['description'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -73,18 +93,23 @@ class CategoryStruct extends BaseStruct {
 
   @override
   bool operator ==(Object other) {
-    return other is CategoryStruct && id == other.id && name == other.name;
+    return other is CategoryStruct &&
+        id == other.id &&
+        name == other.name &&
+        description == other.description;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([id, name]);
+  int get hashCode => const ListEquality().hash([id, name, description]);
 }
 
 CategoryStruct createCategoryStruct({
   int? id,
   String? name,
+  String? description,
 }) =>
     CategoryStruct(
       id: id,
       name: name,
+      description: description,
     );

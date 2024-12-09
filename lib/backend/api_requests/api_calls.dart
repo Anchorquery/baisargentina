@@ -1710,9 +1710,15 @@ class DiscoinGroup {
   static EditarDescuentoCall editarDescuentoCall = EditarDescuentoCall();
   static FindDescuentosCall findDescuentosCall = FindDescuentosCall();
   static FindOneDescuentoCall findOneDescuentoCall = FindOneDescuentoCall();
-  static EliminarCall eliminarCall = EliminarCall();
-  static ObtnerCategoriasCall obtnerCategoriasCall = ObtnerCategoriasCall();
-  static CrearCaregoriaCall crearCaregoriaCall = CrearCaregoriaCall();
+  static EliminarDescuentoCall eliminarDescuentoCall = EliminarDescuentoCall();
+  static EliminarCategoriaDescuentoCall eliminarCategoriaDescuentoCall =
+      EliminarCategoriaDescuentoCall();
+  static ObtenerCategoriasDescuentoCall obtenerCategoriasDescuentoCall =
+      ObtenerCategoriasDescuentoCall();
+  static CrearCategoriaDescuentoCall crearCategoriaDescuentoCall =
+      CrearCategoriaDescuentoCall();
+  static EditarCategoriaDescuentoCall editarCategoriaDescuentoCall =
+      EditarCategoriaDescuentoCall();
 }
 
 class CratedCall {
@@ -1865,7 +1871,7 @@ class FindOneDescuentoCall {
   }
 }
 
-class EliminarCall {
+class EliminarDescuentoCall {
   Future<ApiCallResponse> call({
     int? id,
     String? token = '',
@@ -1875,7 +1881,7 @@ class EliminarCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'eliminar',
+      callName: 'EliminarDescuento',
       apiUrl: '${baseUrl}/discounts/${id}',
       callType: ApiCallType.DELETE,
       headers: {
@@ -1892,7 +1898,34 @@ class EliminarCall {
   }
 }
 
-class ObtnerCategoriasCall {
+class EliminarCategoriaDescuentoCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = DiscoinGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'EliminarCategoriaDescuento',
+      apiUrl: '${baseUrl}/discount-categories/${id}',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ObtenerCategoriasDescuentoCall {
   Future<ApiCallResponse> call({
     int? page,
     int? pageSize,
@@ -1905,7 +1938,7 @@ class ObtnerCategoriasCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'Obtner categorias',
+      callName: 'ObtenerCategoriasDescuento',
       apiUrl: '${baseUrl}/discount-categories',
       callType: ApiCallType.GET,
       headers: {
@@ -1927,7 +1960,7 @@ class ObtnerCategoriasCall {
   }
 }
 
-class CrearCaregoriaCall {
+class CrearCategoriaDescuentoCall {
   Future<ApiCallResponse> call({
     String? name = '',
     String? description = '',
@@ -1943,9 +1976,45 @@ class CrearCaregoriaCall {
   "description": "${description}"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'crear caregoria',
+      callName: 'CrearCategoriaDescuento',
       apiUrl: '${baseUrl}/discount-categories',
       callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EditarCategoriaDescuentoCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = DiscoinGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "name": "${name}",
+  "description": "${description}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'EditarCategoriaDescuento',
+      apiUrl: '${baseUrl}/discount-categories/${id}',
+      callType: ApiCallType.PUT,
       headers: {
         'Authorization': 'Bearer ${token}',
       },
@@ -1976,7 +2045,7 @@ class PlanGroup {
   };
   static BucarPlanesCall bucarPlanesCall = BucarPlanesCall();
   static MiPlanCall miPlanCall = MiPlanCall();
-  static BuscarUnPlanCall buscarUnPlanCall = BuscarUnPlanCall();
+  static BuscarPlanPorIdCall buscarPlanPorIdCall = BuscarPlanPorIdCall();
   static ObtenerTokenTarjetaCall obtenerTokenTarjetaCall =
       ObtenerTokenTarjetaCall();
   static GenerarPagoCall generarPagoCall = GenerarPagoCall();
@@ -2023,7 +2092,7 @@ class MiPlanCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'mi plan',
+      callName: 'MiPlan',
       apiUrl: '${baseUrl}/plans/me',
       callType: ApiCallType.GET,
       headers: {
@@ -2040,7 +2109,7 @@ class MiPlanCall {
   }
 }
 
-class BuscarUnPlanCall {
+class BuscarPlanPorIdCall {
   Future<ApiCallResponse> call({
     int? id,
     String? token = '',
@@ -2050,7 +2119,7 @@ class BuscarUnPlanCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'Buscar un plan',
+      callName: 'BuscarPlanPorId',
       apiUrl: '${baseUrl}/plans/${id}',
       callType: ApiCallType.GET,
       headers: {

@@ -852,7 +852,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('FAQcreados');
+                                          context.pushNamed('ListarFAQAdmin');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(
@@ -1047,8 +1047,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                         0.0, 0.0, 0.0, 15.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        context
-                                            .pushNamed('CREARoVERDescuentos');
+                                        context.pushNamed(
+                                            'SeleccionarAccionDescuentos');
                                       },
                                       text: 'Ver más',
                                       options: FFButtonOptions(
@@ -1085,7 +1085,9 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                       ],
                     ),
                   ),
-                ],
+                ]
+                    .addToStart(SizedBox(height: 30.0))
+                    .addToEnd(SizedBox(height: 30.0)),
               ),
             ),
           ),

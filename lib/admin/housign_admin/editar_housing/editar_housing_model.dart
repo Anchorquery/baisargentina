@@ -33,7 +33,7 @@ class EditarHousingModel extends FlutterFlowModel<EditarHousingWidget> {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
-  // Stores action output result for [Backend Call - API (Obtener un housing)] action in editarHousing widget.
+  // Stores action output result for [Backend Call - API (Obtener un housing)] action in EditarHousing widget.
   ApiCallResponse? apiGetHousingById;
   // State field(s) for tituloHousingfield widget.
   FocusNode? tituloHousingfieldFocusNode;

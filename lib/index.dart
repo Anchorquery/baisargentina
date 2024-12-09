@@ -38,7 +38,8 @@ export '/password_recovery/codigo_de_validacion/codigo_de_validacion_widget.dart
     show CodigoDeValidacionWidget;
 export '/password_recovery/new_password/new_password_widget.dart'
     show NewPasswordWidget;
-export '/estudiante/planes/planes_widget.dart' show PlanesWidget;
+export '/estudiante/planes_de_membresia/planes_de_membresia_widget.dart'
+    show PlanesDeMembresiaWidget;
 export '/estudiante/planes/detalles_de_plan_basic/detalles_de_plan_basic_widget.dart'
     show DetallesDePlanBasicWidget;
 export '/estudiante/listar_servicios/listar_servicios_widget.dart'
@@ -71,8 +72,6 @@ export '/admin/servicios/editar_categoria_servicio/editar_categoria_servicio_wid
     show EditarCategoriaServicioWidget;
 export '/admin/descuentos/editar_descuento/editar_descuento_widget.dart'
     show EditarDescuentoWidget;
-export '/admin/descuentos/editar_categoria_descuento/editar_categoria_descuento_widget.dart'
-    show EditarCategoriaDescuentoWidget;
 export '/estudiante/planes/detalles_plan/detalles_plan_widget.dart'
     show DetallesPlanWidget;
 export '/estudiante/paymen_succces/paymen_succces_widget.dart'
@@ -109,8 +108,8 @@ export '/admin/users/perfil_estudiante_by_id/perfil_estudiante_by_id_widget.dart
 export '/estudiante/perfil/editar_perfil_user/editar_perfil_user_widget.dart'
     show EditarPerfilUserWidget;
 export '/chat/listado_chats/listado_chats_widget.dart' show ListadoChatsWidget;
-export '/admin/f_a_qadmin/f_a_qcreados/f_a_qcreados_widget.dart'
-    show FAQcreadosWidget;
+export '/admin/f_a_qadmin/listado_f_a_q/listado_f_a_q_widget.dart'
+    show ListadoFAQWidget;
 export '/admin/eventos_admin/reservas_admin/reservas_admin_widget.dart'
     show ReservasAdminWidget;
 export '/estudiante/booking/reserva_id_admin/reserva_id_admin_widget.dart'
@@ -129,8 +128,8 @@ export '/admin/eventos_admin/listar_eventos_admin/listar_eventos_admin_widget.da
     show ListarEventosAdminWidget;
 export '/admin/users/lista_usuario_comercios/lista_usuario_comercios_widget.dart'
     show ListaUsuarioComerciosWidget;
-export '/admin/descuentos/c_r_e_a_ro_v_e_r_descuentos/c_r_e_a_ro_v_e_r_descuentos_widget.dart'
-    show CREARoVERDescuentosWidget;
+export '/admin/descuentos/seleccionar_accion_descuentos/seleccionar_accion_descuentos_widget.dart'
+    show SeleccionarAccionDescuentosWidget;
 export '/admin/descuentos/lista_descuentos_admin/lista_descuentos_admin_widget.dart'
     show ListaDescuentosAdminWidget;
 export '/admin/users/perfil_comercio_by_id/perfil_comercio_by_id_widget.dart'
@@ -142,8 +141,6 @@ export '/admin/users/lista_usuario_estudiantes/lista_usuario_estudiantes_widget.
 export '/admin/users/crear_estudiante/crear_estudiante_widget.dart'
     show CrearEstudianteWidget;
 export '/estudiante/planes_copy/planes_copy_widget.dart' show PlanesCopyWidget;
-export '/admin/f_a_qadmin/crear_f_a_q/crear_f_a_q_widget.dart'
-    show CrearFAQWidget;
 export '/comercio/editar_perfil_comercio_admin/editar_perfil_comercio_admin_widget.dart'
     show EditarPerfilComercioAdminWidget;
 export '/comercio/mi_perfil_comercio/mi_perfil_comercio_widget.dart'
@@ -158,3 +155,9 @@ export '/estudiante/discoint/detalles_de_descuento/detalles_de_descuento_widget.
     show DetallesDeDescuentoWidget;
 export '/admin/descuentos/lista_categoria_descuentos_admin/lista_categoria_descuentos_admin_widget.dart'
     show ListaCategoriaDescuentosAdminWidget;
+export '/admin/f_a_qadmin/crear_editar_f_a_q/crear_editar_f_a_q_widget.dart'
+    show CrearEditarFAQWidget;
+export '/admin/f_a_qadmin/listar_f_a_q_admin/listar_f_a_q_admin_widget.dart'
+    show ListarFAQAdminWidget;
+export '/admin/f_a_qadmin/listado_f_a_q_copy/listado_f_a_q_copy_widget.dart'
+    show ListadoFAQCopyWidget;

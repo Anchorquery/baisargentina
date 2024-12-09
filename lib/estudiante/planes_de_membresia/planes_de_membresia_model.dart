@@ -8,7 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'planes_widget.dart' show PlanesWidget;
+import 'planes_de_membresia_widget.dart' show PlanesDeMembresiaWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class PlanesModel extends FlutterFlowModel<PlanesWidget> {
+class PlanesDeMembresiaModel extends FlutterFlowModel<PlanesDeMembresiaWidget> {
   ///  Local state fields for this page.
 
   List<PlanStruct> planes = [];
@@ -38,9 +38,9 @@ class PlanesModel extends FlutterFlowModel<PlanesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (Bucar planes)] action in planes widget.
+  // Stores action output result for [Backend Call - API (Bucar planes)] action in PlanesDeMembresia widget.
   ApiCallResponse? apiBuscarPlanes;
-  // Stores action output result for [Backend Call - API (mi plan)] action in planes widget.
+  // Stores action output result for [Backend Call - API (MiPlan)] action in PlanesDeMembresia widget.
   ApiCallResponse? apiMyPlan;
   // Model for loader component.
   late LoaderModel loaderModel;

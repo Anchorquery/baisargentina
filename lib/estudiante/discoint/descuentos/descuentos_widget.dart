@@ -53,7 +53,8 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
           }
         }),
         Future(() async {
-          _model.apiResultdgg = await DiscoinGroup.obtnerCategoriasCall.call();
+          _model.apiResultdgg =
+              await DiscoinGroup.obtenerCategoriasDescuentoCall.call();
 
           if (!(_model.apiResultdgg?.succeeded ?? true)) {
             return;

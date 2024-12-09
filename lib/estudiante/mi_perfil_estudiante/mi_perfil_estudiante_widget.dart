@@ -69,6 +69,14 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                   (_model.apiResponseMe?.jsonBody ?? ''),
                   r'''$.id''',
                 ),
+                name: getJsonField(
+                  (_model.apiResponseMe?.jsonBody ?? ''),
+                  r'''$.name''',
+                ).toString().toString(),
+                lastName: getJsonField(
+                  (_model.apiResponseMe?.jsonBody ?? ''),
+                  r'''$.lastName''',
+                ).toString().toString(),
               ),
             );
             _model.idUser = getJsonField(
@@ -476,8 +484,8 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                           color: Colors.black,
                                           size: 24.0,
                                         ),
-                                        onPressed: () {
-                                          print('IconButton pressed ...');
+                                        onPressed: () async {
+                                          context.safePop();
                                         },
                                       ),
                                     ],
@@ -644,7 +652,7 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                   child: Text(
                                     '${UserStruct.maybeFromMap(UserGroup.meCall.user(
                                       (_model.apiResponseMe?.jsonBody ?? ''),
-                                    ))?.name} ${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                    ))?.name}  ${UserStruct.maybeFromMap(UserGroup.meCall.user(
                                       (_model.apiResponseMe?.jsonBody ?? ''),
                                     ))?.lastName}',
                                     style: FlutterFlowTheme.of(context)
@@ -861,16 +869,123 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                               borderRadius:
                                                   BorderRadius.circular(20.0),
                                             ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                '',
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.cover,
-                                                alignment: Alignment(0.0, 0.0),
-                                              ),
+                                            child: Stack(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    _model.myPlan!.image.url,
+                                                    width: 300.0,
+                                                    height: 200.0,
+                                                    fit: BoxFit.cover,
+                                                    alignment:
+                                                        Alignment(0.0, 0.0),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          -0.86, 0.8),
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      await Navigator.push(
+                                                        context,
+                                                        PageTransition(
+                                                          type:
+                                                              PageTransitionType
+                                                                  .fade,
+                                                          child:
+                                                              FlutterFlowExpandedImageView(
+                                                            image:
+                                                                Image.network(
+                                                              _model.myPlan!
+                                                                  .qrImage,
+                                                              fit: BoxFit
+                                                                  .contain,
+                                                            ),
+                                                            allowRotation:
+                                                                false,
+                                                            tag: _model.myPlan!
+                                                                .qrImage,
+                                                            useHeroAnimation:
+                                                                true,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                    child: Hero(
+                                                      tag: _model
+                                                          .myPlan!.qrImage,
+                                                      transitionOnUserGestures:
+                                                          true,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        child: Image.network(
+                                                          _model
+                                                              .myPlan!.qrImage,
+                                                          width: 70.0,
+                                                          height: 70.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          -0.8, -0.6),
+                                                  child: Text(
+                                                    '${UserStruct.maybeFromMap(UserGroup.meCall.user(
+                                                      (_model.apiResponseMe
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    ))?.name}  ${currentUserData?.lastName != null && currentUserData?.lastName != '' ? currentUserData?.lastName : ' '}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          -0.83, -0.3),
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      _model.myPlan?.name,
+                                                      'Estandar',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ).animateOnPageLoad(animationsMap[
                                               'containerOnPageLoadAnimation1']!),
@@ -878,58 +993,63 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                       ],
                                     ),
                                   ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 7.0, 0.0, 25.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => FocusScope.of(context)
-                                                .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child:
-                                                  CancelarSuscripcionWidget(),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    text: 'Cancelar suscripción',
-                                    options: FFButtonOptions(
-                                      width: 150.0,
-                                      height: 50.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 0.0, 10.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .override(
-                                            fontFamily: 'Lato',
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 0.0,
-                                      borderSide: BorderSide(
+                                if (_model.myPlan?.type != 'free')
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 7.0, 0.0, 25.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          useSafeArea: true,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () =>
+                                                  FocusScope.of(context)
+                                                      .unfocus(),
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child:
+                                                    CancelarSuscripcionWidget(),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => safeSetState(() {}));
+                                      },
+                                      text: 'Cancelar suscripción',
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 50.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 0.0, 10.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 1.0,
+                                            .tertiary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
                                       ),
-                                      borderRadius: BorderRadius.circular(38.0),
-                                    ),
-                                  ).animateOnPageLoad(animationsMap[
-                                      'buttonOnPageLoadAnimation1']!),
-                                ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation1']!),
+                                  ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
@@ -939,7 +1059,7 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('editarPerfilUser');
+                                      context.pushNamed('EditarPerfilUser');
                                     },
                                     child: Container(
                                       width: double.infinity,
@@ -1416,7 +1536,7 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('FAQ');
+                                      context.pushNamed('ListadoFAQ');
                                     },
                                     child: Container(
                                       width: double.infinity,
@@ -1486,7 +1606,7 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('planes');
+                                      context.pushNamed('PlanesDeMembresia');
                                     },
                                     child: Container(
                                       width: double.infinity,

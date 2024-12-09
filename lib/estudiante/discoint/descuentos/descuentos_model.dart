@@ -62,7 +62,7 @@ class DescuentosModel extends FlutterFlowModel<DescuentosWidget> {
 
   // Stores action output result for [Backend Call - API (Find descuentos)] action in Descuentos widget.
   ApiCallResponse? apiGetDescuentos;
-  // Stores action output result for [Backend Call - API (Obtner categorias)] action in Descuentos widget.
+  // Stores action output result for [Backend Call - API (ObtenerCategoriasDescuento)] action in Descuentos widget.
   ApiCallResponse? apiResultdgg;
   // Stores action output result for [Backend Call - API (Find descuentos)] action in Text widget.
   ApiCallResponse? apiGetDiscoinsByNameCommerce;

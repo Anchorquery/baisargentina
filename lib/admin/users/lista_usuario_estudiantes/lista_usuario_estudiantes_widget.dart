@@ -391,7 +391,7 @@ class _ListaUsuarioEstudiantesWidgetState
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                        'editarPerfilUserAdmin',
+                                                        'EditarPerfilUserAdmin',
                                                         queryParameters: {
                                                           'id': serializeParam(
                                                             getJsonField(

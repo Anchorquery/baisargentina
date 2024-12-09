@@ -43,7 +43,7 @@ class _DetallesPlanWidgetState extends State<DetallesPlanWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultnh9 = await PlanGroup.buscarUnPlanCall.call(
+      _model.apiResultnh9 = await PlanGroup.buscarPlanPorIdCall.call(
         id: widget!.id,
         token: currentAuthenticationToken,
       );
@@ -315,7 +315,7 @@ class _DetallesPlanWidgetState extends State<DetallesPlanWidget>
                               child: Text(
                                 valueOrDefault<String>(
                                   _model.plan?.description,
-                                  'd',
+                                  ' Sin detalles',
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium

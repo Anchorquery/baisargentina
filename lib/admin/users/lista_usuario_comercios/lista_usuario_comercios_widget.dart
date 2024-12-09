@@ -399,7 +399,7 @@ class _ListaUsuarioComerciosWidgetState
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                        'editarPerfilComercioAdmin',
+                                                        'EditarPerfilComercioAdmin',
                                                         queryParameters: {
                                                           'id': serializeParam(
                                                             getJsonField(

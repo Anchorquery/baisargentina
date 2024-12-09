@@ -46,9 +46,9 @@ class EditarPerfilComercioAdminModel
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (obtenerPerfilComercio)] action in editarPerfilComercioAdmin widget.
+  // Stores action output result for [Backend Call - API (obtenerPerfilComercio)] action in EditarPerfilComercioAdmin widget.
   ApiCallResponse? apiResulteme;
-  // Stores action output result for [Backend Call - Query Rows] action in editarPerfilComercioAdmin widget.
+  // Stores action output result for [Backend Call - Query Rows] action in EditarPerfilComercioAdmin widget.
   List<CommerceCategoriesRow>? categoriasComercios;
   // Model for loader component.
   late LoaderModel loaderModel;

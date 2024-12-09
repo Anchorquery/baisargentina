@@ -1,5 +1,3 @@
-import '/auth/custom_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'crear_editar_categoria_descuento_model.dart';
-export 'crear_editar_categoria_descuento_model.dart';
+import 'crear_editar_f_a_q_model.dart';
+export 'crear_editar_f_a_q_model.dart';
 
-class CrearEditarCategoriaDescuentoWidget extends StatefulWidget {
-  const CrearEditarCategoriaDescuentoWidget({
+class CrearEditarFAQWidget extends StatefulWidget {
+  const CrearEditarFAQWidget({
     super.key,
     this.id,
   });
@@ -21,36 +19,34 @@ class CrearEditarCategoriaDescuentoWidget extends StatefulWidget {
   final int? id;
 
   @override
-  State<CrearEditarCategoriaDescuentoWidget> createState() =>
-      _CrearEditarCategoriaDescuentoWidgetState();
+  State<CrearEditarFAQWidget> createState() => _CrearEditarFAQWidgetState();
 }
 
-class _CrearEditarCategoriaDescuentoWidgetState
-    extends State<CrearEditarCategoriaDescuentoWidget> {
-  late CrearEditarCategoriaDescuentoModel _model;
+class _CrearEditarFAQWidgetState extends State<CrearEditarFAQWidget> {
+  late CrearEditarFAQModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CrearEditarCategoriaDescuentoModel());
+    _model = createModel(context, () => CrearEditarFAQModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (widget!.id != null) {
-        _model.categoria = await DiscountCategoriesTable().queryRows(
+        _model.faq = await FaqsTable().queryRows(
           queryFn: (q) => q.eqOrNull(
             'id',
             widget!.id,
           ),
         );
         safeSetState(() {
-          _model.nombreTextController?.text = _model.categoria!.first.name!;
+          _model.nombreTextController?.text = _model.faq!.first.name!;
         });
         safeSetState(() {
           _model.descripcionTextController?.text =
-              _model.categoria!.first.description!;
+              _model.faq!.first.description!;
         });
         return;
       } else {
@@ -111,9 +107,7 @@ class _CrearEditarCategoriaDescuentoWidgetState
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              widget!.id != null
-                                  ? 'Editar categoría'
-                                  : 'Crear categoría',
+                              widget!.id != null ? 'Editar FAQ' : 'Crear FAQ',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -153,7 +147,7 @@ class _CrearEditarCategoriaDescuentoWidgetState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Nombre de la categoría',
+                                'Pregunta',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -185,7 +179,7 @@ class _CrearEditarCategoriaDescuentoWidgetState
                                             letterSpacing: 0.0,
                                           ),
                                       hintText:
-                                          'Asigna un nombre a la categoría',
+                                          'Asigna un titulo a la pregunta',
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -246,7 +240,7 @@ class _CrearEditarCategoriaDescuentoWidgetState
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 15.0, 0.0, 0.0),
                                 child: Text(
-                                  'Descripcion',
+                                  'Respuesta',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -288,7 +282,7 @@ class _CrearEditarCategoriaDescuentoWidgetState
                                               letterSpacing: 0.0,
                                             ),
                                         hintText:
-                                            'Describe el beneficio  que obtendrán los estudiantes',
+                                            'Asigna un respuesta a la pregunta',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .labelMedium
                                             .override(
@@ -389,73 +383,43 @@ class _CrearEditarCategoriaDescuentoWidgetState
                                         }
                                         _shouldSetState = true;
                                         if (_model.validacionForm!) {
-                                          _model.apiEditarCategoriaDescuentos =
-                                              await DiscoinGroup
-                                                  .editarCategoriaDescuentoCall
-                                                  .call(
-                                            name: _model
-                                                .nombreTextController.text,
-                                            description: _model
-                                                .descripcionTextController.text,
-                                            id: widget!.id,
-                                            token: currentAuthenticationToken,
+                                          await FaqsTable().update(
+                                            data: {
+                                              'name': _model
+                                                  .nombreTextController.text,
+                                              'description': _model
+                                                  .descripcionTextController
+                                                  .text,
+                                              'state': true,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
+                                              widget!.id,
+                                            ),
                                           );
-
                                           _shouldSetState = true;
-                                          if ((_model
-                                                  .apiEditarCategoriaDescuentos
-                                                  ?.succeeded ??
-                                              true)) {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'Descuento guardado'),
-                                                  content: Text(
-                                                      'Se ha editado el item correctamente'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            if (_shouldSetState)
-                                              safeSetState(() {});
-                                            return;
-                                          } else {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'Ha ocurrido un error'),
-                                                  content: Text(getJsonField(
-                                                    (_model.apiEditarCategoriaDescuentos
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                    r'''$.error''',
-                                                  ).toString()),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            if (_shouldSetState)
-                                              safeSetState(() {});
-                                            return;
-                                          }
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('FAQ guardado'),
+                                                content: Text(
+                                                    'Se ha editado el item correctamente'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                          return;
                                         } else {
                                           await showDialog(
                                             context: context,
@@ -492,78 +456,43 @@ class _CrearEditarCategoriaDescuentoWidgetState
                                         }
                                         _shouldSetState = true;
                                         if (_model.validacionForm2!) {
-                                          _model.apicrearCategoriaDescuentos =
-                                              await DiscoinGroup
-                                                  .crearCategoriaDescuentoCall
-                                                  .call(
-                                            name: _model
+                                          _model.crearFAQ =
+                                              await FaqsTable().insert({
+                                            'name': _model
                                                 .nombreTextController.text,
-                                            description: _model
+                                            'description': _model
                                                 .descripcionTextController.text,
-                                            token: currentAuthenticationToken,
-                                          );
-
+                                            'state': true,
+                                          });
                                           _shouldSetState = true;
-                                          if ((_model
-                                                  .apicrearCategoriaDescuentos
-                                                  ?.succeeded ??
-                                              true)) {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title:
-                                                      Text('Descuento creado'),
-                                                  content: Text(
-                                                      'Se ha generado el item correctamente'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            safeSetState(() {
-                                              _model.nombreTextController
-                                                  ?.clear();
-                                              _model.descripcionTextController
-                                                  ?.clear();
-                                            });
-                                            if (_shouldSetState)
-                                              safeSetState(() {});
-                                            return;
-                                          } else {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'Ha ocurrido un error'),
-                                                  content: Text(getJsonField(
-                                                    (_model.apicrearCategoriaDescuentos
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                    r'''$.error''',
-                                                  ).toString()),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            if (_shouldSetState)
-                                              safeSetState(() {});
-                                            return;
-                                          }
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    'FAQ creado correctamente.'),
+                                                content:
+                                                    Text('Se ha creado el FAQ'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          safeSetState(() {
+                                            _model.nombreTextController
+                                                ?.clear();
+                                            _model.descripcionTextController
+                                                ?.clear();
+                                          });
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                          return;
                                         } else {
                                           await showDialog(
                                             context: context,

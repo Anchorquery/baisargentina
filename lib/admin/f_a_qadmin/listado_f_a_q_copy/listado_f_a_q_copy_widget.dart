@@ -6,25 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'f_a_qcreados_model.dart';
-export 'f_a_qcreados_model.dart';
+import 'listado_f_a_q_copy_model.dart';
+export 'listado_f_a_q_copy_model.dart';
 
-class FAQcreadosWidget extends StatefulWidget {
-  const FAQcreadosWidget({super.key});
+class ListadoFAQCopyWidget extends StatefulWidget {
+  const ListadoFAQCopyWidget({super.key});
 
   @override
-  State<FAQcreadosWidget> createState() => _FAQcreadosWidgetState();
+  State<ListadoFAQCopyWidget> createState() => _ListadoFAQCopyWidgetState();
 }
 
-class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
-  late FAQcreadosModel _model;
+class _ListadoFAQCopyWidgetState extends State<ListadoFAQCopyWidget> {
+  late ListadoFAQCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => FAQcreadosModel());
+    _model = createModel(context, () => ListadoFAQCopyModel());
   }
 
   @override
@@ -154,27 +154,6 @@ class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 50.0,
-                                                    buttonSize: 35.0,
-                                                    fillColor: Colors.black,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.edit,
-                                                      color: Colors.white,
-                                                      size: 20.0,
-                                                    ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
-                                                    },
-                                                  ),
-                                                ),
                                               ],
                                             ),
                                           ),
@@ -233,27 +212,6 @@ class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                       ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 50.0,
-                                                    buttonSize: 35.0,
-                                                    fillColor: Colors.black,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.edit,
-                                                      color: Colors.white,
-                                                      size: 20.0,
-                                                    ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
-                                                    },
-                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -314,27 +272,6 @@ class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 50.0,
-                                                    buttonSize: 35.0,
-                                                    fillColor: Colors.black,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.edit,
-                                                      color: Colors.white,
-                                                      size: 20.0,
-                                                    ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
-                                                    },
-                                                  ),
-                                                ),
                                               ],
                                             ),
                                           ),
@@ -393,27 +330,6 @@ class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                       ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 50.0,
-                                                    buttonSize: 35.0,
-                                                    fillColor: Colors.black,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.edit,
-                                                      color: Colors.white,
-                                                      size: 20.0,
-                                                    ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
-                                                    },
-                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -554,27 +470,6 @@ class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 50.0,
-                                                    buttonSize: 35.0,
-                                                    fillColor: Colors.black,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.edit,
-                                                      color: Colors.white,
-                                                      size: 20.0,
-                                                    ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
-                                                    },
-                                                  ),
-                                                ),
                                               ],
                                             ),
                                           ),
@@ -588,39 +483,6 @@ class _FAQcreadosWidgetState extends State<FAQcreadosWidget> {
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed('CrearFAQ');
-                      },
-                      text: 'Crear nueva FAQ',
-                      icon: Icon(
-                        Icons.add_circle,
-                        size: 30.0,
-                      ),
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            40.0, 0.0, 40.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: Colors.white,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Lato',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  letterSpacing: 0.0,
-                                ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
                     ),
                   ),
                 ],

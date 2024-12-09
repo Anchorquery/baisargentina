@@ -27,7 +27,7 @@ class DetallesPlanModel extends FlutterFlowModel<DetallesPlanWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (Buscar un plan)] action in detallesPlan widget.
+  // Stores action output result for [Backend Call - API (BuscarPlanPorId)] action in DetallesPlan widget.
   ApiCallResponse? apiResultnh9;
   // Model for loader component.
   late LoaderModel loaderModel;

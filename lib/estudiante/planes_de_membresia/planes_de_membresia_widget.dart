@@ -15,19 +15,20 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'planes_model.dart';
-export 'planes_model.dart';
+import 'planes_de_membresia_model.dart';
+export 'planes_de_membresia_model.dart';
 
-class PlanesWidget extends StatefulWidget {
-  const PlanesWidget({super.key});
+class PlanesDeMembresiaWidget extends StatefulWidget {
+  const PlanesDeMembresiaWidget({super.key});
 
   @override
-  State<PlanesWidget> createState() => _PlanesWidgetState();
+  State<PlanesDeMembresiaWidget> createState() =>
+      _PlanesDeMembresiaWidgetState();
 }
 
-class _PlanesWidgetState extends State<PlanesWidget>
+class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
     with TickerProviderStateMixin {
-  late PlanesModel _model;
+  late PlanesDeMembresiaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -36,7 +37,7 @@ class _PlanesWidgetState extends State<PlanesWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => PlanesModel());
+    _model = createModel(context, () => PlanesDeMembresiaModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -314,7 +315,7 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 10.0, 0.0, 0.0),
                                             child: Text(
-                                              '${currentUserData?.name} ${currentUserData?.lastName}',
+                                              '${currentUserData?.name}${currentUserData?.lastName != null && currentUserData?.lastName != '' ? currentUserData?.lastName : ''}',
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -406,17 +407,60 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
                                               ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                  _model.myPlan!.image.url,
-                                                  width: 300.0,
-                                                  height: 200.0,
-                                                  fit: BoxFit.cover,
-                                                  alignment:
-                                                      Alignment(0.0, 0.0),
-                                                ),
+                                              child: Stack(
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.asset(
+                                                      'assets/images/tarjeta.png',
+                                                      width: 300.0,
+                                                      height: 200.0,
+                                                      fit: BoxFit.cover,
+                                                      alignment:
+                                                          Alignment(0.0, 0.0),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -0.8, -0.6),
+                                                    child: Text(
+                                                      '${currentUserData?.name}${currentUserData?.lastName != null && currentUserData?.lastName != '' ? currentUserData?.lastName : ''}',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleMedium
+                                                          .override(
+                                                            fontFamily: 'Lato',
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.w800,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -0.83, -0.3),
+                                                    child: Text(
+                                                      valueOrDefault<String>(
+                                                        _model.myPlan?.name,
+                                                        'Estandar',
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Lato',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondary,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ).animateOnPageLoad(animationsMap[
                                                 'containerOnPageLoadAnimation']!),
@@ -543,7 +587,7 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                        'detallesPlan',
+                                                        'DetallesPlan',
                                                         queryParameters: {
                                                           'id': serializeParam(
                                                             listaplanesItem.id,
@@ -734,7 +778,7 @@ class _PlanesWidgetState extends State<PlanesWidget>
                                       ),
                                     ),
                                   ),
-                                ],
+                                ].addToEnd(SizedBox(height: 30.0)),
                               ),
                             ),
                           ),

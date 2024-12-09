@@ -9,9 +9,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'lista_categoria_descuentos_admin_model.dart';
 export 'lista_categoria_descuentos_admin_model.dart';
@@ -40,22 +38,23 @@ class _ListaCategoriaDescuentosAdminWidgetState
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResponseHopusing = await DiscoinGroup.findDescuentosCall.call(
+      _model.apiResponseCategorias =
+          await DiscoinGroup.obtenerCategoriasDescuentoCall.call(
         token: currentAuthenticationToken,
       );
 
-      if ((_model.apiResponseHopusing?.succeeded ?? true)) {
+      if ((_model.apiResponseCategorias?.succeeded ?? true)) {
         _model.data = (getJsonField(
-          (_model.apiResponseHopusing?.jsonBody ?? ''),
+          (_model.apiResponseCategorias?.jsonBody ?? ''),
           r'''$.data''',
           true,
         )!
                 .toList()
-                .map<DiscountsStruct?>(DiscountsStruct.maybeFromMap)
-                .toList() as Iterable<DiscountsStruct?>)
+                .map<CategoryStruct?>(CategoryStruct.maybeFromMap)
+                .toList() as Iterable<CategoryStruct?>)
             .withoutNulls
             .toList()
-            .cast<DiscountsStruct>();
+            .cast<CategoryStruct>();
         _model.loading = !_model.loading;
         safeSetState(() {});
         return;
@@ -153,7 +152,7 @@ class _ListaCategoriaDescuentosAdminWidgetState
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'Lista Descuentos',
+                            'Lista Categorías',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -177,9 +176,9 @@ class _ListaCategoriaDescuentosAdminWidgetState
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('CrearDescuento');
+                          context.pushNamed('CrearEditarCategoriaDescuento');
                         },
-                        text: 'Crear un descuento',
+                        text: 'Crear una categoría',
                         icon: Icon(
                           Icons.add_circle,
                           size: 15.0,
@@ -213,25 +212,28 @@ class _ListaCategoriaDescuentosAdminWidgetState
                     child: RefreshIndicator(
                       color: FlutterFlowTheme.of(context).tertiary,
                       onRefresh: () async {
-                        _model.apiResponseHopusingCopy =
-                            await DiscoinGroup.findDescuentosCall.call(
+                        _model.apiResponseCategoriasRefresh = await DiscoinGroup
+                            .obtenerCategoriasDescuentoCall
+                            .call(
                           token: currentAuthenticationToken,
                         );
 
-                        if ((_model.apiResponseHopusingCopy?.succeeded ??
+                        if ((_model.apiResponseCategoriasRefresh?.succeeded ??
                             true)) {
                           _model.data = (getJsonField(
-                            (_model.apiResponseHopusingCopy?.jsonBody ?? ''),
+                            (_model.apiResponseCategoriasRefresh?.jsonBody ??
+                                ''),
                             r'''$.data''',
                             true,
                           )!
                                   .toList()
-                                  .map<DiscountsStruct?>(
-                                      DiscountsStruct.maybeFromMap)
-                                  .toList() as Iterable<DiscountsStruct?>)
+                                  .map<CategoryStruct?>(
+                                      CategoryStruct.maybeFromMap)
+                                  .toList() as Iterable<CategoryStruct?>)
                               .withoutNulls
                               .toList()
-                              .cast<DiscountsStruct>();
+                              .cast<CategoryStruct>();
+                          _model.loading = !_model.loading;
                           safeSetState(() {});
                           return;
                         } else {
@@ -248,17 +250,17 @@ class _ListaCategoriaDescuentosAdminWidgetState
                                   0.0, 15.0, 0.0, 0.0),
                               child: Builder(
                                 builder: (context) {
-                                  final descuentos = _model.data.toList();
+                                  final categories = _model.data.toList();
 
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     primary: false,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
-                                    itemCount: descuentos.length,
-                                    itemBuilder: (context, descuentosIndex) {
-                                      final descuentosItem =
-                                          descuentos[descuentosIndex];
+                                    itemCount: categories.length,
+                                    itemBuilder: (context, categoriesIndex) {
+                                      final categoriesItem =
+                                          categories[categoriesIndex];
                                       return Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -276,19 +278,8 @@ class _ListaCategoriaDescuentosAdminWidgetState
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           8.0),
-                                                  child: OctoImage(
-                                                    placeholderBuilder: (_) =>
-                                                        SizedBox.expand(
-                                                      child: Image(
-                                                        image: BlurHashImage(
-                                                            descuentosItem.image
-                                                                .blurhash),
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                    image: NetworkImage(
-                                                      descuentosItem.image.url,
-                                                    ),
+                                                  child: Image.asset(
+                                                    'assets/images/6815332.png',
                                                     width: 70.0,
                                                     height: 70.0,
                                                     fit: BoxFit.cover,
@@ -315,14 +306,14 @@ class _ListaCategoriaDescuentosAdminWidgetState
                                                           queryParameters: {
                                                             'id':
                                                                 serializeParam(
-                                                              descuentosItem.id,
+                                                              categoriesItem.id,
                                                               ParamType.int,
                                                             ),
                                                           }.withoutNulls,
                                                         );
                                                       },
                                                       child: Text(
-                                                        descuentosItem.name,
+                                                        categoriesItem.name,
                                                         textAlign:
                                                             TextAlign.start,
                                                         style: FlutterFlowTheme
@@ -353,10 +344,10 @@ class _ListaCategoriaDescuentosAdminWidgetState
                                                       Colors.transparent,
                                                   onTap: () async {
                                                     context.pushNamed(
-                                                      'EditarDescuento',
+                                                      'CrearEditarCategoriaDescuento',
                                                       queryParameters: {
                                                         'id': serializeParam(
-                                                          descuentosItem.id,
+                                                          categoriesItem.id,
                                                           ParamType.int,
                                                         ),
                                                       }.withoutNulls,
@@ -382,11 +373,11 @@ class _ListaCategoriaDescuentosAdminWidgetState
                                                   onTap: () async {
                                                     _model.apiResultbwl =
                                                         await DiscoinGroup
-                                                            .eliminarCall
+                                                            .eliminarDescuentoCall
                                                             .call(
                                                       token:
                                                           currentAuthenticationToken,
-                                                      id: descuentosItem.id,
+                                                      id: categoriesItem.id,
                                                     );
 
                                                     if ((_model.apiResultbwl
@@ -415,7 +406,7 @@ class _ListaCategoriaDescuentosAdminWidgetState
                                                       );
                                                       _model
                                                           .removeAtIndexFromData(
-                                                              descuentosIndex);
+                                                              categoriesIndex);
                                                       safeSetState(() {});
                                                     }
 

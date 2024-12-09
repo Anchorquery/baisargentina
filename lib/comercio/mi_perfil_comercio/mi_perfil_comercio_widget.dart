@@ -388,7 +388,7 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('editarPerfilComercio');
+                          context.pushNamed('EditarPerfilComercio');
                         },
                         text: 'Editar',
                         options: FFButtonOptions(

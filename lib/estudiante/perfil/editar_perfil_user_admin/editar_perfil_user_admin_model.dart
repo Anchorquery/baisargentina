@@ -38,7 +38,7 @@ class EditarPerfilUserAdminModel
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
-  // Stores action output result for [Backend Call - API (obtenerPerfilEstudiante)] action in editarPerfilUserAdmin widget.
+  // Stores action output result for [Backend Call - API (obtenerPerfilEstudiante)] action in EditarPerfilUserAdmin widget.
   ApiCallResponse? apiObtenerUser;
   bool isDataUploading1 = false;
   FFUploadedFile uploadedLocalFile1 =
