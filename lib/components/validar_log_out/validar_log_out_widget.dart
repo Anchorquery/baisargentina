@@ -1,3 +1,5 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -115,8 +117,17 @@ class _ValidarLogOutWidgetState extends State<ValidarLogOutWidget>
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      GoRouter.of(context).prepareAuthEvent();
+                      await authManager.signOut();
+                      GoRouter.of(context).clearRedirectLocation();
+
+                      FFAppState().token = '';
+                      FFAppState().user =
+                          UserStruct.fromSerializableMap(jsonDecode('{}'));
+                      safeSetState(() {});
+
+                      context.goNamedAuth('inicio', context.mounted);
                     },
                     text: 'Cerrar sesión',
                     options: FFButtonOptions(

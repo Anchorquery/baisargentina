@@ -4,6 +4,7 @@ import '/backend/schema/structs/index.dart';
 import '/components/cancelar_suscripcion/cancelar_suscripcion_widget.dart';
 import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
+import '/components/validar_log_out/validar_log_out_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -1669,52 +1670,64 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                   ).animateOnPageLoad(animationsMap[
                                       'containerOnPageLoadAnimation10']!),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 16.0, 0.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      await authManager.signOut();
-                                      GoRouter.of(context)
-                                          .clearRedirectLocation();
-
-                                      FFAppState().token = '';
-                                      FFAppState().user =
-                                          UserStruct.fromSerializableMap(
-                                              jsonDecode('{}'));
-                                      safeSetState(() {});
-
-                                      context.goNamedAuth(
-                                          'inicio', context.mounted);
-                                    },
-                                    text: 'Cerrar sesión',
-                                    options: FFButtonOptions(
-                                      width: 150.0,
-                                      height: 50.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .override(
-                                            fontFamily: 'Lato',
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 0.0,
-                                      borderSide: BorderSide(
+                                Builder(
+                                  builder: (context) => Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 16.0, 0.0, 0.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () =>
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus(),
+                                                child: ValidarLogOutWidget(),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      text: 'Cerrar sesión',
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 50.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 1.0,
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
                                       ),
-                                      borderRadius: BorderRadius.circular(38.0),
-                                    ),
-                                  ).animateOnPageLoad(animationsMap[
-                                      'buttonOnPageLoadAnimation2']!),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation2']!),
+                                  ),
                                 ),
                               ],
                             ),
