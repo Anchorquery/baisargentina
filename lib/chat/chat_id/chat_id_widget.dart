@@ -633,8 +633,7 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                                 timestamp: getCurrentTimestamp
                                                     .toString(),
                                                 chatId: widget!.chatRef?.id,
-                                                imagesList:
-                                                    _model.uploadedLocalFiles,
+                                                imagesList: _model.imagenes,
                                               );
 
                                               _shouldSetState = true;
@@ -679,8 +678,7 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                                 timestamp: getCurrentTimestamp
                                                     .toString(),
                                                 chatId: widget!.chatRef?.id,
-                                                imagesList:
-                                                    _model.uploadedLocalFiles,
+                                                imagesList: _model.imagenes,
                                               );
 
                                               _shouldSetState = true;

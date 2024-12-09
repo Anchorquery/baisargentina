@@ -3,15 +3,15 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'crear_categoria_descuento_widget.dart'
-    show CrearCategoriaDescuentoWidget;
+import 'crear_editar_categoria_descuento_widget.dart'
+    show CrearEditarCategoriaDescuentoWidget;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CrearCategoriaDescuentoModel
-    extends FlutterFlowModel<CrearCategoriaDescuentoWidget> {
+class CrearEditarCategoriaDescuentoModel
+    extends FlutterFlowModel<CrearEditarCategoriaDescuentoWidget> {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();

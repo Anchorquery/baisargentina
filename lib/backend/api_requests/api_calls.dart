@@ -115,6 +115,7 @@ class GetEventCall {
 
 class GetOrganizerCall {
   Future<ApiCallResponse> call({
+    int? role,
     String? token =
         'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMzA4OTkxOSwiZXhwIjoxNzI1NjgxOTE5fQ.F-1c8-nRWcHRqiHQjxtTwlXT-VImWmicIysfDQsSZfM',
   }) async {
@@ -129,7 +130,9 @@ class GetOrganizerCall {
       headers: {
         'Authorization': 'Bearer ${token}',
       },
-      params: {},
+      params: {
+        'role': role,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1704,6 +1707,7 @@ class DiscoinGroup {
     'Authorization': 'Bearer [token]',
   };
   static CratedCall cratedCall = CratedCall();
+  static EditarDescuentoCall editarDescuentoCall = EditarDescuentoCall();
   static FindDescuentosCall findDescuentosCall = FindDescuentosCall();
   static FindOneDescuentoCall findOneDescuentoCall = FindOneDescuentoCall();
   static EliminarCall eliminarCall = EliminarCall();
@@ -1755,6 +1759,52 @@ class CratedCall {
   }
 }
 
+class EditarDescuentoCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    double? porceint,
+    String? typeUsing = '',
+    String? start = '',
+    String? end = '',
+    int? comerce,
+    String? category = '',
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = DiscoinGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'EditarDescuento',
+      apiUrl: '${baseUrl}/discounts/${id}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'name': name,
+        'description': description,
+        'porceint': porceint,
+        'typeUsing': typeUsing,
+        'start': start,
+        'end': end,
+        'comerce': comerce,
+        'category': category,
+        'id': id,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class FindDescuentosCall {
   Future<ApiCallResponse> call({
     int? categoryId,
@@ -1790,7 +1840,7 @@ class FindDescuentosCall {
 
 class FindOneDescuentoCall {
   Future<ApiCallResponse> call({
-    String? uuid = '',
+    int? id,
     String? token = '',
   }) async {
     final baseUrl = DiscoinGroup.getBaseUrl(
@@ -1799,7 +1849,7 @@ class FindOneDescuentoCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'find one descuento',
-      apiUrl: '${baseUrl}/discounts/${uuid}',
+      apiUrl: '${baseUrl}/discounts/${id}',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${token}',
@@ -1817,7 +1867,7 @@ class FindOneDescuentoCall {
 
 class EliminarCall {
   Future<ApiCallResponse> call({
-    String? uuid = '',
+    int? id,
     String? token = '',
   }) async {
     final baseUrl = DiscoinGroup.getBaseUrl(
@@ -1826,7 +1876,7 @@ class EliminarCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'eliminar',
-      apiUrl: '${baseUrl}/discounts/${uuid}',
+      apiUrl: '${baseUrl}/discounts/${id}',
       callType: ApiCallType.DELETE,
       headers: {
         'Authorization': 'Bearer ${token}',

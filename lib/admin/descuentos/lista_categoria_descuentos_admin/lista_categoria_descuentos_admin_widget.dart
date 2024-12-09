@@ -13,20 +13,21 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
-import 'lista_descuentos_admin_model.dart';
-export 'lista_descuentos_admin_model.dart';
+import 'lista_categoria_descuentos_admin_model.dart';
+export 'lista_categoria_descuentos_admin_model.dart';
 
-class ListaDescuentosAdminWidget extends StatefulWidget {
-  const ListaDescuentosAdminWidget({super.key});
+class ListaCategoriaDescuentosAdminWidget extends StatefulWidget {
+  const ListaCategoriaDescuentosAdminWidget({super.key});
 
   @override
-  State<ListaDescuentosAdminWidget> createState() =>
-      _ListaDescuentosAdminWidgetState();
+  State<ListaCategoriaDescuentosAdminWidget> createState() =>
+      _ListaCategoriaDescuentosAdminWidgetState();
 }
 
-class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
+class _ListaCategoriaDescuentosAdminWidgetState
+    extends State<ListaCategoriaDescuentosAdminWidget>
     with TickerProviderStateMixin {
-  late ListaDescuentosAdminModel _model;
+  late ListaCategoriaDescuentosAdminModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -35,7 +36,7 @@ class _ListaDescuentosAdminWidgetState extends State<ListaDescuentosAdminWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ListaDescuentosAdminModel());
+    _model = createModel(context, () => ListaCategoriaDescuentosAdminModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {

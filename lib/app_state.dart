@@ -34,6 +34,39 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _token = prefs.getString('ff_token') ?? _token;
     });
+    _safeInit(() {
+      _listMessages = prefs
+              .getStringList('ff_listMessages')
+              ?.map((x) {
+                try {
+                  return ChatMessageStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _listMessages;
+    });
+    _safeInit(() {
+      _listChats = prefs
+              .getStringList('ff_listChats')
+              ?.map((x) {
+                try {
+                  return ChatStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _listChats;
+    });
+    _safeInit(() {
+      _currentRoomId = prefs.getString('ff_currentRoomId') ?? _currentRoomId;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -72,18 +105,26 @@ class FFAppState extends ChangeNotifier {
   List<ChatMessageStruct> get listMessages => _listMessages;
   set listMessages(List<ChatMessageStruct> value) {
     _listMessages = value;
+    prefs.setStringList(
+        'ff_listMessages', value.map((x) => x.serialize()).toList());
   }
 
   void addToListMessages(ChatMessageStruct value) {
     listMessages.add(value);
+    prefs.setStringList(
+        'ff_listMessages', _listMessages.map((x) => x.serialize()).toList());
   }
 
   void removeFromListMessages(ChatMessageStruct value) {
     listMessages.remove(value);
+    prefs.setStringList(
+        'ff_listMessages', _listMessages.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromListMessages(int index) {
     listMessages.removeAt(index);
+    prefs.setStringList(
+        'ff_listMessages', _listMessages.map((x) => x.serialize()).toList());
   }
 
   void updateListMessagesAtIndex(
@@ -91,28 +132,40 @@ class FFAppState extends ChangeNotifier {
     ChatMessageStruct Function(ChatMessageStruct) updateFn,
   ) {
     listMessages[index] = updateFn(_listMessages[index]);
+    prefs.setStringList(
+        'ff_listMessages', _listMessages.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInListMessages(int index, ChatMessageStruct value) {
     listMessages.insert(index, value);
+    prefs.setStringList(
+        'ff_listMessages', _listMessages.map((x) => x.serialize()).toList());
   }
 
   List<ChatStruct> _listChats = [];
   List<ChatStruct> get listChats => _listChats;
   set listChats(List<ChatStruct> value) {
     _listChats = value;
+    prefs.setStringList(
+        'ff_listChats', value.map((x) => x.serialize()).toList());
   }
 
   void addToListChats(ChatStruct value) {
     listChats.add(value);
+    prefs.setStringList(
+        'ff_listChats', _listChats.map((x) => x.serialize()).toList());
   }
 
   void removeFromListChats(ChatStruct value) {
     listChats.remove(value);
+    prefs.setStringList(
+        'ff_listChats', _listChats.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromListChats(int index) {
     listChats.removeAt(index);
+    prefs.setStringList(
+        'ff_listChats', _listChats.map((x) => x.serialize()).toList());
   }
 
   void updateListChatsAtIndex(
@@ -120,16 +173,21 @@ class FFAppState extends ChangeNotifier {
     ChatStruct Function(ChatStruct) updateFn,
   ) {
     listChats[index] = updateFn(_listChats[index]);
+    prefs.setStringList(
+        'ff_listChats', _listChats.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInListChats(int index, ChatStruct value) {
     listChats.insert(index, value);
+    prefs.setStringList(
+        'ff_listChats', _listChats.map((x) => x.serialize()).toList());
   }
 
   String _currentRoomId = '';
   String get currentRoomId => _currentRoomId;
   set currentRoomId(String value) {
     _currentRoomId = value;
+    prefs.setString('ff_currentRoomId', value);
   }
 }
 

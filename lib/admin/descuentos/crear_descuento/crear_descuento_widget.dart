@@ -35,6 +35,7 @@ class _CrearDescuentoWidgetState extends State<CrearDescuentoWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.apiResponseOrganizer = await EventsGroup.getOrganizerCall.call(
         token: currentAuthenticationToken,
+        role: 4,
       );
 
       if ((_model.apiResponseOrganizer?.succeeded ?? true)) {
@@ -86,10 +87,19 @@ class _CrearDescuentoWidgetState extends State<CrearDescuentoWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.chevron_left_rounded,
-                        color: Color(0xFFFF8F14),
-                        size: 24.0,
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.safePop();
+                        },
+                        child: Icon(
+                          Icons.chevron_left_rounded,
+                          color: Color(0xFFFF8F14),
+                          size: 24.0,
+                        ),
                       ),
                       Expanded(
                         child: Column(
@@ -280,14 +290,14 @@ class _CrearDescuentoWidgetState extends State<CrearDescuentoWidget> {
                                   context.pushNamed(
                                     'EditarDescuento',
                                     queryParameters: {
-                                      'uuid': serializeParam(
+                                      'id': serializeParam(
                                         getJsonField(
                                           (_model.apiResponseOrganizer
                                                   ?.jsonBody ??
                                               ''),
                                           r'''$.uuid''',
-                                        ).toString(),
-                                        ParamType.String,
+                                        ),
+                                        ParamType.int,
                                       ),
                                     }.withoutNulls,
                                   );

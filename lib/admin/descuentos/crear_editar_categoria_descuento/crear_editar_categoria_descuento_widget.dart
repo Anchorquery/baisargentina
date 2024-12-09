@@ -7,27 +7,32 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'crear_categoria_descuento_model.dart';
-export 'crear_categoria_descuento_model.dart';
+import 'crear_editar_categoria_descuento_model.dart';
+export 'crear_editar_categoria_descuento_model.dart';
 
-class CrearCategoriaDescuentoWidget extends StatefulWidget {
-  const CrearCategoriaDescuentoWidget({super.key});
+class CrearEditarCategoriaDescuentoWidget extends StatefulWidget {
+  const CrearEditarCategoriaDescuentoWidget({
+    super.key,
+    this.id,
+  });
+
+  final int? id;
 
   @override
-  State<CrearCategoriaDescuentoWidget> createState() =>
-      _CrearCategoriaDescuentoWidgetState();
+  State<CrearEditarCategoriaDescuentoWidget> createState() =>
+      _CrearEditarCategoriaDescuentoWidgetState();
 }
 
-class _CrearCategoriaDescuentoWidgetState
-    extends State<CrearCategoriaDescuentoWidget> {
-  late CrearCategoriaDescuentoModel _model;
+class _CrearEditarCategoriaDescuentoWidgetState
+    extends State<CrearEditarCategoriaDescuentoWidget> {
+  late CrearEditarCategoriaDescuentoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CrearCategoriaDescuentoModel());
+    _model = createModel(context, () => CrearEditarCategoriaDescuentoModel());
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -73,7 +78,9 @@ class _CrearCategoriaDescuentoWidgetState
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              'Crear categorìa',
+                              widget!.id != null
+                                  ? 'Editar categoría'
+                                  : 'Crear categoría',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

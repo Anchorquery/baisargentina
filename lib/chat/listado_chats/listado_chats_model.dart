@@ -2,7 +2,6 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/chat/component_create_ticket/component_create_ticket_widget.dart';
-import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -44,19 +43,13 @@ class ListadoChatsModel extends FlutterFlowModel<ListadoChatsWidget> {
   ApiCallResponse? apiResultu3gCopy;
   // Stores action output result for [Backend Call - API (asignar usuario a chat)] action in Container widget.
   ApiCallResponse? apiResult36m;
-  // Model for loader component.
-  late LoaderModel loaderModel;
 
   @override
-  void initState(BuildContext context) {
-    loaderModel = createModel(context, () => LoaderModel());
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
     textFieldFocusNode?.dispose();
     textController?.dispose();
-
-    loaderModel.dispose();
   }
 }

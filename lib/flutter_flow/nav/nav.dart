@@ -356,10 +356,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CrearDescuentoWidget(),
         ),
         FFRoute(
-          name: 'CrearCategoriaDescuento',
-          path: '/crearCategoriaDescuento',
+          name: 'CrearEditarCategoriaDescuento',
+          path: '/crearEditarCategoriaDescuento',
           requireAuth: true,
-          builder: (context, params) => CrearCategoriaDescuentoWidget(),
+          builder: (context, params) => CrearEditarCategoriaDescuentoWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'Descuentos',
@@ -405,9 +410,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/editarDescuento',
           requireAuth: true,
           builder: (context, params) => EditarDescuentoWidget(
-            uuid: params.getParam(
-              'uuid',
-              ParamType.String,
+            id: params.getParam(
+              'id',
+              ParamType.int,
             ),
           ),
         ),
@@ -752,6 +757,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/listarCategoriasServiciosAdmin',
           requireAuth: true,
           builder: (context, params) => ListarCategoriasServiciosAdminWidget(),
+        ),
+        FFRoute(
+          name: 'DetallesDeDescuento',
+          path: '/detallesDeDescuento',
+          requireAuth: true,
+          builder: (context, params) => DetallesDeDescuentoWidget(
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ListaCategoriaDescuentosAdmin',
+          path: '/listaCategoriaDescuentosAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListaCategoriaDescuentosAdminWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

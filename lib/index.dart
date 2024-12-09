@@ -59,8 +59,8 @@ export '/admin/servicios/crear_categoria_servicio/crear_categoria_servicio_widge
     show CrearCategoriaServicioWidget;
 export '/admin/descuentos/crear_descuento/crear_descuento_widget.dart'
     show CrearDescuentoWidget;
-export '/admin/descuentos/crear_categoria_descuento/crear_categoria_descuento_widget.dart'
-    show CrearCategoriaDescuentoWidget;
+export '/admin/descuentos/crear_editar_categoria_descuento/crear_editar_categoria_descuento_widget.dart'
+    show CrearEditarCategoriaDescuentoWidget;
 export '/estudiante/discoint/descuentos/descuentos_widget.dart'
     show DescuentosWidget;
 export '/estudiante/services/services_by_category/services_by_category_widget.dart'
@@ -154,3 +154,7 @@ export '/admin/eventos_admin/listar_servicios_admin/listar_servicios_admin_widge
     show ListarServiciosAdminWidget;
 export '/admin/eventos_admin/listar_categorias_servicios_admin/listar_categorias_servicios_admin_widget.dart'
     show ListarCategoriasServiciosAdminWidget;
+export '/estudiante/discoint/detalles_de_descuento/detalles_de_descuento_widget.dart'
+    show DetallesDeDescuentoWidget;
+export '/admin/descuentos/lista_categoria_descuentos_admin/lista_categoria_descuentos_admin_widget.dart'
+    show ListaCategoriaDescuentosAdminWidget;

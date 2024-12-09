@@ -6,7 +6,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'lista_descuentos_admin_widget.dart' show ListaDescuentosAdminWidget;
+import 'lista_categoria_descuentos_admin_widget.dart'
+    show ListaCategoriaDescuentosAdminWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -15,8 +16,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
-class ListaDescuentosAdminModel
-    extends FlutterFlowModel<ListaDescuentosAdminWidget> {
+class ListaCategoriaDescuentosAdminModel
+    extends FlutterFlowModel<ListaCategoriaDescuentosAdminWidget> {
   ///  Local state fields for this page.
 
   List<DiscountsStruct> data = [];
@@ -32,7 +33,7 @@ class ListaDescuentosAdminModel
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (Find descuentos)] action in ListaDescuentosAdmin widget.
+  // Stores action output result for [Backend Call - API (Find descuentos)] action in ListaCategoriaDescuentosAdmin widget.
   ApiCallResponse? apiResponseHopusing;
   // Stores action output result for [Backend Call - API (Find descuentos)] action in Column widget.
   ApiCallResponse? apiResponseHopusingCopy;
