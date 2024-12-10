@@ -114,7 +114,7 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                                     child: Image.network(
                                       getJsonField(
                                         _model.data,
-                                        r'''$.avatar''',
+                                        r'''$.metadata.picture.url''',
                                       ).toString(),
                                       fit: BoxFit.cover,
                                     ),
@@ -123,37 +123,33 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                               ),
                               Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
-                                height:
-                                    MediaQuery.sizeOf(context).height * 0.08,
+                                height: MediaQuery.sizeOf(context).height * 0.1,
                                 decoration: BoxDecoration(),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            getJsonField(
-                                              _model.data,
-                                              r'''$.metadata.nameCommerce''',
-                                            ).toString(),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Lato',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  fontSize: 24.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w800,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          getJsonField(
+                                            _model.data,
+                                            r'''$.metadata.nameCommerce''',
+                                          ).toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Lato',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                fontSize: 24.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                        ),
+                                      ],
                                     ),
                                     Text(
                                       getJsonField(
@@ -296,9 +292,18 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                             alignment: AlignmentDirectional(-1.0, 1.0),
                             child: Text(
                               getJsonField(
-                                _model.data,
-                                r'''$.metadata.events''',
-                              ).toString(),
+                                        (_model.apiGetPerfilComercio
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.metadata.events''',
+                                      ) !=
+                                      null
+                                  ? getJsonField(
+                                      (_model.apiGetPerfilComercio?.jsonBody ??
+                                          ''),
+                                      r'''$.metadata.events''',
+                                    ).toString()
+                                  : '0',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -409,7 +414,9 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                         ),
                       ),
                     ),
-                  ],
+                  ]
+                      .addToStart(SizedBox(height: 30.0))
+                      .addToEnd(SizedBox(height: 30.0)),
                 ),
               );
             } else {

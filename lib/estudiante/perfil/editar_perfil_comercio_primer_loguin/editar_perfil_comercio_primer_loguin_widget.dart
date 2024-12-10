@@ -1478,177 +1478,163 @@ class _EditarPerfilComercioPrimerLoguinWidgetState
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
                             child: FFButtonWidget(
-                              onPressed: !_model.formularioPerfil!
-                                  ? null
-                                  : () async {
-                                      var _shouldSetState = false;
-                                      _model.formularioPerfil = true;
-                                      if (_model.formKey.currentState == null ||
-                                          !_model.formKey.currentState!
-                                              .validate()) {
-                                        safeSetState(() =>
-                                            _model.formularioPerfil = false);
-                                        return;
-                                      }
-                                      if (_model.uploadedLocalFile1 == null ||
-                                          (_model.uploadedLocalFile1.bytes ??
-                                                  [])
-                                              .isEmpty) {
-                                        _model.formularioPerfil = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.datePicked1 == null) {
-                                        _model.formularioPerfil = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.datePicked2 == null) {
-                                        _model.formularioPerfil = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.uploadedLocalFiles2.any(
-                                          (file) =>
-                                              file == null ||
-                                              (file.bytes?.isEmpty ?? true))) {
-                                        _model.formularioPerfil = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      _shouldSetState = true;
-                                      if (_model.formularioPerfil == true) {
-                                        _model.apiResultbmb = await UserGroup
-                                            .updateMetaDataComercioCall
-                                            .call(
-                                          urlUbicacion: _model
-                                              .textFieldUbicacionTextController
-                                              .text,
-                                          startDate: dateTimeFormat(
-                                            "Hm",
-                                            _model.datePicked1,
-                                            locale: FFLocalizations.of(context)
-                                                .languageCode,
-                                          ),
-                                          endDate: dateTimeFormat(
-                                            "Hm",
-                                            _model.datePicked2,
-                                            locale: FFLocalizations.of(context)
-                                                .languageCode,
-                                          ),
-                                          domingo: _model.switchDomingoValue,
-                                          sabado: _model.switchSabadoValue,
-                                          viernes: _model.switchViernesValue,
-                                          jueves: _model.switchJuevesValue,
-                                          miercoles:
-                                              _model.switchMiercolesValue,
-                                          martes: _model.switchMartesValue,
-                                          lunes: _model.switchLunesValue,
-                                          nameCommerce: _model
-                                              .textFieldNombreComercioTextController
-                                              .text,
-                                          picture: _model.uploadedLocalFile1,
-                                          imagesList:
-                                              _model.uploadedLocalFiles2,
-                                          token: currentAuthenticationToken,
+                              onPressed: () async {
+                                var _shouldSetState = false;
+                                _model.formularioPerfil = true;
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  safeSetState(
+                                      () => _model.formularioPerfil = false);
+                                  return;
+                                }
+                                if (_model.uploadedLocalFile1 == null ||
+                                    (_model.uploadedLocalFile1.bytes ?? [])
+                                        .isEmpty) {
+                                  _model.formularioPerfil = false;
+                                  safeSetState(() {});
+                                  return;
+                                }
+                                if (_model.datePicked1 == null) {
+                                  _model.formularioPerfil = false;
+                                  safeSetState(() {});
+                                  return;
+                                }
+                                if (_model.datePicked2 == null) {
+                                  _model.formularioPerfil = false;
+                                  safeSetState(() {});
+                                  return;
+                                }
+                                if (_model.uploadedLocalFiles2.any((file) =>
+                                    file == null ||
+                                    (file.bytes?.isEmpty ?? true))) {
+                                  _model.formularioPerfil = false;
+                                  safeSetState(() {});
+                                  return;
+                                }
+                                _shouldSetState = true;
+                                if (_model.formularioPerfil == true) {
+                                  _model.apiResultbmb = await UserGroup
+                                      .updateMetaDataComercioCall
+                                      .call(
+                                    urlUbicacion: _model
+                                        .textFieldUbicacionTextController.text,
+                                    startDate: dateTimeFormat(
+                                      "HH:mm:ss.SSS",
+                                      _model.datePicked1,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    endDate: dateTimeFormat(
+                                      "HH:mm:ss.SSS",
+                                      _model.datePicked2,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    domingo: _model.switchDomingoValue,
+                                    sabado: _model.switchSabadoValue,
+                                    viernes: _model.switchViernesValue,
+                                    jueves: _model.switchJuevesValue,
+                                    miercoles: _model.switchMiercolesValue,
+                                    martes: _model.switchMartesValue,
+                                    lunes: _model.switchLunesValue,
+                                    nameCommerce: _model
+                                        .textFieldNombreComercioTextController
+                                        .text,
+                                    picture: _model.uploadedLocalFile1,
+                                    imagesList: _model.uploadedLocalFiles2,
+                                    token: currentAuthenticationToken,
+                                  );
+
+                                  _shouldSetState = true;
+                                  if ((_model.apiResultbmb?.succeeded ??
+                                      true)) {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Solicitud exitosa'),
+                                          content: Text(
+                                              'Se ha actualizado el perfil correctamente.'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
                                         );
+                                      },
+                                    );
+                                    FFAppState().updateUserStruct(
+                                      (e) => e..isInvited = true,
+                                    );
+                                    safeSetState(() {});
 
-                                        _shouldSetState = true;
-                                        if ((_model.apiResultbmb?.succeeded ??
-                                            true)) {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title:
-                                                    Text('Solicitud exitosa'),
-                                                content: Text(
-                                                    'Se ha actualizado el perfil correctamente.'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
+                                    context.goNamed('HomeComercio');
 
-                                          context.goNamed('HomeComercio');
-
-                                          if (_shouldSetState)
-                                            safeSetState(() {});
-                                          return;
-                                        } else {
-                                          var confirmDialogResponse =
-                                              await showDialog<bool>(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                            'Ha ocurrido un error'),
-                                                        content:
-                                                            Text(getJsonField(
-                                                          (_model.apiResultbmb
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.error''',
-                                                        ).toString()),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    false),
-                                                            child:
-                                                                Text('Cancel'),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    true),
-                                                            child:
-                                                                Text('Confirm'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  ) ??
-                                                  false;
-                                          if (_shouldSetState)
-                                            safeSetState(() {});
-                                          return;
-                                        }
-                                      } else {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Campos vacíos'),
-                                              content: Text(
-                                                  'Debes completar todos los campos. '),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        if (_shouldSetState)
-                                          safeSetState(() {});
-                                        return;
-                                      }
-
-                                      if (_shouldSetState) safeSetState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  } else {
+                                    var confirmDialogResponse =
+                                        await showDialog<bool>(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Ha ocurrido un error'),
+                                                  content: Text(getJsonField(
+                                                    (_model.apiResultbmb
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.error''',
+                                                  ).toString()),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              false),
+                                                      child: Text('Cancel'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              true),
+                                                      child: Text('Confirm'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ) ??
+                                            false;
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  }
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Campos vacíos'),
+                                        content: Text(
+                                            'Debes completar todos los campos. '),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
                                     },
+                                  );
+                                  if (_shouldSetState) safeSetState(() {});
+                                  return;
+                                }
+
+                                if (_shouldSetState) safeSetState(() {});
+                              },
                               text: 'Guardar',
                               options: FFButtonOptions(
                                 height: 40.0,
