@@ -5,14 +5,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'create_a_ticket_widget.dart' show CreateATicketWidget;
+import 'crear_un_ticket_widget.dart' show CrearUnTicketWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CreateATicketModel extends FlutterFlowModel<CreateATicketWidget> {
+class CrearUnTicketModel extends FlutterFlowModel<CrearUnTicketWidget> {
   ///  Local state fields for this page.
 
   dynamic data;

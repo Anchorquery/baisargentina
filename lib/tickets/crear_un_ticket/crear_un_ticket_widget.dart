@@ -10,19 +10,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'create_a_ticket_model.dart';
-export 'create_a_ticket_model.dart';
+import 'crear_un_ticket_model.dart';
+export 'crear_un_ticket_model.dart';
 
-class CreateATicketWidget extends StatefulWidget {
-  const CreateATicketWidget({super.key});
+class CrearUnTicketWidget extends StatefulWidget {
+  const CrearUnTicketWidget({super.key});
 
   @override
-  State<CreateATicketWidget> createState() => _CreateATicketWidgetState();
+  State<CrearUnTicketWidget> createState() => _CrearUnTicketWidgetState();
 }
 
-class _CreateATicketWidgetState extends State<CreateATicketWidget>
+class _CrearUnTicketWidgetState extends State<CrearUnTicketWidget>
     with TickerProviderStateMixin {
-  late CreateATicketModel _model;
+  late CrearUnTicketModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -31,7 +31,7 @@ class _CreateATicketWidgetState extends State<CreateATicketWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CreateATicketModel());
+    _model = createModel(context, () => CrearUnTicketModel());
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();

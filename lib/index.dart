@@ -96,11 +96,12 @@ export '/admin/eventos_admin/editar_categoria_e/editar_categoria_e_widget.dart'
     show EditarCategoriaEWidget;
 export '/admin/transaction_details/transaction_details_widget.dart'
     show TransactionDetailsWidget;
-export '/tickets/see_or_create/see_or_create_widget.dart'
-    show SeeOrCreateWidget;
-export '/tickets/create_a_ticket/create_a_ticket_widget.dart'
-    show CreateATicketWidget;
-export '/tickets/all_tickets/all_tickets_widget.dart' show AllTicketsWidget;
+export '/tickets/seleccionar_accion_tickets/seleccionar_accion_tickets_widget.dart'
+    show SeleccionarAccionTicketsWidget;
+export '/tickets/crear_un_ticket/crear_un_ticket_widget.dart'
+    show CrearUnTicketWidget;
+export '/tickets/todos_los_tickets/todos_los_tickets_widget.dart'
+    show TodosLosTicketsWidget;
 export '/admin/users/seleccionar_tipo_usuario/seleccionar_tipo_usuario_widget.dart'
     show SeleccionarTipoUsuarioWidget;
 export '/admin/users/perfil_estudiante_by_id/perfil_estudiante_by_id_widget.dart'
@@ -140,7 +141,6 @@ export '/admin/users/lista_usuario_estudiantes/lista_usuario_estudiantes_widget.
     show ListaUsuarioEstudiantesWidget;
 export '/admin/users/crear_estudiante/crear_estudiante_widget.dart'
     show CrearEstudianteWidget;
-export '/estudiante/planes_copy/planes_copy_widget.dart' show PlanesCopyWidget;
 export '/comercio/editar_perfil_comercio_admin/editar_perfil_comercio_admin_widget.dart'
     show EditarPerfilComercioAdminWidget;
 export '/comercio/mi_perfil_comercio/mi_perfil_comercio_widget.dart'
@@ -161,3 +161,7 @@ export '/admin/f_a_qadmin/listar_f_a_q_admin/listar_f_a_q_admin_widget.dart'
     show ListarFAQAdminWidget;
 export '/admin/f_a_qadmin/listado_f_a_q_copy/listado_f_a_q_copy_widget.dart'
     show ListadoFAQCopyWidget;
+export '/estudiante/perfil/editar_perfil_user_primer_loguin/editar_perfil_user_primer_loguin_widget.dart'
+    show EditarPerfilUserPrimerLoguinWidget;
+export '/estudiante/perfil/editar_perfil_comercio_primer_loguin/editar_perfil_comercio_primer_loguin_widget.dart'
+    show EditarPerfilComercioPrimerLoguinWidget;

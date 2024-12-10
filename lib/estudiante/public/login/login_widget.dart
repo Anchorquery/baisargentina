@@ -581,7 +581,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 (_model.loginResponse?.jsonBody ?? ''),
                               ))!;
 
-                              context.goNamedAuth('pageInit', context.mounted);
+                              context.goNamedAuth('PageInit', context.mounted);
 
                               if (_shouldSetState) safeSetState(() {});
                               return;

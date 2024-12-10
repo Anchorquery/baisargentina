@@ -156,15 +156,18 @@ class _ListarCategoriasServiciosAdminWidgetState
                         size: 24.0,
                       ),
                     ),
-                    Text(
-                      'Lista de C. servicios',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Lato',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 32.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w800,
-                          ),
+                    Expanded(
+                      child: Text(
+                        'Categorías de servicios',
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Lato',
+                              color: FlutterFlowTheme.of(context).primary,
+                              fontSize: 32.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w800,
+                            ),
+                      ),
                     ),
                   ].divide(SizedBox(width: 20.0)),
                 ),

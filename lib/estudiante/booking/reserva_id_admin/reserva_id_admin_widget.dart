@@ -118,7 +118,7 @@ class _ReservaIdAdminWidgetState extends State<ReservaIdAdminWidget>
                     size: 30.0,
                   ),
                   onPressed: () async {
-                    context.pushNamed('AllTickets');
+                    context.pushNamed('TodosLosTickets');
                   },
                 ),
                 actions: [],

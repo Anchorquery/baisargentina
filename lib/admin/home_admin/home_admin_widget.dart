@@ -946,7 +946,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('AllTickets');
+                                          context.pushNamed('TodosLosTickets');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(

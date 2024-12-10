@@ -12,19 +12,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'all_tickets_model.dart';
-export 'all_tickets_model.dart';
+import 'todos_los_tickets_model.dart';
+export 'todos_los_tickets_model.dart';
 
-class AllTicketsWidget extends StatefulWidget {
-  const AllTicketsWidget({super.key});
+class TodosLosTicketsWidget extends StatefulWidget {
+  const TodosLosTicketsWidget({super.key});
 
   @override
-  State<AllTicketsWidget> createState() => _AllTicketsWidgetState();
+  State<TodosLosTicketsWidget> createState() => _TodosLosTicketsWidgetState();
 }
 
-class _AllTicketsWidgetState extends State<AllTicketsWidget>
+class _TodosLosTicketsWidgetState extends State<TodosLosTicketsWidget>
     with TickerProviderStateMixin {
-  late AllTicketsModel _model;
+  late TodosLosTicketsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,7 +33,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AllTicketsModel());
+    _model = createModel(context, () => TodosLosTicketsModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -272,7 +272,7 @@ class _AllTicketsWidgetState extends State<AllTicketsWidget>
                               alignment: AlignmentDirectional(-1.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('CreateATicket');
+                                  context.pushNamed('CrearUnTicket');
                                 },
                                 text: 'Crear ticket manual',
                                 options: FFButtonOptions(

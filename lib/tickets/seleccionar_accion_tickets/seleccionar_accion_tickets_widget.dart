@@ -4,25 +4,27 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'see_or_create_model.dart';
-export 'see_or_create_model.dart';
+import 'seleccionar_accion_tickets_model.dart';
+export 'seleccionar_accion_tickets_model.dart';
 
-class SeeOrCreateWidget extends StatefulWidget {
-  const SeeOrCreateWidget({super.key});
+class SeleccionarAccionTicketsWidget extends StatefulWidget {
+  const SeleccionarAccionTicketsWidget({super.key});
 
   @override
-  State<SeeOrCreateWidget> createState() => _SeeOrCreateWidgetState();
+  State<SeleccionarAccionTicketsWidget> createState() =>
+      _SeleccionarAccionTicketsWidgetState();
 }
 
-class _SeeOrCreateWidgetState extends State<SeeOrCreateWidget> {
-  late SeeOrCreateModel _model;
+class _SeleccionarAccionTicketsWidgetState
+    extends State<SeleccionarAccionTicketsWidget> {
+  late SeleccionarAccionTicketsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SeeOrCreateModel());
+    _model = createModel(context, () => SeleccionarAccionTicketsModel());
   }
 
   @override

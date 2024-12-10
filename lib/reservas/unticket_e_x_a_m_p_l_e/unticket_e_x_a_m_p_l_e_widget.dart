@@ -172,7 +172,7 @@ class _UnticketEXAMPLEWidgetState extends State<UnticketEXAMPLEWidget>
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'ORganizador',
+                        'Organizador',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
                               fontSize: 14.0,

@@ -2,7 +2,9 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/loader/loader_widget.dart';
+import '/estudiante/info1/info1_widget.dart';
+import '/estudiante/info2/info2_widget.dart';
+import '/estudiante/info3/info3_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,7 +12,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
 import 'planes_de_membresia_widget.dart' show PlanesDeMembresiaWidget;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -42,16 +43,10 @@ class PlanesDeMembresiaModel extends FlutterFlowModel<PlanesDeMembresiaWidget> {
   ApiCallResponse? apiBuscarPlanes;
   // Stores action output result for [Backend Call - API (MiPlan)] action in PlanesDeMembresia widget.
   ApiCallResponse? apiMyPlan;
-  // Model for loader component.
-  late LoaderModel loaderModel;
 
   @override
-  void initState(BuildContext context) {
-    loaderModel = createModel(context, () => LoaderModel());
-  }
+  void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    loaderModel.dispose();
-  }
+  void dispose() {}
 }

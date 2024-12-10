@@ -6,7 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'all_tickets_widget.dart' show AllTicketsWidget;
+import 'todos_los_tickets_widget.dart' show TodosLosTicketsWidget;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -14,7 +14,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AllTicketsModel extends FlutterFlowModel<AllTicketsWidget> {
+class TodosLosTicketsModel extends FlutterFlowModel<TodosLosTicketsWidget> {
   ///  Local state fields for this page.
 
   List<dynamic> data = [];
@@ -41,7 +41,7 @@ class AllTicketsModel extends FlutterFlowModel<AllTicketsWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (find reservas admin)] action in AllTickets widget.
+  // Stores action output result for [Backend Call - API (find reservas admin)] action in TodosLosTickets widget.
   ApiCallResponse? apiObtenerReservasAdmin;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;

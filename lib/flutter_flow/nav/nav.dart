@@ -522,22 +522,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'SeeOrCreate',
-          path: '/seeOrCreate',
+          name: 'SeleccionarAccionTickets',
+          path: '/seleccionarAccionTickets',
           requireAuth: true,
-          builder: (context, params) => SeeOrCreateWidget(),
+          builder: (context, params) => SeleccionarAccionTicketsWidget(),
         ),
         FFRoute(
-          name: 'CreateATicket',
-          path: '/createATicket',
+          name: 'CrearUnTicket',
+          path: '/crearUnTicket',
           requireAuth: true,
-          builder: (context, params) => CreateATicketWidget(),
+          builder: (context, params) => CrearUnTicketWidget(),
         ),
         FFRoute(
-          name: 'AllTickets',
-          path: '/allTickets',
+          name: 'TodosLosTickets',
+          path: '/todosLosTickets',
           requireAuth: true,
-          builder: (context, params) => AllTicketsWidget(),
+          builder: (context, params) => TodosLosTicketsWidget(),
         ),
         FFRoute(
           name: 'SeleccionarTipoUsuario',
@@ -665,7 +665,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'pageInit',
+          name: 'PageInit',
           path: '/pageInit',
           requireAuth: true,
           builder: (context, params) => PageInitWidget(),
@@ -694,12 +694,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/crearEstudiante',
           requireAuth: true,
           builder: (context, params) => CrearEstudianteWidget(),
-        ),
-        FFRoute(
-          name: 'planesCopy',
-          path: '/planesCopy',
-          requireAuth: true,
-          builder: (context, params) => PlanesCopyWidget(),
         ),
         FFRoute(
           name: 'EditarPerfilComercioAdmin',
@@ -780,6 +774,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/listadoFAQCopy',
           requireAuth: true,
           builder: (context, params) => ListadoFAQCopyWidget(),
+        ),
+        FFRoute(
+          name: 'EditarPerfilUserPrimerLoguin',
+          path: '/editarPerfilUserPrimerLoguin',
+          requireAuth: true,
+          builder: (context, params) => EditarPerfilUserPrimerLoguinWidget(),
+        ),
+        FFRoute(
+          name: 'EditarPerfilComercioPrimerLoguin',
+          path: '/editarPerfilComercioPrimerLoguin',
+          requireAuth: true,
+          builder: (context, params) =>
+              EditarPerfilComercioPrimerLoguinWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

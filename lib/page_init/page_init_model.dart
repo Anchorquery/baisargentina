@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 class PageInitModel extends FlutterFlowModel<PageInitWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (me )] action in pageInit widget.
+  // Stores action output result for [Backend Call - API (me )] action in PageInit widget.
   ApiCallResponse? misDatos;
   // Model for loader component.
   late LoaderModel loaderModel;

@@ -23,6 +23,7 @@ class UserStruct extends BaseStruct {
     String? qrImage,
     String? dni,
     String? pasaporte,
+    bool? isInvited,
   })  : _id = id,
         _name = name,
         _lastName = lastName,
@@ -37,7 +38,8 @@ class UserStruct extends BaseStruct {
         _phone = phone,
         _qrImage = qrImage,
         _dni = dni,
-        _pasaporte = pasaporte;
+        _pasaporte = pasaporte,
+        _isInvited = isInvited;
 
   // "id" field.
   int? _id;
@@ -148,6 +150,13 @@ class UserStruct extends BaseStruct {
 
   bool hasPasaporte() => _pasaporte != null;
 
+  // "isInvited" field.
+  bool? _isInvited;
+  bool get isInvited => _isInvited ?? false;
+  set isInvited(bool? val) => _isInvited = val;
+
+  bool hasIsInvited() => _isInvited != null;
+
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -164,6 +173,7 @@ class UserStruct extends BaseStruct {
         qrImage: data['qrImage'] as String?,
         dni: data['dni'] as String?,
         pasaporte: data['pasaporte'] as String?,
+        isInvited: data['isInvited'] as bool?,
       );
 
   static UserStruct? maybeFromMap(dynamic data) =>
@@ -185,6 +195,7 @@ class UserStruct extends BaseStruct {
         'qrImage': _qrImage,
         'dni': _dni,
         'pasaporte': _pasaporte,
+        'isInvited': _isInvited,
       }.withoutNulls;
 
   @override
@@ -248,6 +259,10 @@ class UserStruct extends BaseStruct {
         'pasaporte': serializeParam(
           _pasaporte,
           ParamType.String,
+        ),
+        'isInvited': serializeParam(
+          _isInvited,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -328,6 +343,11 @@ class UserStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        isInvited: deserializeParam(
+          data['isInvited'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -350,7 +370,8 @@ class UserStruct extends BaseStruct {
         phone == other.phone &&
         qrImage == other.qrImage &&
         dni == other.dni &&
-        pasaporte == other.pasaporte;
+        pasaporte == other.pasaporte &&
+        isInvited == other.isInvited;
   }
 
   @override
@@ -369,7 +390,8 @@ class UserStruct extends BaseStruct {
         phone,
         qrImage,
         dni,
-        pasaporte
+        pasaporte,
+        isInvited
       ]);
 }
 
@@ -389,6 +411,7 @@ UserStruct createUserStruct({
   String? qrImage,
   String? dni,
   String? pasaporte,
+  bool? isInvited,
 }) =>
     UserStruct(
       id: id,
@@ -406,4 +429,5 @@ UserStruct createUserStruct({
       qrImage: qrImage,
       dni: dni,
       pasaporte: pasaporte,
+      isInvited: isInvited,
     );
