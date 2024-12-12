@@ -400,6 +400,7 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                     await ChatGroup.listarChatsCall.call(
                                   stateChat: _model.estadoChatValue,
                                   q: _model.textController.text,
+                                  token: currentAuthenticationToken,
                                 );
 
                                 _shouldSetState = true;
@@ -603,6 +604,8 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                               safeSetState(() {});
                               _model.apiResultu3gCopy =
                                   await ChatGroup.listarChatsCall.call(
+                                q: _model.textController.text,
+                                stateChat: _model.estadoChatValue,
                                 token: currentAuthenticationToken,
                               );
 
@@ -615,6 +618,29 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                 ));
                                 _model.loading = !(_model.loading ?? true);
                                 safeSetState(() {});
+                                return;
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Ha ocurrido un error'),
+                                      content: Text(getJsonField(
+                                        (_model.apiResultu3gCopy?.jsonBody ??
+                                            ''),
+                                        r'''$.error''',
+                                      ).toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                return;
                               }
                             },
                             child: SingleChildScrollView(
