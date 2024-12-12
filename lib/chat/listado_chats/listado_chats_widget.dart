@@ -213,6 +213,18 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                           ),
                     ),
                   ),
+                if (currentUserData?.role == 3)
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      'Aqui se muestran tus tickets abiertos.',
+                      style: FlutterFlowTheme.of(context).labelMedium.override(
+                            fontFamily: 'Lato',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ),
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -236,6 +248,17 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                             _shouldSetState = true;
                             if ((_model.apiCargarChatsPorNombre?.succeeded ??
                                 true)) {
+                              _model.loading = !(_model.loading ?? true);
+                              _model.pagination =
+                                  PaginationStruct.maybeFromMap(getJsonField(
+                                (_model.apiCargarChatsPorNombre?.jsonBody ??
+                                    ''),
+                                r'''$.pagination''',
+                              ));
+                              _model.chats = [];
+                              safeSetState(() {});
+                              FFAppState().listChats = [];
+                              safeSetState(() {});
                               FFAppState().listChats = (getJsonField(
                                 (_model.apiCargarChatsPorNombre?.jsonBody ??
                                     ''),
@@ -248,14 +271,6 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                   .withoutNulls
                                   .toList()
                                   .cast<ChatStruct>();
-                              safeSetState(() {});
-                              _model.loading = !(_model.loading ?? true);
-                              _model.pagination =
-                                  PaginationStruct.maybeFromMap(getJsonField(
-                                (_model.apiCargarChatsPorNombre?.jsonBody ??
-                                    ''),
-                                r'''$.pagination''',
-                              ));
                               safeSetState(() {});
                               if (_shouldSetState) safeSetState(() {});
                               return;
@@ -407,6 +422,17 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                 if ((_model
                                         .apiCargarChatsPorEstado?.succeeded ??
                                     true)) {
+                                  _model.pagination =
+                                      PaginationStruct.maybeFromMap(
+                                          getJsonField(
+                                    (_model.apiCargarChatsPorEstado?.jsonBody ??
+                                        ''),
+                                    r'''$.pagination''',
+                                  ));
+                                  _model.chats = [];
+                                  safeSetState(() {});
+                                  FFAppState().listChats = [];
+                                  safeSetState(() {});
                                   FFAppState().listChats = (getJsonField(
                                     (_model.apiCargarChatsPorEstado?.jsonBody ??
                                         ''),
@@ -420,15 +446,6 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                       .withoutNulls
                                       .toList()
                                       .cast<ChatStruct>();
-                                  safeSetState(() {});
-                                  _model.loading = !(_model.loading ?? true);
-                                  _model.pagination =
-                                      PaginationStruct.maybeFromMap(
-                                          getJsonField(
-                                    (_model.apiCargarChatsPorEstado?.jsonBody ??
-                                        ''),
-                                    r'''$.pagination''',
-                                  ));
                                   safeSetState(() {});
                                   if (_shouldSetState) safeSetState(() {});
                                   return;
@@ -514,6 +531,17 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                   if ((_model
                                           .apiCargarChatsPorNombre?.succeeded ??
                                       true)) {
+                                    _model.pagination =
+                                        PaginationStruct.maybeFromMap(
+                                            getJsonField(
+                                      (_model.apiCargarChatsClean?.jsonBody ??
+                                          ''),
+                                      r'''$.pagination''',
+                                    ));
+                                    _model.chats = [];
+                                    safeSetState(() {});
+                                    FFAppState().listChats = [];
+                                    safeSetState(() {});
                                     FFAppState().listChats = (getJsonField(
                                       (_model.apiCargarChatsClean?.jsonBody ??
                                           ''),
@@ -527,15 +555,6 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                         .withoutNulls
                                         .toList()
                                         .cast<ChatStruct>();
-                                    safeSetState(() {});
-                                    _model.loading = !(_model.loading ?? true);
-                                    _model.pagination =
-                                        PaginationStruct.maybeFromMap(
-                                            getJsonField(
-                                      (_model.apiCargarChatsClean?.jsonBody ??
-                                          ''),
-                                      r'''$.pagination''',
-                                    ));
                                     safeSetState(() {});
                                     if (_shouldSetState) safeSetState(() {});
                                     return;
@@ -617,6 +636,21 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                   r'''$.pagination''',
                                 ));
                                 _model.loading = !(_model.loading ?? true);
+                                safeSetState(() {});
+                                FFAppState().listChats = [];
+                                safeSetState(() {});
+                                FFAppState().listChats = (getJsonField(
+                                  (_model.apiResultu3gCopy?.jsonBody ?? ''),
+                                  r'''$.data''',
+                                  true,
+                                )!
+                                        .toList()
+                                        .map<ChatStruct?>(
+                                            ChatStruct.maybeFromMap)
+                                        .toList() as Iterable<ChatStruct?>)
+                                    .withoutNulls
+                                    .toList()
+                                    .cast<ChatStruct>();
                                 safeSetState(() {});
                                 return;
                               } else {

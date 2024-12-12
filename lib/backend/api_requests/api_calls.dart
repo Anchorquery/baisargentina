@@ -2891,6 +2891,7 @@ class ListarChatsCall {
         'pageSize': pageSize,
         'pageCount': pageCount,
         'q': q,
+        'stateChat': stateChat,
       },
       returnBody: true,
       encodeBodyUtf8: false,
