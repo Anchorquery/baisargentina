@@ -61,10 +61,23 @@ class _EditarHousingWidgetState extends State<EditarHousingWidget>
         safeSetState(() {
           _model.tituloHousingfieldTextController?.text = _model.data!.title;
           _model.tituloHousingfieldFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.tituloHousingfieldTextController?.selection = TextSelection(
+              baseOffset: 0,
+              extentOffset:
+                  _model.tituloHousingfieldTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.descriptionEditTextController?.text = _model.data!.description;
           _model.descriptionEditFocusNode?.requestFocus();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _model.descriptionEditTextController?.selection = TextSelection(
+              baseOffset: 0,
+              extentOffset: _model.descriptionEditTextController!.text.length,
+            );
+          });
         });
         safeSetState(() {
           _model.captionFieldEditTextController?.text = _model.data!.caption;
@@ -228,7 +241,10 @@ class _EditarHousingWidgetState extends State<EditarHousingWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,

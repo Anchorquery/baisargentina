@@ -176,7 +176,10 @@ class _EditarPerfilUserAdminWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -2144,7 +2147,9 @@ class _EditarPerfilUserAdminWidgetState
                               ),
                             ),
                           ),
-                        ],
+                        ]
+                            .addToStart(SizedBox(height: 30.0))
+                            .addToEnd(SizedBox(height: 30.0)),
                       ),
                     );
                   } else {

@@ -14,14 +14,14 @@ import 'init_socket_connection.dart'
     show SocketService; // Import del servicio de socket
 import 'dart:async'; // Import necesario para manejar los futuros y los streams
 
-Future<void> listenToNewChatMessageAction(String roomId) async {
+Future<void> listenToUpdateChatMessageAction(String roomId) async {
   if (roomId.isEmpty) {
     print('El ID de la sala está vacío, no se agregará el listener');
     return;
   }
 
   // Acceder al socket mediante un getter público o directamente
-  final socket = SocketService().getSocket(); // Cambié para obtener el socket
+  final socket = SocketService().getSocket(); // Obtiene el socket
 
   if (socket == null) {
     print('El socket no está conectado');
@@ -29,25 +29,37 @@ Future<void> listenToNewChatMessageAction(String roomId) async {
   }
 
   // Remover cualquier listener existente para evitar duplicados
-  socket.off('newChatMessage');
+  socket.off('updateChatMessage');
 
-  // Escuchar el evento 'newChatMessage' con el socket
-  socket.on('newChatMessage', (data) async {
-    print('Nuevo mensaje recibido en la sala $roomId, Datos: $data');
+  // Escuchar el evento 'updateChatMessage' con el socket
+  socket.on('updateChatMessage', (data) async {
+    print('Mensaje actualizado recibido en la sala $roomId, Datos: $data');
 
     if (data != null && data is Map<String, dynamic>) {
       // Convertir los datos del mensaje a un objeto adecuado para la lista de mensajes
-      final newMessage = ChatMessageStruct.fromMap(data);
+      final updatedMessage = ChatMessageStruct.fromMap(data);
 
-      // Añadir el mensaje recibido al estado global FFAppState().listMessage
+      // Obtener la lista actual de mensajes
       final currentMessages = FFAppState().listMessages;
-      currentMessages.insert(0, newMessage);
 
-      FFAppState().update(() {
-        FFAppState().listMessages = currentMessages;
-      });
+      // Buscar el índice del mensaje que se va a actualizar
+      int index =
+          currentMessages.indexWhere((msg) => msg.uuid == updatedMessage.uuid);
 
-      print('Mensaje añadido a FFAppState().listMessage');
+      if (index != -1) {
+        // Actualizar el mensaje existente
+        currentMessages[index] = updatedMessage;
+
+        // Actualizar el estado global
+        FFAppState().update(() {
+          FFAppState().listMessages = currentMessages;
+        });
+
+        print('Mensaje actualizado en FFAppState().listMessages');
+      } else {
+        print(
+            'Mensaje con ID ${updatedMessage.uuid} no encontrado en FFAppState().listMessages');
+      }
     } else {
       print('Datos del mensaje no válidos: $data');
     }

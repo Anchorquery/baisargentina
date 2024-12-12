@@ -27,7 +27,7 @@ class ScaneoExitosoModel extends FlutterFlowModel<ScaneoExitosoWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (findme One)] action in scaneoExitoso widget.
+  // Stores action output result for [Backend Call - API (findme One)] action in ScaneoExitoso widget.
   ApiCallResponse? apiResponseFindMeBooking;
   var responseScanQr = '';
   // Stores action output result for [Backend Call - API (verificarReserva)] action in Button widget.

@@ -13,19 +13,19 @@ class ChatStruct extends BaseStruct {
     List<UserStruct>? lastMessageSeenBy,
     String? uuid,
     String? state,
-    String? lastMessageTime,
     String? name,
     UserChatStruct? user,
     String? id,
+    int? lastMessageTime,
   })  : _lastMessage = lastMessage,
         _lastMessageSentBy = lastMessageSentBy,
         _lastMessageSeenBy = lastMessageSeenBy,
         _uuid = uuid,
         _state = state,
-        _lastMessageTime = lastMessageTime,
         _name = name,
         _user = user,
-        _id = id;
+        _id = id,
+        _lastMessageTime = lastMessageTime;
 
   // "last_message" field.
   String? _lastMessage;
@@ -70,13 +70,6 @@ class ChatStruct extends BaseStruct {
 
   bool hasState() => _state != null;
 
-  // "last_message_time" field.
-  String? _lastMessageTime;
-  String get lastMessageTime => _lastMessageTime ?? '';
-  set lastMessageTime(String? val) => _lastMessageTime = val;
-
-  bool hasLastMessageTime() => _lastMessageTime != null;
-
   // "name" field.
   String? _name;
   String get name => _name ?? '';
@@ -102,20 +95,33 @@ class ChatStruct extends BaseStruct {
 
   bool hasId() => _id != null;
 
+  // "last_message_time" field.
+  int? _lastMessageTime;
+  int get lastMessageTime => _lastMessageTime ?? 0;
+  set lastMessageTime(int? val) => _lastMessageTime = val;
+
+  void incrementLastMessageTime(int amount) =>
+      lastMessageTime = lastMessageTime + amount;
+
+  bool hasLastMessageTime() => _lastMessageTime != null;
+
   static ChatStruct fromMap(Map<String, dynamic> data) => ChatStruct(
         lastMessage: data['last_message'] as String?,
-        lastMessageSentBy:
-            UserStruct.maybeFromMap(data['last_message_sent_by']),
+        lastMessageSentBy: data['last_message_sent_by'] is UserStruct
+            ? data['last_message_sent_by']
+            : UserStruct.maybeFromMap(data['last_message_sent_by']),
         lastMessageSeenBy: getStructList(
           data['last_message_seen_by'],
           UserStruct.fromMap,
         ),
         uuid: data['uuid'] as String?,
         state: data['state'] as String?,
-        lastMessageTime: data['last_message_time'] as String?,
         name: data['name'] as String?,
-        user: UserChatStruct.maybeFromMap(data['user']),
+        user: data['user'] is UserChatStruct
+            ? data['user']
+            : UserChatStruct.maybeFromMap(data['user']),
         id: data['id'] as String?,
+        lastMessageTime: castToType<int>(data['last_message_time']),
       );
 
   static ChatStruct? maybeFromMap(dynamic data) =>
@@ -128,10 +134,10 @@ class ChatStruct extends BaseStruct {
             _lastMessageSeenBy?.map((e) => e.toMap()).toList(),
         'uuid': _uuid,
         'state': _state,
-        'last_message_time': _lastMessageTime,
         'name': _name,
         'user': _user?.toMap(),
         'id': _id,
+        'last_message_time': _lastMessageTime,
       }.withoutNulls;
 
   @override
@@ -157,10 +163,6 @@ class ChatStruct extends BaseStruct {
           _state,
           ParamType.String,
         ),
-        'last_message_time': serializeParam(
-          _lastMessageTime,
-          ParamType.String,
-        ),
         'name': serializeParam(
           _name,
           ParamType.String,
@@ -172,6 +174,10 @@ class ChatStruct extends BaseStruct {
         'id': serializeParam(
           _id,
           ParamType.String,
+        ),
+        'last_message_time': serializeParam(
+          _lastMessageTime,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -204,11 +210,6 @@ class ChatStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        lastMessageTime: deserializeParam(
-          data['last_message_time'],
-          ParamType.String,
-          false,
-        ),
         name: deserializeParam(
           data['name'],
           ParamType.String,
@@ -225,6 +226,11 @@ class ChatStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        lastMessageTime: deserializeParam(
+          data['last_message_time'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -239,10 +245,10 @@ class ChatStruct extends BaseStruct {
         listEquality.equals(lastMessageSeenBy, other.lastMessageSeenBy) &&
         uuid == other.uuid &&
         state == other.state &&
-        lastMessageTime == other.lastMessageTime &&
         name == other.name &&
         user == other.user &&
-        id == other.id;
+        id == other.id &&
+        lastMessageTime == other.lastMessageTime;
   }
 
   @override
@@ -252,10 +258,10 @@ class ChatStruct extends BaseStruct {
         lastMessageSeenBy,
         uuid,
         state,
-        lastMessageTime,
         name,
         user,
-        id
+        id,
+        lastMessageTime
       ]);
 }
 
@@ -264,18 +270,18 @@ ChatStruct createChatStruct({
   UserStruct? lastMessageSentBy,
   String? uuid,
   String? state,
-  String? lastMessageTime,
   String? name,
   UserChatStruct? user,
   String? id,
+  int? lastMessageTime,
 }) =>
     ChatStruct(
       lastMessage: lastMessage,
       lastMessageSentBy: lastMessageSentBy ?? UserStruct(),
       uuid: uuid,
       state: state,
-      lastMessageTime: lastMessageTime,
       name: name,
       user: user ?? UserChatStruct(),
       id: id,
+      lastMessageTime: lastMessageTime,
     );

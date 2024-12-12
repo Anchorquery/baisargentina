@@ -27,6 +27,8 @@ class ChatIdModel extends FlutterFlowModel<ChatIdWidget> {
   void updateImagenesAtIndex(int index, Function(FFUploadedFile) updateFn) =>
       imagenes[index] = updateFn(imagenes[index]);
 
+  bool loadingImage = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -39,8 +41,6 @@ class ChatIdModel extends FlutterFlowModel<ChatIdWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Stores action output result for [Validate Form] action in IconButton widget.
-  bool? validacionForm;
   // Stores action output result for [Custom Action - createRandomUuid] action in IconButton widget.
   String? messageUuid;
   // Stores action output result for [Backend Call - API (crear mensaje)] action in IconButton widget.

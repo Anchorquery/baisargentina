@@ -122,12 +122,22 @@ class BookingStruct extends BaseStruct {
   static BookingStruct fromMap(Map<String, dynamic> data) => BookingStruct(
         id: castToType<int>(data['id']),
         uuid: data['uuid'] as String?,
-        state: deserializeEnum<BookingState>(data['state']),
+        state: data['state'] is BookingState
+            ? data['state']
+            : deserializeEnum<BookingState>(data['state']),
         dateCreated: data['dateCreated'] as String?,
-        owner: OwnerStruct.maybeFromMap(data['owner']),
-        event: EventsStruct.maybeFromMap(data['event']),
-        qrImage: FileDStruct.maybeFromMap(data['qrImage']),
-        organizador: OwnerStruct.maybeFromMap(data['organizador']),
+        owner: data['owner'] is OwnerStruct
+            ? data['owner']
+            : OwnerStruct.maybeFromMap(data['owner']),
+        event: data['event'] is EventsStruct
+            ? data['event']
+            : EventsStruct.maybeFromMap(data['event']),
+        qrImage: data['qrImage'] is FileDStruct
+            ? data['qrImage']
+            : FileDStruct.maybeFromMap(data['qrImage']),
+        organizador: data['organizador'] is OwnerStruct
+            ? data['organizador']
+            : OwnerStruct.maybeFromMap(data['organizador']),
         placeUrl: data['placeUrl'] as String?,
         ref: castToType<int>(data['ref']),
       );

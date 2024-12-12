@@ -168,7 +168,10 @@ class _EditarPerfilUserPrimerLoguinWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -370,7 +373,7 @@ class _EditarPerfilUserPrimerLoguinWidgetState
                               children: [
                                 Form(
                                   key: _model.formKey,
-                                  autovalidateMode: AutovalidateMode.disabled,
+                                  autovalidateMode: AutovalidateMode.always,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -1391,6 +1394,7 @@ class _EditarPerfilUserPrimerLoguinWidgetState
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      var _shouldSetState = false;
                                       _model.authUpdateResponse =
                                           await UserGroup.updateUserCall.call(
                                         country: _model.nacionalidadValue,
@@ -1400,7 +1404,7 @@ class _EditarPerfilUserPrimerLoguinWidgetState
                                         lastName:
                                             _model.apellidoTextController.text,
                                         birth: dateTimeFormat(
-                                          "d-M-y",
+                                          "d/M/y",
                                           _model.datePicked,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
@@ -1411,12 +1415,13 @@ class _EditarPerfilUserPrimerLoguinWidgetState
                                             _model.estasEnArgentinaValue,
                                         password:
                                             _model.passwordTextController.text,
-                                        token: currentAuthenticationToken,
                                         university: _model
                                             .universidadFieldTextController
                                             .text,
+                                        token: currentAuthenticationToken,
                                       );
 
+                                      _shouldSetState = true;
                                       if ((_model
                                               .authUpdateResponse?.succeeded ??
                                           true)) {
@@ -1438,6 +1443,12 @@ class _EditarPerfilUserPrimerLoguinWidgetState
                                             );
                                           },
                                         );
+
+                                        context.goNamed('ListarEventos');
+
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
                                       } else {
                                         await showDialog(
                                           context: context,
@@ -1460,9 +1471,12 @@ class _EditarPerfilUserPrimerLoguinWidgetState
                                             );
                                           },
                                         );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
                                       }
 
-                                      safeSetState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
                                     },
                                     text: 'Guardar',
                                     options: FFButtonOptions(

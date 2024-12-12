@@ -46,11 +46,12 @@ class _CrearEditarCategoriaDescuentoWidgetState
           ),
         );
         safeSetState(() {
-          _model.nombreTextController?.text = _model.categoria!.first.name!;
+          _model.nombreTextController?.text =
+              _model.categoria!.firstOrNull!.name!;
         });
         safeSetState(() {
           _model.descripcionTextController?.text =
-              _model.categoria!.first.description!;
+              _model.categoria!.firstOrNull!.description!;
         });
         return;
       } else {
@@ -75,7 +76,10 @@ class _CrearEditarCategoriaDescuentoWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,

@@ -40,7 +40,9 @@ class VerificacionDataStruct extends BaseStruct {
       VerificacionDataStruct(
         error: data['error'] as bool?,
         message: data['message'] as String?,
-        state: deserializeEnum<BookingState>(data['state']),
+        state: data['state'] is BookingState
+            ? data['state']
+            : deserializeEnum<BookingState>(data['state']),
       );
 
   static VerificacionDataStruct? maybeFromMap(dynamic data) => data is Map

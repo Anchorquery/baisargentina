@@ -27,8 +27,6 @@ export '/estudiante/events/editar_evento/editar_evento_widget.dart'
     show EditarEventoWidget;
 export '/estudiante/booking/reserva_id/reserva_id_widget.dart'
     show ReservaIdWidget;
-export '/estudiante/admin/validarqr/detalle_reserva/detalle_reserva_widget.dart'
-    show DetalleReservaWidget;
 export '/estudiante/policy/faq/faq_widget.dart' show FaqWidget;
 export '/password_recovery/email_recovery/email_recovery_widget.dart'
     show EmailRecoveryWidget;
@@ -100,8 +98,8 @@ export '/tickets/seleccionar_accion_tickets/seleccionar_accion_tickets_widget.da
     show SeleccionarAccionTicketsWidget;
 export '/tickets/crear_un_ticket/crear_un_ticket_widget.dart'
     show CrearUnTicketWidget;
-export '/tickets/todos_los_tickets/todos_los_tickets_widget.dart'
-    show TodosLosTicketsWidget;
+export '/tickets/lista_tickets/lista_tickets_widget.dart'
+    show ListaTicketsWidget;
 export '/admin/users/seleccionar_tipo_usuario/seleccionar_tipo_usuario_widget.dart'
     show SeleccionarTipoUsuarioWidget;
 export '/admin/users/perfil_estudiante_by_id/perfil_estudiante_by_id_widget.dart'
@@ -113,10 +111,8 @@ export '/admin/f_a_qadmin/listado_f_a_q/listado_f_a_q_widget.dart'
     show ListadoFAQWidget;
 export '/admin/eventos_admin/reservas_admin/reservas_admin_widget.dart'
     show ReservasAdminWidget;
-export '/estudiante/booking/reserva_id_admin/reserva_id_admin_widget.dart'
-    show ReservaIdAdminWidget;
-export '/reservas/unticket_e_x_a_m_p_l_e/unticket_e_x_a_m_p_l_e_widget.dart'
-    show UnticketEXAMPLEWidget;
+export '/estudiante/admin/validarqr/detalle_reserva/detalle_reserva_widget.dart'
+    show DetalleReservaWidget;
 export '/admin/servicios/seleccionar_accion_servicio/seleccionar_accion_servicio_widget.dart'
     show SeleccionarAccionServicioWidget;
 export '/admin/transacciones/transacciones_new/transacciones_new_widget.dart'

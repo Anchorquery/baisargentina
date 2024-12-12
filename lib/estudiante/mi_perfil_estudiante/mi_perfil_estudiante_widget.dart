@@ -440,7 +440,10 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -1007,9 +1010,13 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                           context: context,
                                           builder: (context) {
                                             return GestureDetector(
-                                              onTap: () =>
-                                                  FocusScope.of(context)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
@@ -1690,9 +1697,13 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                                           Directionality.of(
                                                               context)),
                                               child: GestureDetector(
-                                                onTap: () =>
-                                                    FocusScope.of(dialogContext)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: ValidarLogOutWidget(),
                                               ),
                                             );

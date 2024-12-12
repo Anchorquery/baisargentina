@@ -56,6 +56,11 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
             widget!.chatRef!.uuid,
           );
         }),
+        Future(() async {
+          await actions.listenToUpdateChatMessageAction(
+            widget!.chatRef!.uuid,
+          );
+        }),
       ]);
     });
 
@@ -75,7 +80,10 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -299,7 +307,7 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      if (_model.imagenes.length > 0)
+                      if (_model.uploadedLocalFiles.length > 0)
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -372,6 +380,20 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                                           .removeAtIndexFromImagenes(
                                                               imagesUploadIndex);
                                                       safeSetState(() {});
+                                                      if (_model.imagenes
+                                                              .length ==
+                                                          0) {
+                                                        safeSetState(() {
+                                                          _model.isDataUploading =
+                                                              false;
+                                                          _model.uploadedLocalFiles =
+                                                              [];
+                                                        });
+
+                                                        return;
+                                                      } else {
+                                                        return;
+                                                      }
                                                     },
                                                   ),
                                                 ),
@@ -460,10 +482,6 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                       .toList()
                                       .cast<FFUploadedFile>();
                                   safeSetState(() {});
-                                  safeSetState(() {
-                                    _model.isDataUploading = false;
-                                    _model.uploadedLocalFiles = [];
-                                  });
                                 },
                               ),
                               Expanded(
@@ -603,16 +621,6 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                           ),
                                           onPressed: () async {
                                             var _shouldSetState = false;
-                                            _model.validacionForm = true;
-                                            if (_model.formKey.currentState ==
-                                                    null ||
-                                                !_model.formKey.currentState!
-                                                    .validate()) {
-                                              safeSetState(() => _model
-                                                  .validacionForm = false);
-                                              return;
-                                            }
-                                            _shouldSetState = true;
                                             if (_model.textController.text !=
                                                     null &&
                                                 _model.textController.text !=
@@ -620,6 +628,8 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                               _model.messageUuid = await actions
                                                   .createRandomUuid();
                                               _shouldSetState = true;
+                                              _model.imagenes = [];
+                                              safeSetState(() {});
                                               _model.apiEnviarMensaje =
                                                   await ChatGroup
                                                       .crearMensajeCall
@@ -633,19 +643,24 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                                 timestamp: getCurrentTimestamp
                                                     .toString(),
                                                 chatId: widget!.chatRef?.id,
-                                                imagesList: _model.imagenes,
+                                                imagesList:
+                                                    _model.uploadedLocalFiles,
                                               );
 
                                               _shouldSetState = true;
+                                              safeSetState(() {
+                                                _model.textController?.clear();
+                                              });
                                               if ((_model.apiEnviarMensaje
                                                       ?.succeeded ??
                                                   true)) {
                                                 safeSetState(() {
-                                                  _model.textController
-                                                      ?.clear();
+                                                  _model.isDataUploading =
+                                                      false;
+                                                  _model.uploadedLocalFiles =
+                                                      [];
                                                 });
-                                                _model.imagenes = [];
-                                                safeSetState(() {});
+
                                                 if (_shouldSetState)
                                                   safeSetState(() {});
                                                 return;
@@ -654,13 +669,8 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                                   safeSetState(() {});
                                                 return;
                                               }
-                                            } else if ((_model.textController
-                                                            .text ==
-                                                        null ||
-                                                    _model.textController
-                                                            .text ==
-                                                        '') &&
-                                                (_model.imagenes.length > 0)) {
+                                            } else if (_model
+                                                .imagenes.isNotEmpty) {
                                               _model.messageUuid2 =
                                                   await actions
                                                       .createRandomUuid();

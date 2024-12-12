@@ -63,7 +63,10 @@ class _EstadisticasWidgetState extends State<EstadisticasWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -353,7 +356,9 @@ class _EstadisticasWidgetState extends State<EstadisticasWidget> {
                       ),
                     ),
                   ),
-                ],
+                ]
+                    .addToStart(SizedBox(height: 30.0))
+                    .addToEnd(SizedBox(height: 30.0)),
               ),
             ),
           ),

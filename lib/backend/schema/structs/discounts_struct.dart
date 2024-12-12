@@ -144,11 +144,15 @@ class DiscountsStruct extends BaseStruct {
         description: data['description'] as String?,
         porceint: castToType<double>(data['porceint']),
         commerce: data['commerce'] as String?,
-        typeUsing: deserializeEnum<TypeUsing>(data['typeUsing']),
+        typeUsing: data['typeUsing'] is TypeUsing
+            ? data['typeUsing']
+            : deserializeEnum<TypeUsing>(data['typeUsing']),
         uuid: data['uuid'] as String?,
         start: data['start'] as String?,
         end: data['end'] as String?,
-        image: FileDStruct.maybeFromMap(data['image']),
+        image: data['image'] is FileDStruct
+            ? data['image']
+            : FileDStruct.maybeFromMap(data['image']),
         comercioId: castToType<int>(data['comercioId']),
         state: data['state'] as bool?,
         category: castToType<int>(data['category']),

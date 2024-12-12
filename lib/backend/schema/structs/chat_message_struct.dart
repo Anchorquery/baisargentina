@@ -16,9 +16,10 @@ class ChatMessageStruct extends BaseStruct {
     String? uuid,
     bool? isMe,
     UserChatStruct? user,
-    String? timestamp,
     int? userId,
     List<FileDStruct>? images,
+    bool? loading,
+    int? timestamp,
   })  : _chat = chat,
         _text = text,
         _image = image,
@@ -27,9 +28,10 @@ class ChatMessageStruct extends BaseStruct {
         _uuid = uuid,
         _isMe = isMe,
         _user = user,
-        _timestamp = timestamp,
         _userId = userId,
-        _images = images;
+        _images = images,
+        _loading = loading,
+        _timestamp = timestamp;
 
   // "chat" field.
   ChatStruct? _chat;
@@ -95,13 +97,6 @@ class ChatMessageStruct extends BaseStruct {
 
   bool hasUser() => _user != null;
 
-  // "timestamp" field.
-  String? _timestamp;
-  String get timestamp => _timestamp ?? '';
-  set timestamp(String? val) => _timestamp = val;
-
-  bool hasTimestamp() => _timestamp != null;
-
   // "user_id" field.
   int? _userId;
   int get userId => _userId ?? 0;
@@ -122,22 +117,43 @@ class ChatMessageStruct extends BaseStruct {
 
   bool hasImages() => _images != null;
 
+  // "loading" field.
+  bool? _loading;
+  bool get loading => _loading ?? false;
+  set loading(bool? val) => _loading = val;
+
+  bool hasLoading() => _loading != null;
+
+  // "timestamp" field.
+  int? _timestamp;
+  int get timestamp => _timestamp ?? 0;
+  set timestamp(int? val) => _timestamp = val;
+
+  void incrementTimestamp(int amount) => timestamp = timestamp + amount;
+
+  bool hasTimestamp() => _timestamp != null;
+
   static ChatMessageStruct fromMap(Map<String, dynamic> data) =>
       ChatMessageStruct(
-        chat: ChatStruct.maybeFromMap(data['chat']),
+        chat: data['chat'] is ChatStruct
+            ? data['chat']
+            : ChatStruct.maybeFromMap(data['chat']),
         text: data['text'] as String?,
         image: data['image'] as String?,
         video: data['video'] as String?,
         file: data['file'] as String?,
         uuid: data['uuid'] as String?,
         isMe: data['isMe'] as bool?,
-        user: UserChatStruct.maybeFromMap(data['user']),
-        timestamp: data['timestamp'] as String?,
+        user: data['user'] is UserChatStruct
+            ? data['user']
+            : UserChatStruct.maybeFromMap(data['user']),
         userId: castToType<int>(data['user_id']),
         images: getStructList(
           data['images'],
           FileDStruct.fromMap,
         ),
+        loading: data['loading'] as bool?,
+        timestamp: castToType<int>(data['timestamp']),
       );
 
   static ChatMessageStruct? maybeFromMap(dynamic data) => data is Map
@@ -153,9 +169,10 @@ class ChatMessageStruct extends BaseStruct {
         'uuid': _uuid,
         'isMe': _isMe,
         'user': _user?.toMap(),
-        'timestamp': _timestamp,
         'user_id': _userId,
         'images': _images?.map((e) => e.toMap()).toList(),
+        'loading': _loading,
+        'timestamp': _timestamp,
       }.withoutNulls;
 
   @override
@@ -192,10 +209,6 @@ class ChatMessageStruct extends BaseStruct {
           _user,
           ParamType.DataStruct,
         ),
-        'timestamp': serializeParam(
-          _timestamp,
-          ParamType.String,
-        ),
         'user_id': serializeParam(
           _userId,
           ParamType.int,
@@ -204,6 +217,14 @@ class ChatMessageStruct extends BaseStruct {
           _images,
           ParamType.DataStruct,
           isList: true,
+        ),
+        'loading': serializeParam(
+          _loading,
+          ParamType.bool,
+        ),
+        'timestamp': serializeParam(
+          _timestamp,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -251,11 +272,6 @@ class ChatMessageStruct extends BaseStruct {
           false,
           structBuilder: UserChatStruct.fromSerializableMap,
         ),
-        timestamp: deserializeParam(
-          data['timestamp'],
-          ParamType.String,
-          false,
-        ),
         userId: deserializeParam(
           data['user_id'],
           ParamType.int,
@@ -266,6 +282,16 @@ class ChatMessageStruct extends BaseStruct {
           ParamType.DataStruct,
           true,
           structBuilder: FileDStruct.fromSerializableMap,
+        ),
+        loading: deserializeParam(
+          data['loading'],
+          ParamType.bool,
+          false,
+        ),
+        timestamp: deserializeParam(
+          data['timestamp'],
+          ParamType.int,
+          false,
         ),
       );
 
@@ -284,9 +310,10 @@ class ChatMessageStruct extends BaseStruct {
         uuid == other.uuid &&
         isMe == other.isMe &&
         user == other.user &&
-        timestamp == other.timestamp &&
         userId == other.userId &&
-        listEquality.equals(images, other.images);
+        listEquality.equals(images, other.images) &&
+        loading == other.loading &&
+        timestamp == other.timestamp;
   }
 
   @override
@@ -299,9 +326,10 @@ class ChatMessageStruct extends BaseStruct {
         uuid,
         isMe,
         user,
-        timestamp,
         userId,
-        images
+        images,
+        loading,
+        timestamp
       ]);
 }
 
@@ -314,8 +342,9 @@ ChatMessageStruct createChatMessageStruct({
   String? uuid,
   bool? isMe,
   UserChatStruct? user,
-  String? timestamp,
   int? userId,
+  bool? loading,
+  int? timestamp,
 }) =>
     ChatMessageStruct(
       chat: chat ?? ChatStruct(),
@@ -326,6 +355,7 @@ ChatMessageStruct createChatMessageStruct({
       uuid: uuid,
       isMe: isMe,
       user: user ?? UserChatStruct(),
-      timestamp: timestamp,
       userId: userId,
+      loading: loading,
+      timestamp: timestamp,
     );

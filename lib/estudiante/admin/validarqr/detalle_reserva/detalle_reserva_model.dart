@@ -1,9 +1,10 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -13,7 +14,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class DetalleReservaModel extends FlutterFlowModel<DetalleReservaWidget> {
@@ -24,12 +28,20 @@ class DetalleReservaModel extends FlutterFlowModel<DetalleReservaWidget> {
     updateFn(data ??= BookingStruct());
   }
 
+  DateTime? fecha;
+
   bool loading = true;
 
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (findme One)] action in DetalleReserva widget.
-  ApiCallResponse? apiResponseFindMeBooking;
+  ApiCallResponse? apiMeBookingByUuid;
+  // Stores action output result for [Backend Call - API (find one admin)] action in DetalleReserva widget.
+  ApiCallResponse? apiMeBookingByUuidAdmin;
+  // Stores action output result for [Backend Call - API (cambiarEstadoRerserva)] action in Button widget.
+  ApiCallResponse? apiResultActivarReserva;
+  // Stores action output result for [Backend Call - API (cambiarEstadoRerserva)] action in Button widget.
+  ApiCallResponse? apiResultCancelarReserva;
   // Model for loader component.
   late LoaderModel loaderModel;
 

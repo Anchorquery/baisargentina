@@ -828,6 +828,7 @@ class UpdateMetaDataComercioCall {
     String? nameCommerce = '',
     FFUploadedFile? picture,
     List<FFUploadedFile>? imagesList,
+    String? descriptionUbication = '',
     String? token = '',
   }) async {
     final baseUrl = UserGroup.getBaseUrl(
@@ -857,6 +858,7 @@ class UpdateMetaDataComercioCall {
         'urlUbicacion': urlUbicacion,
         'picture': picture,
         'images': images,
+        'descriptionUbication': descriptionUbication,
       },
       bodyType: BodyType.MULTIPART,
       returnBody: true,
@@ -1095,6 +1097,7 @@ class UpdateMetaComercioAdminCall {
     FFUploadedFile? picture,
     List<FFUploadedFile>? imagesList,
     int? category,
+    String? descriptionUbication = '',
     String? token = '',
   }) async {
     final baseUrl = UserGroup.getBaseUrl(
@@ -1126,6 +1129,7 @@ class UpdateMetaComercioAdminCall {
         'picture': picture,
         'images': images,
         'category': category,
+        'descriptionUbication': descriptionUbication,
       },
       bodyType: BodyType.MULTIPART,
       returnBody: true,
@@ -2839,7 +2843,7 @@ class ListarChatsCall {
     );
 
     return ApiManager.instance.makeApiCall(
-      callName: 'listar chats',
+      callName: 'ListarChats',
       apiUrl: '${baseUrl}/chats',
       callType: ApiCallType.GET,
       headers: {

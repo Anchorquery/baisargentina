@@ -69,7 +69,10 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -946,7 +949,7 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('TodosLosTickets');
+                                          context.pushNamed('ListaTickets');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(

@@ -31,6 +31,8 @@ class HomeComercioModel extends FlutterFlowModel<HomeComercioWidget> {
 
   // Stores action output result for [Backend Call - API (me )] action in HomeComercio widget.
   ApiCallResponse? apiResultMeCoomercio;
+  // Stores action output result for [Backend Call - API (me )] action in Column widget.
+  ApiCallResponse? apiResultMeCoomercioRefresh;
   var resultScanQr = '';
   // Stores action output result for [Backend Call - API (verificarSuscripcion)] action in Card widget.
   ApiCallResponse? apiResultucb;

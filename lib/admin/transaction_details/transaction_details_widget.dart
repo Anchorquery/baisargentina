@@ -63,7 +63,10 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -330,7 +333,15 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('unticketEXAMPLE');
+                      context.pushNamed(
+                        'DetalleReserva',
+                        queryParameters: {
+                          'uuid': serializeParam(
+                            'hfgfghfgh',
+                            ParamType.String,
+                          ),
+                        }.withoutNulls,
+                      );
                     },
                     text: 'Ver ticket',
                     options: FFButtonOptions(

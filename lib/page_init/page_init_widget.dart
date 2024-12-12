@@ -118,7 +118,10 @@ class _PageInitWidgetState extends State<PageInitWidget> {
 
           return;
         } else if (currentUserData?.role == 4) {
-          if (FFAppState().user.isInvited == true) {
+          if (getJsonField(
+            (_model.misDatos?.jsonBody ?? ''),
+            r'''$.isInvited''',
+          )) {
             context.goNamedAuth(
                 'EditarPerfilComercioPrimerLoguin', context.mounted);
 
@@ -129,7 +132,10 @@ class _PageInitWidgetState extends State<PageInitWidget> {
             return;
           }
         } else {
-          if (FFAppState().user.isInvited == true) {
+          if (getJsonField(
+            (_model.misDatos?.jsonBody ?? ''),
+            r'''$.isInvited''',
+          )) {
             context.goNamedAuth(
                 'EditarPerfilUserPrimerLoguin', context.mounted);
 
@@ -179,10 +185,11 @@ class _PageInitWidgetState extends State<PageInitWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

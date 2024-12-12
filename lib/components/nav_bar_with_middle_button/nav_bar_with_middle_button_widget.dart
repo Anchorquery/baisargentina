@@ -191,7 +191,7 @@ class _NavBarWithMiddleButtonWidgetState
                                       true) ==
                                   true) {
                                 context.pushNamed(
-                                  'scaneoExitoso',
+                                  'ScaneoExitoso',
                                   queryParameters: {
                                     'uuid': serializeParam(
                                       getJsonField(
@@ -206,7 +206,7 @@ class _NavBarWithMiddleButtonWidgetState
                                 );
                               } else {
                                 context.pushNamed(
-                                  'scaneoError',
+                                  'ScaneoError',
                                   queryParameters: {
                                     'uuid': serializeParam(
                                       getJsonField(

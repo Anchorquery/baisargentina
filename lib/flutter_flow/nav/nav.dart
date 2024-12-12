@@ -187,7 +187,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ReservasWidget(),
         ),
         FFRoute(
-          name: 'scaneoExitoso',
+          name: 'ScaneoExitoso',
           path: '/scaneoExitoso',
           requireAuth: true,
           builder: (context, params) => ScaneoExitosoWidget(
@@ -198,7 +198,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'scaneoError',
+          name: 'ScaneoError',
           path: '/scaneoError',
           requireAuth: true,
           builder: (context, params) => ScaneoErrorWidget(
@@ -231,17 +231,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             isAdmin: params.getParam(
               'isAdmin',
               ParamType.bool,
-            ),
-          ),
-        ),
-        FFRoute(
-          name: 'DetalleReserva',
-          path: '/detalleReserva',
-          requireAuth: true,
-          builder: (context, params) => DetalleReservaWidget(
-            uuid: params.getParam(
-              'uuid',
-              ParamType.String,
             ),
           ),
         ),
@@ -534,10 +523,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CrearUnTicketWidget(),
         ),
         FFRoute(
-          name: 'TodosLosTickets',
-          path: '/todosLosTickets',
+          name: 'ListaTickets',
+          path: '/listaTickets',
           requireAuth: true,
-          builder: (context, params) => TodosLosTicketsWidget(),
+          builder: (context, params) => ListaTicketsWidget(),
         ),
         FFRoute(
           name: 'SeleccionarTipoUsuario',
@@ -580,25 +569,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ReservasAdminWidget(),
         ),
         FFRoute(
-          name: 'reservaIdAdmin',
-          path: '/reservaIdAdmin',
+          name: 'DetalleReserva',
+          path: '/detalleReserva',
           requireAuth: true,
-          builder: (context, params) => ReservaIdAdminWidget(
+          builder: (context, params) => DetalleReservaWidget(
             uuid: params.getParam(
               'uuid',
               ParamType.String,
             ),
-            isAdmin: params.getParam(
-              'isAdmin',
-              ParamType.bool,
-            ),
           ),
-        ),
-        FFRoute(
-          name: 'unticketEXAMPLE',
-          path: '/unticketEXAMPLE',
-          requireAuth: true,
-          builder: (context, params) => UnticketEXAMPLEWidget(),
         ),
         FFRoute(
           name: 'SeleccionarAccionServicio',
@@ -789,7 +768,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               EditarPerfilComercioPrimerLoguinWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
-      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

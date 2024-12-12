@@ -227,7 +227,7 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget>
                                   true) ==
                               true) {
                             context.pushNamed(
-                              'scaneoExitoso',
+                              'ScaneoExitoso',
                               queryParameters: {
                                 'uuid': serializeParam(
                                   getJsonField(
@@ -242,7 +242,7 @@ class _ScaneoErrorWidgetState extends State<ScaneoErrorWidget>
                             );
                           } else {
                             context.pushNamed(
-                              'scaneoError',
+                              'ScaneoError',
                               queryParameters: {
                                 'uuid': serializeParam(
                                   getJsonField(

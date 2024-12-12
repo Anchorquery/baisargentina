@@ -56,7 +56,9 @@ class ServicesCategoryStruct extends BaseStruct {
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
         description: data['description'] as String?,
-        image: FileDStruct.maybeFromMap(data['image']),
+        image: data['image'] is FileDStruct
+            ? data['image']
+            : FileDStruct.maybeFromMap(data['image']),
       );
 
   static ServicesCategoryStruct? maybeFromMap(dynamic data) => data is Map

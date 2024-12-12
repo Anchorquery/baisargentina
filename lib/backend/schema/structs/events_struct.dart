@@ -121,9 +121,13 @@ class EventsStruct extends BaseStruct {
         name: data['name'] as String?,
         description: data['description'] as String?,
         category: data['category'] as String?,
-        portada: FileDStruct.maybeFromMap(data['portada']),
+        portada: data['portada'] is FileDStruct
+            ? data['portada']
+            : FileDStruct.maybeFromMap(data['portada']),
         precio: castToType<double>(data['precio']),
-        type: deserializeEnum<TypeEvent>(data['type']),
+        type: data['type'] is TypeEvent
+            ? data['type']
+            : deserializeEnum<TypeEvent>(data['type']),
         fecha: data['fecha'] as String?,
         horaInicioEvento: data['horaInicioEvento'] as String?,
         isBais: data['isBais'] as bool?,

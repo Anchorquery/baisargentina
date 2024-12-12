@@ -247,21 +247,29 @@ class EventStruct extends BaseStruct {
         placeDescription: data['placeDescription'] as String?,
         precio: castToType<double>(data['precio']),
         limitePersonas: castToType<int>(data['limitePersonas']),
-        portada: FileDStruct.maybeFromMap(data['portada']),
+        portada: data['portada'] is FileDStruct
+            ? data['portada']
+            : FileDStruct.maybeFromMap(data['portada']),
         images: getStructList(
           data['images'],
           FileDStruct.fromMap,
         ),
-        category: CategoryStruct.maybeFromMap(data['category']),
+        category: data['category'] is CategoryStruct
+            ? data['category']
+            : CategoryStruct.maybeFromMap(data['category']),
         fecha: data['fecha'] as String?,
         fechaInicioVenta: data['fechaInicioVenta'] as String?,
         fechaFinVenta: data['fechaFinVenta'] as String?,
         horaInicioEvento: data['horaInicioEvento'] as String?,
-        restriccion: deserializeEnum<RestriccionEvent>(data['restriccion']),
+        restriccion: data['restriccion'] is RestriccionEvent
+            ? data['restriccion']
+            : deserializeEnum<RestriccionEvent>(data['restriccion']),
         horaFinEvento: data['horaFinEvento'] as String?,
         description: data['description'] as String?,
         reservado: data['reservado'] as bool?,
-        organizador: OwnerStruct.maybeFromMap(data['organizador']),
+        organizador: data['organizador'] is OwnerStruct
+            ? data['organizador']
+            : OwnerStruct.maybeFromMap(data['organizador']),
         detenerVentas: data['detenerVentas'] as String?,
         isBais: data['isBais'] as bool?,
         nameOrganizerNoBais: data['nameOrganizerNoBais'] as String?,

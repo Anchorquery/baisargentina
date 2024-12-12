@@ -12,19 +12,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'todos_los_tickets_model.dart';
-export 'todos_los_tickets_model.dart';
+import 'lista_tickets_model.dart';
+export 'lista_tickets_model.dart';
 
-class TodosLosTicketsWidget extends StatefulWidget {
-  const TodosLosTicketsWidget({super.key});
+class ListaTicketsWidget extends StatefulWidget {
+  const ListaTicketsWidget({super.key});
 
   @override
-  State<TodosLosTicketsWidget> createState() => _TodosLosTicketsWidgetState();
+  State<ListaTicketsWidget> createState() => _ListaTicketsWidgetState();
 }
 
-class _TodosLosTicketsWidgetState extends State<TodosLosTicketsWidget>
+class _ListaTicketsWidgetState extends State<ListaTicketsWidget>
     with TickerProviderStateMixin {
-  late TodosLosTicketsModel _model;
+  late ListaTicketsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,7 +33,7 @@ class _TodosLosTicketsWidgetState extends State<TodosLosTicketsWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TodosLosTicketsModel());
+    _model = createModel(context, () => ListaTicketsModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -110,7 +110,10 @@ class _TodosLosTicketsWidgetState extends State<TodosLosTicketsWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -805,7 +808,7 @@ class _TodosLosTicketsWidgetState extends State<TodosLosTicketsWidget>
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               context.pushNamed(
-                                                'reservaIdAdmin',
+                                                'DetalleReserva',
                                                 queryParameters: {
                                                   'uuid': serializeParam(
                                                     getJsonField(

@@ -42,11 +42,11 @@ class _CrearEditarFAQWidgetState extends State<CrearEditarFAQWidget> {
           ),
         );
         safeSetState(() {
-          _model.nombreTextController?.text = _model.faq!.first.name!;
+          _model.nombreTextController?.text = _model.faq!.firstOrNull!.name!;
         });
         safeSetState(() {
           _model.descripcionTextController?.text =
-              _model.faq!.first.description!;
+              _model.faq!.firstOrNull!.description!;
         });
         return;
       } else {
@@ -71,7 +71,10 @@ class _CrearEditarFAQWidgetState extends State<CrearEditarFAQWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,

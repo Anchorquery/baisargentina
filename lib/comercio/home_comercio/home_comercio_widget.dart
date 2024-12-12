@@ -62,24 +62,51 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
         body: SafeArea(
           top: true,
-          child: Stack(
-            children: [
-              Builder(
-                builder: (context) {
-                  if (_model.loading == false) {
-                    return Stack(
-                      children: [
-                        Align(
-                          alignment: AlignmentDirectional(0.0, -1.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                25.0, 0.0, 25.0, 0.0),
+          child: Builder(
+            builder: (context) {
+              if (_model.loading == false) {
+                return Stack(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0.0, -1.0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            25.0, 0.0, 25.0, 0.0),
+                        child: RefreshIndicator(
+                          key: Key('RefreshIndicator_f30gwpj3'),
+                          color: FlutterFlowTheme.of(context).tertiary,
+                          onRefresh: () async {
+                            _model.apiResultMeCoomercioRefresh =
+                                await UserGroup.meCall.call(
+                              token: currentAuthenticationToken,
+                            );
+
+                            if ((_model
+                                    .apiResultMeCoomercioRefresh?.succeeded ??
+                                true)) {
+                              _model.data = CommercePerfilStruct.maybeFromMap(
+                                  getJsonField(
+                                (_model.apiResultMeCoomercioRefresh?.jsonBody ??
+                                    ''),
+                                r'''$.metadata''',
+                              ));
+                              safeSetState(() {});
+                              return;
+                            } else {
+                              return;
+                            }
+                          },
+                          child: SingleChildScrollView(
+                            physics: const AlwaysScrollableScrollPhysics(),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -261,9 +288,13 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                             context: context,
                                             builder: (context) {
                                               return GestureDetector(
-                                                onTap: () =>
-                                                    FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
@@ -292,9 +323,13 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                             context: context,
                                             builder: (context) {
                                               return GestureDetector(
-                                                onTap: () =>
-                                                    FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
@@ -566,42 +601,44 @@ class _HomeComercioWidgetState extends State<HomeComercioWidget> {
                                     ),
                                   ),
                                 ),
-                              ],
+                              ]
+                                  .addToStart(SizedBox(height: 30.0))
+                                  .addToEnd(SizedBox(height: 30.0)),
                             ),
                           ),
                         ),
-                        Align(
-                          alignment: AlignmentDirectional(0.85, -1.0),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).primary,
-                            icon: Icon(
-                              Icons.logout_sharp,
-                              color: FlutterFlowTheme.of(context).info,
-                              size: 24.0,
-                            ),
-                            onPressed: () async {
-                              GoRouter.of(context).prepareAuthEvent();
-                              await authManager.signOut();
-                              GoRouter.of(context).clearRedirectLocation();
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.85, -1.0),
+                      child: FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: 40.0,
+                        fillColor: FlutterFlowTheme.of(context).primary,
+                        icon: Icon(
+                          Icons.logout_sharp,
+                          color: FlutterFlowTheme.of(context).info,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          GoRouter.of(context).prepareAuthEvent();
+                          await authManager.signOut();
+                          GoRouter.of(context).clearRedirectLocation();
 
-                              context.goNamedAuth('inicio', context.mounted);
-                            },
-                          ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return wrapWithModel(
-                      model: _model.loaderModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: LoaderWidget(),
-                    );
-                  }
-                },
-              ),
-            ],
+                          context.goNamedAuth('inicio', context.mounted);
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return wrapWithModel(
+                  model: _model.loaderModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: LoaderWidget(),
+                );
+              }
+            },
           ),
         ),
       ),

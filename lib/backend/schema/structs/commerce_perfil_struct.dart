@@ -23,6 +23,7 @@ class CommercePerfilStruct extends BaseStruct {
     FileDStruct? picture,
     List<FileDStruct>? images,
     CategoryStruct? category,
+    String? descriptionUbication,
   })  : _nameCommerce = nameCommerce,
         _description = description,
         _urlUbicacion = urlUbicacion,
@@ -37,7 +38,8 @@ class CommercePerfilStruct extends BaseStruct {
         _endDate = endDate,
         _picture = picture,
         _images = images,
-        _category = category;
+        _category = category,
+        _descriptionUbication = descriptionUbication;
 
   // "nameCommerce" field.
   String? _nameCommerce;
@@ -156,6 +158,13 @@ class CommercePerfilStruct extends BaseStruct {
 
   bool hasCategory() => _category != null;
 
+  // "descriptionUbication" field.
+  String? _descriptionUbication;
+  String get descriptionUbication => _descriptionUbication ?? '';
+  set descriptionUbication(String? val) => _descriptionUbication = val;
+
+  bool hasDescriptionUbication() => _descriptionUbication != null;
+
   static CommercePerfilStruct fromMap(Map<String, dynamic> data) =>
       CommercePerfilStruct(
         nameCommerce: data['nameCommerce'] as String?,
@@ -170,12 +179,17 @@ class CommercePerfilStruct extends BaseStruct {
         domingo: data['domingo'] as bool?,
         startDate: data['startDate'] as String?,
         endDate: data['endDate'] as String?,
-        picture: FileDStruct.maybeFromMap(data['picture']),
+        picture: data['picture'] is FileDStruct
+            ? data['picture']
+            : FileDStruct.maybeFromMap(data['picture']),
         images: getStructList(
           data['images'],
           FileDStruct.fromMap,
         ),
-        category: CategoryStruct.maybeFromMap(data['category']),
+        category: data['category'] is CategoryStruct
+            ? data['category']
+            : CategoryStruct.maybeFromMap(data['category']),
+        descriptionUbication: data['descriptionUbication'] as String?,
       );
 
   static CommercePerfilStruct? maybeFromMap(dynamic data) => data is Map
@@ -198,6 +212,7 @@ class CommercePerfilStruct extends BaseStruct {
         'picture': _picture?.toMap(),
         'images': _images?.map((e) => e.toMap()).toList(),
         'category': _category?.toMap(),
+        'descriptionUbication': _descriptionUbication,
       }.withoutNulls;
 
   @override
@@ -262,6 +277,10 @@ class CommercePerfilStruct extends BaseStruct {
         'category': serializeParam(
           _category,
           ParamType.DataStruct,
+        ),
+        'descriptionUbication': serializeParam(
+          _descriptionUbication,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -345,6 +364,11 @@ class CommercePerfilStruct extends BaseStruct {
           false,
           structBuilder: CategoryStruct.fromSerializableMap,
         ),
+        descriptionUbication: deserializeParam(
+          data['descriptionUbication'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -368,7 +392,8 @@ class CommercePerfilStruct extends BaseStruct {
         endDate == other.endDate &&
         picture == other.picture &&
         listEquality.equals(images, other.images) &&
-        category == other.category;
+        category == other.category &&
+        descriptionUbication == other.descriptionUbication;
   }
 
   @override
@@ -387,7 +412,8 @@ class CommercePerfilStruct extends BaseStruct {
         endDate,
         picture,
         images,
-        category
+        category,
+        descriptionUbication
       ]);
 }
 
@@ -406,6 +432,7 @@ CommercePerfilStruct createCommercePerfilStruct({
   String? endDate,
   FileDStruct? picture,
   CategoryStruct? category,
+  String? descriptionUbication,
 }) =>
     CommercePerfilStruct(
       nameCommerce: nameCommerce,
@@ -422,4 +449,5 @@ CommercePerfilStruct createCommercePerfilStruct({
       endDate: endDate,
       picture: picture ?? FileDStruct(),
       category: category ?? CategoryStruct(),
+      descriptionUbication: descriptionUbication,
     );

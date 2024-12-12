@@ -152,7 +152,10 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -298,8 +301,11 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                 context: context,
                                 builder: (context) {
                                   return GestureDetector(
-                                    onTap: () =>
-                                        FocusScope.of(context).unfocus(),
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                    },
                                     child: Padding(
                                       padding: MediaQuery.viewInsetsOf(context),
                                       child: Info1Widget(),
@@ -378,7 +384,11 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                               context: context,
                               builder: (context) {
                                 return GestureDetector(
-                                  onTap: () => FocusScope.of(context).unfocus(),
+                                  onTap: () {
+                                    FocusScope.of(context).unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  },
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
                                     child: Info2Widget(),
@@ -456,7 +466,11 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                               context: context,
                               builder: (context) {
                                 return GestureDetector(
-                                  onTap: () => FocusScope.of(context).unfocus(),
+                                  onTap: () {
+                                    FocusScope.of(context).unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  },
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
                                     child: Info3Widget(),

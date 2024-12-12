@@ -59,7 +59,10 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -233,39 +236,132 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    await launchURL(getJsonField(
-                                      _model.data,
-                                      r'''$.metadata.urlUbicacion''',
-                                    ).toString());
-                                  },
-                                  text: 'Ver ubicación',
-                                  icon: Icon(
-                                    Icons.location_on_sharp,
-                                    size: 15.0,
-                                  ),
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Lato',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
+                              Builder(
+                                builder: (context) {
+                                  if ((CommercePerfilStruct.maybeFromMap(
+                                                      getJsonField(
+                                                _model.data,
+                                                r'''$.metadata''',
+                                              ).toString())
+                                                  ?.descriptionUbication !=
+                                              null &&
+                                          CommercePerfilStruct.maybeFromMap(
+                                                      getJsonField(
+                                                _model.data,
+                                                r'''$.metadata''',
+                                              ).toString())
+                                                  ?.descriptionUbication !=
+                                              '') ||
+                                      (CommercePerfilStruct.maybeFromMap(
+                                                      getJsonField(
+                                                _model.data,
+                                                r'''$.metadata''',
+                                              ).toString())
+                                                  ?.urlUbicacion !=
+                                              null &&
+                                          CommercePerfilStruct.maybeFromMap(
+                                                      getJsonField(
+                                                _model.data,
+                                                r'''$.metadata''',
+                                              ).toString())
+                                                  ?.urlUbicacion !=
+                                              '')) {
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        if (CommercePerfilStruct.maybeFromMap(
+                                                        getJsonField(
+                                                  _model.data,
+                                                  r'''$.metadata''',
+                                                ).toString())
+                                                    ?.urlUbicacion !=
+                                                null &&
+                                            CommercePerfilStruct.maybeFromMap(
+                                                        getJsonField(
+                                                  _model.data,
+                                                  r'''$.metadata''',
+                                                ).toString())
+                                                    ?.urlUbicacion !=
+                                                '')
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 10.0, 0.0, 0.0),
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                await launchURL(getJsonField(
+                                                  _model.data,
+                                                  r'''$.metadata.urlUbicacion''',
+                                                ).toString());
+                                              },
+                                              text: 'Ver ubicación',
+                                              icon: Icon(
+                                                Icons.location_on_sharp,
+                                                size: 15.0,
+                                              ),
+                                              options: FFButtonOptions(
+                                                height: 40.0,
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 0.0, 16.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                elevation: 0.0,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            ),
+                                          ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 30.0, 0.0, 0.0),
+                                          child: Text(
+                                            getJsonField(
+                                              _model.data,
+                                              r'''$.metadata.descriptionUbication''',
+                                            ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Lato',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
                                         ),
-                                    elevation: 0.0,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                ),
+                                      ],
+                                    );
+                                  } else {
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 0.0),
+                                      child: Text(
+                                        'No definida',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),

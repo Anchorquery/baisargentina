@@ -5,6 +5,8 @@ import '/chat/component_create_ticket/component_create_ticket_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -57,6 +59,30 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
           r'''$.pagination''',
         ));
         safeSetState(() {});
+        await actions.listenToUpdateChatAction();
+        return;
+      } else {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title:
+                  Text('Ha ocurrido un error,No fue posible cargar los chats'),
+              content: Text(getJsonField(
+                (_model.apiCargarChats?.jsonBody ?? ''),
+                r'''$.error''',
+              ).toString().toString()),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+        context.safePop();
+        return;
       }
     });
 
@@ -76,7 +102,10 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -93,7 +122,10 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                 context: context,
                 builder: (context) {
                   return GestureDetector(
-                    onTap: () => FocusScope.of(context).unfocus(),
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
                     child: Padding(
                       padding: MediaQuery.viewInsetsOf(context),
                       child: ComponentCreateTicketWidget(),
@@ -114,42 +146,45 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  if (FFAppState().user.role == 1) {
-                    context.pushNamed('HomeAdmin');
+          title: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    if (FFAppState().user.role == 1) {
+                      context.pushNamed('HomeAdmin');
 
-                    return;
-                  } else {
-                    context.pushNamed('MiPerfilEstudiante');
+                      return;
+                    } else {
+                      context.pushNamed('MiPerfilEstudiante');
 
-                    return;
-                  }
-                },
-                child: Icon(
-                  Icons.chevron_left_rounded,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 24.0,
+                      return;
+                    }
+                  },
+                  child: Icon(
+                    Icons.chevron_left_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 24.0,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                child: Text(
-                  'Mensajes a soporte',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Lato',
-                        letterSpacing: 0.0,
-                      ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    'Mensajes a soporte',
+                    style: FlutterFlowTheme.of(context).headlineLarge.override(
+                          fontFamily: 'Lato',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           actions: [],
           centerTitle: false,
@@ -182,6 +217,66 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                     child: TextFormField(
                       controller: _model.textController,
                       focusNode: _model.textFieldFocusNode,
+                      onFieldSubmitted: (_) async {
+                        var _shouldSetState = false;
+                        _model.apiCargarChatsPorNombre =
+                            await ChatGroup.listarChatsCall.call(
+                          token: currentAuthenticationToken,
+                          q: _model.textController.text,
+                        );
+
+                        _shouldSetState = true;
+                        if ((_model.apiCargarChatsPorNombre?.succeeded ??
+                            true)) {
+                          FFAppState().listChats = (getJsonField(
+                            (_model.apiCargarChatsPorNombre?.jsonBody ?? ''),
+                            r'''$.data''',
+                            true,
+                          )!
+                                  .toList()
+                                  .map<ChatStruct?>(ChatStruct.maybeFromMap)
+                                  .toList() as Iterable<ChatStruct?>)
+                              .withoutNulls
+                              .toList()
+                              .cast<ChatStruct>();
+                          safeSetState(() {});
+                          _model.loading = !(_model.loading ?? true);
+                          _model.pagination =
+                              PaginationStruct.maybeFromMap(getJsonField(
+                            (_model.apiCargarChatsPorNombre?.jsonBody ?? ''),
+                            r'''$.pagination''',
+                          ));
+                          safeSetState(() {});
+                          if (_shouldSetState) safeSetState(() {});
+                          return;
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text(
+                                    'Ha ocurrido un error,No fue posible cargar los chats'),
+                                content: Text(getJsonField(
+                                  (_model.apiCargarChatsPorNombre?.jsonBody ??
+                                      ''),
+                                  r'''$.error''',
+                                ).toString()),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          if (_shouldSetState) safeSetState(() {});
+                          return;
+                        }
+
+                        if (_shouldSetState) safeSetState(() {});
+                      },
                       autofocus: false,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -242,7 +337,8 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                 ),
                 if (!_model.loading!)
                   Container(
-                    height: MediaQuery.sizeOf(context).height * 0.911,
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: MediaQuery.sizeOf(context).height * 0.65,
                     constraints: BoxConstraints(
                       maxHeight: MediaQuery.sizeOf(context).height * 0.7,
                     ),
@@ -267,18 +363,6 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
 
                               if ((_model.apiResultu3gCopy?.succeeded ??
                                   true)) {
-                                _model.chats = (getJsonField(
-                                  (_model.apiResultu3gCopy?.jsonBody ?? ''),
-                                  r'''$.data''',
-                                  true,
-                                )!
-                                        .toList()
-                                        .map<ChatStruct?>(
-                                            ChatStruct.maybeFromMap)
-                                        .toList() as Iterable<ChatStruct?>)
-                                    .withoutNulls
-                                    .toList()
-                                    .cast<ChatStruct>();
                                 _model.pagination =
                                     PaginationStruct.maybeFromMap(getJsonField(
                                   (_model.apiResultu3gCopy?.jsonBody ?? ''),
@@ -426,27 +510,17 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                                           ),
                                                         ),
                                                       ),
-                                                      Align(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                1.0, 1.0),
-                                                        child: Container(
-                                                          width: 10.0,
-                                                          height: 10.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: dataItem
-                                                                        .user.isOnline ==
-                                                                    true
-                                                                ? FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .success
-                                                                : FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .error,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            border: Border.all(
+                                                      if (currentAuthenticationToken ==
+                                                          '1')
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1.0, 1.0),
+                                                          child: Container(
+                                                            width: 10.0,
+                                                            height: 10.0,
+                                                            decoration:
+                                                                BoxDecoration(
                                                               color: dataItem.user
                                                                           .isOnline ==
                                                                       true
@@ -456,13 +530,27 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                                                   : FlutterFlowTheme.of(
                                                                           context)
                                                                       .error,
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              border:
+                                                                  Border.all(
+                                                                color: dataItem
+                                                                            .user
+                                                                            .isOnline ==
+                                                                        true
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .success
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                              ),
                                                             ),
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    1.0, 1.0),
                                                           ),
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  1.0, 1.0),
                                                         ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -541,8 +629,15 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                                                           0.0,
                                                                           0.0),
                                                               child: Text(
-                                                                dataItem
-                                                                    .lastMessageTime,
+                                                                dateTimeFormat(
+                                                                  "relative",
+                                                                  functions.timestampToDateTimeSeconds(
+                                                                      dataItem
+                                                                          .lastMessageTime),
+                                                                  locale: FFLocalizations.of(
+                                                                          context)
+                                                                      .languageCode,
+                                                                ),
                                                                 textAlign:
                                                                     TextAlign
                                                                         .start,
@@ -578,7 +673,9 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                       ),
                                     ),
                                   );
-                                }),
+                                })
+                                        .addToStart(SizedBox(height: 30.0))
+                                        .addToEnd(SizedBox(height: 30.0)),
                               ),
                             ),
                           );
@@ -586,8 +683,7 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                       ),
                     ),
                   ),
-                Container(),
-              ],
+              ].addToEnd(SizedBox(height: 30.0)),
             ),
           ),
         ),

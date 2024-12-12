@@ -163,7 +163,9 @@ class HousingStruct extends BaseStruct {
         price: castToType<double>(data['price']),
         type: data['type'] as String?,
         caption: data['caption'] as String?,
-        portada: FileDStruct.maybeFromMap(data['portada']),
+        portada: data['portada'] is FileDStruct
+            ? data['portada']
+            : FileDStruct.maybeFromMap(data['portada']),
         banos: castToType<int>(data['banos']),
         urlContacto: data['urlContacto'] as String?,
         images: getStructList(

@@ -146,10 +146,14 @@ class PlanStruct extends BaseStruct {
   static PlanStruct fromMap(Map<String, dynamic> data) => PlanStruct(
         name: data['name'] as String?,
         description: data['description'] as String?,
-        image: FileDStruct.maybeFromMap(data['image']),
+        image: data['image'] is FileDStruct
+            ? data['image']
+            : FileDStruct.maybeFromMap(data['image']),
         price: castToType<double>(data['price']),
         discointPrice: castToType<double>(data['discointPrice']),
-        duration: deserializeEnum<DurationPlans>(data['duration']),
+        duration: data['duration'] is DurationPlans
+            ? data['duration']
+            : deserializeEnum<DurationPlans>(data['duration']),
         id: castToType<int>(data['id']),
         drinksAvailable: castToType<int>(data['drinksAvailable']),
         discountPorcentant: castToType<double>(data['discountPorcentant']),

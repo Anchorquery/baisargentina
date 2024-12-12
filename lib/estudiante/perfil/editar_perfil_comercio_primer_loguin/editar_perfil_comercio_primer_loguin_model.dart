@@ -76,6 +76,11 @@ class EditarPerfilComercioPrimerLoguinModel
   TextEditingController? textFieldUbicacionTextController;
   String? Function(BuildContext, String?)?
       textFieldUbicacionTextControllerValidator;
+  // State field(s) for descripcionUbicacion widget.
+  FocusNode? descripcionUbicacionFocusNode;
+  TextEditingController? descripcionUbicacionTextController;
+  String? Function(BuildContext, String?)?
+      descripcionUbicacionTextControllerValidator;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController1;
   int carouselCurrentIndex1 = 0;
@@ -107,5 +112,8 @@ class EditarPerfilComercioPrimerLoguinModel
 
     textFieldUbicacionFocusNode?.dispose();
     textFieldUbicacionTextController?.dispose();
+
+    descripcionUbicacionFocusNode?.dispose();
+    descripcionUbicacionTextController?.dispose();
   }
 }

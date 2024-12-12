@@ -157,17 +157,31 @@ class BookingVerificationStruct extends BaseStruct {
       BookingVerificationStruct(
         id: castToType<int>(data['id']),
         uuid: data['uuid'] as String?,
-        state: deserializeEnum<BookingState>(data['state']),
+        state: data['state'] is BookingState
+            ? data['state']
+            : deserializeEnum<BookingState>(data['state']),
         dateCreated: data['dateCreated'] as String?,
         verficationDate: data['verficationDate'] as String?,
         errorDate: data['errorDate'] as String?,
-        owner: OwnerStruct.maybeFromMap(data['owner']),
-        event: EventsStruct.maybeFromMap(data['event']),
-        qrImage: FileDStruct.maybeFromMap(data['qrImage']),
-        organizador: OwnerStruct.maybeFromMap(data['organizador']),
-        supervisor: OwnerStruct.maybeFromMap(data['supervisor']),
+        owner: data['owner'] is OwnerStruct
+            ? data['owner']
+            : OwnerStruct.maybeFromMap(data['owner']),
+        event: data['event'] is EventsStruct
+            ? data['event']
+            : EventsStruct.maybeFromMap(data['event']),
+        qrImage: data['qrImage'] is FileDStruct
+            ? data['qrImage']
+            : FileDStruct.maybeFromMap(data['qrImage']),
+        organizador: data['organizador'] is OwnerStruct
+            ? data['organizador']
+            : OwnerStruct.maybeFromMap(data['organizador']),
+        supervisor: data['supervisor'] is OwnerStruct
+            ? data['supervisor']
+            : OwnerStruct.maybeFromMap(data['supervisor']),
         placeUrl: data['placeUrl'] as String?,
-        verification: VerificacionDataStruct.maybeFromMap(data['verification']),
+        verification: data['verification'] is VerificacionDataStruct
+            ? data['verification']
+            : VerificacionDataStruct.maybeFromMap(data['verification']),
       );
 
   static BookingVerificationStruct? maybeFromMap(dynamic data) => data is Map
