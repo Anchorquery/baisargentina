@@ -2,14 +2,17 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/chat/component_create_ticket/component_create_ticket_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'listado_chats_model.dart';
@@ -210,130 +213,372 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                           ),
                     ),
                   ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 16.0),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    child: TextFormField(
-                      controller: _model.textController,
-                      focusNode: _model.textFieldFocusNode,
-                      onFieldSubmitted: (_) async {
-                        var _shouldSetState = false;
-                        _model.apiCargarChatsPorNombre =
-                            await ChatGroup.listarChatsCall.call(
-                          token: currentAuthenticationToken,
-                          q: _model.textController.text,
-                        );
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 16.0),
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        child: TextFormField(
+                          controller: _model.textController,
+                          focusNode: _model.textFieldFocusNode,
+                          onFieldSubmitted: (_) async {
+                            var _shouldSetState = false;
+                            _model.apiCargarChatsPorNombre =
+                                await ChatGroup.listarChatsCall.call(
+                              token: currentAuthenticationToken,
+                              q: _model.textController.text,
+                              stateChat: _model.estadoChatValue,
+                            );
 
-                        _shouldSetState = true;
-                        if ((_model.apiCargarChatsPorNombre?.succeeded ??
-                            true)) {
-                          FFAppState().listChats = (getJsonField(
-                            (_model.apiCargarChatsPorNombre?.jsonBody ?? ''),
-                            r'''$.data''',
-                            true,
-                          )!
+                            _shouldSetState = true;
+                            if ((_model.apiCargarChatsPorNombre?.succeeded ??
+                                true)) {
+                              FFAppState().listChats = (getJsonField(
+                                (_model.apiCargarChatsPorNombre?.jsonBody ??
+                                    ''),
+                                r'''$.data''',
+                                true,
+                              )!
+                                      .toList()
+                                      .map<ChatStruct?>(ChatStruct.maybeFromMap)
+                                      .toList() as Iterable<ChatStruct?>)
+                                  .withoutNulls
                                   .toList()
-                                  .map<ChatStruct?>(ChatStruct.maybeFromMap)
-                                  .toList() as Iterable<ChatStruct?>)
-                              .withoutNulls
-                              .toList()
-                              .cast<ChatStruct>();
-                          safeSetState(() {});
-                          _model.loading = !(_model.loading ?? true);
-                          _model.pagination =
-                              PaginationStruct.maybeFromMap(getJsonField(
-                            (_model.apiCargarChatsPorNombre?.jsonBody ?? ''),
-                            r'''$.pagination''',
-                          ));
-                          safeSetState(() {});
-                          if (_shouldSetState) safeSetState(() {});
-                          return;
-                        } else {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text(
-                                    'Ha ocurrido un error,No fue posible cargar los chats'),
-                                content: Text(getJsonField(
-                                  (_model.apiCargarChatsPorNombre?.jsonBody ??
-                                      ''),
-                                  r'''$.error''',
-                                ).toString()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
-                                  ),
-                                ],
+                                  .cast<ChatStruct>();
+                              safeSetState(() {});
+                              _model.loading = !(_model.loading ?? true);
+                              _model.pagination =
+                                  PaginationStruct.maybeFromMap(getJsonField(
+                                (_model.apiCargarChatsPorNombre?.jsonBody ??
+                                    ''),
+                                r'''$.pagination''',
+                              ));
+                              safeSetState(() {});
+                              if (_shouldSetState) safeSetState(() {});
+                              return;
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text(
+                                        'Ha ocurrido un error,No fue posible cargar los chats'),
+                                    content: Text(getJsonField(
+                                      (_model.apiCargarChatsPorNombre
+                                              ?.jsonBody ??
+                                          ''),
+                                      r'''$.error''',
+                                    ).toString()),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
-                            },
-                          );
-                          if (_shouldSetState) safeSetState(() {});
-                          return;
-                        }
+                              if (_shouldSetState) safeSetState(() {});
+                              return;
+                            }
 
-                        if (_shouldSetState) safeSetState(() {});
-                      },
-                      autofocus: false,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
+                            if (_shouldSetState) safeSetState(() {});
+                          },
+                          autofocus: false,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
                                   fontFamily: 'Lato',
                                   letterSpacing: 0.0,
                                 ),
-                        hintText: 'Busca por nombre de usuario',
-                        hintStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
+                            hintText: 'Busca por nombre de usuario',
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
                                   fontFamily: 'Lato',
                                   letterSpacing: 0.0,
                                 ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 1.0,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).tertiary,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            prefixIcon: Icon(
+                              Icons.search_outlined,
+                              color: FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).tertiary,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.search_outlined,
-                          color: FlutterFlowTheme.of(context).primary,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                  ),
+                          cursorColor: FlutterFlowTheme.of(context).primaryText,
+                          validator: _model.textControllerValidator
+                              .asValidator(context),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Lato',
-                            letterSpacing: 0.0,
-                          ),
-                      cursorColor: FlutterFlowTheme.of(context).primaryText,
-                      validator:
-                          _model.textControllerValidator.asValidator(context),
                     ),
-                  ),
+                    Align(
+                      alignment: AlignmentDirectional(-1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        child: Text(
+                          'Estado de tickets',
+                          textAlign: TextAlign.start,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      decoration: BoxDecoration(),
+                      child: Align(
+                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            FlutterFlowDropDown<String>(
+                              controller: _model.estadoChatValueController ??=
+                                  FormFieldController<String>(
+                                _model.estadoChatValue ??= 'todos',
+                              ),
+                              options: List<String>.from([
+                                'todos',
+                                'pendientes',
+                                'resueltos',
+                                'abiertos'
+                              ]),
+                              optionLabels: [
+                                'Todos',
+                                'Pendientes',
+                                'Resueltos',
+                                'Recien Creados'
+                              ],
+                              onChanged: (val) async {
+                                safeSetState(
+                                    () => _model.estadoChatValue = val);
+                                var _shouldSetState = false;
+                                _model.apiCargarChatsPorEstado =
+                                    await ChatGroup.listarChatsCall.call(
+                                  stateChat: _model.estadoChatValue,
+                                  q: _model.textController.text,
+                                );
+
+                                _shouldSetState = true;
+                                if ((_model
+                                        .apiCargarChatsPorEstado?.succeeded ??
+                                    true)) {
+                                  FFAppState().listChats = (getJsonField(
+                                    (_model.apiCargarChatsPorEstado?.jsonBody ??
+                                        ''),
+                                    r'''$.data''',
+                                    true,
+                                  )!
+                                          .toList()
+                                          .map<ChatStruct?>(
+                                              ChatStruct.maybeFromMap)
+                                          .toList() as Iterable<ChatStruct?>)
+                                      .withoutNulls
+                                      .toList()
+                                      .cast<ChatStruct>();
+                                  safeSetState(() {});
+                                  _model.loading = !(_model.loading ?? true);
+                                  _model.pagination =
+                                      PaginationStruct.maybeFromMap(
+                                          getJsonField(
+                                    (_model.apiCargarChatsPorEstado?.jsonBody ??
+                                        ''),
+                                    r'''$.pagination''',
+                                  ));
+                                  safeSetState(() {});
+                                  if (_shouldSetState) safeSetState(() {});
+                                  return;
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text(
+                                            'Ha ocurrido un error,No fue posible cargar los chats'),
+                                        content: Text(getJsonField(
+                                          (_model.apiCargarChatsPorEstado
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.error''',
+                                        ).toString()),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  if (_shouldSetState) safeSetState(() {});
+                                  return;
+                                }
+
+                                if (_shouldSetState) safeSetState(() {});
+                              },
+                              width: MediaQuery.sizeOf(context).width * 0.75,
+                              height: 40.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintText: 'Estado de ticket',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context).secondary,
+                              elevation: 2.0,
+                              borderColor: FlutterFlowTheme.of(context).primary,
+                              borderWidth: 0.0,
+                              borderRadius: 30.0,
+                              margin: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 12.0, 0.0),
+                              hidesUnderline: true,
+                              isOverButton: false,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            ),
+                            if ((_model.textController.text != null &&
+                                    _model.textController.text != '') ||
+                                (_model.estadoChatValue != 'todos'))
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  var _shouldSetState = false;
+                                  safeSetState(() {
+                                    _model.textController?.clear();
+                                  });
+                                  safeSetState(() {
+                                    _model.estadoChatValueController?.value =
+                                        'todos';
+                                  });
+                                  _model.apiCargarChatsClean =
+                                      await ChatGroup.listarChatsCall.call(
+                                    token: currentAuthenticationToken,
+                                  );
+
+                                  _shouldSetState = true;
+                                  if ((_model
+                                          .apiCargarChatsPorNombre?.succeeded ??
+                                      true)) {
+                                    FFAppState().listChats = (getJsonField(
+                                      (_model.apiCargarChatsClean?.jsonBody ??
+                                          ''),
+                                      r'''$.data''',
+                                      true,
+                                    )!
+                                            .toList()
+                                            .map<ChatStruct?>(
+                                                ChatStruct.maybeFromMap)
+                                            .toList() as Iterable<ChatStruct?>)
+                                        .withoutNulls
+                                        .toList()
+                                        .cast<ChatStruct>();
+                                    safeSetState(() {});
+                                    _model.loading = !(_model.loading ?? true);
+                                    _model.pagination =
+                                        PaginationStruct.maybeFromMap(
+                                            getJsonField(
+                                      (_model.apiCargarChatsClean?.jsonBody ??
+                                          ''),
+                                      r'''$.pagination''',
+                                    ));
+                                    safeSetState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              'Ha ocurrido un error,No fue posible cargar los chats'),
+                                          content: Text(getJsonField(
+                                            (_model.apiCargarChatsPorNombre
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.error''',
+                                          ).toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  }
+
+                                  if (_shouldSetState) safeSetState(() {});
+                                },
+                                child: FaIcon(
+                                  FontAwesomeIcons.eraser,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 if (!_model.loading!)
                   Container(
@@ -572,8 +817,7 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                                                               MainAxisSize.max,
                                                           children: [
                                                             Text(
-                                                              dataItem
-                                                                  .user.name,
+                                                              dataItem.name,
                                                               textAlign:
                                                                   TextAlign
                                                                       .start,

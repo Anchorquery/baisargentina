@@ -2789,6 +2789,8 @@ class ChatGroup {
     'Authorization': 'Bearer [token]',
   };
   static BuscarOCrearChatCall buscarOCrearChatCall = BuscarOCrearChatCall();
+  static MarcarChatComoCerradoCall marcarChatComoCerradoCall =
+      MarcarChatComoCerradoCall();
   static ListarChatsCall listarChatsCall = ListarChatsCall();
   static CrearMensajeCall crearMensajeCall = CrearMensajeCall();
   static AsignarUsuarioAChatCall asignarUsuarioAChatCall =
@@ -2830,12 +2832,47 @@ class BuscarOCrearChatCall {
   }
 }
 
+class MarcarChatComoCerradoCall {
+  Future<ApiCallResponse> call({
+    String? uuid = '',
+    String? message = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ChatGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "message": "${message}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'MarcarChatComoCerrado',
+      apiUrl: '${baseUrl}/chats/marcar-cerrado/${uuid}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ListarChatsCall {
   Future<ApiCallResponse> call({
     int? page = 1,
     int? pageSize = 15,
     int? pageCount = 0,
     String? q = '',
+    String? stateChat = 'todos',
     String? token = '',
   }) async {
     final baseUrl = ChatGroup.getBaseUrl(

@@ -2,6 +2,7 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/chat/chat_thread/chat_thread_widget.dart';
+import '/components/nota_fin_chat/nota_fin_chat_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -222,8 +223,27 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                     color: FlutterFlowTheme.of(context).primaryText,
                     size: 24.0,
                   ),
-                  onPressed: () {
-                    print('IconButton pressed ...');
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
+                          child: Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: NotaFinChatWidget(
+                              chat: widget!.chatRef!,
+                            ),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
                   },
                 ),
               ),
@@ -412,318 +432,385 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                             ),
                           ],
                         ),
-                      Form(
-                        key: _model.formKey,
-                        autovalidateMode: AutovalidateMode.disabled,
-                        child: Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              FlutterFlowIconButton(
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderRadius: 60.0,
-                                borderWidth: 1.0,
-                                buttonSize: 40.0,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                icon: Icon(
-                                  Icons.add_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                onPressed: () async {
-                                  final selectedMedia = await selectMedia(
-                                    includeBlurHash: true,
-                                    mediaSource: MediaSource.photoGallery,
-                                    multiImage: true,
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) =>
-                                          validateFileFormat(
-                                              m.storagePath, context))) {
-                                    safeSetState(
-                                        () => _model.isDataUploading = true);
-                                    var selectedUploadedFiles =
-                                        <FFUploadedFile>[];
-
-                                    try {
-                                      selectedUploadedFiles = selectedMedia
-                                          .map((m) => FFUploadedFile(
-                                                name: m.storagePath
-                                                    .split('/')
-                                                    .last,
-                                                bytes: m.bytes,
-                                                height: m.dimensions?.height,
-                                                width: m.dimensions?.width,
-                                                blurHash: m.blurHash,
-                                              ))
-                                          .toList();
-                                    } finally {
-                                      _model.isDataUploading = false;
-                                    }
-                                    if (selectedUploadedFiles.length ==
-                                        selectedMedia.length) {
-                                      safeSetState(() {
-                                        _model.uploadedLocalFiles =
-                                            selectedUploadedFiles;
-                                      });
-                                    } else {
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                  }
-
-                                  _model.imagenes = _model.uploadedLocalFiles
-                                      .toList()
-                                      .cast<FFUploadedFile>();
-                                  safeSetState(() {});
-                                },
-                              ),
-                              Expanded(
-                                child: Stack(
+                      Builder(
+                        builder: (context) {
+                          if (widget!.chatRef?.state != 'resuelto') {
+                            return Form(
+                              key: _model.formKey,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              child: Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 0.0, 0.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        child: TextFormField(
-                                          controller: _model.textController,
-                                          focusNode: _model.textFieldFocusNode,
-                                          onFieldSubmitted: (_) async {
-                                            if (_model.formKey.currentState ==
-                                                    null ||
-                                                !_model.formKey.currentState!
-                                                    .validate()) {
-                                              return;
-                                            }
-                                          },
-                                          autofocus: true,
-                                          textCapitalization:
-                                              TextCapitalization.sentences,
-                                          textInputAction: TextInputAction.send,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Lato',
-                                                      letterSpacing: 0.0,
+                                    FlutterFlowIconButton(
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      borderRadius: 60.0,
+                                      borderWidth: 1.0,
+                                      buttonSize: 40.0,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      icon: Icon(
+                                        Icons.add_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      onPressed: () async {
+                                        final selectedMedia = await selectMedia(
+                                          includeBlurHash: true,
+                                          mediaSource: MediaSource.photoGallery,
+                                          multiImage: true,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          safeSetState(() =>
+                                              _model.isDataUploading = true);
+                                          var selectedUploadedFiles =
+                                              <FFUploadedFile>[];
+
+                                          try {
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                          blurHash: m.blurHash,
+                                                        ))
+                                                    .toList();
+                                          } finally {
+                                            _model.isDataUploading = false;
+                                          }
+                                          if (selectedUploadedFiles.length ==
+                                              selectedMedia.length) {
+                                            safeSetState(() {
+                                              _model.uploadedLocalFiles =
+                                                  selectedUploadedFiles;
+                                            });
+                                          } else {
+                                            safeSetState(() {});
+                                            return;
+                                          }
+                                        }
+
+                                        _model.imagenes = _model
+                                            .uploadedLocalFiles
+                                            .toList()
+                                            .cast<FFUploadedFile>();
+                                        safeSetState(() {});
+                                      },
+                                    ),
+                                    Expanded(
+                                      child: Stack(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 0.0, 0.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              child: TextFormField(
+                                                controller:
+                                                    _model.textController,
+                                                focusNode:
+                                                    _model.textFieldFocusNode,
+                                                onFieldSubmitted: (_) async {
+                                                  if (_model.formKey
+                                                              .currentState ==
+                                                          null ||
+                                                      !_model
+                                                          .formKey.currentState!
+                                                          .validate()) {
+                                                    return;
+                                                  }
+                                                },
+                                                autofocus: true,
+                                                textCapitalization:
+                                                    TextCapitalization
+                                                        .sentences,
+                                                textInputAction:
+                                                    TextInputAction.send,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  labelStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily: 'Lato',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                  hintText:
+                                                      'Start typing here...',
+                                                  hintStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelSmall
+                                                          .override(
+                                                            fontFamily: 'Lato',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                  errorStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Lato',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        fontSize: 12.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      width: 1.0,
                                                     ),
-                                            hintText: 'Start typing here...',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelSmall
-                                                    .override(
-                                                      fontFamily: 'Lato',
-                                                      letterSpacing: 0.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      width: 1.0,
                                                     ),
-                                            errorStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Lato',
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24.0),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .error,
-                                                      fontSize: 12.0,
-                                                      letterSpacing: 0.0,
+                                                      width: 1.0,
                                                     ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24.0),
+                                                  ),
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(16.0, 16.0,
+                                                              56.0, 16.0),
+                                                ),
+                                                style:
                                                     FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                maxLines: 12,
+                                                minLines: 1,
+                                                cursorColor:
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
-                                                width: 1.0,
+                                                validator: _model
+                                                    .textControllerValidator
+                                                    .asValidator(context),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
                                             ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                            ),
-                                            focusedErrorBorder:
-                                                OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                            ),
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 16.0, 56.0, 16.0),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Lato',
-                                                letterSpacing: 0.0,
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(1.0, 0.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 4.0, 6.0, 4.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                borderRadius: 20.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 40.0,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent1,
+                                                icon: Icon(
+                                                  Icons.send_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 20.0,
+                                                ),
+                                                onPressed: () async {
+                                                  var _shouldSetState = false;
+                                                  if (_model.textController
+                                                              .text !=
+                                                          null &&
+                                                      _model.textController
+                                                              .text !=
+                                                          '') {
+                                                    _model.messageUuid =
+                                                        await actions
+                                                            .createRandomUuid();
+                                                    _shouldSetState = true;
+                                                    _model.imagenes = [];
+                                                    safeSetState(() {});
+                                                    _model.apiEnviarMensaje =
+                                                        await ChatGroup
+                                                            .crearMensajeCall
+                                                            .call(
+                                                      chatUuid:
+                                                          widget!.chatRef?.uuid,
+                                                      uuid: _model.messageUuid,
+                                                      text: _model
+                                                          .textController.text,
+                                                      token:
+                                                          currentAuthenticationToken,
+                                                      timestamp:
+                                                          getCurrentTimestamp
+                                                              .toString(),
+                                                      chatId:
+                                                          widget!.chatRef?.id,
+                                                      imagesList: _model
+                                                          .uploadedLocalFiles,
+                                                    );
+
+                                                    _shouldSetState = true;
+                                                    safeSetState(() {
+                                                      _model.textController
+                                                          ?.clear();
+                                                    });
+                                                    if ((_model.apiEnviarMensaje
+                                                            ?.succeeded ??
+                                                        true)) {
+                                                      safeSetState(() {
+                                                        _model.isDataUploading =
+                                                            false;
+                                                        _model.uploadedLocalFiles =
+                                                            [];
+                                                      });
+
+                                                      if (_shouldSetState)
+                                                        safeSetState(() {});
+                                                      return;
+                                                    } else {
+                                                      if (_shouldSetState)
+                                                        safeSetState(() {});
+                                                      return;
+                                                    }
+                                                  } else if (_model
+                                                      .imagenes.isNotEmpty) {
+                                                    _model.messageUuid2 =
+                                                        await actions
+                                                            .createRandomUuid();
+                                                    _shouldSetState = true;
+                                                    _model.apiEnviarMensajeImagesSinTexto =
+                                                        await ChatGroup
+                                                            .crearMensajeCall
+                                                            .call(
+                                                      chatUuid:
+                                                          widget!.chatRef?.uuid,
+                                                      uuid: _model.messageUuid2,
+                                                      text: _model
+                                                          .textController.text,
+                                                      token:
+                                                          currentAuthenticationToken,
+                                                      timestamp:
+                                                          getCurrentTimestamp
+                                                              .toString(),
+                                                      chatId:
+                                                          widget!.chatRef?.id,
+                                                      imagesList:
+                                                          _model.imagenes,
+                                                    );
+
+                                                    _shouldSetState = true;
+                                                    if ((_model
+                                                            .apiEnviarMensajeImagesSinTexto
+                                                            ?.succeeded ??
+                                                        true)) {
+                                                      _model.imagenes = [];
+                                                      safeSetState(() {});
+                                                      if (_shouldSetState)
+                                                        safeSetState(() {});
+                                                      return;
+                                                    } else {
+                                                      if (_shouldSetState)
+                                                        safeSetState(() {});
+                                                      return;
+                                                    }
+                                                  } else {
+                                                    if (_shouldSetState)
+                                                      safeSetState(() {});
+                                                    return;
+                                                  }
+
+                                                  if (_shouldSetState)
+                                                    safeSetState(() {});
+                                                },
                                               ),
-                                          maxLines: 12,
-                                          minLines: 1,
-                                          cursorColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          validator: _model
-                                              .textControllerValidator
-                                              .asValidator(context),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(1.0, 0.0),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 4.0, 6.0, 4.0),
-                                        child: FlutterFlowIconButton(
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                          borderRadius: 20.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 40.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .accent1,
-                                          icon: Icon(
-                                            Icons.send_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 20.0,
+                                            ),
                                           ),
-                                          onPressed: () async {
-                                            var _shouldSetState = false;
-                                            if (_model.textController.text !=
-                                                    null &&
-                                                _model.textController.text !=
-                                                    '') {
-                                              _model.messageUuid = await actions
-                                                  .createRandomUuid();
-                                              _shouldSetState = true;
-                                              _model.imagenes = [];
-                                              safeSetState(() {});
-                                              _model.apiEnviarMensaje =
-                                                  await ChatGroup
-                                                      .crearMensajeCall
-                                                      .call(
-                                                chatUuid: widget!.chatRef?.uuid,
-                                                uuid: _model.messageUuid,
-                                                text:
-                                                    _model.textController.text,
-                                                token:
-                                                    currentAuthenticationToken,
-                                                timestamp: getCurrentTimestamp
-                                                    .toString(),
-                                                chatId: widget!.chatRef?.id,
-                                                imagesList:
-                                                    _model.uploadedLocalFiles,
-                                              );
-
-                                              _shouldSetState = true;
-                                              safeSetState(() {
-                                                _model.textController?.clear();
-                                              });
-                                              if ((_model.apiEnviarMensaje
-                                                      ?.succeeded ??
-                                                  true)) {
-                                                safeSetState(() {
-                                                  _model.isDataUploading =
-                                                      false;
-                                                  _model.uploadedLocalFiles =
-                                                      [];
-                                                });
-
-                                                if (_shouldSetState)
-                                                  safeSetState(() {});
-                                                return;
-                                              } else {
-                                                if (_shouldSetState)
-                                                  safeSetState(() {});
-                                                return;
-                                              }
-                                            } else if (_model
-                                                .imagenes.isNotEmpty) {
-                                              _model.messageUuid2 =
-                                                  await actions
-                                                      .createRandomUuid();
-                                              _shouldSetState = true;
-                                              _model.apiEnviarMensajeImagesSinTexto =
-                                                  await ChatGroup
-                                                      .crearMensajeCall
-                                                      .call(
-                                                chatUuid: widget!.chatRef?.uuid,
-                                                uuid: _model.messageUuid2,
-                                                text:
-                                                    _model.textController.text,
-                                                token:
-                                                    currentAuthenticationToken,
-                                                timestamp: getCurrentTimestamp
-                                                    .toString(),
-                                                chatId: widget!.chatRef?.id,
-                                                imagesList: _model.imagenes,
-                                              );
-
-                                              _shouldSetState = true;
-                                              if ((_model
-                                                      .apiEnviarMensajeImagesSinTexto
-                                                      ?.succeeded ??
-                                                  true)) {
-                                                _model.imagenes = [];
-                                                safeSetState(() {});
-                                                if (_shouldSetState)
-                                                  safeSetState(() {});
-                                                return;
-                                              } else {
-                                                if (_shouldSetState)
-                                                  safeSetState(() {});
-                                                return;
-                                              }
-                                            } else {
-                                              if (_shouldSetState)
-                                                safeSetState(() {});
-                                              return;
-                                            }
-
-                                            if (_shouldSetState)
-                                              safeSetState(() {});
-                                          },
-                                        ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
+                            );
+                          } else {
+                            return Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Ticket marcado como resuelto',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),
