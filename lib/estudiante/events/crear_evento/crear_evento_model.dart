@@ -79,6 +79,10 @@ class CrearEventoModel extends FlutterFlowModel<CrearEventoWidget> {
   // State field(s) for organizador widget.
   int? organizadorValue;
   FormFieldController<int>? organizadorValueController;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController3;
+  String? Function(BuildContext, String?)? textController3Validator;
   // State field(s) for nameOrganizerNoBais widget.
   FocusNode? nameOrganizerNoBaisFocusNode;
   TextEditingController? nameOrganizerNoBaisTextController;
@@ -177,6 +181,9 @@ class CrearEventoModel extends FlutterFlowModel<CrearEventoWidget> {
 
     placeUrlFocusNode?.dispose();
     placeUrlTextController?.dispose();
+
+    textFieldFocusNode?.dispose();
+    textController3?.dispose();
 
     nameOrganizerNoBaisFocusNode?.dispose();
     nameOrganizerNoBaisTextController?.dispose();

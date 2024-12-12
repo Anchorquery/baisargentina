@@ -220,6 +220,10 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
     _model.placeUrlFocusNode ??= FocusNode();
 
     _model.isBaisValue = true;
+    _model.textController3 ??= TextEditingController(
+        text: '${currentUserData?.name} ${currentUserData?.lastName}');
+    _model.textFieldFocusNode ??= FocusNode();
+
     _model.nameOrganizerNoBaisTextController ??= TextEditingController();
     _model.nameOrganizerNoBaisFocusNode ??= FocusNode();
 
@@ -815,60 +819,183 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                   Builder(
                                     builder: (context) {
                                       if (_model.isBaisValue ?? false) {
-                                        return Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 15.0, 0.0, 20.0),
-                                          child: FlutterFlowDropDown<int>(
-                                            controller: _model
-                                                    .organizadorValueController ??=
-                                                FormFieldController<int>(
-                                              _model.organizadorValue ??=
-                                                  _model.event?.organizador?.id,
-                                            ),
-                                            options: List<int>.from(_model
-                                                .organizers
-                                                .map((e) => e.id)
-                                                .toList()),
-                                            optionLabels: _model.organizers
-                                                .map((e) => e.name)
-                                                .toList(),
-                                            onChanged: (val) => safeSetState(
-                                                () => _model.organizadorValue =
-                                                    val),
-                                            width: 348.0,
-                                            height: 56.0,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Lato',
-                                                      letterSpacing: 0.0,
+                                        return Builder(
+                                          builder: (context) {
+                                            if (currentUserData?.role == 1) {
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 15.0, 0.0, 20.0),
+                                                child: FlutterFlowDropDown<int>(
+                                                  controller: _model
+                                                          .organizadorValueController ??=
+                                                      FormFieldController<int>(
+                                                    _model.organizadorValue ??=
+                                                        _model.event
+                                                            ?.organizador?.id,
+                                                  ),
+                                                  options: List<int>.from(_model
+                                                      .organizers
+                                                      .map((e) => e.id)
+                                                      .toList()),
+                                                  optionLabels: _model
+                                                      .organizers
+                                                      .map((e) => e.name)
+                                                      .toList(),
+                                                  onChanged: (val) =>
+                                                      safeSetState(() => _model
+                                                              .organizadorValue =
+                                                          val),
+                                                  width: 348.0,
+                                                  height: 56.0,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Lato',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                  hintText:
+                                                      'Nombre del organizador',
+                                                  icon: Icon(
+                                                    Icons
+                                                        .keyboard_arrow_down_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 24.0,
+                                                  ),
+                                                  fillColor: Color(0xFFF1F4F8),
+                                                  elevation: 2.0,
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderWidth: 2.0,
+                                                  borderRadius: 40.0,
+                                                  margin: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 4.0, 16.0, 4.0),
+                                                  hidesUnderline: true,
+                                                  isOverButton: true,
+                                                  isSearchable: false,
+                                                  isMultiSelect: false,
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'dropDownOnPageLoadAnimation1']!),
+                                              );
+                                            } else {
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        20.0, 5.0, 20.0, 30.0),
+                                                child: Container(
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          1.0,
+                                                  child: TextFormField(
+                                                    controller:
+                                                        _model.textController3,
+                                                    focusNode: _model
+                                                        .textFieldFocusNode,
+                                                    autofocus: false,
+                                                    readOnly: true,
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      isDense: true,
+                                                      labelStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Lato',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                      hintText: 'TextField',
+                                                      hintStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Lato',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color:
+                                                              Color(0x00000000),
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
                                                     ),
-                                            hintText: 'Nombre del organizador',
-                                            icon: Icon(
-                                              Icons.keyboard_arrow_down_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 24.0,
-                                            ),
-                                            fillColor: Color(0xFFF1F4F8),
-                                            elevation: 2.0,
-                                            borderColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .alternate,
-                                            borderWidth: 2.0,
-                                            borderRadius: 40.0,
-                                            margin:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 4.0, 16.0, 4.0),
-                                            hidesUnderline: true,
-                                            isOverButton: true,
-                                            isSearchable: false,
-                                            isMultiSelect: false,
-                                          ).animateOnPageLoad(animationsMap[
-                                              'dropDownOnPageLoadAnimation1']!),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    cursorColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    validator: _model
+                                                        .textController3Validator
+                                                        .asValidator(context),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
                                         );
                                       } else {
                                         return Padding(
@@ -2653,7 +2780,10 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                           limitePersonas: int.tryParse(_model
                                               .limiteDePersonasTextController
                                               .text),
-                                          organizador: _model.organizadorValue,
+                                          organizador:
+                                              currentUserData?.role == 1
+                                                  ? _model.organizadorValue
+                                                  : currentUserData?.id,
                                           isBais: _model.isBaisValue,
                                           detenerVentas:
                                               _model.detenerventasValue,

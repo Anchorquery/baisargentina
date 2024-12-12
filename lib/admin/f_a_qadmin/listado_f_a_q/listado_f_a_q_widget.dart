@@ -1,4 +1,5 @@
 import '/backend/supabase/supabase.dart';
+import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -100,21 +101,12 @@ class _ListadoFAQWidgetState extends State<ListadoFAQWidget> {
                     child: FutureBuilder<List<FaqsRow>>(
                       future: FaqsTable().queryRows(
                         queryFn: (q) => q.order('created_at'),
+                        limit: 50,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                            ),
-                          );
+                          return LoaderWidget();
                         }
                         List<FaqsRow> listViewFaqsRowList = snapshot.data!;
 

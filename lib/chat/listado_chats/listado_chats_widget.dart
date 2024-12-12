@@ -382,7 +382,9 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                     ),
                     Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
-                      decoration: BoxDecoration(),
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondary,
+                      ),
                       child: Align(
                         alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Row(
