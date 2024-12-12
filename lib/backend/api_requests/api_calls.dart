@@ -2055,6 +2055,8 @@ class PlanGroup {
   static GenerarPagoCall generarPagoCall = GenerarPagoCall();
   static GenerarSuscripcionCall generarSuscripcionCall =
       GenerarSuscripcionCall();
+  static CancelarSuscripcionCall cancelarSuscripcionCall =
+      CancelarSuscripcionCall();
   static VerificarSuscripcionCall verificarSuscripcionCall =
       VerificarSuscripcionCall();
   static RestarSuscripcionBebidaCall restarSuscripcionBebidaCall =
@@ -2255,6 +2257,32 @@ class GenerarSuscripcionCall {
         'expiration_month': expirationMonth,
       },
       bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CancelarSuscripcionCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = PlanGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'CancelarSuscripcion',
+      apiUrl: '${baseUrl}/plans/cancelar-suscripcion',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
