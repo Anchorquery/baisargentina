@@ -127,7 +127,7 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                                   TextSpan(
                                     text: getJsonField(
                                       _model.data,
-                                      r'''$.client.firstname''',
+                                      r'''$.client.name''',
                                     ).toString(),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -143,11 +143,15 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                                   ),
                                   TextSpan(
                                     text: getJsonField(
-                                      (_model.apiResultGetTransaccion
-                                              ?.jsonBody ??
-                                          ''),
-                                      r'''$.client.lastname''',
-                                    ).toString(),
+                                              _model.data,
+                                              r'''$.client.lastname''',
+                                            ) !=
+                                            null
+                                        ? getJsonField(
+                                            _model.data,
+                                            r'''$.client.lastname''',
+                                          ).toString()
+                                        : ' ',
                                     style: TextStyle(),
                                   )
                                 ],
@@ -329,40 +333,42 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed(
-                        'DetalleReserva',
-                        queryParameters: {
-                          'uuid': serializeParam(
-                            'hfgfghfgh',
-                            ParamType.String,
-                          ),
-                        }.withoutNulls,
-                      );
-                    },
-                    text: 'Ver ticket',
-                    options: FFButtonOptions(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lato',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(50.0),
+                if (currentAuthenticationToken == '1')
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        context.pushNamed(
+                          'DetalleReserva',
+                          queryParameters: {
+                            'uuid': serializeParam(
+                              'hfgfghfgh',
+                              ParamType.String,
+                            ),
+                          }.withoutNulls,
+                        );
+                      },
+                      text: 'Ver ticket',
+                      options: FFButtonOptions(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Lato',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                        elevation: 0.0,
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
@@ -2302,161 +2303,211 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                 ],
                               ).animateOnPageLoad(
                                   animationsMap['rowOnPageLoadAnimation6']!),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 10.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    _model.validarForm = true;
-                                    if (_model.formKey.currentState == null ||
-                                        !_model.formKey.currentState!
-                                            .validate()) {
-                                      safeSetState(
-                                          () => _model.validarForm = false);
-                                      return;
-                                    }
-                                    if (_model.datePicked1 == null) {
-                                      _model.validarForm = false;
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                    if (_model.datePicked2 == null) {
-                                      _model.validarForm = false;
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                    if (_model.datePicked3 == null) {
-                                      _model.validarForm = false;
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                    if (_model.datePicked4 == null) {
-                                      _model.validarForm = false;
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                    if (_model.puedenAsistirValue == null) {
-                                      _model.validarForm = false;
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                    if (_model.categoriaEventoValue == null) {
-                                      _model.validarForm = false;
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                    _model.apiResult3i2 =
-                                        await ApiCreateEventsCall.call(
-                                      name: _model.nameTextController.text,
-                                      description: _model
-                                          .descripcionEventoTextController.text,
-                                      placeUrl:
-                                          _model.placeUrlTextController.text,
-                                      organizador: currentUserData?.role == 1
-                                          ? _model.organizadorValue
-                                          : currentUserData?.id,
-                                      fecha: _model.datePicked2?.toString(),
-                                      fechaInicioVenta:
-                                          _model.datePicked1?.toString(),
-                                      fechaFinVenta:
-                                          _model.datePicked2?.toString(),
-                                      horaInicioEvento:
-                                          _model.datePicked3?.toString(),
-                                      horaFinEvento:
-                                          _model.datePicked4?.toString(),
-                                      precio: _model
-                                          .precioDelTicketEventoTextController
-                                          .text,
-                                      restriccion: _model.puedenAsistirValue,
-                                      limitePersonas: valueOrDefault<String>(
-                                        _model.limiteDePersonasTextController
+                              Builder(
+                                builder: (context) => Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 0.0, 10.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      var _shouldSetState = false;
+                                      _model.validarForm = true;
+                                      if (_model.formKey.currentState == null ||
+                                          !_model.formKey.currentState!
+                                              .validate()) {
+                                        safeSetState(
+                                            () => _model.validarForm = false);
+                                        return;
+                                      }
+                                      if (_model.datePicked1 == null) {
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.datePicked2 == null) {
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.datePicked3 == null) {
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.datePicked4 == null) {
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.puedenAsistirValue == null) {
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.categoriaEventoValue == null) {
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      _shouldSetState = true;
+                                      _model.apiResult3i2 =
+                                          await ApiCreateEventsCall.call(
+                                        name: _model.nameTextController.text,
+                                        description: _model
+                                            .descripcionEventoTextController
                                             .text,
-                                        '150',
-                                      ),
-                                      token: currentAuthenticationToken,
-                                      type: _model.tipoEventoValue,
-                                      categoryId: _model.categoriaEventoValue,
-                                      portada: _model.uploadedLocalFile1,
-                                      imagesList: _model.uploadedLocalFiles2,
-                                      nameOrganizerNoBais: _model
-                                          .nameOrganizerNoBaisTextController
-                                          .text,
-                                      isBais: _model.isBaisValue,
-                                      detenerVentas: _model.detenerventasValue,
-                                    );
-
-                                    if ((_model.apiResult3i2?.succeeded ??
-                                        true)) {
-                                      context.goNamed(
-                                        'Evento',
-                                        queryParameters: {
-                                          'id': serializeParam(
-                                            getJsonField(
-                                              (_model.apiResult3i2?.jsonBody ??
-                                                  ''),
-                                              r'''$.data.id''',
-                                            ),
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                ErrorStruct.maybeFromMap(
-                                                        ApiCreateEventsCall
-                                                            .error(
-                                              (_model.apiResult3i2?.jsonBody ??
-                                                  ''),
-                                            ))!
-                                                    .name),
-                                            content: Text(
-                                                ErrorStruct.maybeFromMap(
-                                                        ApiCreateEventsCall
-                                                            .error(
-                                              (_model.apiResult3i2?.jsonBody ??
-                                                  ''),
-                                            ))!
-                                                    .message),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    }
-
-                                    safeSetState(() {});
-                                  },
-                                  text: 'Crear evento',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Lato',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
+                                        placeUrl:
+                                            _model.placeUrlTextController.text,
+                                        organizador: currentUserData?.role == 1
+                                            ? _model.organizadorValue
+                                            : currentUserData?.id,
+                                        fecha: _model.datePicked2?.toString(),
+                                        fechaInicioVenta:
+                                            _model.datePicked1?.toString(),
+                                        fechaFinVenta:
+                                            _model.datePicked2?.toString(),
+                                        horaInicioEvento:
+                                            _model.datePicked3?.toString(),
+                                        horaFinEvento:
+                                            _model.datePicked4?.toString(),
+                                        precio: _model
+                                            .precioDelTicketEventoTextController
+                                            .text,
+                                        restriccion: _model.puedenAsistirValue,
+                                        limitePersonas: valueOrDefault<String>(
+                                          _model.limiteDePersonasTextController
+                                              .text,
+                                          '150',
                                         ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                        token: currentAuthenticationToken,
+                                        type: _model.tipoEventoValue,
+                                        categoryId: _model.categoriaEventoValue,
+                                        portada: _model.uploadedLocalFile1,
+                                        imagesList: _model.uploadedLocalFiles2,
+                                        nameOrganizerNoBais: _model
+                                            .nameOrganizerNoBaisTextController
+                                            .text,
+                                        isBais: _model.isBaisValue,
+                                        detenerVentas:
+                                            _model.detenerventasValue,
+                                      );
+
+                                      _shouldSetState = true;
+                                      if ((_model.apiResult3i2?.succeeded ??
+                                          true)) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Evento creado correctamente',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        context.goNamed(
+                                          'Evento',
+                                          queryParameters: {
+                                            'id': serializeParam(
+                                              getJsonField(
+                                                (_model.apiResult3i2
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.data.id''',
+                                              ),
+                                              ParamType.int,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  ErrorStruct.maybeFromMap(
+                                                          ApiCreateEventsCall
+                                                              .error(
+                                                (_model.apiResult3i2
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ))!
+                                                      .name),
+                                              content: Text(
+                                                  ErrorStruct.maybeFromMap(
+                                                          ApiCreateEventsCall
+                                                              .error(
+                                                (_model.apiResult3i2
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ))!
+                                                      .message),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      }
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                    },
+                                    text: 'Crear evento',
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          24.0, 0.0, 24.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            color: Colors.white,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      elevation: 3.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(24.0),
                                     ),
-                                    borderRadius: BorderRadius.circular(24.0),
                                   ),
                                 ),
                               ),
@@ -2464,7 +2515,9 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                           ),
                         ),
                       ),
-                    ],
+                    ]
+                        .addToStart(SizedBox(height: 30.0))
+                        .addToEnd(SizedBox(height: 30.0)),
                   ),
                 ),
               ),

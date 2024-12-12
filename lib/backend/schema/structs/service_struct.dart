@@ -14,12 +14,14 @@ class ServiceStruct extends BaseStruct {
     String? caption,
     List<FileDStruct>? images,
     String? contactUrl,
+    CategoryStruct? category,
   })  : _id = id,
         _name = name,
         _description = description,
         _caption = caption,
         _images = images,
-        _contactUrl = contactUrl;
+        _contactUrl = contactUrl,
+        _category = category;
 
   // "id" field.
   int? _id;
@@ -69,6 +71,17 @@ class ServiceStruct extends BaseStruct {
 
   bool hasContactUrl() => _contactUrl != null;
 
+  // "category" field.
+  CategoryStruct? _category;
+  CategoryStruct get category => _category ?? CategoryStruct();
+  set category(CategoryStruct? val) => _category = val;
+
+  void updateCategory(Function(CategoryStruct) updateFn) {
+    updateFn(_category ??= CategoryStruct());
+  }
+
+  bool hasCategory() => _category != null;
+
   static ServiceStruct fromMap(Map<String, dynamic> data) => ServiceStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
@@ -79,6 +92,9 @@ class ServiceStruct extends BaseStruct {
           FileDStruct.fromMap,
         ),
         contactUrl: data['contactUrl'] as String?,
+        category: data['category'] is CategoryStruct
+            ? data['category']
+            : CategoryStruct.maybeFromMap(data['category']),
       );
 
   static ServiceStruct? maybeFromMap(dynamic data) =>
@@ -91,6 +107,7 @@ class ServiceStruct extends BaseStruct {
         'caption': _caption,
         'images': _images?.map((e) => e.toMap()).toList(),
         'contactUrl': _contactUrl,
+        'category': _category?.toMap(),
       }.withoutNulls;
 
   @override
@@ -119,6 +136,10 @@ class ServiceStruct extends BaseStruct {
         'contactUrl': serializeParam(
           _contactUrl,
           ParamType.String,
+        ),
+        'category': serializeParam(
+          _category,
+          ParamType.DataStruct,
         ),
       }.withoutNulls;
 
@@ -155,6 +176,12 @@ class ServiceStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        category: deserializeStructParam(
+          data['category'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: CategoryStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -169,12 +196,13 @@ class ServiceStruct extends BaseStruct {
         description == other.description &&
         caption == other.caption &&
         listEquality.equals(images, other.images) &&
-        contactUrl == other.contactUrl;
+        contactUrl == other.contactUrl &&
+        category == other.category;
   }
 
   @override
   int get hashCode => const ListEquality()
-      .hash([id, name, description, caption, images, contactUrl]);
+      .hash([id, name, description, caption, images, contactUrl, category]);
 }
 
 ServiceStruct createServiceStruct({
@@ -183,6 +211,7 @@ ServiceStruct createServiceStruct({
   String? description,
   String? caption,
   String? contactUrl,
+  CategoryStruct? category,
 }) =>
     ServiceStruct(
       id: id,
@@ -190,4 +219,5 @@ ServiceStruct createServiceStruct({
       description: description,
       caption: caption,
       contactUrl: contactUrl,
+      category: category ?? CategoryStruct(),
     );

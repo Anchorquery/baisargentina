@@ -39,11 +39,6 @@ class _CancelarSuscripcionWidgetState extends State<CancelarSuscripcionWidget>
     super.initState();
     _model = createModel(context, () => CancelarSuscripcionModel());
 
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      Navigator.pop(context);
-    });
-
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,

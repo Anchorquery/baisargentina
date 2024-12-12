@@ -1,6 +1,7 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -16,7 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
@@ -33,14 +36,21 @@ class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
           int index, Function(ServicesCategoryStruct) updateFn) =>
       categorias[index] = updateFn(categorias[index]);
 
+  ServiceStruct? data;
+  void updateDataStruct(Function(ServiceStruct) updateFn) {
+    updateFn(data ??= ServiceStruct());
+  }
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (Find category)] action in EditarServicio widget.
   ApiCallResponse? apiResultGetCategories;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
+  // Stores action output result for [Backend Call - API (findOneService)] action in EditarServicio widget.
+  ApiCallResponse? apiResultGetServices;
+  // State field(s) for nombre widget.
+  FocusNode? nombreFocusNode;
+  TextEditingController? nombreTextController;
+  String? Function(BuildContext, String?)? nombreTextControllerValidator;
   // State field(s) for caption widget.
   FocusNode? captionFocusNode;
   TextEditingController? captionTextController;
@@ -57,8 +67,12 @@ class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
   int? categoryValue;
   FormFieldController<int>? categoryValueController;
   // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
-  int carouselCurrentIndex = 1;
+  CarouselSliderController? carouselController1;
+  int carouselCurrentIndex1 = 1;
+
+  // State field(s) for Carousel widget.
+  CarouselSliderController? carouselController2;
+  int carouselCurrentIndex2 = 1;
 
   bool isDataUploading = false;
   List<FFUploadedFile> uploadedLocalFiles = [];
@@ -71,8 +85,8 @@ class EditarServicioModel extends FlutterFlowModel<EditarServicioWidget> {
 
   @override
   void dispose() {
-    textFieldFocusNode?.dispose();
-    textController1?.dispose();
+    nombreFocusNode?.dispose();
+    nombreTextController?.dispose();
 
     captionFocusNode?.dispose();
     captionTextController?.dispose();

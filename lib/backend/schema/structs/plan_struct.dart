@@ -21,6 +21,10 @@ class PlanStruct extends BaseStruct {
     String? uuid,
     String? state,
     String? type,
+    bool? dadoDeBaja,
+    int? start,
+    int? end,
+    int? fechaCancelacion,
   })  : _name = name,
         _description = description,
         _image = image,
@@ -33,7 +37,11 @@ class PlanStruct extends BaseStruct {
         _qrImage = qrImage,
         _uuid = uuid,
         _state = state,
-        _type = type;
+        _type = type,
+        _dadoDeBaja = dadoDeBaja,
+        _start = start,
+        _end = end,
+        _fechaCancelacion = fechaCancelacion;
 
   // "name" field.
   String? _name;
@@ -143,6 +151,41 @@ class PlanStruct extends BaseStruct {
 
   bool hasType() => _type != null;
 
+  // "dadoDeBaja" field.
+  bool? _dadoDeBaja;
+  bool get dadoDeBaja => _dadoDeBaja ?? false;
+  set dadoDeBaja(bool? val) => _dadoDeBaja = val;
+
+  bool hasDadoDeBaja() => _dadoDeBaja != null;
+
+  // "start" field.
+  int? _start;
+  int get start => _start ?? 0;
+  set start(int? val) => _start = val;
+
+  void incrementStart(int amount) => start = start + amount;
+
+  bool hasStart() => _start != null;
+
+  // "end" field.
+  int? _end;
+  int get end => _end ?? 0;
+  set end(int? val) => _end = val;
+
+  void incrementEnd(int amount) => end = end + amount;
+
+  bool hasEnd() => _end != null;
+
+  // "fechaCancelacion" field.
+  int? _fechaCancelacion;
+  int get fechaCancelacion => _fechaCancelacion ?? 0;
+  set fechaCancelacion(int? val) => _fechaCancelacion = val;
+
+  void incrementFechaCancelacion(int amount) =>
+      fechaCancelacion = fechaCancelacion + amount;
+
+  bool hasFechaCancelacion() => _fechaCancelacion != null;
+
   static PlanStruct fromMap(Map<String, dynamic> data) => PlanStruct(
         name: data['name'] as String?,
         description: data['description'] as String?,
@@ -161,6 +204,10 @@ class PlanStruct extends BaseStruct {
         uuid: data['uuid'] as String?,
         state: data['state'] as String?,
         type: data['type'] as String?,
+        dadoDeBaja: data['dadoDeBaja'] as bool?,
+        start: castToType<int>(data['start']),
+        end: castToType<int>(data['end']),
+        fechaCancelacion: castToType<int>(data['fechaCancelacion']),
       );
 
   static PlanStruct? maybeFromMap(dynamic data) =>
@@ -180,6 +227,10 @@ class PlanStruct extends BaseStruct {
         'uuid': _uuid,
         'state': _state,
         'type': _type,
+        'dadoDeBaja': _dadoDeBaja,
+        'start': _start,
+        'end': _end,
+        'fechaCancelacion': _fechaCancelacion,
       }.withoutNulls;
 
   @override
@@ -235,6 +286,22 @@ class PlanStruct extends BaseStruct {
         'type': serializeParam(
           _type,
           ParamType.String,
+        ),
+        'dadoDeBaja': serializeParam(
+          _dadoDeBaja,
+          ParamType.bool,
+        ),
+        'start': serializeParam(
+          _start,
+          ParamType.int,
+        ),
+        'end': serializeParam(
+          _end,
+          ParamType.int,
+        ),
+        'fechaCancelacion': serializeParam(
+          _fechaCancelacion,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -306,6 +373,26 @@ class PlanStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        dadoDeBaja: deserializeParam(
+          data['dadoDeBaja'],
+          ParamType.bool,
+          false,
+        ),
+        start: deserializeParam(
+          data['start'],
+          ParamType.int,
+          false,
+        ),
+        end: deserializeParam(
+          data['end'],
+          ParamType.int,
+          false,
+        ),
+        fechaCancelacion: deserializeParam(
+          data['fechaCancelacion'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -326,7 +413,11 @@ class PlanStruct extends BaseStruct {
         qrImage == other.qrImage &&
         uuid == other.uuid &&
         state == other.state &&
-        type == other.type;
+        type == other.type &&
+        dadoDeBaja == other.dadoDeBaja &&
+        start == other.start &&
+        end == other.end &&
+        fechaCancelacion == other.fechaCancelacion;
   }
 
   @override
@@ -343,7 +434,11 @@ class PlanStruct extends BaseStruct {
         qrImage,
         uuid,
         state,
-        type
+        type,
+        dadoDeBaja,
+        start,
+        end,
+        fechaCancelacion
       ]);
 }
 
@@ -361,6 +456,10 @@ PlanStruct createPlanStruct({
   String? uuid,
   String? state,
   String? type,
+  bool? dadoDeBaja,
+  int? start,
+  int? end,
+  int? fechaCancelacion,
 }) =>
     PlanStruct(
       name: name,
@@ -376,4 +475,8 @@ PlanStruct createPlanStruct({
       uuid: uuid,
       state: state,
       type: type,
+      dadoDeBaja: dadoDeBaja,
+      start: start,
+      end: end,
+      fechaCancelacion: fechaCancelacion,
     );

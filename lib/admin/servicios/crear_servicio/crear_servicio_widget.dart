@@ -1,6 +1,7 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -857,68 +858,114 @@ class _CrearServicioWidgetState extends State<CrearServicioWidget>
                                 animationsMap['rowOnPageLoadAnimation']!),
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    _model.apiResultvrg =
-                                        await ServicesGroup.createdCall.call(
-                                      token: currentAuthenticationToken,
-                                      name: _model.textController1.text,
-                                      description:
-                                          _model.captionTextController.text,
-                                      contactUrl: _model
-                                          .linkToServiceTextController.text,
-                                      caption:
-                                          _model.captionTextController.text,
-                                      imagesList: _model.uploadedLocalFiles,
-                                      category: _model.categoryValue,
-                                    );
-
-                                    if (!(_model.apiResultvrg?.succeeded ??
-                                        true)) {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('Error'),
-                                            content: Text(getJsonField(
-                                              (_model.apiResultvrg?.jsonBody ??
-                                                  ''),
-                                              r'''$.error''',
-                                            ).toString()),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
+                              child: Builder(
+                                builder: (context) => Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 30.0, 0.0, 0.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      var _shouldSetState = false;
+                                      _model.apiResultvrg =
+                                          await ServicesGroup.createdCall.call(
+                                        token: currentAuthenticationToken,
+                                        name: _model.textController1.text,
+                                        description:
+                                            _model.captionTextController.text,
+                                        contactUrl: _model
+                                            .linkToServiceTextController.text,
+                                        caption:
+                                            _model.captionTextController.text,
+                                        imagesList: _model.uploadedLocalFiles,
+                                        category: _model.categoryValue,
                                       );
-                                    }
 
-                                    safeSetState(() {});
-                                  },
-                                  text: 'Publicar',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        50.0, 0.0, 50.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFFFF8F14),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Lato',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                    elevation: 0.0,
-                                    borderRadius: BorderRadius.circular(30.0),
+                                      _shouldSetState = true;
+                                      if ((_model.apiResultvrg?.succeeded ??
+                                          true)) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Servicio creado exitosamente.',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        context.safePop();
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Error'),
+                                              content: Text(getJsonField(
+                                                (_model.apiResultvrg
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.error''',
+                                              ).toString()),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      }
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                    },
+                                    text: 'Publicar',
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          50.0, 0.0, 50.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Color(0xFFFF8F14),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            color: Colors.white,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -928,7 +975,9 @@ class _CrearServicioWidgetState extends State<CrearServicioWidget>
                       ),
                     ),
                   ),
-                ],
+                ]
+                    .addToStart(SizedBox(height: 30.0))
+                    .addToEnd(SizedBox(height: 30.0)),
               ),
             ),
           ),

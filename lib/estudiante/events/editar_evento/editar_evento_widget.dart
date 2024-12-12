@@ -2,6 +2,7 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
@@ -2749,119 +2750,152 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                     ],
                                   ).animateOnPageLoad(animationsMap[
                                       'rowOnPageLoadAnimation5']!),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 10.0, 0.0, 10.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        _model.apiResult3i2 = await EventsGroup
-                                            .actualizarEventoCall
-                                            .call(
-                                          name: _model.nameTextController.text,
-                                          description: _model
-                                              .descripcionEventoTextController
-                                              .text,
-                                          imagesList:
-                                              _model.uploadedLocalFiles2,
-                                          category: _model.categoriaEventoValue,
-                                          type: _model.typeValue,
-                                          portada: _model.uploadedLocalFile1,
-                                          placeUrl: _model
-                                              .placeUrlTextController.text,
-                                          fechaInicioVenta:
-                                              _model.datePicked1?.toString(),
-                                          fechaFinVenta:
-                                              _model.datePicked4?.toString(),
-                                          horaInicioEvento:
-                                              _model.datePicked3?.toString(),
-                                          fecha: _model.datePicked2?.toString(),
-                                          restriccion:
-                                              _model.puedenAsistirValue,
-                                          limitePersonas: int.tryParse(_model
-                                              .limiteDePersonasTextController
-                                              .text),
-                                          organizador:
-                                              currentUserData?.role == 1
-                                                  ? _model.organizadorValue
-                                                  : currentUserData?.id,
-                                          isBais: _model.isBaisValue,
-                                          detenerVentas:
-                                              _model.detenerventasValue,
-                                          nameOrganizerNoBais: _model
-                                              .nameOrganizerNoBaisTextController
-                                              .text,
-                                          precio: double.tryParse(_model
-                                              .precioDelTicketEventoTextController
-                                              .text),
-                                          token: currentAuthenticationToken,
-                                          id: widget!.id,
-                                        );
-
-                                        if ((_model.apiResult3i2?.succeeded ??
-                                            true)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Event Created!!',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
+                                  Builder(
+                                    builder: (context) => Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 10.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          var _shouldSetState = false;
+                                          _model.apiResult3i2 =
+                                              await EventsGroup
+                                                  .actualizarEventoCall
+                                                  .call(
+                                            name:
+                                                _model.nameTextController.text,
+                                            description: _model
+                                                .descripcionEventoTextController
+                                                .text,
+                                            imagesList:
+                                                _model.uploadedLocalFiles2,
+                                            category:
+                                                _model.categoriaEventoValue,
+                                            type: _model.typeValue,
+                                            portada: _model.uploadedLocalFile1,
+                                            placeUrl: _model
+                                                .placeUrlTextController.text,
+                                            fechaInicioVenta:
+                                                _model.datePicked1?.toString(),
+                                            fechaFinVenta:
+                                                _model.datePicked4?.toString(),
+                                            horaInicioEvento:
+                                                _model.datePicked3?.toString(),
+                                            fecha:
+                                                _model.datePicked2?.toString(),
+                                            restriccion:
+                                                _model.puedenAsistirValue,
+                                            limitePersonas: int.tryParse(_model
+                                                .limiteDePersonasTextController
+                                                .text),
+                                            organizador:
+                                                currentUserData?.role == 1
+                                                    ? _model.organizadorValue
+                                                    : currentUserData?.id,
+                                            isBais: _model.isBaisValue,
+                                            detenerVentas:
+                                                _model.detenerventasValue,
+                                            nameOrganizerNoBais: _model
+                                                .nameOrganizerNoBaisTextController
+                                                .text,
+                                            precio: double.tryParse(_model
+                                                .precioDelTicketEventoTextController
+                                                .text),
+                                            token: currentAuthenticationToken,
+                                            id: widget!.id,
                                           );
-                                        } else {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('Error'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
+
+                                          _shouldSetState = true;
+                                          if ((_model.apiResult3i2?.succeeded ??
+                                              true)) {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (dialogContext) {
+                                                return Dialog(
+                                                  elevation: 0,
+                                                  insetPadding: EdgeInsets.zero,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                              0.0, 0.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(
+                                                              dialogContext)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child:
+                                                        ModalInformativoWidget(
+                                                      textMessage:
+                                                          'Evento actualizado correctamente',
+                                                      messageButton: 'Cerrar',
+                                                    ),
                                                   ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        }
+                                                );
+                                              },
+                                            );
 
-                                        safeSetState(() {});
-                                      },
-                                      text: 'Guardar evento',
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Lato',
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 3.0,
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                            return;
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('Error'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            if (_shouldSetState)
+                                              safeSetState(() {});
+                                            return;
+                                          }
+
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                        },
+                                        text: 'Guardar evento',
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
                                       ),
                                     ),
                                   ),
@@ -2869,7 +2903,9 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                               ),
                             ),
                           ),
-                        ],
+                        ]
+                            .addToStart(SizedBox(height: 30.0))
+                            .addToEnd(SizedBox(height: 30.0)),
                       ),
                     ),
                   );

@@ -1,6 +1,7 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -15,7 +16,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'editar_servicio_model.dart';
 export 'editar_servicio_model.dart';
@@ -47,45 +50,101 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultGetCategories = await ServicesGroup.findCategoryCall.call(
-        token: currentAuthenticationToken,
-      );
+      await Future.wait([
+        Future(() async {
+          _model.apiResultGetCategories =
+              await ServicesGroup.findCategoryCall.call(
+            token: currentAuthenticationToken,
+          );
 
-      if ((_model.apiResultGetCategories?.succeeded ?? true)) {
-        _model.categorias = (getJsonField(
-          (_model.apiResultGetCategories?.jsonBody ?? ''),
-          r'''$.data''',
-          true,
-        )!
+          if ((_model.apiResultGetCategories?.succeeded ?? true)) {
+            _model.categorias = (getJsonField(
+              (_model.apiResultGetCategories?.jsonBody ?? ''),
+              r'''$.data''',
+              true,
+            )!
+                    .toList()
+                    .map<ServicesCategoryStruct?>(
+                        ServicesCategoryStruct.maybeFromMap)
+                    .toList() as Iterable<ServicesCategoryStruct?>)
+                .withoutNulls
                 .toList()
-                .map<ServicesCategoryStruct?>(
-                    ServicesCategoryStruct.maybeFromMap)
-                .toList() as Iterable<ServicesCategoryStruct?>)
-            .withoutNulls
-            .toList()
-            .cast<ServicesCategoryStruct>();
-        safeSetState(() {});
-      } else {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Error'),
-              content: Text('No se pudo obtener las categorias'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
+                .cast<ServicesCategoryStruct>();
+            safeSetState(() {});
+            return;
+          } else {
+            await showDialog(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: Text('Error'),
+                  content: Text('No se pudo obtener las categorias'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: Text('Ok'),
+                    ),
+                  ],
+                );
+              },
             );
-          },
-        );
-      }
+            return;
+          }
+        }),
+        Future(() async {
+          _model.apiResultGetServices =
+              await ServicesGroup.findOneServiceCall.call(
+            id: widget!.id,
+            token: currentAuthenticationToken,
+          );
+
+          if ((_model.apiResultGetServices?.succeeded ?? true)) {
+            _model.data = ServiceStruct.maybeFromMap(getJsonField(
+              (_model.apiResultGetServices?.jsonBody ?? ''),
+              r'''$.data''',
+            ));
+            safeSetState(() {});
+            safeSetState(() {
+              _model.nombreTextController?.text = _model.data!.name;
+            });
+            safeSetState(() {
+              _model.captionTextController?.text = _model.data!.caption;
+            });
+            safeSetState(() {
+              _model.descriptionTextController?.text = _model.data!.description;
+            });
+            safeSetState(() {
+              _model.linkToServiceTextController?.text =
+                  _model.data!.contactUrl;
+            });
+            safeSetState(() {
+              _model.categoryValueController?.value = _model.data!.category.id;
+            });
+            return;
+          } else {
+            await showDialog(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: Text('Error'),
+                  content: Text('No se pudo obtener las categorias'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: Text('Ok'),
+                    ),
+                  ],
+                );
+              },
+            );
+            return;
+          }
+        }),
+      ]);
     });
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.nombreTextController ??= TextEditingController();
+    _model.nombreFocusNode ??= FocusNode();
 
     _model.captionTextController ??= TextEditingController();
     _model.captionFocusNode ??= FocusNode();
@@ -212,8 +271,8 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
                                 child: TextFormField(
-                                  controller: _model.textController1,
-                                  focusNode: _model.textFieldFocusNode,
+                                  controller: _model.nombreTextController,
+                                  focusNode: _model.nombreFocusNode,
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
@@ -274,7 +333,8 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
                                       MaxLengthEnforcement.enforced,
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  validator: _model.textController1Validator
+                                  validator: _model
+                                      .nombreTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -619,7 +679,8 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
                               child: FlutterFlowDropDown<int>(
                                 controller: _model.categoryValueController ??=
                                     FormFieldController<int>(
-                                  _model.categoryValue ??= 0,
+                                  _model.categoryValue ??=
+                                      _model.data?.category?.id,
                                 ),
                                 options: List<int>.from(_model.categorias
                                     .map((e) => e.id)
@@ -664,7 +725,7 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 10.0),
                               child: Text(
-                                'Imgenes del servicio',
+                                'Imagenes del servicio',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -690,76 +751,180 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
                                         decoration: BoxDecoration(),
-                                        child: Visibility(
-                                          visible:
-                                              _model.uploadedLocalFiles.length >
-                                                  0,
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 20.0, 0.0, 0.0),
-                                            child: Builder(
-                                              builder: (context) {
-                                                final imagesEvent = _model
-                                                    .uploadedLocalFiles
-                                                    .toList();
+                                        child: Builder(
+                                          builder: (context) {
+                                            if (_model
+                                                    .uploadedLocalFiles.length >
+                                                0) {
+                                              return Visibility(
+                                                visible: _model
+                                                        .uploadedLocalFiles
+                                                        .length >
+                                                    0,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: Builder(
+                                                    builder: (context) {
+                                                      final imagesEvent = _model
+                                                          .uploadedLocalFiles
+                                                          .toList();
 
-                                                return Container(
-                                                  width: double.infinity,
-                                                  height: 180.0,
-                                                  child: CarouselSlider.builder(
-                                                    itemCount:
-                                                        imagesEvent.length,
-                                                    itemBuilder: (context,
-                                                        imagesEventIndex, _) {
-                                                      final imagesEventItem =
-                                                          imagesEvent[
-                                                              imagesEventIndex];
-                                                      return ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.memory(
-                                                          imagesEventItem
-                                                                  .bytes ??
-                                                              Uint8List
-                                                                  .fromList([]),
-                                                          width: 300.0,
-                                                          height: 200.0,
-                                                          fit: BoxFit.cover,
+                                                      return Container(
+                                                        width: double.infinity,
+                                                        height: 180.0,
+                                                        child: CarouselSlider
+                                                            .builder(
+                                                          itemCount: imagesEvent
+                                                              .length,
+                                                          itemBuilder: (context,
+                                                              imagesEventIndex,
+                                                              _) {
+                                                            final imagesEventItem =
+                                                                imagesEvent[
+                                                                    imagesEventIndex];
+                                                            return ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                              child:
+                                                                  Image.memory(
+                                                                imagesEventItem
+                                                                        .bytes ??
+                                                                    Uint8List
+                                                                        .fromList(
+                                                                            []),
+                                                                width: 300.0,
+                                                                height: 200.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            );
+                                                          },
+                                                          carouselController: _model
+                                                                  .carouselController1 ??=
+                                                              CarouselSliderController(),
+                                                          options:
+                                                              CarouselOptions(
+                                                            initialPage: max(
+                                                                0,
+                                                                min(
+                                                                    1,
+                                                                    imagesEvent
+                                                                            .length -
+                                                                        1)),
+                                                            viewportFraction:
+                                                                0.5,
+                                                            disableCenter:
+                                                                false,
+                                                            enlargeCenterPage:
+                                                                true,
+                                                            enlargeFactor: 0.25,
+                                                            enableInfiniteScroll:
+                                                                false,
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            autoPlay: false,
+                                                            onPageChanged: (index,
+                                                                    _) =>
+                                                                _model.carouselCurrentIndex1 =
+                                                                    index,
+                                                          ),
                                                         ),
                                                       );
                                                     },
-                                                    carouselController: _model
-                                                            .carouselController ??=
-                                                        CarouselSliderController(),
-                                                    options: CarouselOptions(
-                                                      initialPage: max(
-                                                          0,
-                                                          min(
-                                                              1,
-                                                              imagesEvent
-                                                                      .length -
-                                                                  1)),
-                                                      viewportFraction: 0.5,
-                                                      disableCenter: false,
-                                                      enlargeCenterPage: true,
-                                                      enlargeFactor: 0.25,
-                                                      enableInfiniteScroll:
-                                                          false,
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      autoPlay: false,
-                                                      onPageChanged: (index,
-                                                              _) =>
-                                                          _model.carouselCurrentIndex =
-                                                              index,
-                                                    ),
                                                   ),
-                                                );
-                                              },
-                                            ),
-                                          ),
+                                                ),
+                                              );
+                                            } else {
+                                              return Visibility(
+                                                visible:
+                                                    _model.data!.images.length >
+                                                        0,
+                                                child: Builder(
+                                                  builder: (context) {
+                                                    final imagagesData = _model
+                                                            .data?.images
+                                                            ?.toList() ??
+                                                        [];
+
+                                                    return Container(
+                                                      width: double.infinity,
+                                                      height: 200.0,
+                                                      child: CarouselSlider
+                                                          .builder(
+                                                        itemCount:
+                                                            imagagesData.length,
+                                                        itemBuilder: (context,
+                                                            imagagesDataIndex,
+                                                            _) {
+                                                          final imagagesDataItem =
+                                                              imagagesData[
+                                                                  imagagesDataIndex];
+                                                          return ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                            child: OctoImage(
+                                                              placeholderBuilder:
+                                                                  (_) => SizedBox
+                                                                      .expand(
+                                                                child: Image(
+                                                                  image: BlurHashImage(
+                                                                      imagagesDataItem
+                                                                          .blurhash),
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                              image:
+                                                                  NetworkImage(
+                                                                imagagesDataItem
+                                                                    .url,
+                                                              ),
+                                                              width: 200.0,
+                                                              height: 200.0,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          );
+                                                        },
+                                                        carouselController: _model
+                                                                .carouselController2 ??=
+                                                            CarouselSliderController(),
+                                                        options:
+                                                            CarouselOptions(
+                                                          initialPage: max(
+                                                              0,
+                                                              min(
+                                                                  1,
+                                                                  imagagesData
+                                                                          .length -
+                                                                      1)),
+                                                          viewportFraction: 0.5,
+                                                          disableCenter: true,
+                                                          enlargeCenterPage:
+                                                              true,
+                                                          enlargeFactor: 0.25,
+                                                          enableInfiniteScroll:
+                                                              true,
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          autoPlay: false,
+                                                          onPageChanged: (index,
+                                                                  _) =>
+                                                              _model.carouselCurrentIndex2 =
+                                                                  index,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              );
+                                            }
+                                          },
                                         ),
                                       ),
                                       Padding(
@@ -862,68 +1027,114 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
                                 animationsMap['rowOnPageLoadAnimation']!),
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    _model.apiResultvrg =
-                                        await ServicesGroup.createdCall.call(
-                                      token: currentAuthenticationToken,
-                                      name: _model.textController1.text,
-                                      description:
-                                          _model.captionTextController.text,
-                                      contactUrl: _model
-                                          .linkToServiceTextController.text,
-                                      caption:
-                                          _model.captionTextController.text,
-                                      imagesList: _model.uploadedLocalFiles,
-                                      category: _model.categoryValue,
-                                    );
-
-                                    if (!(_model.apiResultvrg?.succeeded ??
-                                        true)) {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('Error'),
-                                            content: Text(getJsonField(
-                                              (_model.apiResultvrg?.jsonBody ??
-                                                  ''),
-                                              r'''$.error''',
-                                            ).toString()),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
+                              child: Builder(
+                                builder: (context) => Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 30.0, 0.0, 0.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      var _shouldSetState = false;
+                                      _model.apiResultvrg =
+                                          await ServicesGroup.createdCall.call(
+                                        token: currentAuthenticationToken,
+                                        name: _model.nombreTextController.text,
+                                        description:
+                                            _model.captionTextController.text,
+                                        contactUrl: _model
+                                            .linkToServiceTextController.text,
+                                        caption:
+                                            _model.captionTextController.text,
+                                        imagesList: _model.uploadedLocalFiles,
+                                        category: _model.categoryValue,
                                       );
-                                    }
 
-                                    safeSetState(() {});
-                                  },
-                                  text: 'Publicar',
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        50.0, 0.0, 50.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFFFF8F14),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Lato',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                    elevation: 0.0,
-                                    borderRadius: BorderRadius.circular(30.0),
+                                      _shouldSetState = true;
+                                      if ((_model.apiResultvrg?.succeeded ??
+                                          true)) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Servicio editado exitosamente.',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        context.safePop();
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Error'),
+                                              content: Text(getJsonField(
+                                                (_model.apiResultvrg
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.error''',
+                                              ).toString()),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      }
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                    },
+                                    text: 'Publicar',
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          50.0, 0.0, 50.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Color(0xFFFF8F14),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            color: Colors.white,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      elevation: 0.0,
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -933,7 +1144,9 @@ class _EditarServicioWidgetState extends State<EditarServicioWidget>
                       ),
                     ),
                   ),
-                ],
+                ]
+                    .addToStart(SizedBox(height: 30.0))
+                    .addToEnd(SizedBox(height: 30.0)),
               ),
             ),
           ),

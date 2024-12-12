@@ -142,8 +142,7 @@ class _ListarServiciosAdminWidgetState extends State<ListarServiciosAdminWidget>
                       highlightColor: Colors.transparent,
                       onTap: () async {
                         if (currentUserData?.role == 1) {
-                          context.pushNamed('HomeAdmin');
-
+                          context.safePop();
                           return;
                         } else {
                           context.safePop();
