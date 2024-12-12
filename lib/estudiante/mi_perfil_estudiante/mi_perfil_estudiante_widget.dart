@@ -1054,64 +1054,69 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                           'buttonOnPageLoadAnimation1']!),
                                     ),
                                   ),
-                                Container(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  decoration: BoxDecoration(),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        30.0, 30.0, 30.0, 30.0),
-                                    child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.7,
-                                      height: 70.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .warning,
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
-                                      ),
-                                      child: Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                'Has cancelado tu plan, el mismo será dado de baja el : ${dateTimeFormat(
-                                                  "yMMMd",
-                                                  functions
-                                                      .timestampToDateTimeSeconds(
-                                                          _model.myPlan!
-                                                              .fechaCancelacion),
-                                                  locale: FFLocalizations.of(
+                                if (_model.myPlan?.state != 'active')
+                                  Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    decoration: BoxDecoration(),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          30.0, 30.0, 30.0, 30.0),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.7,
+                                        height: 70.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .warning,
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                        ),
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  'Has cancelado tu plan, el mismo será dado de baja el : ${dateTimeFormat(
+                                                    "yMMMd",
+                                                    functions
+                                                        .timestampToDateTimeSeconds(
+                                                            _model.myPlan!
+                                                                .fechaCancelacion),
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  )}',
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                      .languageCode,
-                                                )}',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Lato',
-                                                          color:
-                                                              Color(0xFF060606),
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Lato',
+                                                        color:
+                                                            Color(0xFF060606),
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                ),
                                               ),
-                                            ),
-                                          ]
-                                              .addToStart(SizedBox(width: 30.0))
-                                              .addToEnd(SizedBox(width: 30.0)),
+                                            ]
+                                                .addToStart(
+                                                    SizedBox(width: 30.0))
+                                                .addToEnd(
+                                                    SizedBox(width: 30.0)),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
