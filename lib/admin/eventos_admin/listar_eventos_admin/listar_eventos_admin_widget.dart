@@ -353,7 +353,7 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
                                                             (alertDialogContext) {
                                                           return AlertDialog(
                                                             title: Text(
-                                                                'Eliminar Housing'),
+                                                                'Eliminar Evento'),
                                                             content: Text(
                                                                 '¿Está seguro que desea eliminar este item?'),
                                                             actions: [

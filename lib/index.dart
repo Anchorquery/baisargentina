@@ -2,7 +2,8 @@
 export '/estudiante/public/inicio/inicio_widget.dart' show InicioWidget;
 export '/estudiante/public/registro/registro_widget.dart' show RegistroWidget;
 export '/estudiante/public/login/login_widget.dart' show LoginWidget;
-export '/estudiante/housing/housigns/housigns_widget.dart' show HousignsWidget;
+export '/estudiante/housing/listado_housing/listado_housing_widget.dart'
+    show ListadoHousingWidget;
 export '/estudiante/mi_perfil_estudiante/mi_perfil_estudiante_widget.dart'
     show MiPerfilEstudianteWidget;
 export '/estudiante/reservaexitosa/reservaexitosa_widget.dart'

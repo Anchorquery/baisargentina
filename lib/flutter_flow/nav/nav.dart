@@ -109,10 +109,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'housigns',
-          path: '/housigns',
+          name: 'ListadoHousing',
+          path: '/listadoHousing',
           requireAuth: true,
-          builder: (context, params) => HousignsWidget(),
+          builder: (context, params) => ListadoHousingWidget(),
         ),
         FFRoute(
           name: 'MiPerfilEstudiante',

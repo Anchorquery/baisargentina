@@ -1,7 +1,6 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/empty_list/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -251,27 +250,6 @@ class _ListaHousingAdminWidgetState extends State<ListaHousingAdminWidget>
                               child: Builder(
                                 builder: (context) {
                                   final housings = _model.data.toList();
-                                  if (housings.isEmpty) {
-                                    return Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
-                                      height:
-                                          MediaQuery.sizeOf(context).height *
-                                              0.3,
-                                      child: EmptyListWidget(
-                                        message: 'No hay housing disponibles',
-                                        error: 'Sin datos',
-                                        icon: Icon(
-                                          Icons.info_sharp,
-                                        ),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondary,
-                                        textColor: FlutterFlowTheme.of(context)
-                                            .primary,
-                                      ),
-                                    );
-                                  }
 
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
