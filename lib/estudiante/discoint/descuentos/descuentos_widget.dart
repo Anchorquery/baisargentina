@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -179,24 +180,6 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
-        floatingActionButton: Visibility(
-          visible: currentUserData?.role == 1,
-          child: Align(
-            alignment: AlignmentDirectional(1.0, 0.8),
-            child: FloatingActionButton(
-              onPressed: () async {
-                context.pushNamed('CrearDescuento');
-              },
-              backgroundColor: FlutterFlowTheme.of(context).primary,
-              elevation: 8.0,
-              child: Icon(
-                Icons.add_rounded,
-                color: FlutterFlowTheme.of(context).info,
-                size: 24.0,
-              ),
-            ),
-          ),
-        ),
         body: Stack(
           children: [
             Builder(
@@ -229,11 +212,13 @@ class _DescuentosWidgetState extends State<DescuentosWidget>
                                     alignment: AlignmentDirectional(0.0, -1.0),
                                     child: Text(
                                       'DESCUENTOS',
+                                      textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .headlineLarge
                                           .override(
                                             fontFamily: 'Lato',
                                             color: Colors.white,
+                                            fontSize: 25.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                           ),

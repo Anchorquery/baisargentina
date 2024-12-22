@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -666,9 +667,7 @@ class _ChatIdWidgetState extends State<ChatIdWidget> {
                                                         .accent1,
                                                 icon: Icon(
                                                   Icons.send_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
+                                                  color: Colors.white,
                                                   size: 20.0,
                                                 ),
                                                 onPressed: () async {

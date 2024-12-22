@@ -1,6 +1,9 @@
+import '/backend/api_requests/api_calls.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +13,14 @@ import 'establecer_contrasena_model.dart';
 export 'establecer_contrasena_model.dart';
 
 class EstablecerContrasenaWidget extends StatefulWidget {
-  const EstablecerContrasenaWidget({super.key});
+  const EstablecerContrasenaWidget({
+    super.key,
+    required this.email,
+    required this.otp,
+  });
+
+  final String? email;
+  final int? otp;
 
   @override
   State<EstablecerContrasenaWidget> createState() =>
@@ -28,8 +38,8 @@ class _EstablecerContrasenaWidgetState
     super.initState();
     _model = createModel(context, () => EstablecerContrasenaModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.contrasenaTextController ??= TextEditingController();
+    _model.contrasenaFocusNode ??= FocusNode();
   }
 
   @override
@@ -114,7 +124,7 @@ class _EstablecerContrasenaWidgetState
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 15.0),
                           child: Text(
-                            'Crea una contraseña entre 8-12 digitos',
+                            'Crea una contraseña entre 8-18 digitos',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -138,168 +148,231 @@ class _EstablecerContrasenaWidgetState
                                   ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
-                          autofocus: false,
-                          textInputAction: TextInputAction.done,
-                          obscureText: !_model.passwordVisibility,
-                          decoration: InputDecoration(
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF00215B),
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                15.0, 0.0, 15.0, 0.0),
-                            suffixIcon: InkWell(
-                              onTap: () => safeSetState(
-                                () => _model.passwordVisibility =
-                                    !_model.passwordVisibility,
-                              ),
-                              focusNode: FocusNode(skipTraversal: true),
-                              child: Icon(
-                                _model.passwordVisibility
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined,
-                                color: Color(0xFFC6C7C9),
-                                size: 25.0,
-                              ),
-                            ),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                          maxLength: 12,
-                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                          keyboardType: TextInputType.visiblePassword,
-                          cursorColor: FlutterFlowTheme.of(context).primary,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
-                        ),
-                      ),
-                      RichText(
-                        textScaler: MediaQuery.of(context).textScaler,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Al tocar “cotinuar”, aceptas nuestros ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                      Form(
+                        key: _model.formKey,
+                        autovalidateMode: AutovalidateMode.always,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 5.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.contrasenaTextController,
+                            focusNode: _model.contrasenaFocusNode,
+                            autofocus: false,
+                            textInputAction: TextInputAction.done,
+                            obscureText: !_model.contrasenaVisibility,
+                            decoration: InputDecoration(
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
                                   .override(
                                     fontFamily: 'Lato',
-                                    color: FlutterFlowTheme.of(context).primary,
                                     letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
                                   ),
-                            ),
-                            TextSpan(
-                              text: ' términos.',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                decoration: TextDecoration.underline,
-                              ),
-                              mouseCursor: SystemMouseCursors.click,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  context.pushNamed('terminosycondiciones');
-                                },
-                            ),
-                            TextSpan(
-                              text:
-                                  'Conoce como procesamos tus datos en nuestra.',
-                              style: TextStyle(),
-                            ),
-                            TextSpan(
-                              text:
-                                  'Politica de privacidad y Politica de cookies',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                decoration: TextDecoration.underline,
-                              ),
-                              mouseCursor: SystemMouseCursors.click,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  context.pushNamed('politicasdeReembolso');
-                                },
-                            )
-                          ],
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
                                     fontFamily: 'Lato',
                                     letterSpacing: 0.0,
                                   ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF00215B),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  15.0, 0.0, 15.0, 0.0),
+                              suffixIcon: InkWell(
+                                onTap: () => safeSetState(
+                                  () => _model.contrasenaVisibility =
+                                      !_model.contrasenaVisibility,
+                                ),
+                                focusNode: FocusNode(skipTraversal: true),
+                                child: Icon(
+                                  _model.contrasenaVisibility
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                  color: Color(0xFFC6C7C9),
+                                  size: 25.0,
+                                ),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Lato',
+                                  letterSpacing: 0.0,
+                                ),
+                            maxLength: 12,
+                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                            keyboardType: TextInputType.visiblePassword,
+                            cursorColor: FlutterFlowTheme.of(context).primary,
+                            validator: _model.contrasenaTextControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
                       ),
+                      if (widget!.email == '0')
+                        RichText(
+                          textScaler: MediaQuery.of(context).textScaler,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Al tocar “cotinuar”, aceptas nuestros ',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lato',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                              ),
+                              TextSpan(
+                                text: ' términos y condiciones.',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  decoration: TextDecoration.underline,
+                                ),
+                                mouseCursor: SystemMouseCursors.click,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    context.pushNamed('terminosycondiciones');
+                                  },
+                              )
+                            ],
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Lato',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
-                    },
-                    text: 'Continuar',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).tertiary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lato',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
+                Builder(
+                  builder: (context) => Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        var _shouldSetState = false;
+                        _model.apiRestablecerContrasena =
+                            await PublicGroup.restablecerContrasenaCall.call(
+                          code: widget!.otp,
+                          email: widget!.email,
+                          password: _model.contrasenaTextController.text,
+                        );
+
+                        _shouldSetState = true;
+                        if ((_model.apiRestablecerContrasena?.succeeded ??
+                            true)) {
+                          await showDialog(
+                            context: context,
+                            builder: (dialogContext) {
+                              return Dialog(
+                                elevation: 0,
+                                insetPadding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                alignment: AlignmentDirectional(0.0, 0.0)
+                                    .resolve(Directionality.of(context)),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    FocusScope.of(dialogContext).unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  },
+                                  child: ModalInformativoWidget(
+                                    textMessage:
+                                        'Contraseña reestablecida, será enviado al login para que inicie sesión. ',
+                                    messageButton: 'Cerrar',
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+
+                          context.pushNamed('login');
+
+                          if (_shouldSetState) safeSetState(() {});
+                          return;
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (dialogContext) {
+                              return Dialog(
+                                elevation: 0,
+                                insetPadding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                alignment: AlignmentDirectional(0.0, 0.0)
+                                    .resolve(Directionality.of(context)),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    FocusScope.of(dialogContext).unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  },
+                                  child: ModalInformativoWidget(
+                                    textMessage:
+                                        'Ha ocurrido un error, intenta más tarde',
+                                    messageButton: 'Cerrar',
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+
+                          if (_shouldSetState) safeSetState(() {});
+                          return;
+                        }
+
+                        if (_shouldSetState) safeSetState(() {});
+                      },
+                      text: 'Continuar',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).tertiary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Lato',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(24.0),
                       ),
-                      borderRadius: BorderRadius.circular(24.0),
                     ),
                   ),
                 ),

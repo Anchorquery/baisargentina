@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -354,7 +355,7 @@ class _ReservaexitosaWidgetState extends State<ReservaexitosaWidget>
                             Align(
                               alignment: AlignmentDirectional(0.0, -1.0),
                               child: Text(
-                                'Recibiras un correo con los siguientes pasos',
+                                'Recibirás un correo con los siguientes pasos',
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -520,7 +521,7 @@ class _ReservaexitosaWidgetState extends State<ReservaexitosaWidget>
                               onPressed: () async {
                                 context.pushNamed('ListarEventos');
                               },
-                              text: 'Ver màs eventos',
+                              text: 'Ver más eventos',
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 48.0,

@@ -2,12 +2,14 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -83,10 +85,8 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
           _model.switchDomingoValue = _model.perfil!.domingo;
         });
         safeSetState(() {
-          _model.descripcionUbicacionTextController?.text = getJsonField(
-            (_model.apiResulteme?.jsonBody ?? ''),
-            r'''$.descriptionUbication''',
-          ).toString().toString();
+          _model.descripcionUbicacionTextController?.text =
+              _model.perfil!.descriptionUbication;
         });
         return;
       } else {
@@ -1563,74 +1563,111 @@ class _EditarPerfilComercioWidgetState extends State<EditarPerfilComercioWidget>
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 15.0, 0.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                _model.apiResultbmb = await UserGroup
-                                    .updateMetaDataComercioCall
-                                    .call(
-                                  urlUbicacion: _model
-                                      .textFieldUbicacionTextController.text,
-                                  endDate: _model.perfil?.endDate,
-                                  startDate: _model.perfil?.startDate,
-                                  domingo: _model.switchDomingoValue,
-                                  sabado: _model.switchSabadoValue,
-                                  viernes: _model.switchViernesValue,
-                                  jueves: _model.switchJuevesValue,
-                                  martes: _model.switchMartesValue,
-                                  lunes: _model.switchLunesValue,
-                                  nameCommerce: _model
-                                      .textFieldNombreComercioTextController
-                                      .text,
-                                  picture: _model.uploadedLocalFile1,
-                                  imagesList: _model.uploadedLocalFiles2,
-                                  miercoles: _model.switchMiercolesValue,
-                                  token: currentAuthenticationToken,
-                                  descriptionUbication: _model
-                                      .descripcionUbicacionTextController.text,
-                                );
-
-                                if ((_model.apiResultbmb?.succeeded ?? true)) {
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('Solicitud exitosa'),
-                                        content: Text(
-                                            'Se ha actualizado el perfil correctamente.'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
+                          Builder(
+                            builder: (context) => Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 15.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  var _shouldSetState = false;
+                                  _model.apiResultbmb = await UserGroup
+                                      .updateMetaDataComercioCall
+                                      .call(
+                                    urlUbicacion: _model
+                                        .textFieldUbicacionTextController.text,
+                                    endDate: _model.perfil?.endDate,
+                                    startDate: _model.perfil?.startDate,
+                                    domingo: _model.switchDomingoValue,
+                                    sabado: _model.switchSabadoValue,
+                                    viernes: _model.switchViernesValue,
+                                    jueves: _model.switchJuevesValue,
+                                    martes: _model.switchMartesValue,
+                                    lunes: _model.switchLunesValue,
+                                    nameCommerce: _model
+                                        .textFieldNombreComercioTextController
+                                        .text,
+                                    picture: _model.uploadedLocalFile1,
+                                    imagesList: _model.uploadedLocalFiles2,
+                                    miercoles: _model.switchMiercolesValue,
+                                    token: currentAuthenticationToken,
+                                    descriptionUbication: _model
+                                        .descripcionUbicacionTextController
+                                        .text,
                                   );
-                                }
 
-                                safeSetState(() {});
-                              },
-                              text: 'Guardar',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    30.0, 0.0, 30.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFFFF8F14),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(30.0),
+                                  _shouldSetState = true;
+                                  if ((_model.apiResultbmb?.succeeded ??
+                                      true)) {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(dialogContext)
+                                                  .unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: ModalInformativoWidget(
+                                              textMessage: 'Perfil actualizado',
+                                              messageButton: 'Cerrar',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  } else {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Ha ocurrido un error'),
+                                          content: Text('Intente más tarde'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  }
+
+                                  if (_shouldSetState) safeSetState(() {});
+                                },
+                                text: 'Guardar',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      30.0, 0.0, 30.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: Color(0xFFFF8F14),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Lato',
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
                               ),
                             ),
                           ),

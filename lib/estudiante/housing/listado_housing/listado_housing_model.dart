@@ -6,6 +6,7 @@ import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'listado_housing_widget.dart' show ListadoHousingWidget;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

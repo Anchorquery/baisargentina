@@ -23,6 +23,7 @@ class EventsGroup {
     'Authorization': 'Bearer [token]',
   };
   static GetEventsCall getEventsCall = GetEventsCall();
+  static GenerarPdfCall generarPdfCall = GenerarPdfCall();
   static GetEventCall getEventCall = GetEventCall();
   static GetOrganizerCall getOrganizerCall = GetOrganizerCall();
   static EliminarEventoCall eliminarEventoCall = EliminarEventoCall();
@@ -43,6 +44,48 @@ class GetEventsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'GetEvents',
       apiUrl: '${baseUrl}/events',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'categoryId': categoryId,
+        'listAdmin': listAdmin,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  dynamic? pagination(dynamic response) => getJsonField(
+        response,
+        r'''$.meta.pagination''',
+      );
+}
+
+class GenerarPdfCall {
+  Future<ApiCallResponse> call({
+    String? categoryId = '0',
+    bool? listAdmin,
+    String? token =
+        'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjEsImlhdCI6MTcyMzA4OTkxOSwiZXhwIjoxNzI1NjgxOTE5fQ.F-1c8-nRWcHRqiHQjxtTwlXT-VImWmicIysfDQsSZfM',
+  }) async {
+    final baseUrl = EventsGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarPdf',
+      apiUrl: '${baseUrl}/events/generate-pdf',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${token}',
@@ -256,6 +299,10 @@ class PublicGroup {
   static String getBaseUrl() => 'https://server.baisargentina.com/api';
   static Map<String, String> headers = {};
   static LoginCall loginCall = LoginCall();
+  static SolicitarOTPCall solicitarOTPCall = SolicitarOTPCall();
+  static VerificarOtpCall verificarOtpCall = VerificarOtpCall();
+  static RestablecerContrasenaCall restablecerContrasenaCall =
+      RestablecerContrasenaCall();
   static CategoriaComerciosCall categoriaComerciosCall =
       CategoriaComerciosCall();
 }
@@ -275,6 +322,267 @@ class LoginCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Login',
       apiUrl: '${baseUrl}/auth/local',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? token(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.jwt''',
+      ));
+  int? id(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.user.id''',
+      ));
+  dynamic? user(dynamic response) => getJsonField(
+        response,
+        r'''$.user''',
+      );
+  String? email(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.email''',
+      ));
+  bool? confirmed(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.confirmed''',
+      ));
+  bool? locked(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.blocked''',
+      ));
+  String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.name''',
+      ));
+  String? birth(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.birth''',
+      ));
+  String? country(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.country''',
+      ));
+  String? lastName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.lastName''',
+      ));
+  bool? inArgentina(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.inArgentina''',
+      ));
+  String? university(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.university''',
+      ));
+  String? avatar(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.avatar''',
+      ));
+  int? role(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.user.role.id''',
+      ));
+}
+
+class SolicitarOTPCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+  }) async {
+    final baseUrl = PublicGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "email": "${email}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'SolicitarOTP',
+      apiUrl: '${baseUrl}/users-permissions/auth/solicitar-otp-reset-password',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? token(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.jwt''',
+      ));
+  int? id(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.user.id''',
+      ));
+  dynamic? user(dynamic response) => getJsonField(
+        response,
+        r'''$.user''',
+      );
+  String? email(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.email''',
+      ));
+  bool? confirmed(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.confirmed''',
+      ));
+  bool? locked(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.blocked''',
+      ));
+  String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.name''',
+      ));
+  String? birth(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.birth''',
+      ));
+  String? country(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.country''',
+      ));
+  String? lastName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.lastName''',
+      ));
+  bool? inArgentina(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.inArgentina''',
+      ));
+  String? university(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.university''',
+      ));
+  String? avatar(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.avatar''',
+      ));
+  int? role(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.user.role.id''',
+      ));
+}
+
+class VerificarOtpCall {
+  Future<ApiCallResponse> call({
+    int? code,
+    String? email = '',
+  }) async {
+    final baseUrl = PublicGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "code": ${code},
+  "email": "${email}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'VerificarOtp',
+      apiUrl: '${baseUrl}/users-permissions/auth/verificar-otp',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? token(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.jwt''',
+      ));
+  int? id(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.user.id''',
+      ));
+  dynamic? user(dynamic response) => getJsonField(
+        response,
+        r'''$.user''',
+      );
+  String? email(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.email''',
+      ));
+  bool? confirmed(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.confirmed''',
+      ));
+  bool? locked(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.blocked''',
+      ));
+  String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.name''',
+      ));
+  String? birth(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.birth''',
+      ));
+  String? country(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.country''',
+      ));
+  String? lastName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.lastName''',
+      ));
+  bool? inArgentina(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.user.inArgentina''',
+      ));
+  String? university(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.university''',
+      ));
+  String? avatar(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.user.avatar''',
+      ));
+  int? role(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.user.role.id''',
+      ));
+}
+
+class RestablecerContrasenaCall {
+  Future<ApiCallResponse> call({
+    int? code,
+    String? email = '',
+    String? password = '',
+  }) async {
+    final baseUrl = PublicGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "code": ${code},
+  "email": "${email}",
+  "password": "${password}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'RestablecerContrasena',
+      apiUrl: '${baseUrl}/users-permissions/auth/restablecer-contrasena-otp',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -392,6 +700,9 @@ class ReserveGroup {
   static CrearReservaAdminCall crearReservaAdminCall = CrearReservaAdminCall();
   static CambiarEstadoRerservaCall cambiarEstadoRerservaCall =
       CambiarEstadoRerservaCall();
+  static GenerarPdfTicketsCall generarPdfTicketsCall = GenerarPdfTicketsCall();
+  static GenerarPdfTicketByIdCall generarPdfTicketByIdCall =
+      GenerarPdfTicketByIdCall();
 }
 
 class CreateReserveCall {
@@ -751,6 +1062,67 @@ class CambiarEstadoRerservaCall {
   }
 }
 
+class GenerarPdfTicketsCall {
+  Future<ApiCallResponse> call({
+    String? startDate = '',
+    String? endDate = '',
+    String? groupBy = '',
+    String? ownerName = '',
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarPdfTickets',
+      apiUrl: '${baseUrl}/bookings-me/generar-pdf/',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'startDate': startDate,
+        'endDate': endDate,
+        'groupBy': groupBy,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GenerarPdfTicketByIdCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = ReserveGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarPdfTicketById',
+      apiUrl: '${baseUrl}/bookings-me/generar-pdf/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End Reserve Group Code
 
 /// Start User Group Code
@@ -773,6 +1145,10 @@ class UserGroup {
   static DeleteUserCall deleteUserCall = DeleteUserCall();
   static ObtenerPerfilComercioCall obtenerPerfilComercioCall =
       ObtenerPerfilComercioCall();
+  static GenerarPdfUsuariosCall generarPdfUsuariosCall =
+      GenerarPdfUsuariosCall();
+  static GenerarPdfUsuarioByIdCall generarPdfUsuarioByIdCall =
+      GenerarPdfUsuarioByIdCall();
   static UpdateMetaComercioAdminCall updateMetaComercioAdminCall =
       UpdateMetaComercioAdminCall();
   static ObtenerPerfilEstudianteCall obtenerPerfilEstudianteCall =
@@ -1064,6 +1440,60 @@ class ObtenerPerfilComercioCall {
     return ApiManager.instance.makeApiCall(
       callName: 'obtenerPerfilComercio',
       apiUrl: '${baseUrl}/users-permissions/users/perfil-commerce/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GenerarPdfUsuariosCall {
+  Future<ApiCallResponse> call({
+    int? role,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarPdfUsuarios',
+      apiUrl: '${baseUrl}/users-permissions/users/generate-pdf',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GenerarPdfUsuarioByIdCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarPdfUsuarioById',
+      apiUrl: '${baseUrl}/users-permissions/users/generate-pdf/${id}',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${token}',
@@ -2740,6 +3170,10 @@ class TransacctionGroup {
       BuscarTransaccionesAdminCall();
   static BuscarTransaccionAdminCall buscarTransaccionAdminCall =
       BuscarTransaccionAdminCall();
+  static GenerarPdfTransaccionesCall generarPdfTransaccionesCall =
+      GenerarPdfTransaccionesCall();
+  static GenerarPdfTransaccionesByIdCall generarPdfTransaccionesByIdCall =
+      GenerarPdfTransaccionesByIdCall();
 }
 
 class BuscarTransaccionesAdminCall {
@@ -2789,6 +3223,59 @@ class BuscarTransaccionAdminCall {
     return ApiManager.instance.makeApiCall(
       callName: 'buscar  transaccion Admin',
       apiUrl: '${baseUrl}/transacctions/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GenerarPdfTransaccionesCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = TransacctionGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarPdfTransacciones',
+      apiUrl: '${baseUrl}/transacctions/generar-pdf',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GenerarPdfTransaccionesByIdCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = TransacctionGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarPdfTransaccionesById',
+      apiUrl: '${baseUrl}/transacctions/generar-pdf/${id}',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${token}',

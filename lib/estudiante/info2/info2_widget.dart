@@ -80,7 +80,7 @@ class _Info2WidgetState extends State<Info2Widget> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'Noche de Beer Pong',
+                                    'Noches de Beer Pong',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineLarge
                                         .override(
@@ -110,9 +110,9 @@ class _Info2WidgetState extends State<Info2Widget> {
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 100.0),
+                                  0.0, 10.0, 0.0, 80.0),
                               child: Text(
-                                'Descubre los jueves de noche más universitaria de Buenos Aires en Budabar.\n\n\n-  Entrada grátis todos los jueves hasta la 1am.. \n- Entrada sin hacer fila.\n- 2 bebidas gratis al mes.',
+                                'Descubre los jueves más universitarios de Buenos Aires en Buda Bar\n\n\n- Entrada gratis hasta la 1:00 AM\n- Entrada sin hacer fila\n- 2 bebidas gratis al mes.',
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(

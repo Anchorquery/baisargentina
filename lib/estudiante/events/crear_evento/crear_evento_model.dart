@@ -11,6 +11,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'crear_evento_widget.dart' show CrearEventoWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
@@ -80,15 +81,11 @@ class CrearEventoModel extends FlutterFlowModel<CrearEventoWidget> {
   // State field(s) for organizador widget.
   int? organizadorValue;
   FormFieldController<int>? organizadorValueController;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
-  // State field(s) for nameOrganizerNoBais widget.
-  FocusNode? nameOrganizerNoBaisFocusNode;
-  TextEditingController? nameOrganizerNoBaisTextController;
+  // State field(s) for organizadorName widget.
+  FocusNode? organizadorNameFocusNode;
+  TextEditingController? organizadorNameTextController;
   String? Function(BuildContext, String?)?
-      nameOrganizerNoBaisTextControllerValidator;
+      organizadorNameTextControllerValidator;
   DateTime? datePicked1;
   DateTime? datePicked2;
   DateTime? datePicked3;
@@ -183,11 +180,8 @@ class CrearEventoModel extends FlutterFlowModel<CrearEventoWidget> {
     placeUrlFocusNode?.dispose();
     placeUrlTextController?.dispose();
 
-    textFieldFocusNode?.dispose();
-    textController3?.dispose();
-
-    nameOrganizerNoBaisFocusNode?.dispose();
-    nameOrganizerNoBaisTextController?.dispose();
+    organizadorNameFocusNode?.dispose();
+    organizadorNameTextController?.dispose();
 
     descripcionEventoFocusNode?.dispose();
     descripcionEventoTextController?.dispose();

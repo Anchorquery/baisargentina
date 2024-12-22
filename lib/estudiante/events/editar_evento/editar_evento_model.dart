@@ -12,6 +12,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'editar_evento_widget.dart' show EditarEventoWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
@@ -96,11 +97,6 @@ class EditarEventoModel extends FlutterFlowModel<EditarEventoWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
-  // State field(s) for nameOrganizerNoBais widget.
-  FocusNode? nameOrganizerNoBaisFocusNode;
-  TextEditingController? nameOrganizerNoBaisTextController;
-  String? Function(BuildContext, String?)?
-      nameOrganizerNoBaisTextControllerValidator;
   DateTime? datePicked1;
   DateTime? datePicked2;
   DateTime? datePicked3;
@@ -202,9 +198,6 @@ class EditarEventoModel extends FlutterFlowModel<EditarEventoWidget> {
 
     textFieldFocusNode?.dispose();
     textController3?.dispose();
-
-    nameOrganizerNoBaisFocusNode?.dispose();
-    nameOrganizerNoBaisTextController?.dispose();
 
     descripcionEventoFocusNode?.dispose();
     descripcionEventoTextController?.dispose();

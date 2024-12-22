@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -303,8 +304,51 @@ class _ListaTicketsWidgetState extends State<ListaTicketsWidget>
                             Align(
                               alignment: AlignmentDirectional(-1.0, 0.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  var _shouldSetState = false;
+                                  _model.apiDescargarPdf = await ReserveGroup
+                                      .generarPdfTicketsCall
+                                      .call(
+                                    token: currentAuthenticationToken,
+                                    startDate: dateTimeFormat(
+                                      "d/M/y",
+                                      _model.datePicked1,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    endDate: dateTimeFormat(
+                                      "d/M/y",
+                                      _model.datePicked2,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                    groupBy: _model.groupBy,
+                                    ownerName: _model.textController.text,
+                                  );
+
+                                  _shouldSetState = true;
+                                  if ((_model.apiDescargarPdf?.succeeded ??
+                                      true)) {
+                                    await downloadFile(
+                                      filename: getJsonField(
+                                        (_model.apiDescargarPdf?.jsonBody ??
+                                            ''),
+                                        r'''$.title''',
+                                      ).toString(),
+                                      url: getJsonField(
+                                        (_model.apiDescargarPdf?.jsonBody ??
+                                            ''),
+                                        r'''$.url''',
+                                      ).toString(),
+                                    );
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  } else {
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  }
+
+                                  if (_shouldSetState) safeSetState(() {});
                                 },
                                 text: 'Descargar la de tickets',
                                 options: FFButtonOptions(
@@ -336,6 +380,7 @@ class _ListaTicketsWidgetState extends State<ListaTicketsWidget>
                               0.0, 5.0, 0.0, 5.0),
                           child: FFButtonWidget(
                             onPressed: () async {
+                              var _shouldSetState = false;
                               final _datePicked1Date = await showDatePicker(
                                 context: context,
                                 initialDate: getCurrentTimestamp,
@@ -403,6 +448,7 @@ class _ListaTicketsWidgetState extends State<ListaTicketsWidget>
                                 ),
                               );
 
+                              _shouldSetState = true;
                               if ((_model.apiObtenerReservasAdminDateInit
                                       ?.succeeded ??
                                   true)) {
@@ -416,9 +462,14 @@ class _ListaTicketsWidgetState extends State<ListaTicketsWidget>
                                     .toList()
                                     .cast<dynamic>();
                                 safeSetState(() {});
+                                if (_shouldSetState) safeSetState(() {});
+                                return;
+                              } else {
+                                if (_shouldSetState) safeSetState(() {});
+                                return;
                               }
 
-                              safeSetState(() {});
+                              if (_shouldSetState) safeSetState(() {});
                             },
                             text: _model.datePicked1 != null
                                 ? dateTimeFormat(

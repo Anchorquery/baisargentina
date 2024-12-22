@@ -1,9 +1,11 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/loader/loader_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'perfil_estudiante_by_id_widget.dart' show PerfilEstudianteByIdWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -22,6 +24,8 @@ class PerfilEstudianteByIdModel
 
   // Stores action output result for [Backend Call - API (obtenerPerfilEstudiante)] action in PerfilEstudianteById widget.
   ApiCallResponse? apiGerPerfilEstudiante;
+  // Stores action output result for [Backend Call - API (GenerarPdfUsuarioById)] action in IconButton widget.
+  ApiCallResponse? apiDescargarPdfUserById;
   // State field(s) for Switch widget.
   bool? switchValue;
   // Stores action output result for [Backend Call - API (AdminUdatepUserStra)] action in Switch widget.

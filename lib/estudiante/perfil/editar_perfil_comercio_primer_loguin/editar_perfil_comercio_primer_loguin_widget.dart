@@ -2,12 +2,14 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -1164,7 +1166,7 @@ class _EditarPerfilComercioPrimerLoguinWidgetState
                                             decoration: InputDecoration(
                                               isDense: true,
                                               labelText:
-                                                  'Descripcion de la ubicacion',
+                                                  'Descripción de la ubicación',
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -1172,7 +1174,7 @@ class _EditarPerfilComercioPrimerLoguinWidgetState
                                                         fontFamily: 'Lato',
                                                         letterSpacing: 0.0,
                                                       ),
-                                              hintText: 'Ubicacion',
+                                              hintText: 'Ubicación',
                                               hintStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -1273,6 +1275,25 @@ class _EditarPerfilComercioPrimerLoguinWidgetState
                                           ),
                                         ),
                                       ].divide(SizedBox(width: 5.0)),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 40.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Fotografías de tu comercio',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              color: Color(0xFFFF8F14),
+                                              fontSize: 20.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w800,
+                                            ),
+                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -1608,16 +1629,100 @@ class _EditarPerfilComercioPrimerLoguinWidgetState
                                 if (_model.uploadedLocalFile1 == null ||
                                     (_model.uploadedLocalFile1.bytes ?? [])
                                         .isEmpty) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(dialogContext)
+                                                .unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: ModalInformativoWidget(
+                                            textMessage:
+                                                'Las fotografías de tu comercio son obligatorias. ',
+                                            messageButton: 'Cerrar',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+
                                   _model.formularioPerfil = false;
                                   safeSetState(() {});
                                   return;
                                 }
                                 if (_model.datePicked1 == null) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(dialogContext)
+                                                .unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: ModalInformativoWidget(
+                                            textMessage:
+                                                'Es necesario que ingreses el horario de apertura',
+                                            messageButton: '',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+
                                   _model.formularioPerfil = false;
                                   safeSetState(() {});
                                   return;
                                 }
                                 if (_model.datePicked2 == null) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(dialogContext)
+                                                .unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: ModalInformativoWidget(
+                                            textMessage:
+                                                'Es necesario que ingreses el horario de cierre de tu negocio. ',
+                                            messageButton: '',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+
                                   _model.formularioPerfil = false;
                                   safeSetState(() {});
                                   return;
@@ -1625,6 +1730,34 @@ class _EditarPerfilComercioPrimerLoguinWidgetState
                                 if (_model.uploadedLocalFiles2.any((file) =>
                                     file == null ||
                                     (file.bytes?.isEmpty ?? true))) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(dialogContext)
+                                                .unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: ModalInformativoWidget(
+                                            textMessage:
+                                                'Debes agregar una imagen de perfil. ',
+                                            messageButton: 'Cerrar',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+
                                   _model.formularioPerfil = false;
                                   safeSetState(() {});
                                   return;

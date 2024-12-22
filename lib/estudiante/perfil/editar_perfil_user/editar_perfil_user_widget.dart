@@ -4,12 +4,14 @@ import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'editar_perfil_user_model.dart';
 export 'editar_perfil_user_model.dart';
@@ -56,52 +59,19 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
         safeSetState(() {});
         safeSetState(() {
           _model.nameTextController?.text = _model.misdatos!.name;
-          _model.nameFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.nameTextController?.selection = TextSelection.collapsed(
-              offset: _model.nameTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.apellidoTextController?.text = _model.misdatos!.lastName;
-          _model.apellidoFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.apellidoTextController?.selection = TextSelection.collapsed(
-              offset: _model.apellidoTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.emailAddressTextController?.text = _model.misdatos!.email;
-          _model.emailAddressFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.emailAddressTextController?.selection =
-                TextSelection.collapsed(
-              offset: _model.emailAddressTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.phoneNumberTextController?.text = _model.misdatos!.phone;
-          _model.phoneNumberFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.phoneNumberTextController?.selection =
-                TextSelection.collapsed(
-              offset: _model.phoneNumberTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.universidadFieldTextController?.text =
               _model.misdatos!.university;
-          _model.universidadFieldFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.universidadFieldTextController?.selection =
-                TextSelection.collapsed(
-              offset: _model.universidadFieldTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.estasEnArgentinaValueController?.value =
@@ -209,7 +179,7 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                                 validateFileFormat(
                                                     m.storagePath, context))) {
                                           safeSetState(() =>
-                                              _model.isDataUploading = true);
+                                              _model.isDataUploading1 = true);
                                           var selectedUploadedFiles =
                                               <FFUploadedFile>[];
 
@@ -229,12 +199,12 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                                         ))
                                                     .toList();
                                           } finally {
-                                            _model.isDataUploading = false;
+                                            _model.isDataUploading1 = false;
                                           }
                                           if (selectedUploadedFiles.length ==
                                               selectedMedia.length) {
                                             safeSetState(() {
-                                              _model.uploadedLocalFile =
+                                              _model.uploadedLocalFile1 =
                                                   selectedUploadedFiles.first;
                                             });
                                           } else {
@@ -250,7 +220,7 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                           field: 'avatar',
                                           refId: _model.misdatos?.id,
                                           token: currentAuthenticationToken,
-                                          files: _model.uploadedLocalFile,
+                                          files: _model.uploadedLocalFile1,
                                         );
 
                                         _shouldSetState = true;
@@ -1378,6 +1348,534 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                           .asValidator(context),
                                     ),
                                   ),
+                                Align(
+                                  alignment: AlignmentDirectional(-1.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: Text(
+                                          'Foto de ID',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Lato',
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ),
+                                      if (_model.uploadedLocalFile2 != null &&
+                                          (_model.uploadedLocalFile2.bytes
+                                                  ?.isNotEmpty ??
+                                              false))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 20.0, 0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child:
+                                                      FlutterFlowExpandedImageView(
+                                                    image: Image.memory(
+                                                      _model.uploadedLocalFile2
+                                                              .bytes ??
+                                                          Uint8List.fromList(
+                                                              []),
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                    allowRotation: true,
+                                                    useHeroAnimation: false,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              child: Image.memory(
+                                                _model.uploadedLocalFile2
+                                                        .bytes ??
+                                                    Uint8List.fromList([]),
+                                                width: 230.0,
+                                                height: 200.0,
+                                                fit: BoxFit.fitWidth,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (_model.uploadedLocalFile2 == null ||
+                                          (_model.uploadedLocalFile2.bytes
+                                                  ?.isEmpty ??
+                                              true))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 20.0, 0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child:
+                                                      FlutterFlowExpandedImageView(
+                                                    image: Image.network(
+                                                      _model.misdatos!.dni,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                    allowRotation: true,
+                                                    useHeroAnimation: false,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              child: Image.network(
+                                                _model.misdatos!.dni,
+                                                width: 230.0,
+                                                height: 200.0,
+                                                fit: BoxFit.fitWidth,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 20.0, 0.0, 20.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              var _shouldSetState = false;
+                                              // f 1
+                                              final selectedMedia =
+                                                  await selectMediaWithSourceBottomSheet(
+                                                context: context,
+                                                allowPhoto: true,
+                                                includeDimensions: true,
+                                                pickerFontFamily: 'Roboto',
+                                              );
+                                              if (selectedMedia != null &&
+                                                  selectedMedia.every((m) =>
+                                                      validateFileFormat(
+                                                          m.storagePath,
+                                                          context))) {
+                                                safeSetState(() => _model
+                                                    .isDataUploading2 = true);
+                                                var selectedUploadedFiles =
+                                                    <FFUploadedFile>[];
+
+                                                try {
+                                                  selectedUploadedFiles =
+                                                      selectedMedia
+                                                          .map((m) =>
+                                                              FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                          .toList();
+                                                } finally {
+                                                  _model.isDataUploading2 =
+                                                      false;
+                                                }
+                                                if (selectedUploadedFiles
+                                                        .length ==
+                                                    selectedMedia.length) {
+                                                  safeSetState(() {
+                                                    _model.uploadedLocalFile2 =
+                                                        selectedUploadedFiles
+                                                            .first;
+                                                  });
+                                                } else {
+                                                  safeSetState(() {});
+                                                  return;
+                                                }
+                                              }
+
+                                              _model.apiUpdateMeDni =
+                                                  await UploadMediaGroup
+                                                      .singleCall
+                                                      .call(
+                                                ref:
+                                                    'plugin::users-permissions.user',
+                                                field: 'dni',
+                                                refId: currentUserData?.id,
+                                                token:
+                                                    currentAuthenticationToken,
+                                                files:
+                                                    _model.uploadedLocalFile2,
+                                              );
+
+                                              _shouldSetState = true;
+                                              if ((_model.apiUpdateMeDni
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('Dni subido'),
+                                                      content: Text(
+                                                          'Archivo subido'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                if (_shouldSetState)
+                                                  safeSetState(() {});
+                                                return;
+                                              } else {
+                                                if (_shouldSetState)
+                                                  safeSetState(() {});
+                                                return;
+                                              }
+
+                                              if (_shouldSetState)
+                                                safeSetState(() {});
+                                            },
+                                            text: '',
+                                            icon: Icon(
+                                              Icons.upload_rounded,
+                                              color: Colors.white,
+                                              size: 25.0,
+                                            ),
+                                            options: FFButtonOptions(
+                                              height: 42.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 20.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Lato',
+                                                        color: Colors.white,
+                                                        fontSize: 14.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(70.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(-1.0, 0.0),
+                                        child: Text(
+                                          'Foto de pasaporte',
+                                          textAlign: TextAlign.start,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Lato',
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ),
+                                      if (_model.uploadedLocalFile3 != null &&
+                                          (_model.uploadedLocalFile3.bytes
+                                                  ?.isNotEmpty ??
+                                              false))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 20.0, 0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child:
+                                                      FlutterFlowExpandedImageView(
+                                                    image: Image.memory(
+                                                      _model.uploadedLocalFile3
+                                                              .bytes ??
+                                                          Uint8List.fromList(
+                                                              []),
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                    allowRotation: true,
+                                                    useHeroAnimation: false,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              child: Image.memory(
+                                                _model.uploadedLocalFile3
+                                                        .bytes ??
+                                                    Uint8List.fromList([]),
+                                                width: 230.0,
+                                                height: 200.0,
+                                                fit: BoxFit.fitWidth,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (_model.uploadedLocalFile3 == null ||
+                                          (_model.uploadedLocalFile3.bytes
+                                                  ?.isEmpty ??
+                                              true))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 20.0, 0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child:
+                                                      FlutterFlowExpandedImageView(
+                                                    image: Image.network(
+                                                      _model.misdatos!.dni,
+                                                      fit: BoxFit.contain,
+                                                    ),
+                                                    allowRotation: true,
+                                                    useHeroAnimation: false,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              child: Image.network(
+                                                _model.misdatos!.dni,
+                                                width: 230.0,
+                                                height: 200.0,
+                                                fit: BoxFit.fitWidth,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 20.0, 0.0, 20.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              var _shouldSetState = false;
+                                              // f 1
+                                              final selectedMedia =
+                                                  await selectMediaWithSourceBottomSheet(
+                                                context: context,
+                                                allowPhoto: true,
+                                                includeDimensions: true,
+                                                pickerFontFamily: 'Roboto',
+                                              );
+                                              if (selectedMedia != null &&
+                                                  selectedMedia.every((m) =>
+                                                      validateFileFormat(
+                                                          m.storagePath,
+                                                          context))) {
+                                                safeSetState(() => _model
+                                                    .isDataUploading3 = true);
+                                                var selectedUploadedFiles =
+                                                    <FFUploadedFile>[];
+
+                                                try {
+                                                  selectedUploadedFiles =
+                                                      selectedMedia
+                                                          .map((m) =>
+                                                              FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                          .toList();
+                                                } finally {
+                                                  _model.isDataUploading3 =
+                                                      false;
+                                                }
+                                                if (selectedUploadedFiles
+                                                        .length ==
+                                                    selectedMedia.length) {
+                                                  safeSetState(() {
+                                                    _model.uploadedLocalFile3 =
+                                                        selectedUploadedFiles
+                                                            .first;
+                                                  });
+                                                } else {
+                                                  safeSetState(() {});
+                                                  return;
+                                                }
+                                              }
+
+                                              _model.apiUpdatePasaporteMe =
+                                                  await UploadMediaGroup
+                                                      .singleCall
+                                                      .call(
+                                                ref:
+                                                    'plugin::users-permissions.user',
+                                                field: 'pasaporte',
+                                                refId: currentUserData?.id,
+                                                token:
+                                                    currentAuthenticationToken,
+                                                files:
+                                                    _model.uploadedLocalFile3,
+                                              );
+
+                                              _shouldSetState = true;
+                                              if ((_model.apiUpdatePasaporteMe
+                                                      ?.succeeded ??
+                                                  true)) {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'Pasaporte subido'),
+                                                      content: Text(
+                                                          'Archivo subido'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                if (_shouldSetState)
+                                                  safeSetState(() {});
+                                                return;
+                                              } else {
+                                                if (_shouldSetState)
+                                                  safeSetState(() {});
+                                                return;
+                                              }
+
+                                              if (_shouldSetState)
+                                                safeSetState(() {});
+                                            },
+                                            text: '',
+                                            icon: Icon(
+                                              Icons.upload_rounded,
+                                              color: Colors.white,
+                                              size: 25.0,
+                                            ),
+                                            options: FFButtonOptions(
+                                              height: 42.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 20.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Lato',
+                                                        color: Colors.white,
+                                                        fontSize: 14.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(70.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
@@ -366,7 +367,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                                     Align(
                                       alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Text(
-                                        'Àrea (mtrs²)',
+                                        'Área (mtrs²)',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -480,7 +481,7 @@ class _HousignWidgetState extends State<HousignWidget> {
                           alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                30.0, 10.0, 30.0, 10.0),
+                                25.0, 0.0, 25.0, 20.0),
                             child: RichText(
                               textScaler: MediaQuery.of(context).textScaler,
                               text: TextSpan(

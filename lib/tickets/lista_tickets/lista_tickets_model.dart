@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'lista_tickets_widget.dart' show ListaTicketsWidget;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,8 @@ class ListaTicketsModel extends FlutterFlowModel<ListaTicketsWidget> {
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Backend Call - API (find reservas admin)] action in TextField widget.
   ApiCallResponse? apiObtenerReservasAdminporNombre;
+  // Stores action output result for [Backend Call - API (GenerarPdfTickets)] action in Button widget.
+  ApiCallResponse? apiDescargarPdf;
   DateTime? datePicked1;
   // Stores action output result for [Backend Call - API (find reservas admin)] action in fechaInicioVentaLabel widget.
   ApiCallResponse? apiObtenerReservasAdminDateInit;

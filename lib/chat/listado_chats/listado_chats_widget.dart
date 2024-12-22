@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -182,6 +183,7 @@ class _ListadoChatsWidgetState extends State<ListadoChatsWidget> {
                     'Mensajes a soporte',
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
                           fontFamily: 'Lato',
+                          fontSize: 25.0,
                           letterSpacing: 0.0,
                         ),
                   ),

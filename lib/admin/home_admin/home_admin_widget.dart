@@ -3,6 +3,8 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,10 +45,12 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
           _model.ultimoRegistro = getJsonField(
             (_model.apiResulAdminHome?.jsonBody ?? ''),
             r'''$.data.lastRegister''',
-          ).toString().toString();
+          );
           safeSetState(() {});
+          return;
+        } else {
+          return;
         }
-        return;
       } else if (currentUserData?.role == 4) {
         context.pushNamed('HomeComercio');
 
@@ -188,7 +192,12 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Text(
-                      'Ultima registro ${_model.ultimoRegistro}',
+                      'Ultima registro ${dateTimeFormat(
+                        "d/M H:mm",
+                        functions
+                            .timestampToDateTimeSeconds(_model.ultimoRegistro!),
+                        locale: FFLocalizations.of(context).languageCode,
+                      )}',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lato',
                             color: FlutterFlowTheme.of(context).primary,
@@ -459,7 +468,8 @@ class _HomeAdminWidgetState extends State<HomeAdminWidget> {
                                           0.0, 0.0, 0.0, 15.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          context.pushNamed('transaccionesNew');
+                                          context.pushNamed(
+                                              'ListadoTransacciones');
                                         },
                                         text: 'Ver más',
                                         options: FFButtonOptions(

@@ -1,31 +1,34 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'email_recovery_model.dart';
-export 'email_recovery_model.dart';
+import 'recuperar_contrasena_copy_model.dart';
+export 'recuperar_contrasena_copy_model.dart';
 
-class EmailRecoveryWidget extends StatefulWidget {
-  const EmailRecoveryWidget({super.key});
+class RecuperarContrasenaCopyWidget extends StatefulWidget {
+  const RecuperarContrasenaCopyWidget({super.key});
 
   @override
-  State<EmailRecoveryWidget> createState() => _EmailRecoveryWidgetState();
+  State<RecuperarContrasenaCopyWidget> createState() =>
+      _RecuperarContrasenaCopyWidgetState();
 }
 
-class _EmailRecoveryWidgetState extends State<EmailRecoveryWidget> {
-  late EmailRecoveryModel _model;
+class _RecuperarContrasenaCopyWidgetState
+    extends State<RecuperarContrasenaCopyWidget> {
+  late RecuperarContrasenaCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EmailRecoveryModel());
+    _model = createModel(context, () => RecuperarContrasenaCopyModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.emailTextTextController ??= TextEditingController();
+    _model.emailTextFocusNode ??= FocusNode();
   }
 
   @override
@@ -110,65 +113,70 @@ class _EmailRecoveryWidgetState extends State<EmailRecoveryWidget> {
                                   ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
-                          autofocus: false,
-                          textInputAction: TextInputAction.done,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF00215B),
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                      Form(
+                        key: _model.formKey,
+                        autovalidateMode: AutovalidateMode.always,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 5.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.emailTextTextController,
+                            focusNode: _model.emailTextFocusNode,
+                            autofocus: false,
+                            textInputAction: TextInputAction.done,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
                                     fontFamily: 'Lato',
                                     letterSpacing: 0.0,
                                   ),
-                          keyboardType: TextInputType.emailAddress,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Lato',
+                                    letterSpacing: 0.0,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF00215B),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(24.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Lato',
+                                  letterSpacing: 0.0,
+                                ),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: _model.emailTextTextControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
                       ),
                       Align(

@@ -1,9 +1,11 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/loader/loader_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -134,10 +136,61 @@ class _PerfilEstudianteByIdWidgetState
                                 color: Color(0xFFFF8F14),
                                 shape: BoxShape.circle,
                               ),
-                              child: Icon(
-                                Icons.download,
-                                color: Colors.white,
-                                size: 24.0,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  FlutterFlowIconButton(
+                                    borderRadius: 25.0,
+                                    buttonSize: 40.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).tertiary,
+                                    icon: Icon(
+                                      Icons.download,
+                                      color: FlutterFlowTheme.of(context).info,
+                                      size: 24.0,
+                                    ),
+                                    showLoadingIndicator: true,
+                                    onPressed: () async {
+                                      var _shouldSetState = false;
+                                      _model.apiDescargarPdfUserById =
+                                          await UserGroup
+                                              .generarPdfUsuarioByIdCall
+                                              .call(
+                                        id: widget!.id,
+                                        token: currentAuthenticationToken,
+                                      );
+
+                                      _shouldSetState = true;
+                                      if ((_model.apiDescargarPdfUserById
+                                              ?.succeeded ??
+                                          true)) {
+                                        await downloadFile(
+                                          filename: getJsonField(
+                                            (_model.apiDescargarPdfUserById
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.title''',
+                                          ).toString(),
+                                          url: getJsonField(
+                                            (_model.apiDescargarPdfUserById
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.url''',
+                                          ).toString(),
+                                        );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      } else {
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
+                                      }
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -735,7 +788,7 @@ class _PerfilEstudianteByIdWidgetState
                             ],
                           ),
                         ),
-                      ],
+                      ].addToEnd(SizedBox(height: 30.0)),
                     ),
                   ),
                 );

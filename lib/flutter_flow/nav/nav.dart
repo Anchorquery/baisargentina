@@ -24,6 +24,8 @@ export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
 
@@ -81,6 +83,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => RootPageContext.wrap(
         appStateNotifier.loggedIn ? PageInitWidget() : InicioWidget(),
         errorRoute: state.uri.toString(),
@@ -240,10 +243,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => FaqWidget(),
         ),
         FFRoute(
-          name: 'emailRecovery',
-          path: '/emailRecovery',
-          requireAuth: true,
-          builder: (context, params) => EmailRecoveryWidget(),
+          name: 'RecuperarContrasena',
+          path: '/recuperarContrasena',
+          builder: (context, params) => RecuperarContrasenaWidget(),
         ),
         FFRoute(
           name: 'codigoEnviado',
@@ -308,8 +310,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'EstablecerContrasena',
           path: '/establecerContrasena',
-          requireAuth: true,
-          builder: (context, params) => EstablecerContrasenaWidget(),
+          builder: (context, params) => EstablecerContrasenaWidget(
+            email: params.getParam(
+              'email',
+              ParamType.String,
+            ),
+            otp: params.getParam(
+              'otp',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'servicio',
@@ -586,10 +596,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SeleccionarAccionServicioWidget(),
         ),
         FFRoute(
-          name: 'transaccionesNew',
-          path: '/transaccionesNew',
+          name: 'ListadoTransacciones',
+          path: '/listadoTransacciones',
           requireAuth: true,
-          builder: (context, params) => TransaccionesNewWidget(),
+          builder: (context, params) => ListadoTransaccionesWidget(),
         ),
         FFRoute(
           name: 'ListaHousingAdmin',
@@ -766,6 +776,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           requireAuth: true,
           builder: (context, params) =>
               EditarPerfilComercioPrimerLoguinWidget(),
+        ),
+        FFRoute(
+          name: 'RecuperarContrasenaCopy',
+          path: '/recuperarContrasenaCopy',
+          requireAuth: true,
+          builder: (context, params) => RecuperarContrasenaCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

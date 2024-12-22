@@ -1,8 +1,10 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -79,11 +81,21 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.chevron_left_rounded,
-                      color: FlutterFlowTheme.of(context).tertiary,
-                      size: 24.0,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.safePop();
+                      },
+                      child: Icon(
+                        Icons.chevron_left_rounded,
+                        color: FlutterFlowTheme.of(context).tertiary,
+                        size: 24.0,
+                      ),
                     ),
                     Padding(
                       padding:
@@ -167,7 +179,53 @@ class _TransactionDetailsWidgetState extends State<TransactionDetailsWidget> {
                         ),
                       ),
                     ),
-                  ],
+                    FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 25.0,
+                      buttonSize: 40.0,
+                      fillColor: FlutterFlowTheme.of(context).tertiary,
+                      icon: Icon(
+                        Icons.download,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 24.0,
+                      ),
+                      showLoadingIndicator: true,
+                      onPressed: () async {
+                        var _shouldSetState = false;
+                        _model.apiDescargarPdfTicketById =
+                            await TransacctionGroup
+                                .generarPdfTransaccionesByIdCall
+                                .call(
+                          id: widget!.id,
+                          token: currentAuthenticationToken,
+                        );
+
+                        _shouldSetState = true;
+                        if ((_model.apiDescargarPdfTicketById?.succeeded ??
+                            true)) {
+                          await downloadFile(
+                            filename: getJsonField(
+                              (_model.apiDescargarPdfTicketById?.jsonBody ??
+                                  ''),
+                              r'''$.title''',
+                            ).toString(),
+                            url: getJsonField(
+                              (_model.apiDescargarPdfTicketById?.jsonBody ??
+                                  ''),
+                              r'''$.url''',
+                            ).toString(),
+                          );
+                          if (_shouldSetState) safeSetState(() {});
+                          return;
+                        } else {
+                          if (_shouldSetState) safeSetState(() {});
+                          return;
+                        }
+
+                        if (_shouldSetState) safeSetState(() {});
+                      },
+                    ),
+                  ].divide(SizedBox(width: 5.0)).around(SizedBox(width: 5.0)),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),

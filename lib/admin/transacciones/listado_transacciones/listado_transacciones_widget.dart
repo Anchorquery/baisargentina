@@ -6,25 +6,27 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'transacciones_new_model.dart';
-export 'transacciones_new_model.dart';
+import 'listado_transacciones_model.dart';
+export 'listado_transacciones_model.dart';
 
-class TransaccionesNewWidget extends StatefulWidget {
-  const TransaccionesNewWidget({super.key});
+class ListadoTransaccionesWidget extends StatefulWidget {
+  const ListadoTransaccionesWidget({super.key});
 
   @override
-  State<TransaccionesNewWidget> createState() => _TransaccionesNewWidgetState();
+  State<ListadoTransaccionesWidget> createState() =>
+      _ListadoTransaccionesWidgetState();
 }
 
-class _TransaccionesNewWidgetState extends State<TransaccionesNewWidget>
+class _ListadoTransaccionesWidgetState extends State<ListadoTransaccionesWidget>
     with TickerProviderStateMixin {
-  late TransaccionesNewModel _model;
+  late ListadoTransaccionesModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,7 +35,7 @@ class _TransaccionesNewWidgetState extends State<TransaccionesNewWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TransaccionesNewModel());
+    _model = createModel(context, () => ListadoTransaccionesModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -182,6 +184,7 @@ class _TransaccionesNewWidgetState extends State<TransaccionesNewWidget>
                               controller: _model.textController,
                               focusNode: _model.textFieldFocusNode,
                               onFieldSubmitted: (_) async {
+                                var _shouldSetState = false;
                                 _model.apiObtenerTransaccionesAdminporNombre =
                                     await TransacctionGroup
                                         .buscarTransaccionesAdminCall
@@ -190,6 +193,7 @@ class _TransaccionesNewWidgetState extends State<TransaccionesNewWidget>
                                   owner: _model.textController.text,
                                 );
 
+                                _shouldSetState = true;
                                 if ((_model
                                         .apiObtenerTransaccionesAdminporNombre
                                         ?.succeeded ??
@@ -204,9 +208,14 @@ class _TransaccionesNewWidgetState extends State<TransaccionesNewWidget>
                                       .toList()
                                       .cast<dynamic>();
                                   safeSetState(() {});
+                                  if (_shouldSetState) safeSetState(() {});
+                                  return;
+                                } else {
+                                  if (_shouldSetState) safeSetState(() {});
+                                  return;
                                 }
 
-                                safeSetState(() {});
+                                if (_shouldSetState) safeSetState(() {});
                               },
                               autofocus: false,
                               obscureText: false,
@@ -278,8 +287,38 @@ class _TransaccionesNewWidgetState extends State<TransaccionesNewWidget>
                             Align(
                               alignment: AlignmentDirectional(-1.0, 0.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  var _shouldSetState = false;
+                                  _model.apiDescargarPdf =
+                                      await TransacctionGroup
+                                          .generarPdfTransaccionesCall
+                                          .call(
+                                    token: currentAuthenticationToken,
+                                  );
+
+                                  _shouldSetState = true;
+                                  if ((_model.apiDescargarPdf?.succeeded ??
+                                      true)) {
+                                    await downloadFile(
+                                      filename: getJsonField(
+                                        (_model.apiDescargarPdf?.jsonBody ??
+                                            ''),
+                                        r'''$.title''',
+                                      ).toString(),
+                                      url: getJsonField(
+                                        (_model.apiDescargarPdf?.jsonBody ??
+                                            ''),
+                                        r'''$.url''',
+                                      ).toString(),
+                                    );
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  } else {
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
+                                  }
+
+                                  if (_shouldSetState) safeSetState(() {});
                                 },
                                 text: 'Descargar la de tickets',
                                 options: FFButtonOptions(

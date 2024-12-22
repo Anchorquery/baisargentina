@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'scaneo_error_widget.dart' show ScaneoErrorWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

@@ -80,7 +80,7 @@ class _Info1WidgetState extends State<Info1Widget> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'Fiesta gratis',
+                                    'Fiestas grátis',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineLarge
                                         .override(
@@ -110,9 +110,9 @@ class _Info1WidgetState extends State<Info1Widget> {
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 100.0),
+                                  0.0, 10.0, 0.0, 80.0),
                               child: Text(
-                                'Obtén acceso gratuito a todas las fiestas organizadas por BAIS Argentina\n\n\n- Entrada grátis hasta las 2am en todas nuestras fiestas.\n- Entrada sin hacer fila.\n- Descuentos exclusivos en mesas vip.',
+                                'Acceso a todas las fiestas organizadas por BAIS Argentina.\n\n\n- Entrada grátis hasta las 2:00 AM\n- Entrada sin hacer fila\n- Descuentos exclusivos en mesas VIP\n',
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(

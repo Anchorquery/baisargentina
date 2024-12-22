@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'lista_usuario_estudiantes_widget.dart'
     show ListaUsuarioEstudiantesWidget;
 import 'package:flutter/material.dart';
@@ -31,6 +32,8 @@ class ListaUsuarioEstudiantesModel
 
   // Stores action output result for [Backend Call - API (findUser)] action in ListaUsuarioEstudiantes widget.
   ApiCallResponse? apiResponseUsers;
+  // Stores action output result for [Backend Call - API (GenerarPdfUsuarios)] action in Button widget.
+  ApiCallResponse? apiDescargarPedf;
   // Stores action output result for [Backend Call - API (findUser)] action in Column widget.
   ApiCallResponse? apiResponseUser;
   // Stores action output result for [Backend Call - API (delete user)] action in Icon widget.

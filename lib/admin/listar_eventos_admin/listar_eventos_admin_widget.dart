@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -315,172 +316,183 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
                                               ),
                                             ],
                                           ),
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              context.pushNamed(
-                                                'EditarEvento',
-                                                queryParameters: {
-                                                  'id': serializeParam(
-                                                    eventosItem.id,
-                                                    ParamType.int,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
-                                            },
-                                            child: Icon(
-                                              Icons.edit_square,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    'EditarEvento',
+                                                    queryParameters: {
+                                                      'id': serializeParam(
+                                                        eventosItem.id,
+                                                        ParamType.int,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
+                                                },
+                                                child: Icon(
+                                                  Icons.edit_square,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .primary,
-                                              size: 24.0,
-                                            ),
-                                          ),
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              var _shouldSetState = false;
-                                              var confirmDialogResponse =
-                                                  await showDialog<bool>(
+                                                  size: 24.0,
+                                                ),
+                                              ),
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  var _shouldSetState = false;
+                                                  var confirmDialogResponse =
+                                                      await showDialog<bool>(
+                                                            context: context,
+                                                            builder:
+                                                                (alertDialogContext) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Eliminar Evento'),
+                                                                content: Text(
+                                                                    '¿Está seguro que desea eliminar este item?'),
+                                                                actions: [
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            alertDialogContext,
+                                                                            false),
+                                                                    child: Text(
+                                                                        'Cancelar'),
+                                                                  ),
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            alertDialogContext,
+                                                                            true),
+                                                                    child: Text(
+                                                                        'Confirmar'),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                          ) ??
+                                                          false;
+                                                  if (confirmDialogResponse) {
+                                                    _model.apiResultlel =
+                                                        await EventsGroup
+                                                            .eliminarEventoCall
+                                                            .call(
+                                                      id: eventosItem.id,
+                                                      token:
+                                                          currentAuthenticationToken,
+                                                    );
+
+                                                    _shouldSetState = true;
+                                                    if ((_model.apiResultlel
+                                                            ?.succeeded ??
+                                                        true)) {
+                                                      _model.data = [];
+                                                      _model.loading = false;
+                                                      safeSetState(() {});
+                                                      _model.apiResponseHopusing2 =
+                                                          await EventsGroup
+                                                              .getEventsCall
+                                                              .call(
+                                                        token:
+                                                            currentAuthenticationToken,
+                                                      );
+
+                                                      _shouldSetState = true;
+                                                      if ((_model
+                                                              .apiResponseEvents
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        _model.data =
+                                                            (getJsonField(
+                                                          (_model.apiResponseEvents
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                          r'''$.data''',
+                                                          true,
+                                                        )!
+                                                                        .toList()
+                                                                        .map<EventsStruct?>(EventsStruct
+                                                                            .maybeFromMap)
+                                                                        .toList()
+                                                                    as Iterable<
+                                                                        EventsStruct?>)
+                                                                .withoutNulls
+                                                                .toList()
+                                                                .cast<
+                                                                    EventsStruct>();
+                                                        _model.loading = false;
+                                                        safeSetState(() {});
+                                                        if (_shouldSetState)
+                                                          safeSetState(() {});
+                                                        return;
+                                                      } else {
+                                                        if (_shouldSetState)
+                                                          safeSetState(() {});
+                                                        return;
+                                                      }
+                                                    } else {
+                                                      await showDialog(
                                                         context: context,
                                                         builder:
                                                             (alertDialogContext) {
                                                           return AlertDialog(
-                                                            title: Text(
-                                                                'Eliminar Evento'),
+                                                            title:
+                                                                Text('Error'),
                                                             content: Text(
-                                                                '¿Está seguro que desea eliminar este item?'),
+                                                                getJsonField(
+                                                              (_model.apiResultlel
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.error''',
+                                                            ).toString()),
                                                             actions: [
                                                               TextButton(
                                                                 onPressed: () =>
                                                                     Navigator.pop(
-                                                                        alertDialogContext,
-                                                                        false),
-                                                                child: Text(
-                                                                    'Cancelar'),
-                                                              ),
-                                                              TextButton(
-                                                                onPressed: () =>
-                                                                    Navigator.pop(
-                                                                        alertDialogContext,
-                                                                        true),
-                                                                child: Text(
-                                                                    'Confirmar'),
+                                                                        alertDialogContext),
+                                                                child:
+                                                                    Text('Ok'),
                                                               ),
                                                             ],
                                                           );
                                                         },
-                                                      ) ??
-                                                      false;
-                                              if (confirmDialogResponse) {
-                                                _model.apiResultlel =
-                                                    await EventsGroup
-                                                        .eliminarEventoCall
-                                                        .call(
-                                                  id: eventosItem.id,
-                                                  token:
-                                                      currentAuthenticationToken,
-                                                );
+                                                      );
+                                                    }
 
-                                                _shouldSetState = true;
-                                                if ((_model.apiResultlel
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  _model.data = [];
-                                                  _model.loading = false;
-                                                  safeSetState(() {});
-                                                  _model.apiResponseHopusing2 =
-                                                      await EventsGroup
-                                                          .getEventsCall
-                                                          .call(
-                                                    token:
-                                                        currentAuthenticationToken,
-                                                  );
-
-                                                  _shouldSetState = true;
-                                                  if ((_model.apiResponseEvents
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    _model.data = (getJsonField(
-                                                      (_model.apiResponseEvents
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                      r'''$.data''',
-                                                      true,
-                                                    )!
-                                                                .toList()
-                                                                .map<EventsStruct?>(
-                                                                    EventsStruct
-                                                                        .maybeFromMap)
-                                                                .toList()
-                                                            as Iterable<
-                                                                EventsStruct?>)
-                                                        .withoutNulls
-                                                        .toList()
-                                                        .cast<EventsStruct>();
-                                                    _model.loading = false;
-                                                    safeSetState(() {});
                                                     if (_shouldSetState)
                                                       safeSetState(() {});
                                                     return;
                                                   } else {
+                                                    Navigator.pop(context);
                                                     if (_shouldSetState)
                                                       safeSetState(() {});
                                                     return;
                                                   }
-                                                } else {
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('Error'),
-                                                        content:
-                                                            Text(getJsonField(
-                                                          (_model.apiResultlel
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.error''',
-                                                        ).toString()),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('Ok'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                }
 
-                                                if (_shouldSetState)
-                                                  safeSetState(() {});
-                                                return;
-                                              } else {
-                                                Navigator.pop(context);
-                                                if (_shouldSetState)
-                                                  safeSetState(() {});
-                                                return;
-                                              }
-
-                                              if (_shouldSetState)
-                                                safeSetState(() {});
-                                            },
-                                            child: Icon(
-                                              Icons.delete_sharp,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                                  if (_shouldSetState)
+                                                    safeSetState(() {});
+                                                },
+                                                child: Icon(
+                                                  Icons.delete_sharp,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .error,
-                                              size: 24.0,
-                                            ),
+                                                  size: 24.0,
+                                                ),
+                                              ),
+                                            ].divide(SizedBox(width: 12.0)),
                                           ),
                                         ],
                                       ),

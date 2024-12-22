@@ -12,6 +12,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -68,67 +69,21 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
             safeSetState(() {});
             safeSetState(() {
               _model.nameTextController?.text = _model.event!.name;
-              _model.nameFocusNode?.requestFocus();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _model.nameTextController?.selection = TextSelection.collapsed(
-                  offset: _model.nameTextController!.text.length,
-                );
-              });
             });
             safeSetState(() {
               _model.placeUrlTextController?.text = _model.event!.placeUrl;
-              _model.placeUrlFocusNode?.requestFocus();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _model.placeUrlTextController?.selection =
-                    TextSelection.collapsed(
-                  offset: _model.placeUrlTextController!.text.length,
-                );
-              });
-            });
-            safeSetState(() {
-              _model.nameOrganizerNoBaisTextController?.text =
-                  _model.event!.nameOrganizerNoBais;
-              _model.nameOrganizerNoBaisFocusNode?.requestFocus();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _model.nameOrganizerNoBaisTextController?.selection =
-                    TextSelection.collapsed(
-                  offset: _model.nameOrganizerNoBaisTextController!.text.length,
-                );
-              });
             });
             safeSetState(() {
               _model.descripcionEventoTextController?.text =
                   _model.event!.description;
-              _model.descripcionEventoFocusNode?.requestFocus();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _model.descripcionEventoTextController?.selection =
-                    TextSelection.collapsed(
-                  offset: _model.descripcionEventoTextController!.text.length,
-                );
-              });
             });
             safeSetState(() {
               _model.limiteDePersonasTextController?.text =
                   _model.event!.limitePersonas.toString();
-              _model.limiteDePersonasFocusNode?.requestFocus();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _model.limiteDePersonasTextController?.selection =
-                    TextSelection.collapsed(
-                  offset: _model.limiteDePersonasTextController!.text.length,
-                );
-              });
             });
             safeSetState(() {
               _model.precioDelTicketEventoTextController?.text =
                   _model.event!.precio.toString();
-              _model.precioDelTicketEventoFocusNode?.requestFocus();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _model.precioDelTicketEventoTextController?.selection =
-                    TextSelection.collapsed(
-                  offset:
-                      _model.precioDelTicketEventoTextController!.text.length,
-                );
-              });
             });
             safeSetState(() {
               _model.puedenAsistirValueController?.value =
@@ -147,10 +102,6 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
             });
             safeSetState(() {
               _model.isBaisValue = _model.isBaisValue!;
-            });
-            safeSetState(() {
-              _model.organizadorValueController?.value =
-                  _model.event!.organizador.id;
             });
             safeSetState(() {
               _model.categoriaEventoValueController?.value =
@@ -225,9 +176,6 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
         text: '${currentUserData?.name} ${currentUserData?.lastName}');
     _model.textFieldFocusNode ??= FocusNode();
 
-    _model.nameOrganizerNoBaisTextController ??= TextEditingController();
-    _model.nameOrganizerNoBaisFocusNode ??= FocusNode();
-
     _model.descripcionEventoTextController ??= TextEditingController();
     _model.descripcionEventoFocusNode ??= FocusNode();
 
@@ -277,25 +225,6 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
         ],
       ),
       'dropDownOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 100.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 100.0.ms,
-            duration: 600.0.ms,
-            begin: Offset(0.0, 60.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'textFieldOnPageLoadAnimation3': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -371,7 +300,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
           ),
         ],
       ),
-      'textFieldOnPageLoadAnimation4': AnimationInfo(
+      'textFieldOnPageLoadAnimation3': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -447,7 +376,7 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
           ),
         ],
       ),
-      'textFieldOnPageLoadAnimation5': AnimationInfo(
+      'textFieldOnPageLoadAnimation4': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -561,56 +490,60 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                       size: 24.0,
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, -1.0),
-                                          child: Text(
-                                            'Editar evento',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  fontFamily: 'Lato',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .tertiary,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w900,
-                                                ),
-                                          ),
-                                        ),
-                                        Opacity(
-                                          opacity: 0.5,
-                                          child: Align(
+                                  if (currentAuthenticationToken == '1')
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Align(
                                             alignment:
                                                 AlignmentDirectional(0.0, -1.0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5.0, 5.0, 5.0, 5.0),
-                                              child: Text(
-                                                'Rellena todos los campos',
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Lato',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          letterSpacing: 0.0,
-                                                        ),
+                                            child: Text(
+                                              'Editar evento',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleLarge
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .tertiary,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w900,
+                                                  ),
+                                            ),
+                                          ),
+                                          Opacity(
+                                            opacity: 0.5,
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, -1.0),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 5.0, 5.0, 5.0),
+                                                child: Text(
+                                                  'Rellena todos los campos',
+                                                  textAlign: TextAlign.center,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Lato',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -819,270 +752,161 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                   ),
                                   Builder(
                                     builder: (context) {
-                                      if (_model.isBaisValue ?? false) {
-                                        return Builder(
-                                          builder: (context) {
-                                            if (currentUserData?.role == 1) {
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 15.0, 0.0, 20.0),
-                                                child: FlutterFlowDropDown<int>(
-                                                  controller: _model
-                                                          .organizadorValueController ??=
-                                                      FormFieldController<int>(
-                                                    _model.organizadorValue ??=
-                                                        _model.event
-                                                            ?.organizador?.id,
-                                                  ),
-                                                  options: List<int>.from(_model
-                                                      .organizers
-                                                      .map((e) => e.id)
-                                                      .toList()),
-                                                  optionLabels: _model
-                                                      .organizers
-                                                      .map((e) => e.name)
-                                                      .toList(),
-                                                  onChanged: (val) =>
-                                                      safeSetState(() => _model
-                                                              .organizadorValue =
-                                                          val),
-                                                  width: 348.0,
-                                                  height: 56.0,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Lato',
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                  hintText:
-                                                      'Nombre del organizador',
-                                                  icon: Icon(
-                                                    Icons
-                                                        .keyboard_arrow_down_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 24.0,
-                                                  ),
-                                                  fillColor: Color(0xFFF1F4F8),
-                                                  elevation: 2.0,
-                                                  borderColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  borderWidth: 2.0,
-                                                  borderRadius: 40.0,
-                                                  margin: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 4.0, 16.0, 4.0),
-                                                  hidesUnderline: true,
-                                                  isOverButton: true,
-                                                  isSearchable: false,
-                                                  isMultiSelect: false,
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'dropDownOnPageLoadAnimation1']!),
-                                              );
-                                            } else {
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        20.0, 5.0, 20.0, 30.0),
-                                                child: Container(
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          1.0,
-                                                  child: TextFormField(
-                                                    controller:
-                                                        _model.textController3,
-                                                    focusNode: _model
-                                                        .textFieldFocusNode,
-                                                    autofocus: false,
-                                                    readOnly: true,
-                                                    obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      isDense: true,
-                                                      labelStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lato',
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                      hintText: 'TextField',
-                                                      hintStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lato',
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                      ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .error,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .error,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                      ),
-                                                      filled: true,
-                                                      fillColor: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
+                                      if (currentUserData?.role == 1) {
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 15.0, 0.0, 20.0),
+                                          child: FlutterFlowDropDown<int>(
+                                            controller: _model
+                                                    .organizadorValueController ??=
+                                                FormFieldController<int>(
+                                              _model.organizadorValue ??=
+                                                  _model.event?.organizador?.id,
+                                            ),
+                                            options: List<int>.from(_model
+                                                .organizers
+                                                .map((e) => e.id)
+                                                .toList()),
+                                            optionLabels: _model.organizers
+                                                .map((e) => e.name)
+                                                .toList(),
+                                            onChanged: (val) => safeSetState(
+                                                () => _model.organizadorValue =
+                                                    val),
+                                            width: 348.0,
+                                            height: 56.0,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Lato',
+                                                      letterSpacing: 0.0,
                                                     ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Lato',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                    cursorColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryText,
-                                                    validator: _model
-                                                        .textController3Validator
-                                                        .asValidator(context),
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                          },
+                                            hintText: 'Nombre del organizador',
+                                            icon: Icon(
+                                              Icons.keyboard_arrow_down_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            fillColor: Color(0xFFF1F4F8),
+                                            elevation: 2.0,
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .alternate,
+                                            borderWidth: 2.0,
+                                            borderRadius: 40.0,
+                                            margin:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 4.0, 16.0, 4.0),
+                                            hidesUnderline: true,
+                                            isOverButton: true,
+                                            isSearchable: false,
+                                            isMultiSelect: false,
+                                          ).animateOnPageLoad(animationsMap[
+                                              'dropDownOnPageLoadAnimation1']!),
                                         );
                                       } else {
                                         return Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  20.0, 0.0, 20.0, 20.0),
-                                          child: TextFormField(
-                                            controller: _model
-                                                .nameOrganizerNoBaisTextController,
-                                            focusNode: _model
-                                                .nameOrganizerNoBaisFocusNode,
-                                            autofocus: true,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText:
-                                                  'Nombre del organizador',
-                                              labelStyle:
+                                                  20.0, 5.0, 20.0, 30.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                1.0,
+                                            child: TextFormField(
+                                              controller:
+                                                  _model.textController3,
+                                              focusNode:
+                                                  _model.textFieldFocusNode,
+                                              autofocus: false,
+                                              readOnly: true,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                hintText: 'TextField',
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Lato',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
+                                              style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
+                                                      .bodyMedium
                                                       .override(
                                                         fontFamily: 'Lato',
                                                         letterSpacing: 0.0,
                                                       ),
-                                              hintStyle:
+                                              cursorColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Lato',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(24.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(24.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(24.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(24.0),
-                                              ),
-                                              contentPadding:
-                                                  EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          20.0, 0.0, 0.0, 0.0),
+                                                      .primaryText,
+                                              validator: _model
+                                                  .textController3Validator
+                                                  .asValidator(context),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Lato',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                            keyboardType: TextInputType.name,
-                                            validator: _model
-                                                .nameOrganizerNoBaisTextControllerValidator
-                                                .asValidator(context),
-                                          ).animateOnPageLoad(animationsMap[
-                                              'textFieldOnPageLoadAnimation3']!),
+                                          ),
                                         );
                                       }
                                     },
@@ -1824,14 +1648,11 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                             fontFamily: 'Lato',
                                             letterSpacing: 0.0,
                                           ),
-                                      maxLength: 40,
-                                      maxLengthEnforcement:
-                                          MaxLengthEnforcement.enforced,
                                       validator: _model
                                           .descripcionEventoTextControllerValidator
                                           .asValidator(context),
                                     ).animateOnPageLoad(animationsMap[
-                                        'textFieldOnPageLoadAnimation4']!),
+                                        'textFieldOnPageLoadAnimation3']!),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -2076,84 +1897,91 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                     ).animateOnPageLoad(animationsMap[
                                         'rowOnPageLoadAnimation3']!),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 0.0, 20.0, 0.0),
-                                    child: TextFormField(
-                                      controller: _model
-                                          .precioDelTicketEventoTextController,
-                                      focusNode:
-                                          _model.precioDelTicketEventoFocusNode,
-                                      autofocus: true,
-                                      textCapitalization:
-                                          TextCapitalization.characters,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        labelText: 'Precio de Ticket',
-                                        labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
+                                  if (_model.typeValue != 'free')
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          20.0, 0.0, 20.0, 0.0),
+                                      child: TextFormField(
+                                        controller: _model
+                                            .precioDelTicketEventoTextController,
+                                        focusNode: _model
+                                            .precioDelTicketEventoFocusNode,
+                                        autofocus: true,
+                                        textCapitalization:
+                                            TextCapitalization.characters,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Precio de Ticket',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
                                             .override(
                                               fontFamily: 'Lato',
                                               letterSpacing: 0.0,
                                             ),
-                                        hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .override(
-                                              fontFamily: 'Lato',
-                                              letterSpacing: 0.0,
-                                            ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(24.0),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(24.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(24.0),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(24.0),
-                                        ),
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Lato',
-                                            letterSpacing: 0.0,
-                                          ),
-                                      keyboardType:
-                                          const TextInputType.numberWithOptions(
-                                              decimal: true),
-                                      validator: _model
-                                          .precioDelTicketEventoTextControllerValidator
-                                          .asValidator(context),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'textFieldOnPageLoadAnimation5']!),
-                                  ),
+                                        keyboardType: const TextInputType
+                                            .numberWithOptions(decimal: true),
+                                        validator: _model
+                                            .precioDelTicketEventoTextControllerValidator
+                                            .asValidator(context),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'textFieldOnPageLoadAnimation4']!),
+                                    ),
                                   Align(
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
@@ -2794,9 +2622,6 @@ class _EditarEventoWidgetState extends State<EditarEventoWidget>
                                             isBais: _model.isBaisValue,
                                             detenerVentas:
                                                 _model.detenerventasValue,
-                                            nameOrganizerNoBais: _model
-                                                .nameOrganizerNoBaisTextController
-                                                .text,
                                             precio: double.tryParse(_model
                                                 .precioDelTicketEventoTextController
                                                 .text),

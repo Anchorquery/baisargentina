@@ -110,9 +110,9 @@ class _Info3WidgetState extends State<Info3Widget> {
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 100.0),
+                                  0.0, 10.0, 0.0, 80.0),
                               child: Text(
-                                'Descubre los jueves de noche más universitaria de Buenos Aires en Budabar.\n\n\n-  Entrada grátis todos los jueves hasta la 1am.. \n- Entrada sin hacer fila.\n- 2 bebidas gratis al mes.',
+                                '¡Únete a la aventura y descubre los mejores rincones del país con nuevos amigos!\n\n\n- Descuentos exclusivos.\n- Asiento preferencial en el autobús de BAIS.\n- Atención personalizada durante el viaje.',
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(

@@ -6,7 +6,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'transacciones_new_widget.dart' show TransaccionesNewWidget;
+import 'dart:ui';
+import 'listado_transacciones_widget.dart' show ListadoTransaccionesWidget;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -14,7 +15,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class TransaccionesNewModel extends FlutterFlowModel<TransaccionesNewWidget> {
+class ListadoTransaccionesModel
+    extends FlutterFlowModel<ListadoTransaccionesWidget> {
   ///  Local state fields for this page.
 
   List<dynamic> data = [];
@@ -41,7 +43,7 @@ class TransaccionesNewModel extends FlutterFlowModel<TransaccionesNewWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (buscar transacciones admin)] action in transaccionesNew widget.
+  // Stores action output result for [Backend Call - API (buscar transacciones admin)] action in ListadoTransacciones widget.
   ApiCallResponse? apiObtenerTransaccionessAdmin;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
@@ -49,6 +51,8 @@ class TransaccionesNewModel extends FlutterFlowModel<TransaccionesNewWidget> {
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Backend Call - API (buscar transacciones admin)] action in TextField widget.
   ApiCallResponse? apiObtenerTransaccionesAdminporNombre;
+  // Stores action output result for [Backend Call - API (GenerarPdfTransacciones)] action in Button widget.
+  ApiCallResponse? apiDescargarPdf;
   DateTime? datePicked1;
   // Stores action output result for [Backend Call - API (buscar transacciones admin)] action in fechaInicioVentaLabel widget.
   ApiCallResponse? apiObtenerTransaccionesAdminDateInit;

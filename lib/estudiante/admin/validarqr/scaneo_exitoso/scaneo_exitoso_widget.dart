@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -248,7 +249,7 @@ class _ScaneoExitosoWidgetState extends State<ScaneoExitosoWidget>
             ).animateOnPageLoad(
                 animationsMap['containerOnPageLoadAnimation1']!),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(25.0, 24.0, 25.0, 0.0),
               child: Text(
                 'Reserva confirmada!',
                 style: FlutterFlowTheme.of(context).displaySmall.override(

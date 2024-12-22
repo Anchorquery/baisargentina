@@ -5,6 +5,7 @@ import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'perfil_comercio_by_id_widget.dart' show PerfilComercioByIdWidget;
 import 'package:flutter/material.dart';

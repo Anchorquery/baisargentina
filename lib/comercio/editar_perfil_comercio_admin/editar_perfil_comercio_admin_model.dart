@@ -11,6 +11,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'editar_perfil_comercio_admin_widget.dart'
     show EditarPerfilComercioAdminWidget;
 import 'package:carousel_slider/carousel_slider.dart';

@@ -12,6 +12,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'editar_perfil_user_admin_widget.dart' show EditarPerfilUserAdminWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -173,8 +174,34 @@ class _ListaUsuarioComerciosWidgetState
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          var _shouldSetState = false;
+                          _model.apiDescargarPedf =
+                              await UserGroup.generarPdfUsuariosCall.call(
+                            role: 4,
+                            token: currentAuthenticationToken,
+                          );
+
+                          _shouldSetState = true;
+                          if ((_model.apiDescargarPedf?.succeeded ?? true)) {
+                            await downloadFile(
+                              filename: getJsonField(
+                                (_model.apiDescargarPedf?.jsonBody ?? ''),
+                                r'''$.title''',
+                              ).toString(),
+                              url: getJsonField(
+                                (_model.apiDescargarPedf?.jsonBody ?? ''),
+                                r'''$.url''',
+                              ).toString(),
+                            );
+                            if (_shouldSetState) safeSetState(() {});
+                            return;
+                          } else {
+                            if (_shouldSetState) safeSetState(() {});
+                            return;
+                          }
+
+                          if (_shouldSetState) safeSetState(() {});
                         },
                         text: 'Descargar listado',
                         icon: Icon(

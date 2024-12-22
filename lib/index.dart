@@ -29,8 +29,8 @@ export '/estudiante/events/editar_evento/editar_evento_widget.dart'
 export '/estudiante/booking/reserva_id/reserva_id_widget.dart'
     show ReservaIdWidget;
 export '/estudiante/policy/faq/faq_widget.dart' show FaqWidget;
-export '/password_recovery/email_recovery/email_recovery_widget.dart'
-    show EmailRecoveryWidget;
+export '/password_recovery/recuperar_contrasena/recuperar_contrasena_widget.dart'
+    show RecuperarContrasenaWidget;
 export '/password_recovery/codigo_enviado/codigo_enviado_widget.dart'
     show CodigoEnviadoWidget;
 export '/password_recovery/codigo_de_validacion/codigo_de_validacion_widget.dart'
@@ -116,13 +116,13 @@ export '/estudiante/admin/validarqr/detalle_reserva/detalle_reserva_widget.dart'
     show DetalleReservaWidget;
 export '/admin/servicios/seleccionar_accion_servicio/seleccionar_accion_servicio_widget.dart'
     show SeleccionarAccionServicioWidget;
-export '/admin/transacciones/transacciones_new/transacciones_new_widget.dart'
-    show TransaccionesNewWidget;
+export '/admin/transacciones/listado_transacciones/listado_transacciones_widget.dart'
+    show ListadoTransaccionesWidget;
 export '/admin/housign_admin/lista_housing_admin/lista_housing_admin_widget.dart'
     show ListaHousingAdminWidget;
 export '/admin/housign_admin/editar_housing/editar_housing_widget.dart'
     show EditarHousingWidget;
-export '/admin/eventos_admin/listar_eventos_admin/listar_eventos_admin_widget.dart'
+export '/admin/listar_eventos_admin/listar_eventos_admin_widget.dart'
     show ListarEventosAdminWidget;
 export '/admin/users/lista_usuario_comercios/lista_usuario_comercios_widget.dart'
     show ListaUsuarioComerciosWidget;
@@ -162,3 +162,5 @@ export '/estudiante/perfil/editar_perfil_user_primer_loguin/editar_perfil_user_p
     show EditarPerfilUserPrimerLoguinWidget;
 export '/estudiante/perfil/editar_perfil_comercio_primer_loguin/editar_perfil_comercio_primer_loguin_widget.dart'
     show EditarPerfilComercioPrimerLoguinWidget;
+export '/password_recovery/recuperar_contrasena_copy/recuperar_contrasena_copy_widget.dart'
+    show RecuperarContrasenaCopyWidget;

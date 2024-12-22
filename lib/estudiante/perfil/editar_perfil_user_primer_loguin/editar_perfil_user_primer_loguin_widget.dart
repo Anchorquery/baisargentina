@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -58,52 +59,19 @@ class _EditarPerfilUserPrimerLoguinWidgetState
         safeSetState(() {});
         safeSetState(() {
           _model.nameTextController?.text = _model.misdatos!.name;
-          _model.nameFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.nameTextController?.selection = TextSelection.collapsed(
-              offset: _model.nameTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.apellidoTextController?.text = _model.misdatos!.lastName;
-          _model.apellidoFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.apellidoTextController?.selection = TextSelection.collapsed(
-              offset: _model.apellidoTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.emailAddressTextController?.text = _model.misdatos!.email;
-          _model.emailAddressFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.emailAddressTextController?.selection =
-                TextSelection.collapsed(
-              offset: _model.emailAddressTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.phoneNumberTextController?.text = _model.misdatos!.phone;
-          _model.phoneNumberFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.phoneNumberTextController?.selection =
-                TextSelection.collapsed(
-              offset: _model.phoneNumberTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.universidadFieldTextController?.text =
               _model.misdatos!.university;
-          _model.universidadFieldFocusNode?.requestFocus();
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _model.universidadFieldTextController?.selection =
-                TextSelection.collapsed(
-              offset: _model.universidadFieldTextController!.text.length,
-            );
-          });
         });
         safeSetState(() {
           _model.estasEnArgentinaValueController?.value =

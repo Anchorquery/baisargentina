@@ -5,6 +5,7 @@ import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -43,6 +44,17 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
           (_model.apiGetPerfilComercio?.jsonBody ?? ''),
           r'''$''',
         );
+        _model.images = (getJsonField(
+          (_model.apiGetPerfilComercio?.jsonBody ?? ''),
+          r'''$.metadata.images''',
+          true,
+        )!
+                .toList()
+                .map<FileDStruct?>(FileDStruct.maybeFromMap)
+                .toList() as Iterable<FileDStruct?>)
+            .withoutNulls
+            .toList()
+            .cast<FileDStruct>();
         _model.loading = !_model.loading;
         safeSetState(() {});
       }
@@ -135,22 +147,24 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Text(
-                                          getJsonField(
-                                            _model.data,
-                                            r'''$.metadata.nameCommerce''',
-                                          ).toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Lato',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                fontSize: 24.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w800,
-                                              ),
+                                        Expanded(
+                                          child: Text(
+                                            getJsonField(
+                                              _model.data,
+                                              r'''$.metadata.nameCommerce''',
+                                            ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Lato',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  fontSize: 24.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w800,
+                                                ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -236,132 +250,80 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Builder(
-                                builder: (context) {
-                                  if ((CommercePerfilStruct.maybeFromMap(
-                                                      getJsonField(
-                                                _model.data,
-                                                r'''$.metadata''',
-                                              ).toString())
-                                                  ?.descriptionUbication !=
-                                              null &&
-                                          CommercePerfilStruct.maybeFromMap(
-                                                      getJsonField(
-                                                _model.data,
-                                                r'''$.metadata''',
-                                              ).toString())
-                                                  ?.descriptionUbication !=
-                                              '') ||
-                                      (CommercePerfilStruct.maybeFromMap(
-                                                      getJsonField(
-                                                _model.data,
-                                                r'''$.metadata''',
-                                              ).toString())
-                                                  ?.urlUbicacion !=
-                                              null &&
-                                          CommercePerfilStruct.maybeFromMap(
-                                                      getJsonField(
-                                                _model.data,
-                                                r'''$.metadata''',
-                                              ).toString())
-                                                  ?.urlUbicacion !=
-                                              '')) {
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        if (CommercePerfilStruct.maybeFromMap(
-                                                        getJsonField(
-                                                  _model.data,
-                                                  r'''$.metadata''',
-                                                ).toString())
-                                                    ?.urlUbicacion !=
-                                                null &&
-                                            CommercePerfilStruct.maybeFromMap(
-                                                        getJsonField(
-                                                  _model.data,
-                                                  r'''$.metadata''',
-                                                ).toString())
-                                                    ?.urlUbicacion !=
-                                                '')
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 0.0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                await launchURL(getJsonField(
-                                                  _model.data,
-                                                  r'''$.metadata.urlUbicacion''',
-                                                ).toString());
-                                              },
-                                              text: 'Ver ubicación',
-                                              icon: Icon(
-                                                Icons.location_on_sharp,
-                                                size: 15.0,
-                                              ),
-                                              options: FFButtonOptions(
-                                                height: 40.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 0.0, 16.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Lato',
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                elevation: 0.0,
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                            ),
-                                          ),
-                                        Padding(
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (CommercePerfilStruct.maybeFromMap(
+                                                  getJsonField(
+                                            _model.data,
+                                            r'''$.metadata''',
+                                          ).toString())
+                                              ?.urlUbicacion !=
+                                          null &&
+                                      CommercePerfilStruct.maybeFromMap(
+                                                  getJsonField(
+                                            _model.data,
+                                            r'''$.metadata''',
+                                          ).toString())
+                                              ?.urlUbicacion !=
+                                          '')
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          await launchURL(getJsonField(
+                                            _model.data,
+                                            r'''$.metadata.urlUbicacion''',
+                                          ).toString());
+                                        },
+                                        text: 'Ver ubicación',
+                                        icon: Icon(
+                                          Icons.location_on_sharp,
+                                          size: 15.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          height: 40.0,
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 30.0, 0.0, 0.0),
-                                          child: Text(
-                                            getJsonField(
-                                              _model.data,
-                                              r'''$.metadata.descriptionUbication''',
-                                            ).toString(),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Lato',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Lato',
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          elevation: 0.0,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
-                                      ],
-                                    );
-                                  } else {
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 0.0),
-                                      child: Text(
-                                        'No definida',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Lato',
-                                              letterSpacing: 0.0,
-                                            ),
                                       ),
-                                    );
-                                  }
-                                },
+                                    ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 30.0, 0.0, 0.0),
+                                    child: Text(
+                                      getJsonField(
+                                        _model.data,
+                                        r'''$.metadata.descriptionUbication''',
+                                      ).toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -414,49 +376,35 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                         ],
                       ),
                     ),
-                    if (getJsonField(
-                          _model.data,
-                          r'''$.metadata.images''',
-                        ) !=
-                        null)
+                    if (_model.images.isNotEmpty)
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                         child: Builder(
                           builder: (context) {
-                            final imges = (getJsonField(
-                                  _model.data,
-                                  r'''$.metadata.images''',
-                                  true,
-                                )
-                                        ?.toList()
-                                        .map<FileDStruct?>(
-                                            FileDStruct.maybeFromMap)
-                                        .toList() as Iterable<FileDStruct?>)
-                                    .withoutNulls
-                                    ?.toList() ??
-                                [];
+                            final dataImages = _model.images.toList();
 
                             return Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
                               height: MediaQuery.sizeOf(context).height * 0.3,
                               child: CarouselSlider.builder(
-                                itemCount: imges.length,
-                                itemBuilder: (context, imgesIndex, _) {
-                                  final imgesItem = imges[imgesIndex];
+                                itemCount: dataImages.length,
+                                itemBuilder: (context, dataImagesIndex, _) {
+                                  final dataImagesItem =
+                                      dataImages[dataImagesIndex];
                                   return ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: OctoImage(
                                       placeholderBuilder: (_) =>
                                           SizedBox.expand(
                                         child: Image(
-                                          image:
-                                              BlurHashImage(imgesItem.blurhash),
+                                          image: BlurHashImage(
+                                              dataImagesItem.blurhash),
                                           fit: BoxFit.cover,
                                         ),
                                       ),
                                       image: NetworkImage(
-                                        imgesItem.url,
+                                        dataImagesItem.url,
                                       ),
                                       width: 300.0,
                                       height: 200.0,
@@ -468,7 +416,8 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                                     _model.carouselController ??=
                                         CarouselSliderController(),
                                 options: CarouselOptions(
-                                  initialPage: max(0, min(1, imges.length - 1)),
+                                  initialPage:
+                                      max(0, min(1, dataImages.length - 1)),
                                   viewportFraction: 0.5,
                                   disableCenter: true,
                                   enlargeCenterPage: true,

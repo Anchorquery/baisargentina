@@ -5,10 +5,12 @@ import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'detalle_reserva_widget.dart' show DetalleReservaWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,8 @@ class DetalleReservaModel extends FlutterFlowModel<DetalleReservaWidget> {
   ApiCallResponse? apiMeBookingByUuid;
   // Stores action output result for [Backend Call - API (find one admin)] action in DetalleReserva widget.
   ApiCallResponse? apiMeBookingByUuidAdmin;
+  // Stores action output result for [Backend Call - API (GenerarPdfTicketById)] action in IconButton widget.
+  ApiCallResponse? apiDescargarPdfUserById;
   // Stores action output result for [Backend Call - API (cambiarEstadoRerserva)] action in Button widget.
   ApiCallResponse? apiResultActivarReserva;
   // Stores action output result for [Backend Call - API (cambiarEstadoRerserva)] action in Button widget.

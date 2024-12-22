@@ -4,12 +4,14 @@ import '/backend/schema/structs/index.dart';
 import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'editar_perfil_user_widget.dart' show EditarPerfilUserWidget;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
@@ -19,6 +21,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class EditarPerfilUserModel extends FlutterFlowModel<EditarPerfilUserWidget> {
@@ -36,8 +39,8 @@ class EditarPerfilUserModel extends FlutterFlowModel<EditarPerfilUserWidget> {
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - API (me )] action in EditarPerfilUser widget.
   ApiCallResponse? apiObtenerMisDatos;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // Stores action output result for [Backend Call - API (Single)] action in imagenDePerfil widget.
@@ -102,6 +105,18 @@ class EditarPerfilUserModel extends FlutterFlowModel<EditarPerfilUserWidget> {
   TextEditingController? universidadFieldTextController;
   String? Function(BuildContext, String?)?
       universidadFieldTextControllerValidator;
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Backend Call - API (Single)] action in uploadDni widget.
+  ApiCallResponse? apiUpdateMeDni;
+  bool isDataUploading3 = false;
+  FFUploadedFile uploadedLocalFile3 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Backend Call - API (Single)] action in uploadPasaporteMe2 widget.
+  ApiCallResponse? apiUpdatePasaporteMe;
   // Stores action output result for [Backend Call - API (UpdateUser)] action in crearcuenta widget.
   ApiCallResponse? authUpdateResponse;
   // Model for loader component.
