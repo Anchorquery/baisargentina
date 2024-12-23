@@ -120,8 +120,8 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                               Stack(
                                 children: [
                                   Container(
-                                    width: 120.0,
-                                    height: 120.0,
+                                    width: 80.0,
+                                    height: 80.0,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
@@ -136,57 +136,54 @@ class _MiPerfilComercioWidgetState extends State<MiPerfilComercioWidget> {
                                   ),
                                 ],
                               ),
-                              Container(
-                                width: MediaQuery.sizeOf(context).width * 1.0,
-                                height: MediaQuery.sizeOf(context).height * 0.1,
-                                decoration: BoxDecoration(),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            getJsonField(
-                                              _model.data,
-                                              r'''$.metadata.nameCommerce''',
-                                            ).toString(),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Lato',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
+                              Expanded(
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.1,
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        getJsonField(
+                                          _model.data,
+                                          r'''$.metadata.nameCommerce''',
+                                        ).toString(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
                                                       .primary,
-                                                  fontSize: 24.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w800,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      getJsonField(
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w800,
+                                            ),
+                                      ),
+                                      Text(
+                                        getJsonField(
+                                                  _model.data,
+                                                  r'''$.metadata.category''',
+                                                ) !=
+                                                null
+                                            ? getJsonField(
                                                 _model.data,
-                                                r'''$.metadata.category''',
-                                              ) !=
-                                              null
-                                          ? getJsonField(
-                                              _model.data,
-                                              r'''$.metadata.category.name''',
-                                            ).toString()
-                                          : 'Sin categoria',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Lato',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ],
+                                                r'''$.metadata.category.name''',
+                                              ).toString()
+                                            : 'Sin categoria',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ].divide(SizedBox(width: 15.0)),
