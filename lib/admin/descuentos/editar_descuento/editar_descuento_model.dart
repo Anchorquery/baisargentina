@@ -3,6 +3,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -40,6 +41,7 @@ class EditarDescuentoModel extends FlutterFlowModel<EditarDescuentoWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - API (GetOrganizer)] action in EditarDescuento widget.
   ApiCallResponse? apiResponseOrganizer;
   // Stores action output result for [Backend Call - API (find one descuento)] action in EditarDescuento widget.
@@ -48,6 +50,14 @@ class EditarDescuentoModel extends FlutterFlowModel<EditarDescuentoWidget> {
   FocusNode? nombreFocusNode;
   TextEditingController? nombreTextController;
   String? Function(BuildContext, String?)? nombreTextControllerValidator;
+  String? _nombreTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Asigna un nombre al descuento es requerido';
+    }
+
+    return null;
+  }
+
   // State field(s) for comercioSelector widget.
   int? comercioSelectorValue;
   FormFieldController<int>? comercioSelectorValueController;
@@ -57,6 +67,15 @@ class EditarDescuentoModel extends FlutterFlowModel<EditarDescuentoWidget> {
   FocusNode? descripcionFocusNode;
   TextEditingController? descripcionTextController;
   String? Function(BuildContext, String?)? descripcionTextControllerValidator;
+  String? _descripcionTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Describe el beneficio  que obtendrán los estudiantes es requerido';
+    }
+
+    return null;
+  }
+
   // State field(s) for categoria widget.
   int? categoriaValue;
   FormFieldController<int>? categoriaValueController;
@@ -67,11 +86,26 @@ class EditarDescuentoModel extends FlutterFlowModel<EditarDescuentoWidget> {
   FocusNode? porcentajeFocusNode;
   TextEditingController? porcentajeTextController;
   String? Function(BuildContext, String?)? porcentajeTextControllerValidator;
+  String? _porcentajeTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Porcentaje es requerido.';
+    }
+
+    return null;
+  }
+
+  // Stores action output result for [Validate Form] action in Button widget.
+  bool? validacionForm;
   // Stores action output result for [Backend Call - API (EditarDescuento)] action in Button widget.
   ApiCallResponse? apiResultpzr;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    nombreTextControllerValidator = _nombreTextControllerValidator;
+    descripcionTextControllerValidator = _descripcionTextControllerValidator;
+    porcentajeTextControllerValidator = _porcentajeTextControllerValidator;
+  }
 
   @override
   void dispose() {

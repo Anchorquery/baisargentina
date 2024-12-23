@@ -1145,6 +1145,9 @@ class UserGroup {
   static DeleteUserCall deleteUserCall = DeleteUserCall();
   static ObtenerPerfilComercioCall obtenerPerfilComercioCall =
       ObtenerPerfilComercioCall();
+  static GenerarVisualizacionComercioByIdCall
+      generarVisualizacionComercioByIdCall =
+      GenerarVisualizacionComercioByIdCall();
   static GenerarPdfUsuariosCall generarPdfUsuariosCall =
       GenerarPdfUsuariosCall();
   static GenerarPdfUsuarioByIdCall generarPdfUsuarioByIdCall =
@@ -1445,6 +1448,39 @@ class ObtenerPerfilComercioCall {
         'Authorization': 'Bearer ${token}',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GenerarVisualizacionComercioByIdCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "id": ${id}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'GenerarVisualizacionComercioById',
+      apiUrl: '${baseUrl}/view-perfils',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

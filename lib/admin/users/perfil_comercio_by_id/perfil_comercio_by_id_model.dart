@@ -27,6 +27,8 @@ class PerfilComercioByIdModel
 
   // Stores action output result for [Backend Call - API (obtenerPerfilComercio)] action in PerfilComercioById widget.
   ApiCallResponse? apiGetPerfilComercio;
+  // Stores action output result for [Backend Call - API (GenerarVisualizacionComercioById)] action in PerfilComercioById widget.
+  ApiCallResponse? apiGenerarVisualizacion;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController;
   int carouselCurrentIndex = 1;

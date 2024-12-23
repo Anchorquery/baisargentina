@@ -104,21 +104,6 @@ class _NavBarWithMiddleButtonWidgetState
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                if (currentUserData?.role == 1)
-                  FlutterFlowIconButton(
-                    borderColor: Colors.transparent,
-                    borderRadius: 30.0,
-                    borderWidth: 1.0,
-                    buttonSize: 50.0,
-                    icon: Icon(
-                      Icons.home,
-                      color: Color(0xFF9299A1),
-                      size: 35.0,
-                    ),
-                    onPressed: () async {
-                      context.pushNamed('HomeAdmin');
-                    },
-                  ),
                 if (currentUserData?.role != 1)
                   FlutterFlowIconButton(
                     borderColor: Colors.transparent,

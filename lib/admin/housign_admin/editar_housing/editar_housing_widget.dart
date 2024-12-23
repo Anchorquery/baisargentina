@@ -235,7 +235,7 @@ class _EditarHousingWidgetState extends State<EditarHousingWidget>
                         ),
                         Form(
                           key: _model.formKey,
-                          autovalidateMode: AutovalidateMode.disabled,
+                          autovalidateMode: AutovalidateMode.always,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,

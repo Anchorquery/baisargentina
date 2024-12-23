@@ -41,20 +41,40 @@ class _PerfilComercioByIdWidgetState extends State<PerfilComercioByIdWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiGetPerfilComercio =
-          await UserGroup.obtenerPerfilComercioCall.call(
-        id: widget!.id,
-        token: currentAuthenticationToken,
-      );
+      await Future.wait([
+        Future(() async {
+          _model.apiGetPerfilComercio =
+              await UserGroup.obtenerPerfilComercioCall.call(
+            id: widget!.id,
+            token: currentAuthenticationToken,
+          );
 
-      if ((_model.apiGetPerfilComercio?.succeeded ?? true)) {
-        _model.data = getJsonField(
-          (_model.apiGetPerfilComercio?.jsonBody ?? ''),
-          r'''$''',
-        );
-        _model.loading = !_model.loading;
-        safeSetState(() {});
-      }
+          if ((_model.apiGetPerfilComercio?.succeeded ?? true)) {
+            _model.data = getJsonField(
+              (_model.apiGetPerfilComercio?.jsonBody ?? ''),
+              r'''$''',
+            );
+            _model.loading = !_model.loading;
+            safeSetState(() {});
+            return;
+          } else {
+            return;
+          }
+        }),
+        Future(() async {
+          _model.apiGenerarVisualizacion =
+              await UserGroup.generarVisualizacionComercioByIdCall.call(
+            id: widget!.id,
+            token: currentAuthenticationToken,
+          );
+
+          if ((_model.apiGenerarVisualizacion?.succeeded ?? true)) {
+            return;
+          }
+
+          return;
+        }),
+      ]);
     });
   }
 
@@ -266,62 +286,46 @@ class _PerfilComercioByIdWidgetState extends State<PerfilComercioByIdWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        if (CommercePerfilStruct.maybeFromMap(
-                                                        getJsonField(
-                                                  _model.data,
-                                                  r'''$.metadata''',
-                                                ).toString())
-                                                    ?.urlUbicacion !=
-                                                null &&
-                                            CommercePerfilStruct.maybeFromMap(
-                                                        getJsonField(
-                                                  _model.data,
-                                                  r'''$.metadata''',
-                                                ).toString())
-                                                    ?.urlUbicacion !=
-                                                '')
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 0.0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                await launchURL(getJsonField(
-                                                  _model.data,
-                                                  r'''$.metadata.urlUbicacion''',
-                                                ).toString());
-                                              },
-                                              text: 'Ver ubicación',
-                                              icon: Icon(
-                                                Icons.location_on_sharp,
-                                                size: 15.0,
-                                              ),
-                                              options: FFButtonOptions(
-                                                height: 40.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 0.0, 16.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Lato',
-                                                          color: Colors.white,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                elevation: 0.0,
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 10.0, 0.0, 0.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              await launchURL(getJsonField(
+                                                _model.data,
+                                                r'''$.metadata.urlUbicacion''',
+                                              ).toString());
+                                            },
+                                            text: 'Ver ubicación',
+                                            icon: Icon(
+                                              Icons.location_on_sharp,
+                                              size: 15.0,
+                                            ),
+                                            options: FFButtonOptions(
+                                              height: 40.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Lato',
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
                                           ),
+                                        ),
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -499,7 +503,9 @@ class _PerfilComercioByIdWidgetState extends State<PerfilComercioByIdWidget> {
                           ),
                         ),
                       ),
-                  ],
+                  ]
+                      .addToStart(SizedBox(height: 30.0))
+                      .addToEnd(SizedBox(height: 30.0)),
                 ),
               );
             } else {

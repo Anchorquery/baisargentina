@@ -296,10 +296,9 @@ class _CrearDescuentoWidgetState extends State<CrearDescuentoWidget> {
                                     queryParameters: {
                                       'id': serializeParam(
                                         getJsonField(
-                                          (_model.apiResponseOrganizer
-                                                  ?.jsonBody ??
+                                          (_model.apiCrearDescuento?.jsonBody ??
                                               ''),
-                                          r'''$.uuid''',
+                                          r'''$.id''',
                                         ),
                                         ParamType.int,
                                       ),

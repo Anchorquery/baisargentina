@@ -448,6 +448,33 @@ class _CrearUnTicketWidgetState extends State<CrearUnTicketWidget>
                               ),
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 15.0, 0.0, 15.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(
+                                  Icons.info_rounded,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Para generar un ticket, ingresa un correo electrónico de un estudiante y presiona Enter. Si es correcto, el campo se volverá verde. Luego, escribe el nombre del evento y presiona Enter. Si el evento existe, se mostrará y podrás crear el ticket.',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ].divide(SizedBox(width: 10.0)),
+                            ),
+                          ),
                           if (_model.evento != null)
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,

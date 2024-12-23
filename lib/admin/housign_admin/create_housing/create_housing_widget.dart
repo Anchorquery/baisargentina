@@ -1,5 +1,6 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -154,7 +155,7 @@ class _CreateHousingWidgetState extends State<CreateHousingWidget>
                         ),
                       ),
                       Text(
-                        'Crea una entrada \nde Housign',
+                        'Crea una entrada \nde Housing',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
@@ -168,7 +169,7 @@ class _CreateHousingWidgetState extends State<CreateHousingWidget>
                   ),
                   Form(
                     key: _model.formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
+                    autovalidateMode: AutovalidateMode.always,
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1421,6 +1422,132 @@ class _CreateHousingWidgetState extends State<CreateHousingWidget>
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           var _shouldSetState = false;
+                                          _model.validacionCrearForm = true;
+                                          if (_model.formKey.currentState ==
+                                                  null ||
+                                              !_model.formKey.currentState!
+                                                  .validate()) {
+                                            safeSetState(() => _model
+                                                .validacionCrearForm = false);
+                                            return;
+                                          }
+                                          if (_model.typeHousingValue == null) {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (dialogContext) {
+                                                return Dialog(
+                                                  elevation: 0,
+                                                  insetPadding: EdgeInsets.zero,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                              0.0, 0.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(
+                                                              dialogContext)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child:
+                                                        ModalInformativoWidget(
+                                                      textMessage:
+                                                          'El tipo de vivienda es requerido. ',
+                                                      messageButton: 'Cerrar',
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+
+                                            _model.validacionCrearForm = false;
+                                            safeSetState(() {});
+                                            return;
+                                          }
+                                          if (_model.ventaAlquilerValue ==
+                                              null) {
+                                            _model.validacionCrearForm = false;
+                                            safeSetState(() {});
+                                            return;
+                                          }
+                                          if (_model.uploadedLocalFile1 ==
+                                                  null ||
+                                              (_model.uploadedLocalFile1
+                                                          .bytes ??
+                                                      [])
+                                                  .isEmpty) {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (dialogContext) {
+                                                return Dialog(
+                                                  elevation: 0,
+                                                  insetPadding: EdgeInsets.zero,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                              0.0, 0.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(
+                                                              dialogContext)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child:
+                                                        ModalInformativoWidget(
+                                                      textMessage:
+                                                          'Sube una imagen como portada.',
+                                                      messageButton: 'Cerrar',
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+
+                                            _model.validacionCrearForm = false;
+                                            safeSetState(() {});
+                                            return;
+                                          }
+                                          if (_model.uploadedLocalFiles2.any(
+                                              (file) =>
+                                                  file == null ||
+                                                  (file.bytes?.isEmpty ??
+                                                      true))) {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Las imagenes de la vivienda son obligatorias.'),
+                                                  content: Text('Cerrar'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            _model.validacionCrearForm = false;
+                                            safeSetState(() {});
+                                            return;
+                                          }
+                                          _shouldSetState = true;
                                           _model.apiResultvrg =
                                               await HousingGroup
                                                   .creearHousingCall
