@@ -2186,78 +2186,6 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                         return;
                                       }
                                       if (_model.datePicked1 == null) {
-                                        _model.validarForm = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.datePicked2 == null) {
-                                        _model.validarForm = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.datePicked3 == null) {
-                                        _model.validarForm = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.datePicked4 == null) {
-                                        _model.validarForm = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.puedenAsistirValue == null) {
-                                        _model.validarForm = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      if (_model.categoriaEventoValue == null) {
-                                        _model.validarForm = false;
-                                        safeSetState(() {});
-                                        return;
-                                      }
-                                      _shouldSetState = true;
-                                      _model.apiResult3i2 =
-                                          await ApiCreateEventsCall.call(
-                                        name: _model.nameTextController.text,
-                                        description: _model
-                                            .descripcionEventoTextController
-                                            .text,
-                                        placeUrl:
-                                            _model.placeUrlTextController.text,
-                                        organizador: currentUserData?.role == 1
-                                            ? _model.organizadorValue
-                                            : currentUserData?.id,
-                                        fecha: _model.datePicked2?.toString(),
-                                        fechaInicioVenta:
-                                            _model.datePicked1?.toString(),
-                                        fechaFinVenta:
-                                            _model.datePicked2?.toString(),
-                                        horaInicioEvento:
-                                            _model.datePicked3?.toString(),
-                                        horaFinEvento:
-                                            _model.datePicked4?.toString(),
-                                        precio: _model
-                                            .precioDelTicketEventoTextController
-                                            .text,
-                                        restriccion: _model.puedenAsistirValue,
-                                        limitePersonas: valueOrDefault<String>(
-                                          _model.limiteDePersonasTextController
-                                              .text,
-                                          '150',
-                                        ),
-                                        token: currentAuthenticationToken,
-                                        type: _model.tipoEventoValue,
-                                        categoryId: _model.categoriaEventoValue,
-                                        portada: _model.uploadedLocalFile1,
-                                        imagesList: _model.uploadedLocalFiles2,
-                                        isBais: _model.isBaisValue,
-                                        detenerVentas:
-                                            _model.detenerventasValue,
-                                      );
-
-                                      _shouldSetState = true;
-                                      if ((_model.apiResult3i2?.succeeded ??
-                                          true)) {
                                         await showDialog(
                                           context: context,
                                           builder: (dialogContext) {
@@ -2281,7 +2209,7 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                                 },
                                                 child: ModalInformativoWidget(
                                                   textMessage:
-                                                      'Evento creado correctamente',
+                                                      'La fecha de inicio de venta de boletos es obligatoria.',
                                                   messageButton: 'Cerrar',
                                                 ),
                                               ),
@@ -2289,47 +2217,54 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                           },
                                         );
 
-                                        context.goNamed(
-                                          'Evento',
-                                          queryParameters: {
-                                            'id': serializeParam(
-                                              getJsonField(
-                                                (_model.apiResult3i2
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.data.id''',
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.datePicked2 == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'La fecha final de venta de boletos es obligatoria. ',
+                                                  messageButton: 'Cerrar',
+                                                ),
                                               ),
-                                              ParamType.int,
-                                            ),
-                                          }.withoutNulls,
+                                            );
+                                          },
                                         );
 
-                                        if (_shouldSetState)
-                                          safeSetState(() {});
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
                                         return;
-                                      } else {
+                                      }
+                                      if (_model.datePicked3 == null) {
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
                                               title: Text(
-                                                  ErrorStruct.maybeFromMap(
-                                                          ApiCreateEventsCall
-                                                              .error(
-                                                (_model.apiResult3i2
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ))!
-                                                      .name),
-                                              content: Text(
-                                                  ErrorStruct.maybeFromMap(
-                                                          ApiCreateEventsCall
-                                                              .error(
-                                                (_model.apiResult3i2
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ))!
-                                                      .message),
+                                                  'Ingrese la hora de inicio del evento. '),
+                                              content: Text('Cerrar'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
@@ -2341,6 +2276,358 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                             );
                                           },
                                         );
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.datePicked4 == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Ingrese la hora en que el evento finaliza. ',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.detenerventasValue == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Ingrese en que momento se deben detener la vetna de boletos.',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.puedenAsistirValue == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Indique quienes pueden asistir. ',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.categoriaEventoValue == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Ingrese la categoría del evento. ',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      if (_model.tipoEventoValue == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Ingrese el tipo de evento',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
+                                        _model.validarForm = false;
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                      _shouldSetState = true;
+                                      if (_model.validarForm == true) {
+                                        _model.apiResult3i2 =
+                                            await ApiCreateEventsCall.call(
+                                          name: _model.nameTextController.text,
+                                          description: _model
+                                              .descripcionEventoTextController
+                                              .text,
+                                          placeUrl: _model
+                                              .placeUrlTextController.text,
+                                          organizador:
+                                              currentUserData?.role == 1
+                                                  ? _model.organizadorValue
+                                                  : currentUserData?.id,
+                                          fecha: _model.datePicked2?.toString(),
+                                          fechaInicioVenta:
+                                              _model.datePicked1?.toString(),
+                                          fechaFinVenta:
+                                              _model.datePicked2?.toString(),
+                                          horaInicioEvento:
+                                              _model.datePicked3?.toString(),
+                                          horaFinEvento:
+                                              _model.datePicked4?.toString(),
+                                          precio: _model
+                                              .precioDelTicketEventoTextController
+                                              .text,
+                                          restriccion:
+                                              _model.puedenAsistirValue,
+                                          limitePersonas:
+                                              valueOrDefault<String>(
+                                            _model
+                                                .limiteDePersonasTextController
+                                                .text,
+                                            '150',
+                                          ),
+                                          token: currentAuthenticationToken,
+                                          type: _model.tipoEventoValue,
+                                          categoryId:
+                                              _model.categoriaEventoValue,
+                                          portada: _model.uploadedLocalFile1,
+                                          imagesList:
+                                              _model.uploadedLocalFiles2,
+                                          isBais: _model.isBaisValue,
+                                          detenerVentas:
+                                              _model.detenerventasValue,
+                                        );
+
+                                        _shouldSetState = true;
+                                        if ((_model.apiResult3i2?.succeeded ??
+                                            true)) {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: ModalInformativoWidget(
+                                                    textMessage:
+                                                        'Evento creado correctamente',
+                                                    messageButton: 'Cerrar',
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+
+                                          context.goNamed(
+                                            'Evento',
+                                            queryParameters: {
+                                              'id': serializeParam(
+                                                getJsonField(
+                                                  (_model.apiResult3i2
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.data.id''',
+                                                ),
+                                                ParamType.int,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                          return;
+                                        } else {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    ErrorStruct.maybeFromMap(
+                                                            ApiCreateEventsCall
+                                                                .error(
+                                                  (_model.apiResult3i2
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ))!
+                                                        .name),
+                                                content: Text(
+                                                    ErrorStruct.maybeFromMap(
+                                                            ApiCreateEventsCall
+                                                                .error(
+                                                  (_model.apiResult3i2
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ))!
+                                                        .message),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                          return;
+                                        }
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              insetPadding: EdgeInsets.zero,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              alignment:
+                                                  AlignmentDirectional(0.0, 0.0)
+                                                      .resolve(
+                                                          Directionality.of(
+                                                              context)),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  FocusScope.of(dialogContext)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
+                                                child: ModalInformativoWidget(
+                                                  textMessage:
+                                                      'Todos los campos son obligatorios. ',
+                                                  messageButton: 'Cerrar',
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+
                                         if (_shouldSetState)
                                           safeSetState(() {});
                                         return;

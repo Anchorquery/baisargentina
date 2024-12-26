@@ -1,5 +1,6 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/components/loader/loader_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -18,14 +19,22 @@ class HomeAdminModel extends FlutterFlowModel<HomeAdminWidget> {
 
   int? ultimoRegistro;
 
+  bool loading = true;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (ObtenerCantidadEstudiantes)] action in HomeAdmin widget.
   ApiCallResponse? apiResulAdminHome;
+  // Model for loader component.
+  late LoaderModel loaderModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    loaderModel = createModel(context, () => LoaderModel());
+  }
 
   @override
-  void dispose() {}
+  void dispose() {
+    loaderModel.dispose();
+  }
 }

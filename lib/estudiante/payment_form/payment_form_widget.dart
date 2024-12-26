@@ -1,6 +1,7 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/modal_informativo/modal_informativo_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -618,7 +619,8 @@ class _PaymentFormWidgetState extends State<PaymentFormWidget> {
                                 ],
                               ),
                               Text(
-                                widget!.plan?.discointPrice != null
+                                (widget!.plan?.discointPrice != null) &&
+                                        (widget!.plan?.discointPrice != 0.0)
                                     ? formatNumber(
                                         widget!.plan!.discointPrice,
                                         formatType: FormatType.decimal,
@@ -643,132 +645,139 @@ class _PaymentFormWidgetState extends State<PaymentFormWidget> {
                         ),
                         Align(
                           alignment: AlignmentDirectional(0.0, 1.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 0.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                var _shouldSetState = false;
-                                _model.loading = !_model.loading;
-                                safeSetState(() {});
-                                _model.validacionTarjeta = true;
-                                if (_model.formKey.currentState == null ||
-                                    !_model.formKey.currentState!.validate()) {
-                                  safeSetState(
-                                      () => _model.validacionTarjeta = false);
-                                  return;
-                                }
-                                _shouldSetState = true;
-                                if (_model.validacionTarjeta == true) {
-                                  _model.apiResultckn = await PlanGroup
-                                      .generarSuscripcionCall
-                                      .call(
-                                    productType: 'plan',
-                                    productId: widget!.plan?.id?.toString(),
-                                    cardNumber:
-                                        _model.numerotarjetaTextController.text,
-                                    securityCode: _model.cvvTextController.text,
-                                    expirationMonth:
-                                        _model.fechaendTextController.text,
-                                    token: currentAuthenticationToken,
-                                  );
-
+                          child: Builder(
+                            builder: (context) => Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  var _shouldSetState = false;
+                                  _model.loading = !_model.loading;
+                                  safeSetState(() {});
+                                  _model.validacionTarjeta = true;
+                                  if (_model.formKey.currentState == null ||
+                                      !_model.formKey.currentState!
+                                          .validate()) {
+                                    safeSetState(
+                                        () => _model.validacionTarjeta = false);
+                                    return;
+                                  }
                                   _shouldSetState = true;
-                                  if ((_model.apiResultckn?.succeeded ??
-                                      true)) {
-                                    _model.loading = !_model.loading;
-                                    safeSetState(() {});
+                                  if (_model.validacionTarjeta == true) {
+                                    _model.apiResultckn = await PlanGroup
+                                        .generarSuscripcionCall
+                                        .call(
+                                      productType: 'plan',
+                                      productId: widget!.plan?.id?.toString(),
+                                      cardNumber: _model
+                                          .numerotarjetaTextController.text,
+                                      securityCode:
+                                          _model.cvvTextController.text,
+                                      expirationMonth:
+                                          _model.fechaendTextController.text,
+                                      token: currentAuthenticationToken,
+                                    );
 
-                                    context.pushNamed(
-                                      'paymenSuccces',
-                                      queryParameters: {
-                                        'id': serializeParam(
-                                          getJsonField(
-                                            (_model.apiResultckn?.jsonBody ??
-                                                ''),
-                                            r'''$.data.id''',
-                                          ),
-                                          ParamType.int,
-                                        ),
-                                        'mount': serializeParam(
-                                          getJsonField(
-                                            (_model.apiResultckn?.jsonBody ??
-                                                ''),
-                                            r'''$.data.mount''',
-                                          ),
-                                          ParamType.double,
-                                        ),
-                                        'lastForNumber': serializeParam(
-                                          getJsonField(
-                                            (_model.apiResultckn?.jsonBody ??
-                                                ''),
-                                            r'''$.data.lastForNumber''',
-                                          ).toString(),
-                                          ParamType.String,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  } else {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('Ha ocurrido un error'),
-                                          content: Text(getJsonField(
-                                            (_model.apiResultckn?.jsonBody ??
-                                                ''),
-                                            r'''$.error''',
-                                          ).toString()),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
+                                    _shouldSetState = true;
+                                    if ((_model.apiResultckn?.succeeded ??
+                                        true)) {
+                                      _model.loading = !_model.loading;
+                                      safeSetState(() {});
+
+                                      context.pushNamed(
+                                        'paymenSuccces',
+                                        queryParameters: {
+                                          'id': serializeParam(
+                                            getJsonField(
+                                              (_model.apiResultckn?.jsonBody ??
+                                                  ''),
+                                              r'''$.data.id''',
                                             ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                    _model.loading = !_model.loading;
-                                    safeSetState(() {});
+                                            ParamType.int,
+                                          ),
+                                          'mount': serializeParam(
+                                            getJsonField(
+                                              (_model.apiResultckn?.jsonBody ??
+                                                  ''),
+                                              r'''$.data.mount''',
+                                            ),
+                                            ParamType.double,
+                                          ),
+                                          'lastForNumber': serializeParam(
+                                            getJsonField(
+                                              (_model.apiResultckn?.jsonBody ??
+                                                  ''),
+                                              r'''$.data.lastForNumber''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+
+                                      if (_shouldSetState) safeSetState(() {});
+                                      return;
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (dialogContext) {
+                                          return Dialog(
+                                            elevation: 0,
+                                            insetPadding: EdgeInsets.zero,
+                                            backgroundColor: Colors.transparent,
+                                            alignment: AlignmentDirectional(
+                                                    0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                            child: ModalInformativoWidget(
+                                              textMessage:
+                                                  'Revisa los datos de la tarjeta. ',
+                                              messageButton: 'Cerrar',
+                                            ),
+                                          );
+                                        },
+                                      );
+
+                                      _model.loading = !_model.loading;
+                                      safeSetState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
+                                      return;
+                                    }
+                                  } else {
+                                    if (_shouldSetState) safeSetState(() {});
+                                    return;
                                   }
 
                                   if (_shouldSetState) safeSetState(() {});
-                                  return;
-                                } else {
-                                  if (_shouldSetState) safeSetState(() {});
-                                  return;
-                                }
-
-                                if (_shouldSetState) safeSetState(() {});
-                              },
-                              text: 'Pagar',
-                              options: FFButtonOptions(
-                                width: 270.0,
-                                height: 50.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                elevation: 2.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                                },
+                                text: 'Pagar',
+                                options: FFButtonOptions(
+                                  width: 270.0,
+                                  height: 50.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                  elevation: 2.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50.0),
                                 ),
-                                borderRadius: BorderRadius.circular(50.0),
+                                showLoadingIndicator: _model.loading == true,
                               ),
-                              showLoadingIndicator: _model.loading == true,
                             ),
                           ),
                         ),

@@ -39,8 +39,6 @@ class ListarEventosAdminModel
   ApiCallResponse? apiResponseRefreshEvents;
   // Stores action output result for [Backend Call - API (Eliminar evento)] action in Icon widget.
   ApiCallResponse? apiResultlel;
-  // Stores action output result for [Backend Call - API (GetEvents)] action in Icon widget.
-  ApiCallResponse? apiResponseHopusing2;
 
   @override
   void initState(BuildContext context) {}

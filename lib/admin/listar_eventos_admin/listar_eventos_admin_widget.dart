@@ -398,50 +398,14 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
                                                     if ((_model.apiResultlel
                                                             ?.succeeded ??
                                                         true)) {
-                                                      _model.data = [];
+                                                      _model
+                                                          .removeAtIndexFromData(
+                                                              eventosIndex);
                                                       _model.loading = false;
                                                       safeSetState(() {});
-                                                      _model.apiResponseHopusing2 =
-                                                          await EventsGroup
-                                                              .getEventsCall
-                                                              .call(
-                                                        token:
-                                                            currentAuthenticationToken,
-                                                      );
-
-                                                      _shouldSetState = true;
-                                                      if ((_model
-                                                              .apiResponseEvents
-                                                              ?.succeeded ??
-                                                          true)) {
-                                                        _model.data =
-                                                            (getJsonField(
-                                                          (_model.apiResponseEvents
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                          r'''$.data''',
-                                                          true,
-                                                        )!
-                                                                        .toList()
-                                                                        .map<EventsStruct?>(EventsStruct
-                                                                            .maybeFromMap)
-                                                                        .toList()
-                                                                    as Iterable<
-                                                                        EventsStruct?>)
-                                                                .withoutNulls
-                                                                .toList()
-                                                                .cast<
-                                                                    EventsStruct>();
-                                                        _model.loading = false;
+                                                      if (_shouldSetState)
                                                         safeSetState(() {});
-                                                        if (_shouldSetState)
-                                                          safeSetState(() {});
-                                                        return;
-                                                      } else {
-                                                        if (_shouldSetState)
-                                                          safeSetState(() {});
-                                                        return;
-                                                      }
+                                                      return;
                                                     } else {
                                                       await showDialog(
                                                         context: context,
@@ -469,11 +433,10 @@ class _ListarEventosAdminWidgetState extends State<ListarEventosAdminWidget>
                                                           );
                                                         },
                                                       );
+                                                      if (_shouldSetState)
+                                                        safeSetState(() {});
+                                                      return;
                                                     }
-
-                                                    if (_shouldSetState)
-                                                      safeSetState(() {});
-                                                    return;
                                                   } else {
                                                     Navigator.pop(context);
                                                     if (_shouldSetState)

@@ -124,6 +124,10 @@ class CrearEventoModel extends FlutterFlowModel<CrearEventoWidget> {
       return 'ingrese un límite';
     }
 
+    if (val.length < 1) {
+      return 'Requires at least 1 characters.';
+    }
+
     return null;
   }
 
