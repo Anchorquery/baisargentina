@@ -197,7 +197,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                   child: Text(
                     valueOrDefault<String>(
                       _model.myPlan?.name,
-                      'Estandar',
+                      'Estándar',
                     ),
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -232,7 +232,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(25.0, 30.0, 25.0, 0.0),
                 child: Text(
-                  '¡Pásate a Ultra ahora y viví Buenos Aires como nunca antes!',
+                  '¡Pásate a Ultra ahora y vive Buenos Aires como nunca antes!',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Lato',
@@ -504,7 +504,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                             ),
                       ),
                       TextSpan(
-                        text: '¡Potenciá tu experiencia BAIS al máximo!',
+                        text: '¡Potencia tu experiencia BAIS al máximo!',
                         style: TextStyle(
                           fontWeight: FontWeight.w100,
                         ),
@@ -560,7 +560,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 25.0, 0.0, 0.0),
                                 child: Text(
-                                  'ULTRA \nMensual',
+                                  'Plan\nUltra Mensual',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -568,6 +568,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                         fontFamily: 'Lato',
                                         color: Colors.white,
                                         letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
@@ -655,7 +656,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 35.0, 0.0, 0.0),
                                   child: Text(
-                                    'ULTRA \nSemestral',
+                                    'Plan\nUltra Semestral',
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -663,6 +664,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                           fontFamily: 'Lato',
                                           color: Colors.white,
                                           letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                   ),
                                 ),
@@ -808,7 +810,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 30.0, 0.0, 0.0),
                                     child: Text(
-                                      'ULTRA \nTrimestral',
+                                      'Plan \nUltra Trimestral',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -816,6 +818,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                             fontFamily: 'Lato',
                                             color: Colors.white,
                                             letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                     ),
                                   ),

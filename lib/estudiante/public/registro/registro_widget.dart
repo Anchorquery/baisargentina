@@ -868,7 +868,7 @@ class _RegistroWidgetState extends State<RegistroWidget>
                             autofillHints: [AutofillHints.email],
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Correo electrónico ',
+                              labelText: 'Correo electrónico',
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
@@ -932,7 +932,7 @@ class _RegistroWidgetState extends State<RegistroWidget>
                             autofillHints: [AutofillHints.password],
                             obscureText: !_model.passwordVisibility,
                             decoration: InputDecoration(
-                              labelText: 'Cotraseña',
+                              labelText: 'Contraseña',
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelLarge
                                   .override(
@@ -1009,7 +1009,7 @@ class _RegistroWidgetState extends State<RegistroWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 0.0, 0.0),
                                 child: Text(
-                                  '¿Estas en Argentina?',
+                                  '¿Estás en Argentina?',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -1081,7 +1081,7 @@ class _RegistroWidgetState extends State<RegistroWidget>
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Numero de telefono',
+                            labelText: 'Número de teléfono',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(

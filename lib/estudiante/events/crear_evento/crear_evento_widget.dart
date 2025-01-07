@@ -1327,9 +1327,26 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                 ).animateOnPageLoad(
                                     animationsMap['rowOnPageLoadAnimation3']!),
                               ),
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, -1.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      15.0, 25.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Detener las ventas...',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 20.0),
+                                    0.0, 5.0, 0.0, 20.0),
                                 child: FlutterFlowDropDown<String>(
                                   controller:
                                       _model.detenerventasValueController ??=
@@ -1462,8 +1479,8 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                       _model.puedenAsistirValueController ??=
                                           FormFieldController<String>(null),
                                   options: [
-                                    'Solo estudiantes +18',
-                                    'Cualquier persona'
+                                    'Solo estudiantes mayores de 18 años',
+                                    'Cualquier estudiante'
                                   ],
                                   onChanged: (val) => safeSetState(
                                       () => _model.puedenAsistirValue = val),
