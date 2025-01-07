@@ -567,6 +567,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                       .override(
                                         fontFamily: 'Lato',
                                         color: Colors.white,
+                                        fontSize: 12.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -663,6 +664,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                         .override(
                                           fontFamily: 'Lato',
                                           color: Colors.white,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -817,6 +819,7 @@ class _PlanesDeMembresiaWidgetState extends State<PlanesDeMembresiaWidget>
                                           .override(
                                             fontFamily: 'Lato',
                                             color: Colors.white,
+                                            fontSize: 12.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
                                           ),

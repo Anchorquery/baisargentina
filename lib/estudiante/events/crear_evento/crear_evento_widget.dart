@@ -618,7 +618,7 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 5.0),
                                   child: Text(
-                                    'Evento Bais',
+                                    '¿Es un evento organizado por BAIS Argentina?',
                                     textAlign: TextAlign.start,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -1357,8 +1357,8 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                   options: List<String>.from(
                                       ['un_dia_antes', 'dos_dias_antes']),
                                   optionLabels: [
-                                    '1 dia antes del evento',
-                                    '2 dia antes del evento'
+                                    '1 día antes del evento',
+                                    '2 días antes del evento'
                                   ],
                                   onChanged: (val) => safeSetState(
                                       () => _model.detenerventasValue = val),
@@ -1405,7 +1405,7 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'Descripció del evento',
+                                      labelText: 'Descripción del evento',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -1585,7 +1585,7 @@ class _CrearEventoWidgetState extends State<CrearEventoWidget>
                                               TextCapitalization.characters,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'Limite de personas',
+                                            labelText: 'Límite de personas',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
