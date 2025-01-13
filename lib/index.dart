@@ -164,3 +164,7 @@ export '/estudiante/perfil/editar_perfil_comercio_primer_loguin/editar_perfil_co
     show EditarPerfilComercioPrimerLoguinWidget;
 export '/password_recovery/recuperar_contrasena_copy/recuperar_contrasena_copy_widget.dart'
     show RecuperarContrasenaCopyWidget;
+export '/estudiante/public/registro_copy/registro_copy_widget.dart'
+    show RegistroCopyWidget;
+export '/admin/eventos_admin/lista_categoria_deeventos_admin/lista_categoria_deeventos_admin_widget.dart'
+    show ListaCategoriaDeeventosAdminWidget;

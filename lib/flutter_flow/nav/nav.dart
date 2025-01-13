@@ -782,6 +782,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/recuperarContrasenaCopy',
           requireAuth: true,
           builder: (context, params) => RecuperarContrasenaCopyWidget(),
+        ),
+        FFRoute(
+          name: 'registroCopy',
+          path: '/registroCopy',
+          builder: (context, params) => RegistroCopyWidget(),
+        ),
+        FFRoute(
+          name: 'ListaCategoriaDeeventosAdmin',
+          path: '/listaCategoriaDeeventosAdmin',
+          requireAuth: true,
+          builder: (context, params) => ListaCategoriaDeeventosAdminWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

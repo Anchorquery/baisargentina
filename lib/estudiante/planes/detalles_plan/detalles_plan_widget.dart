@@ -331,86 +331,62 @@ class _DetallesPlanWidgetState extends State<DetallesPlanWidget>
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation1']!),
                             ),
-                            Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 50.0, 0.0, 0.0),
-                                child: Text(
-                                  'Tragos disponibles',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        color: Color(0xFFFF8F14),
-                                        fontSize: 18.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                ).animateOnPageLoad(
-                                    animationsMap['textOnPageLoadAnimation2']!),
+                            if (currentAuthenticationToken == '1')
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 50.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Tragos disponibles',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lato',
+                                          color: Color(0xFFFF8F14),
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                  ).animateOnPageLoad(animationsMap[
+                                      'textOnPageLoadAnimation2']!),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  if (_model.plan!.drinksAvailable >= 1)
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      child: Container(
-                                        width: 80.0,
-                                        height: 80.0,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            width: 2.0,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          FFIcons.ktragosIcon,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 40.0,
-                                        ),
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'containerOnPageLoadAnimation1']!),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Container(
-                                      width: 80.0,
-                                      height: 80.0,
-                                      decoration: BoxDecoration(
+                            if (currentAuthenticationToken == '1')
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    if (_model.plan!.drinksAvailable >= 1)
+                                      ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          width: 2.0,
+                                        child: Container(
+                                          width: 80.0,
+                                          height: 80.0,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: Icon(
+                                            FFIcons.ktragosIcon,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 40.0,
+                                          ),
                                         ),
-                                      ),
-                                      child: Visibility(
-                                        visible:
-                                            _model.plan!.drinksAvailable >= 2,
-                                        child: Icon(
-                                          FFIcons.ktragosIcon,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 40.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ).animateOnPageLoad(animationsMap[
-                                      'containerOnPageLoadAnimation2']!),
-                                  if (_model.plan?.drinksAvailable == 3)
+                                      ).animateOnPageLoad(animationsMap[
+                                          'containerOnPageLoadAnimation1']!),
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(10.0),
                                       child: Container(
@@ -425,18 +401,48 @@ class _DetallesPlanWidgetState extends State<DetallesPlanWidget>
                                             width: 2.0,
                                           ),
                                         ),
-                                        child: Icon(
-                                          FFIcons.ktragosIcon,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 40.0,
+                                        child: Visibility(
+                                          visible:
+                                              _model.plan!.drinksAvailable >= 2,
+                                          child: Icon(
+                                            FFIcons.ktragosIcon,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 40.0,
+                                          ),
                                         ),
                                       ),
                                     ).animateOnPageLoad(animationsMap[
-                                        'containerOnPageLoadAnimation3']!),
-                                ],
+                                        'containerOnPageLoadAnimation2']!),
+                                    if (_model.plan?.drinksAvailable == 3)
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        child: Container(
+                                          width: 80.0,
+                                          height: 80.0,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: Icon(
+                                            FFIcons.ktragosIcon,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 40.0,
+                                          ),
+                                        ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'containerOnPageLoadAnimation3']!),
+                                  ],
+                                ),
                               ),
-                            ),
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(

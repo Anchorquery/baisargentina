@@ -43,11 +43,17 @@
 	<true/>
 
 	<key>NSCameraUsageDescription</key>
-    <string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
+    <string>Necesitamos acceso a tu cámara para:
+
+Escanear códigos QR: Esta función te permitirá verificar tus reservas de manera rápida y sencilla al escanear el código QR único que encontrarás en tu confirmación.
+Capturar imágenes de tu perfil: Podrás personalizar tu experiencia añadiendo una foto de perfil, la cual será almacenada de forma segura y solo será utilizada para identificarte dentro de nuestra aplicación.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>In order to upload data, this app requires permission to access the photo library.</string>
-	<key>PermissionGroupNotification</key>
-    <string>Necesitamos permiso para poder mostrar notificaciones.</string>
+    <string>Necesitamos tu permiso para acceder a tu librería y:
+
+Subir imágenes de eventos: Podrás compartir momentos especiales al cargar fotografías directamente desde tu dispositivo a nuestra plataforma.
+Establecer tu foto de perfil: Personaliza tu experiencia creando un perfil único con una imagen que te represente.
+Tus fotos serán utilizadas exclusivamente para enriquecer tu experiencia en nuestra plataforma y no serán compartidas con terceros sin tu consentimiento.</string>
+
 
 
 	<key>UILaunchStoryboardName</key>

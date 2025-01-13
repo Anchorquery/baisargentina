@@ -2,6 +2,7 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/cancelar_suscripcion/cancelar_suscripcion_widget.dart';
+import '/components/eliminar_cuenta/eliminar_cuenta_widget.dart';
 import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/components/validar_log_out/validar_log_out_widget.dart';
@@ -1704,6 +1705,71 @@ class _MiPerfilEstudianteWidgetState extends State<MiPerfilEstudianteWidget>
                                     ),
                                   ).animateOnPageLoad(animationsMap[
                                       'containerOnPageLoadAnimation9']!),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      25.0, 25.0, 25.0, 25.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '¿Quieres eliminar tu cuenta?',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      Builder(
+                                        builder: (context) =>
+                                            FlutterFlowIconButton(
+                                          borderRadius: 8.0,
+                                          buttonSize: 40.0,
+                                          fillColor: Color(0xFFFF8F14),
+                                          icon: FaIcon(
+                                            FontAwesomeIcons.solidTrashAlt,
+                                            color: Colors.white,
+                                            size: 24.0,
+                                          ),
+                                          onPressed: () async {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (dialogContext) {
+                                                return Dialog(
+                                                  elevation: 0,
+                                                  insetPadding: EdgeInsets.zero,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                              0.0, 0.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(
+                                                              dialogContext)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child:
+                                                        EliminarCuentaWidget(),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 Builder(
                                   builder: (context) => Padding(

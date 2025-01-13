@@ -1881,6 +1881,7 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      var _shouldSetState = false;
                                       _model.authUpdateResponse =
                                           await UserGroup.updateUserCall.call(
                                         country: _model.nacionalidadValue,
@@ -1907,6 +1908,7 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                             .text,
                                       );
 
+                                      _shouldSetState = true;
                                       if ((_model
                                               .authUpdateResponse?.succeeded ??
                                           true)) {
@@ -1928,6 +1930,9 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                             );
                                           },
                                         );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
                                       } else {
                                         await showDialog(
                                           context: context,
@@ -1950,9 +1955,12 @@ class _EditarPerfilUserWidgetState extends State<EditarPerfilUserWidget>
                                             );
                                           },
                                         );
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                        return;
                                       }
 
-                                      safeSetState(() {});
+                                      if (_shouldSetState) safeSetState(() {});
                                     },
                                     text: 'Guardar',
                                     options: FFButtonOptions(

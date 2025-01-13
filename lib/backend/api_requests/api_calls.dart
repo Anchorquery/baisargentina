@@ -1136,6 +1136,7 @@ class UserGroup {
     'Authorization': 'Bearer [token]',
   };
   static MeCall meCall = MeCall();
+  static EliminarMiCuentaCall eliminarMiCuentaCall = EliminarMiCuentaCall();
   static UpdateMetaDataComercioCall updateMetaDataComercioCall =
       UpdateMetaDataComercioCall();
   static MeDataCall meDataCall = MeDataCall();
@@ -1171,6 +1172,37 @@ class MeCall {
     return ApiManager.instance.makeApiCall(
       callName: 'me ',
       apiUrl: '${baseUrl}/users/me',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic? user(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+      );
+}
+
+class EliminarMiCuentaCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = UserGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'EliminarMiCuenta',
+      apiUrl: '${baseUrl}/users-permissions/users/eliminar-cuenta',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${token}',

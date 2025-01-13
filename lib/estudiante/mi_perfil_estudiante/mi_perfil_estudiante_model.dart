@@ -2,6 +2,7 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/cancelar_suscripcion/cancelar_suscripcion_widget.dart';
+import '/components/eliminar_cuenta/eliminar_cuenta_widget.dart';
 import '/components/loader/loader_widget.dart';
 import '/components/nav_bar_with_middle_button/nav_bar_with_middle_button_widget.dart';
 import '/components/validar_log_out/validar_log_out_widget.dart';
